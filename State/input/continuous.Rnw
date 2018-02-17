@@ -1,0 +1,41 @@
+\subsection{Continuous in time stock price behavior model} 
+
+
+\begin{center}
+\begin{equation}
+S(t) = S \left( 0 \right) 
+  e^{\sigma W \left( t \right) + \left( \mu - \frac{1}{2} \sigma^2 \right) t}
+\label{eq:s}
+\end{equation}
+\end{center}
+
+The ingredients in (\ref{eq:s}) are the stock price denoted by the stochastic random
+variable $S$, with $S(t)$ which is the stock price at time t. Another stochastic random
+variable, $W(t)$, a brownian motion along with a filtration $\mathcal{F}(t)$. Finaly 
+two nonrandom variable $\sigma$ and $\mu$, respectively for the stock standard deviation
+and expectation.
+
+\begin{center}
+\begin{subequations}
+\begin{align}
+\deltaStock &=  \mu \stock dt + \sigma \stock \deltabm  \label{eq:dif.s} \\
+\geomStock &=  \mu dt + \sigma \deltabm \label{eq:return.s}
+\end{align}
+\end{subequations}
+\end{center}
+
+Equation (\ref{eq:dif.s}) is obtained by using Itô formula in its differential form, 
+with $f\left(t, W\left(\right)\right) = \stock$. Whereas (\ref{eq:dif.s}) provides
+the variation of the stock price instantanously, \ref(eq:return.s) give the instantanous
+mean rate of return at a precise time $t$.
+
+\begin{center}
+\begin{equation}
+\geomStock \sim N(\mu dt, \sigma^2 t)
+\label{eq:return.s.dist}
+\end{equation}
+\end{center}
+
+Bringing together (\ref{eq:BM.dist}) and (\ref{eq:return.s}) gives the relation
+(\ref{eq:return.s.dist}), which states that the instantaneous mean rate of return
+of the stock price motion depends on a normal law.

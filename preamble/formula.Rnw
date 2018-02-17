@@ -1,0 +1,42 @@
+% 
+% Bunch of new commands
+% 
+% brownian motion
+\newcommand{\dBm}{dW\left(t\right)}
+\newcommand{\DBm}{\delta{W\left(t\right)}}
+\newcommand{\Bm}{W\left(t\right)}
+\newcommand{\Dt}{\Delta{t}} 
+\newcommand{\Bmdist}{\DBm \sim N \left( 0, \Dt \right)}
+\newcommand{\ft}{f\left(t, \Bm\right)}
+\newcommand{\E}{\mathop{\mathbb{E}}}
+\newcommand{\ct}{c\left(t, x\right)}
+\newcommand{\dcx}{\frac{\delta\ct}{\delta x}}
+\newcommand{\dciix}{\frac{\delta^2\ct}{\delta x^2}}
+\newcommand{\dct}{\frac{\delta\ct}{\delta t}}
+\newcommand{\N}[1]{N\left(#1\right)}
+\newcommand{\dsub}[1]{d_{#1}\left(\Dt, x\right)}
+% % about stock
+\newcommand{\St}{S\left(t\right)}
+\newcommand{\Si}{S\left(0\right)}
+\newcommand{\dSt}{dS\left(t\right)}
+\newcommand{\DSt}{\DeltaS\left(t\right)}
+\newcommand{\dSr}{\frac{\dSt}{\St}}
+\newcommand{\DSr}{\frac{\DSt}{\St}}
+\newcommand{\Scontinuous}{\St = \Si e^{\sigma\Bm + \left(\alpha - \frac{1}{2 \sigma^2}\right)t}}
+\newcommand{\ItoBmdiff}{d\ft = \left[\frac{\delta\ft}{\delta t} + \frac{\deltaˆ2\ft}{2 \delta{x^2}}\right]dt + \frac{\delta\ft}{\delta x}\dBm}
+\newcommand{\Scontinousdiff}{d\ft = \alfa \St dt + \sigma \St \dBm}
+\newcommand{\Scontinuousrate}{\dSr = \alpha dt + \sigma \dBm}
+\newcommand{\Sshort}{\Si e^{X}}
+\newcommand{\CCRdist}{X \sim N\left(\left(\alpha - \frac{1}{2}\sigma^2\right)t, \sigma^2 t\right)}
+\newcommand{\Sdiscreterate}{\DSr = \alpha \Delta{t} + \sigma \DBm}
+\newcommand{\Sdiscreterateexp}{\E\DSr = \alpha \Dt}
+\newcommand{\Sdiscreteratevar}{var \DSr = \sigma^2 \Dt}
+\newcommand{\Sdiscreteratedist}{\DSr \sim N\left(\alpha\Dt, \sigma\Dt\right)}
+\newcommand{\Sexp}{\E\St = \Si e^{\alpha t}}
+\newcommand{\Svar}{var\St = \Si^2 e^{2\alpha t}\left(e^{\sigma^2 t} - 1\right)}
+\newcommand{\Sshortt}{\St = \Si e^{X t}}
+\newcommand{\CCRt}{X = \frac{1}{t} \ln{\frac{\St}{\Si}}}
+\newcommand{\CCRtdist}{X \sim N\left(\alpha - \frac{\sigma^2}{2}, \frac{\sigma^2}{t}\right)}
+\newcommand{\BSMpde}{\dct + r x \dcx + \frac{1}{2} \sigma^2 x^2 \dciix = r\ct}
+\newcommand{\BSMsol}{\ct = x\N[\dsub{+}] - K e^{r\Dt} \N[\dsub{-}]}
+\newcommand{\dpm}{\dsub{\pm} = \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}

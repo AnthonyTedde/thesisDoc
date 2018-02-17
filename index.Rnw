@@ -1,0 +1,38 @@
+\documentclass[12pt]{report}
+% \usepackage{tgtermes}
+% \usepackage[a4paper, margin=1in]{geometry}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{graphicx} 
+% \usepackage{tikz}
+% \usepackage{amsmath}
+
+%%
+% to enumerate subsubsection
+%%
+\addtocounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+% \SweaveInput{preamble/usepackage.Rnw}
+% \SweaveInput{preamble/misc.Rnw}
+% \SweaveInput{preamble/formula.Rnw}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+ici
+% 
+% \addcontentsline{toc}{chapter}{Acknoledgments}
+% \chapter*{Acknowledgments}
+
+% \tableofcontents{}
+ 
+% \chapter*{Introduction}
+% \addcontentsline{toc}{chapter}{Introduction}
+% \chapter{Problem} 
+% \SweaveInput{problem/index.Rnw}
+\chapter{State of the art}
+\SweaveInput{State/index.Rnw}
+% \chapter{Analysis}
+% \SweaveInput{analysis/index.Rnw}
+% \chapter*{Conclusion}
+% \addcontentsline{toc}{chapter}{Conclusion}
+\end{document}

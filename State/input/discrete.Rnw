@@ -1,0 +1,5 @@
+\subsection{Discrete in time stock price behavior model} 
+
+\begin{center}
+$\Delta{S(t)} = \mu S(t) \Delta{t} + \sigma S(t) \Delta{W(t)}$
+\end{center}

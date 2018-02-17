@@ -1,0 +1,27 @@
+\contentsline {chapter}{\numberline {1}State of the art}{2}
+\contentsline {section}{\numberline {1.1}Moments}{3}
+\contentsline {section}{\numberline {1.2}The Brownian motion}{3}
+\contentsline {subsection}{\numberline {1.2.1}Construction}{3}
+\contentsline {subsection}{\numberline {1.2.2}Characterization of a Brownian motion by its moments}{3}
+\contentsline {subsection}{\numberline {1.2.3}Quadratic variation}{3}
+\contentsline {section}{\numberline {1.3}Itô's lemma}{3}
+\contentsline {subsection}{\numberline {1.3.1}Problem solving formula}{3}
+\contentsline {subsection}{\numberline {1.3.2}Itô's formula for Brownian motion}{3}
+\contentsline {subsection}{\numberline {1.3.3}Properties}{3}
+\contentsline {section}{\numberline {1.4}GARCH model: Expecting volatility}{3}
+\contentsline {subsection}{\numberline {1.4.1}Empirical ,theoretical, and implied volatility}{3}
+\contentsline {subsection}{\numberline {1.4.2}model}{3}
+\contentsline {section}{\numberline {1.5}A stochastic stock price evolution}{3}
+\contentsline {subsection}{\numberline {1.5.1}overview}{3}
+\contentsline {subsection}{\numberline {1.5.2}Abstract model with continuous time component}{3}
+\contentsline {subsection}{\numberline {1.5.3}Abstract model with discrete time component}{3}
+\contentsline {subsection}{\numberline {1.5.4}Parameters}{3}
+\contentsline {subsection}{\numberline {1.5.5}Definition of the mean and volatility}{3}
+\contentsline {section}{\numberline {1.6}Black-Scholes-Merton equation}{3}
+\contentsline {subsection}{\numberline {1.6.1}Philosophy}{3}
+\contentsline {subsection}{\numberline {1.6.2}Assumptions}{3}
+\contentsline {subsection}{\numberline {1.6.3}The greeks}{3}
+\contentsline {subsection}{\numberline {1.6.4}The model}{3}
+\contentsline {subsection}{\numberline {1.6.5}Hedgind strategy with the greeks and the model}{3}
+\contentsline {section}{\numberline {1.7}Volatility smiles}{3}
+\contentsline {section}{\numberline {1.8}Alternatives to Black-Scholes-Merton}{3}

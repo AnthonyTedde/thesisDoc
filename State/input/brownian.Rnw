@@ -1,0 +1,86 @@
+\subsection{Brownian Motion}
+
+Before going further a gentle reminder of what is a brownian motion and how it is
+computed would probably be apprectiate especially since it will become a 
+master piece in subsequent computation.
+
+A brownian motion is the continuous in time and in variable version of a scaled 
+symmetric random walk. Basicaly At any time $t+1$ a random walk can take two variables 
+contingent on an experiment realized at $t$, such as throwing a two fair coins.
+The idea that the coin is fair is crutial in the determination of the next step 
+value because of the symmetry of the random walk.
+
+Moreover the symmetry underly another key aspect inherited for random walk to brownian motion,
+which is the martingale property. A martingale characterize a specific motion
+involving in value through time with a constant drift rate of zero. It means that
+the expectation of such of process always is its initial value.
+
+I howerver no waste much time in the precise mathematical definition of what a random is.
+Instead, modeling the browian motion seems to be crutial.
+
+First of all the brownian motion has as initial value zero. According to what has been stated 
+before about the martingale property of a brownian motion, one should expect to 
+get zero in average by entering in a brownian motion process.
+
+Secondly their increments are normally distributed in the value they could take from
+a previous time and they also are normally distributed beteen them if nonoverlaped.
+
+\begin{equation}
+\Delta{W(t)} \sim N \left( 0, \Delta{t} \right)
+\label{eq:BM.dist}
+\end{equation}
+
+As shown in (\ref{eq:BM.dist}) the more the delta time, the bigger the variance
+of the brownian motion. It is easily explained by the idea that forcasting more distant
+random data, following a time process, brings more uncertainty.
+
+The concept of time process is key for a Wiener process and is closely attached
+to that of filtration. A filtration is a collection of
+$\sigma$ algebra $\mathcal{F(t)}$ indexed by time. 
+
+At any time $t$ a brownian motion is said to be $\mathcal(F(t))$--measurable and
+independent of futur increment as well. It means that all informations accessible
+at time $t$ is sufficent to determine the value taken by the brownian motion
+at that time -- it is resolved by the information at $t$. However at this precise
+time $t$ there is no way to predict with one hundred percent of certainty 
+the futur value taken by the motion of the Wiener process. 
+
+These constrains meet what is call the weak form of market efficency and will
+be a necessary feature for the modeling of stock price thicker, but I digress.
+
+
+<<echo=false>>=
+library(RandomWalk)
+# The following line set the variable @sampled with a list of 20
+# data.frame of Adapted random walk.
+Sampled <- sbmotionGenerator(time_to_maturity = 4, scale = 100, n = 30)
+class(Sampled) <- 'list'
+tikzDevice::tikz(file = "figures/plot_test.tex", width = 6, height = 3)
+ggplot2::ggplot(dplyr::bind_rows(Sampled, .id = "uniqueID"), 
+                ggplot2::aes(x = time_periods, y = brownian_motion_path, group = uniqueID)) + 
+  ggplot2::geom_line(ggplot2::aes(colour = uniqueID)) + 
+  ggplot2::theme(legend.position = 'none', 
+                 axis.title = ggplot2::element_text(size = ggplot2::rel(0.8)),
+                 axis.text = ggplot2::element_text(size = ggplot2::rel(0.7)),
+                 axis.text.y = ggplot2::element_text(angle = -45)) +
+  ggplot2::labs( x = 'Time period',
+                y = 'Brownian motion')
+ggplot2::ggsave(filename = "figures/myplot.png", device = 'png', 
+                width = 30, units = 'cm')
+dev.off()
+@
+% \caption{Multiple Brownian Motions path with time to maturity fixed at 4}
+
+% \input{figures/myplot.tex}
+% \includegraphics{figures/myplot.png}
+
+\begin{figure}
+%Do not try to scale figure in .tex or you loose font size consistency
+\centering
+%The code to input the plot is extremely simple
+\input{figures/plot_test.tex}
+%Captions and Labels can be used since this is a figure environment
+\caption{Sample output from tikzDevice}
+\label{plot:test}
+\end{figure}
+

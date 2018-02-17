@@ -1,0 +1,18 @@
+\section{Methodology}
+
+\subsection{Theoretical analysis}
+% analysis under assumptions and out of.
+
+\subsection{Empirical analysis}
+% from some market data.
+
+
+\section{Models against Theoretical data}
+
+\section{Models against Empirical data}
+
+\section{comparison}
+
+\section{correction}
+
+\section{Other models in action}

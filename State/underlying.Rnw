@@ -1,0 +1,38 @@
+% !Rnw root = ../index.Rnw
+\section{The underlying model}
+
+The model introduce in this section will be further used as a theoretical framework
+with aim to price a derivative. Roughthly speaking it [the model] simulate the 
+time evolution of a stock price in a neutral world. 
+
+A neutral world is a kind of non existing world where people does not expect or 
+even not seek to be rewarded for any risks taken. By consequence all expected rates 
+of return equal the risk free rate in that fairy world.
+Even though such a world truly does not exist it will be a useful support in the
+determination of a stock price with the use of the Black-Scholes-Merton differential
+equation, because in that model -- subsequently exposed -- the true, based on 
+risk-free rate and risk premium computed stock rate of return has really no effect.
+
+Under the hood, the framework contain a brownian motion and an theoretically or
+empirically-based stock price movement expectation and variance. All these 
+parameters will be explained in next sub-section.
+
+The model has two dimensions. one defined by a dependent variable which is the stock price and 
+another by an independent one, the time. Both of these can evolve in two kind of way, 
+continuously and discretely. That's why the model may be assessed under four differents
+measures precision.
+
+\begin{itemize}
+\item Discrete or continuous in time
+\item Discrete or continuous in the value it takes.
+\end{itemize}
+
+The choice had been make to use the continuous value and discrete time in the model 
+I developed. Continuous in time because it gives a good estimation in what can be 
+observed in realty [REFERENCE] and discrete in time for the reason that as the 
+stock price is by definition random, no one formula can be given naturally. 
+pointwise estimation is therefore needed.
+
+% \SweaveInput{input/brownian.Rnw}
+\SweaveInput{input/continuous.Rnw}
+\SweaveInput{input/discrete.Rnw}
