@@ -1,3 +1,31 @@
+\section{GARCH model: Expecting volatility}
+\subsection{Empirical ,theoretical, and implied volatility}
+\subsection{model}
+
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+fdsajklfhdjfhjdfhdlhfdjdsah
+
+\section{A stochastic stock price evolution}
+\subsection{overview}
+matrix with variable -> continuous / discrete
+% 
+\subsection{Abstract model with continuous time component}
+Construction throught ITO
+\subsection{Abstract model with discrete time component}
+why so useful + compare it with ito ?
+
+\subsection{Parameters}
+mu, sd, ... moments (lognormal)
+
+\subsection{Definition of the mean and volatility}
+Garch model for volatility
 \subsection{Continuous in time stock price behavior model} 
 
 
@@ -14,6 +42,7 @@ variable $S$, with $S(t)$ which is the stock price at time t. Another stochastic
 variable, $W(t)$, a brownian motion along with a filtration $\mathcal{F}(t)$. Finaly 
 two nonrandom variable $\sigma$ and $\mu$, respectively for the stock standard deviation
 and expectation.
+
 
 \begin{center}
 \begin{subequations}

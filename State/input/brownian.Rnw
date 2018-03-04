@@ -1,3 +1,7 @@
+\subsection{Construction}
+\subsection{Characterization of a Brownian motion by its moments}
+\subsection{Quadratic variation}
+Explain why Itô's lemma
 \subsection{Brownian Motion}
 
 Before going further a gentle reminder of what is a brownian motion and how it is

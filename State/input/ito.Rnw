@@ -1,0 +1,6 @@
+\subsection{Problem solving formula}
+Explain how useful the formula is in this context.
+Show the relation between the formula and the tailor approximation.
+\subsection{Itô's formula for Brownian motion}
+\subsection{Properties}
+quadratic variation, ...

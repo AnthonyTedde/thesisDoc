@@ -1,0 +1,8 @@
+% Snippet
+\newcommand{\BSM}{Black--Scholes--Merton }
+\newcommand{\lnorm}{log-normally }
+\newcommand{\bmotion}{Brownian Motion }
+\newcommand{\stvar}{stochastic variable }
+\newcommand{\wienpro}{Wiener process }
+\newcommand{\markpro}{Markov process }
+

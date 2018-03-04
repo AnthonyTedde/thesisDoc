@@ -1,0 +1,17 @@
+% \section{Moments}
+\section{Overview}
+The purpose of the \BSM
+
+\section{Brownian motion}
+\SweaveInput{input/brownian}
+ 
+\section{Itô's lemma}
+\SweaveInput{input/ito}
+
+
+\section{Black-Scholes-Merton equation}
+\subsection{Philosophy}
+\subsection{Assumptions}
+\subsection{The greeks}
+\subsection{The model}
+\subsection{Hedgind strategy with the greeks and the model}

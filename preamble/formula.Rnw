@@ -5,9 +5,9 @@
 \newcommand{\dBm}{dW\left(t\right)}
 \newcommand{\DBm}{\delta{W\left(t\right)}}
 \newcommand{\Bm}{W\left(t\right)}
-\newcommand{\Dt}{\Delta{t}} 
+\newcommand{\Dt}{\Delta t} 
 \newcommand{\Bmdist}{\DBm \sim N \left( 0, \Dt \right)}
-\newcommand{\ft}{f\left(t, \Bm\right)}
+\newcommand{\ft}{f\left(t, \Bm \right)}
 \newcommand{\E}{\mathop{\mathbb{E}}}
 \newcommand{\ct}{c\left(t, x\right)}
 \newcommand{\dcx}{\frac{\delta\ct}{\delta x}}
@@ -19,18 +19,19 @@
 \newcommand{\St}{S\left(t\right)}
 \newcommand{\Si}{S\left(0\right)}
 \newcommand{\dSt}{dS\left(t\right)}
-\newcommand{\DSt}{\DeltaS\left(t\right)}
+\newcommand{\DSt}{\Delta S\left(t\right)}
 \newcommand{\dSr}{\frac{\dSt}{\St}}
 \newcommand{\DSr}{\frac{\DSt}{\St}}
 \newcommand{\Scontinuous}{\St = \Si e^{\sigma\Bm + \left(\alpha - \frac{1}{2 \sigma^2}\right)t}}
-\newcommand{\ItoBmdiff}{d\ft = \left[\frac{\delta\ft}{\delta t} + \frac{\deltaˆ2\ft}{2 \delta{x^2}}\right]dt + \frac{\delta\ft}{\delta x}\dBm}
-\newcommand{\Scontinousdiff}{d\ft = \alfa \St dt + \sigma \St \dBm}
-\newcommand{\Scontinuousrate}{\dSr = \alpha dt + \sigma \dBm}
+\newcommand{\Itobmdiff}{d\ft = \left[\frac{\partial \ft }{\partial t} + \frac{1}{2} \frac{\partial ^2\ft }{\partial x^2}\right]dt + \frac{\partial \ft}{\partial x} \dBm}
+\newcommand{\Scontinousdiff}{d\St &= \alpha \St dt + \sigma \St \dBm}
+\newcommand{\Scontinuousrate}{\dSr &= \alpha dt + \sigma \dBm}
+ \newcommand{\Sdiscretediff}{d\St &= \alpha \St \Dt + \sigma \St \dBm}
 \newcommand{\Sshort}{\Si e^{X}}
 \newcommand{\CCRdist}{X \sim N\left(\left(\alpha - \frac{1}{2}\sigma^2\right)t, \sigma^2 t\right)}
-\newcommand{\Sdiscreterate}{\DSr = \alpha \Delta{t} + \sigma \DBm}
-\newcommand{\Sdiscreterateexp}{\E\DSr = \alpha \Dt}
-\newcommand{\Sdiscreteratevar}{var \DSr = \sigma^2 \Dt}
+\newcommand{\Sdiscreterate}{\DSr &= \alpha \Delta t + \sigma \DBm}
+\newcommand{\Sdiscreterateexp}{\E \DSr = \alpha \Dt}
+\newcommand{\Sdiscreteratevar}{var \DSr = \sigma ^2 \Dt}
 \newcommand{\Sdiscreteratedist}{\DSr \sim N\left(\alpha\Dt, \sigma\Dt\right)}
 \newcommand{\Sexp}{\E\St = \Si e^{\alpha t}}
 \newcommand{\Svar}{var\St = \Si^2 e^{2\alpha t}\left(e^{\sigma^2 t} - 1\right)}
