@@ -17,7 +17,7 @@ c( expand.grid(c(360, 4), c(.2, 1)) %>%
   map(.f = function(x){
     ggplot(x[[1]],
                     aes(time_periods, stock_price_path)) +
-      geom_line(color = 'pink') +
+      geom_line(color = 'darkred') +
       geom_line(data = x[[2]],
                          aes(time_periods, stock_price_path),
                          color = 'steelblue') +

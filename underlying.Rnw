@@ -124,16 +124,15 @@ In the realm of real world, the model described by (\ref{eq:Sdiscretediff}) fair
 Moreover as particaly than theoreticaly the process (\ref{eq:Sdiscretediff}) could be as precise as one would by moving the delta time cursor down ($\Delta t \downarrow 0$).
 A somehow key warning can therefore be raised in the accuracy of such a model that is indeed closely related to the choice of $\Delta t$ in conjucture with the stock variance(SURE THAT IS THE STOCK VARIANCE OR THE STOCK PRICE EVOLUTION VARIANCE ?).
 
+
 <<echo=false>>=
-source('analysis/stock.R')
+# Uncomment the following if figure need to be reconstructed
+# source('analysis/stock.R')
 @
 
 \begin{figure}[h!]
-%Do not try to scale figure in .tex or you loose font size consistency
 \centering
-%The code to input the plot is extremely simple
 \input{figures/ItoAccuracy.tex}
-%Captions and Labels can be used since this is a figure environment
 \caption{Sample output from tikzDevice}
 \label{plot:test}
 \end{figure}
@@ -148,9 +147,17 @@ On the other hand, the worst scenario of getting reliable measure by using (\ref
 
 As previously stated $\DSr$ is normally distributed with $\Sdiscreterateexp$ and $\Sdiscreteratevar$. The figure ([REFERENCE]) shows that the normality expectation holds. The solid line exibits the normal distribution bell curve while the bins represents the samples' distribution of 300 stock processes equally splited into the same $\Dt$ with parameters $\alpha = 0$, $\sigma = 40\%$.
 
-\begin{center}
-  FIGURE
-\end{center}
+<<echo=FALSE, results=hide>>=
+# source('analysis/stock_return_ito_density.R')
+# The code MUST be pasted  from the source file
+@
+ 
+\begin{figure}[!h]
+\centering
+\input{figures/stock_return_density.tex}
+\caption{Daily Basis Stock Return Density}
+\label{plot:returnDensity}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Distribution of the stock price process
