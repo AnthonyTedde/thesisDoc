@@ -44,6 +44,7 @@
 \newcommand{\dct}{\frac{\delta\ct}{\delta t}}
 \newcommand{\N}[1]{N\left(#1\right)}
 \newcommand{\dsub}[1]{d_{#1}\left(\Dt, x\right)}
+\newcommand{\call}[2]{c\left( #1, #2\right)}
 % % about stock
 \newcommand{\St}{S\left(t\right)}
 \newcommand{\Si}{S\left(0\right)}
@@ -68,6 +69,7 @@
 \newcommand{\CCRt}{X = \frac{1}{t} \ln{\frac{\St}{\Si}}}
 \newcommand{\CCRtdist}{X \sim N\left(\alpha - \frac{\sigma^2}{2}, \frac{\sigma^2}{t}\right)}
 \newcommand{\BSMpde}{\dct + r x \dcx + \frac{1}{2} \sigma^2 x^2 \dciix = r\ct}
+\newcommand{\BSMeq}[1]{r\call{t}{#1} = \frac{\partial \call{t}{#1}}{\partial t} + r #1 \frac{\partial \call{t}{#1}}{\partial #1} + \frac{1}{2} \sigma ^2 #1 ^2 \frac{\partial ^2 \call{t}{#1}}{\partial #1 ^2}}
 \newcommand{\BSMsol}{\ct = x\N[\dsub{+}] - K e^{r\Dt} \N[\dsub{-}]}
 \newcommand{\dpm}{\dsub{\pm} = \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}
 
@@ -87,114 +89,44 @@
 \label{cha:Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 Talk about what is done to price a vanilla option throuhout the BSM method.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:The \BSM model
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The \BSM model}
-\label{cha:The \BSM model}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: OverView
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{OverView}
-\label{sec:OverView}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Assumptions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Assumptions}
-\label{sec:Assumptions}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The partial differential BSM equation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The partial differential BSM equation}
-\label{sec:The partial differential BSM equation}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Solution for vanilla option pricing method
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solution for vanilla option pricing method}
-\label{sec:Solution for vanilla option pricing method}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\SweaveUTF8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %
 %  CHAPTER:The underlying models
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The underlying models}
-\label{cha:The underlying models}
+\chapter{The underlying model}
+\label{cha:underlying}
+  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: A log-normally distributed one
+% SECTION: Overview
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{A log-normally distributed one}
-\label{sec:A log-normally distributed one}
+\section{Overview}
+\label{sec:Overview}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
-\label{sub:Overview}
-The random model described in this section is used to highlight a behavior that  a continuously, in time and in value, stock price motion follows, provided that the distribution of the process used to model the walk of the price is  \lnorm distributed. 
+This chapter highlights one specific model that is used to model the price ticker of a share of stock for any time $t$ in the future.
 
-Even though, as it were previously mentioned, the stock model is defined in 
-a way that not only its independent variable (time component) is continuous but
-is also its depent variable (stock motion component),
-it is however convenient in practice to not consider the move between two random
-value $\dSt$ as fully continuous, provided that these moves are normally 
-distributed.
-The reason is only matter of computation. Because a component of the stock
-price motion function is random, i.e. a Brownian Motion, the value it would
-take in a subsequent time is by definition of its randomness unpredictable.
-Needless to say that less the jump between two values of $\St$ is and less
-this approximation against the theoretical model brings inacuracy.
-It is why the following subsection introduce first the stock price motion model
-with continuity in its delta value and the next one features the same model 
-exept that the move between the value the stock take is discrete.
+Equation (\ref{eq:Scontinuous}) features a stochastic process where the only random component is the Brownian motion $\Bm$.
+The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which respectively are the mean rate of return and the volatility of a stock price whose path is described by that model.
 
 \begin{center}
-\begin{equation}
-\Scontinuous
-\label{eq:Scontinuous}
-\end{equation}
+  \begin{equation}
+    \Scontinuous
+    \label{eq:Scontinuous}
+  \end{equation}
 \end{center}
 
-For both continuous or discrete value process, the equation 
-(\ref{eq:Scontinuous}) can be use to model it. It is only when one want 
-to deal with delta that the equations discribing the continuous or 
-the descrite value process differs.
+ The condition underlying by (\ref{eq:Scontinuous}) is that the mean rate of return and the volatility of the stock price is constant. The path is continuous, there is no jump in the course of the stock price evolution. Moreover it will be shown in subsequent section that the stochastic process (\ref{eq:Scontinuous}) is log-normally distributed.
 
-
-In (\ref{eq:Scontinuous}) distinction are made in a sense to separate what variables are not random from
-the one that is random. Stricly speaking and because the model deals with process
-trhough time, a continuous random variable that evolves while time passes is 
-called stochastic.
-The only \stvar involved in the model is the \bmotion, $\Bm$. Roughly a \bmotion
-, synonym with \wienpro (which is a standard normally distributed \markpro), is
-a stochastic process that evolves through time with independent increments 
-normally distributed -- if not overlapped. Because this variable in the only
-one that is stochastic in the model, is is the one that bring uncertainty
-to the stock price motion described following (\ref{eq:Scontinuous})
-Finally the two other ingredients cannot be called variables but rater
-contant, because they keep the same value as time passes. They are $\sigma$ and
-$\mu$, respectively for the stock's standard deviation and expectation.
- 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Continuous through time
+% SECTION: Derivation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Continuous through time}
-\label{sub:Continuous through time}
+\section{Derivation}
+\label{sec:Derivation}
 
-As previously stated, the delta -- which mean the evolution between two specified given time -- of a stock price motion that is continuous in the value it could take between two time increments are here considered.
-
-The equation (\ref{eq:Scontinuous}) could be derived using Itô's formula (\ref{eq:Itobmdiff}), in order to get a differential based equation. The provided differential formula will be next used to find out the first and second moments of the distribution underpinned by the stock price random process.
+The equation (\ref{eq:Scontinuous}) could be derived using Itô's formula (\ref{eq:Itobmdiff}) in order to get the differential form of that equation. The provided differential formula will be next used to find out the first and second moments of the distribution underpinned by the stock price random process.
 
 \begin{center}
   \begin{equation}
@@ -202,7 +134,7 @@ The equation (\ref{eq:Scontinuous}) could be derived using Itô's formula (\ref{
   \end{equation}
 \end{center}
 
-The term $d\ft$ in (\ref{eq:Itobmdiff}) represents any changes in the value of a function $\ft$ occuring over a infinitesimally move in time $dt$. The related function is any one involving time and a Brownian motion. For that matter in the present case highlighted in this section it is considered that $ \ft = \St $.
+The term $d\ft$ in (\ref{eq:Itobmdiff}) represents any changes in the value of a function $\ft$ occuring over a infinitesimally small move in time $dt$. The related function is any one involving time along with a Brownian motion. For that matter in the present case, $ \ft = \St $.
 By applying the tranformation inccured by Itô, the two following equations (\ref{eq:Scontinuousdiff}, \ref{eq:Scontinuousrate}) emerge:
  
 \begin{center}
@@ -214,8 +146,9 @@ By applying the tranformation inccured by Itô, the two following equations (\re
   \end{subequations}
 \end{center}
 
-Although (\ref{eq:Scontinuousdiff}) imparts a first building block of the model to consider as a proxy for strock prive movement,  the equation (\ref{eq:Scontinuousrate}) gives more clues on the distribution of the XXX RETURN (LOG)?. 
-Because the increments of the Brownian Motion are are normally distributed with mean $0$ and variance $dt$, the distribution of (\ref{eq:Scontinuousrate}) also be normally distributed with mean $\alpha$ and variance $\sigma^2$, as stated in (\ref{eq:return.s.dist}).
+In one hand, the equation (\ref{eq:Scontinuousdiff}) shows that any change occuring in the stock price over an small amount of time is due to one fully predictable element -- its drift rate ($\alpha \St$) -- and another one that brings uncertainty.
+
+In the other hand, equation (\ref{eq:Scontinuousrate}) relates the rate of return of the stock price over a small amount of time. Because the uncertainty given is given by the Browinan motion has an expectation of zero, it could be shown that the mean rate of return of a stock price following the model (\ref{Scontinuous}) is equal to $\alpha$, as stated through (\ref{eq:return.s.dist}).
 
 \begin{center}
   \begin{equation}
@@ -224,15 +157,20 @@ Because the increments of the Brownian Motion are are normally distributed with 
   \end{equation}
 \end{center}
 
-The Itô formula is so widely used and so well establish that it could be trustworthy applyed  in any transformation of borel--measurable function $\ft$ implying time and Brownian Motion -- even more broadly any stochastic process with a slightly arrangement of the Itô's formula previously introduced --.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Discrete through time
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Discrete through time}
-\label{sub:Discrete through time}
+The figure (\ref{plot:returnDensity}) shows that the normality expectation holds, for equation \ref{eq:return.s.dist}. The solid line exibits the normal distribution bell curve ($N \sim (0, 40 * 360^{-1}$)). While the bins represent the distribution of the increments from a stock processes, with parameters $\alpha = 0$, $\sigma = 40\%$ and $\Dt = 360^{-1}$.
 
-In the present subsection, the stochastic price motion process (\ref{eq:Scontinuous}) come in a slightly different flavor and led to another representation than the one highlighted by equation \ref{eq:Scontinuousdiff}.
+ 
+\begin{figure}[!h]
+\centering
+\input{figures/stock_return_density.tex}
+\caption{Daily Basis Stock Return Density}
+\label{plot:returnDensity}
+\end{figure}
+
+
+
+In other way, the stochastic price motion process (\ref{eq:Scontinuous}), throughout the Itô approximation, could led to another representation than the one highlighted by equation \ref{eq:Scontinuousdiff}.
 
 \begin{center}
   \begin{subequations}
@@ -243,37 +181,24 @@ In the present subsection, the stochastic price motion process (\ref{eq:Scontinu
   \end{subequations}
 \end{center}
 
-The unique difference between respectively (\ref{eq:Scontinuousdiff}) -- (\ref{eq:Sdiscretediff}) and (\ref{eq:Scontinuousrate}) -- (\ref{eq:Sdiscreterate}) is the frequence at which data can be recorded.
+The unique difference between respectively (\ref{eq:Scontinuousdiff}) -- (\ref{eq:Sdiscretediff}) and (\ref{eq:Scontinuousrate}) -- (\ref{eq:Sdiscreterate}) is the frequence at which data are recorded.
 In the realm of real world, the model described by (\ref{eq:Sdiscretediff}) fairly matches the data pickup requirements in the sense that only discrete measurement can be performed from the bunch of market available data.
-Moreover as particaly than theoreticaly the process (\ref{eq:Sdiscretediff}) could be as precise as one would by moving the delta time cursor down ($\Delta t \downarrow 0$).
-A somehow key warning can therefore be raised in the accuracy of such a model that is indeed closely related to the choice of $\Delta t$ in conjucture with the stock variance(SURE THAT IS THE STOCK VARIANCE OR THE STOCK PRICE EVOLUTION VARIANCE ?).
+ 
 
-
-
-\begin{figure}[h!]
+\begin{figure}[h]
 \centering
 \input{figures/ItoAccuracy.tex}
-\caption{Sample output from tikzDevice}
-\label{plot:test}
+\caption{Accuracy of Itô approximation}
+\label{plot:ItoAccuracy}
 \end{figure}
 
 
-The graphs (REFERENCE) makes a point of showing how precise is the estimation made by using the approximation (\ref{eq:Scontinuousdiff}) against (\ref{eq:Scontinuous}) as $dt$ decrease.
-   
-Four different simulations of stock price motion are represented throughout charts (REF). They vary by two means, horizontally the stock volatility change whilst the time period between two measures remain identical. While vertically, the volatilities are the same and only the time steps are differents (daily basis for top charts and quarterly measurement for bottom ones).
-The blue line are the one ones for which computation has been made using (\ref{eq:Scontinuous}) whereas those with a pink dotted representation have been constructed over the Itô's approximation (\ref{eq:Scontinuousdiff}).
-On one hand, the first -- which show the most accurate approximation, more reliable -- is constructed with a standard deviation of 0.4 and a duration of one day between two measures.
-On the other hand, the worst scenario of getting reliable measure by using (\ref{eq:Scontinuousdiff}) is represented by the graph in the odd pane, for which the measures are set quarterly and the volatility.
-
-As previously stated $\DSr$ is normally distributed with $\Sdiscreterateexp$ and $\Sdiscreteratevar$. The figure ([REFERENCE]) shows that the normality expectation holds. The solid line exibits the normal distribution bell curve while the bins represents the samples' distribution of 300 stock processes equally splited into the same $\Dt$ with parameters $\alpha = 0$, $\sigma = 40\%$.
-
- 
-\begin{figure}[!h]
-\centering
-\input{figures/stock_return_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{plot:returnDensity}
-\end{figure}
+The figure (\ref{plot:ItoAccuracy}) is purposed to show how precise is the estimation made by using the approximation (\ref{eq:Scontinuousdiff}) against (\ref{eq:Scontinuous}) as $\Dt \to 0$.
+Four graphs are bundled, each one represents a stock price motion. The blue line is made by the stricky application of (\ref{eq:Scontinuous}) while the dark red one is gotten thanks to the Itô's approximation (\ref{eq:Scontinuousdiff}).
+They vary among themselves by, in turn, either a different value for the variance parameter or a different recording frequency or both.
+In one hand, horizontally the stock volatility change whilst the time duration between two measures remains identical. 
+While in the other hand, vertically, whether the volatilities are equal, the time steps are differents. Indeed the measurement is simulated with a daily basis for the two charts above whereas fixed quarterly for the bottom ones.
+It is obvious, following these representations that the less the volatility and time step, the better the approximation. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Distribution of the stock price process
@@ -288,6 +213,8 @@ Because every process with normally distributed logarithm are log--normally dist
 MEAN
 VAR
 
+
++ FIGURE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Flaws
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -309,6 +236,93 @@ VAR
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Jump issues}
 \label{sec:Jump issues}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  CHAPTER:The \BSM model
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The \BSM model}
+\label{cha:The \BSM model}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: OverView
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{OverView}
+\label{sec:OverView}
+
+The Black--Schole--Merton equation is meant to provide the non arbitrage price of any kind of derivative assets. In the present document the model derived by the Black--Scholes--Merton formula is focus on the pricing of one of a kind trivial derivative, the call vanilla option.
+
+In order to price this derivative throughout the model highlighted in this present chapter, some contraints are set. The section \ref{sec:Assumptions} exibits the assumptions made to keep the model between boundaries. In latter chapter however it will be shown how the model is relevant by going on the edge on that constraints and even beyond.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Assumptions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Assumptions}
+\label{sec:Assumptions}
+
+As previously stated, the Black--Scholes--Merton is a framework to define the non arbitrage price for call option. As a model it is somehow far away from reality in a bunch of way. The list below itemize all the contraint attached to the model.
+
+\begin{itemize}
+  \item The stock price process involving in the computation of Black--Scholes--Merton is lognormally distributed with mean and variance as described in \ref{sub:Distribution of the stock price process}
+  \item Short selling is not forbidden as hands-on market opperations
+  \item The price for bid and ask quote are identical. It means that there is no bid--ask spread to be considerered
+  \item The underlying does not provide dividend at any time
+  \item No arbitrage opportunity are implied
+  \item Are constant, the risk-free intererst rate ($r$), the stock volatility ($\sigma$) and, even though no considered in the Black--Scholes--Merton solution for the purpose of vanilla option pricing, also is the stock rate of return ($\alpha$)
+\end{itemize}
+
+[TODO: Send reader to METHODOLOGY chapter where is explain how the analysis will go away from these constraints]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: The partial differential BSM equation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Black--Sholes--Merton equation}
+\label{sec:The partial differential BSM equation}
+
+The Black--Scholes--Merton model provides a backward parabolic differential equation (\ref{eq:BSMeq}) with terminal condition () and boundary contirion () , () with the purpose of finding out the fair price of an option provided that assumptions (\ref{sec:Assumptions}) are respected. 
+
+Because the dummy variable $x$ and $t$ are dummies, the equation (\ref{eq:BSMeq}) involved no uncertainty. As it is shown through chapter (GREEKS REF), the uncertainty underlying to the model is removed thank to the delta hedging rule.
+
+\begin{center}
+  \begin{equation}
+     \BSMeq{x}
+    \label{eq:BSMeq}
+  \end{equation}
+\end{center}
+
+The terminal condition (\ref{eq:BSMterminal}) is intended to support that the value of a call option at maturity equals its payoff. 
+
+\begin{center}
+  \begin{equation}
+    \call{T}{x} = \left(x - K\right) ^+
+    \label{eq:BSMterminal}
+  \end{equation}
+\end{center}
+
+Whilst the terminal condition focuses on the value taken at maturity, the bondaries condition fix some constraints on the extreme values likely to be taken by the shares of stock at any time during the optio like. 
+In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an option with an worthless underlying is itself valueless while whenever the option is deep in the money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
+
+\begin{center}
+  \begin{equation}
+    \call{t}{0} = 0
+    \label{eq:BSMboundary0}
+  \end{equation}
+\end{center}
+
+\begin{center}
+  \begin{equation}
+    \lim_{x\to\infty} \left[ \call{t}{x} - \left(x - e^{-r \left(T - t \right)} \right) \right] = 0
+    \label{eq:BSMboundaryinf}
+  \end{equation}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Solution for vanilla option pricing method
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solution for vanilla option pricing method}
+\label{sec:Solution for vanilla option pricing method}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  CHAPTER:The Greeks
@@ -365,6 +379,8 @@ VAR
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{An hedging strategy involving the Greeks and \BSM}
 \label{sec:An hedging strategy involving the Greeks and \BSM}
+
+TEST
 
 
 

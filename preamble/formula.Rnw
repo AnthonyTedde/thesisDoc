@@ -15,6 +15,7 @@
 \newcommand{\dct}{\frac{\delta\ct}{\delta t}}
 \newcommand{\N}[1]{N\left(#1\right)}
 \newcommand{\dsub}[1]{d_{#1}\left(\Dt, x\right)}
+\newcommand{\call}[2]{c\left( #1, #2\right)}
 % % about stock
 \newcommand{\St}{S\left(t\right)}
 \newcommand{\Si}{S\left(0\right)}
@@ -39,5 +40,6 @@
 \newcommand{\CCRt}{X = \frac{1}{t} \ln{\frac{\St}{\Si}}}
 \newcommand{\CCRtdist}{X \sim N\left(\alpha - \frac{\sigma^2}{2}, \frac{\sigma^2}{t}\right)}
 \newcommand{\BSMpde}{\dct + r x \dcx + \frac{1}{2} \sigma^2 x^2 \dciix = r\ct}
+\newcommand{\BSMeq}[1]{r\call{t}{#1} = \frac{\partial \call{t}{#1}}{\partial t} + r #1 \frac{\partial \call{t}{#1}}{\partial #1} + \frac{1}{2} \sigma ^2 #1 ^2 \frac{\partial ^2 \call{t}{#1}}{\partial #1 ^2}}
 \newcommand{\BSMsol}{\ct = x\N[\dsub{+}] - K e^{r\Dt} \N[\dsub{-}]}
 \newcommand{\dpm}{\dsub{\pm} = \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}

@@ -25,9 +25,11 @@
 \label{cha:Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 Talk about what is done to price a vanilla option throuhout the BSM method.
-\SweaveInput{BSM}
 \SweaveInput{underlying}
+\SweaveInput{BSM}
 \SweaveInput{greeks}
+
+TEST
 
 
 

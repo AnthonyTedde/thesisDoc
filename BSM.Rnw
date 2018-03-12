@@ -13,6 +13,10 @@
 \section{OverView}
 \label{sec:OverView}
 
+The Black--Schole--Merton equation is meant to provide the non arbitrage price of any kind of derivative assets. In the present document the model derived by the Black--Scholes--Merton formula is focus on the pricing of one of a kind trivial derivative, the call vanilla option.
+
+In order to price this derivative throughout the model highlighted in this present chapter, some contraints are set. The section \ref{sec:Assumptions} exibits the assumptions made to keep the model between boundaries. In latter chapter however it will be shown how the model is relevant by going on the edge on that constraints and even beyond.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Assumptions
@@ -20,13 +24,61 @@
 \section{Assumptions}
 \label{sec:Assumptions}
 
+As previously stated, the Black--Scholes--Merton is a framework to define the non arbitrage price for call option. As a model it is somehow far away from reality in a bunch of way. The list below itemize all the contraint attached to the model.
+
+\begin{itemize}
+  \item The stock price process involving in the computation of Black--Scholes--Merton is lognormally distributed with mean and variance as described in \ref{sub:Distribution of the stock price process}
+  \item Short selling is not forbidden as hands-on market opperations
+  \item The price for bid and ask quote are identical. It means that there is no bid--ask spread to be considerered
+  \item The underlying does not provide dividend at any time
+  \item No arbitrage opportunity are implied
+  \item Are constant, the risk-free intererst rate ($r$), the stock volatility ($\sigma$) and, even though no considered in the Black--Scholes--Merton solution for the purpose of vanilla option pricing, also is the stock rate of return ($\alpha$)
+\end{itemize}
+
+[TODO: Send reader to METHODOLOGY chapter where is explain how the analysis will go away from these constraints]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: The partial differential BSM equation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The partial differential BSM equation}
+\section{The Black--Sholes--Merton equation}
 \label{sec:The partial differential BSM equation}
 
+The Black--Scholes--Merton model provides a backward parabolic differential equation (\ref{eq:BSMeq}) with terminal condition () and boundary contirion () , () with the purpose of finding out the fair price of an option provided that assumptions (\ref{sec:Assumptions}) are respected. 
+
+Because the dummy variable $x$ and $t$ are dummies, the equation (\ref{eq:BSMeq}) involved no uncertainty. As it is shown through chapter (GREEKS REF), the uncertainty underlying to the model is removed thank to the delta hedging rule.
+
+\begin{center}
+  \begin{equation}
+     \BSMeq{x}
+    \label{eq:BSMeq}
+  \end{equation}
+\end{center}
+
+The terminal condition (\ref{eq:BSMterminal}) is intended to support that the value of a call option at maturity equals its payoff. 
+
+\begin{center}
+  \begin{equation}
+    \call{T}{x} = \left(x - K\right) ^+
+    \label{eq:BSMterminal}
+  \end{equation}
+\end{center}
+
+Whilst the terminal condition focuses on the value taken at maturity, the bondaries condition fix some constraints on the extreme values likely to be taken by the shares of stock at any time during the optio like. 
+In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an option with an worthless underlying is itself valueless while whenever the option is deep in the money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
+
+\begin{center}
+  \begin{equation}
+    \call{t}{0} = 0
+    \label{eq:BSMboundary0}
+  \end{equation}
+\end{center}
+
+\begin{center}
+  \begin{equation}
+    \lim_{x\to\infty} \left[ \call{t}{x} - \left(x - e^{-r \left(T - t \right)} \right) \right] = 0
+    \label{eq:BSMboundaryinf}
+  \end{equation}
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Solution for vanilla option pricing method

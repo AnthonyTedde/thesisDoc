@@ -24,7 +24,7 @@ c( expand.grid(c(360, 4), c(.2, 1)) %>%
       theme(legend.position = 'none', 
                axis.title = element_text(size = rel(0.8)),
                axis.text = element_text(size = rel(0.7))) +
-      labs( x = 'Time period',
+      labs(title = "(a)", x = 'Time period',
                      y = 'Brownian motion') 
   }), ncol = 2) %>% 
   do.call(what = grid.arrange)
