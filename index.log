@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  12 MAR 2018 22:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  14 MAR 2018 21:32
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1114,9 +1114,17 @@ LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
 
 [7
 
-] [8]
+]
+
+LaTeX Warning: Reference `BSMsol' on page 8 undefined on input line 328.
+
+
+LaTeX Warning: Reference `eq:ScontinuousDiff' on page 8 undefined on input line
+ 329.
+
+[8] [9]
 Chapter 3.
-[9
+[10
 
 ] (./index.aux)
 
@@ -1124,13 +1132,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14422 strings out of 492995
- 272271 string characters out of 6132705
- 581503 words of memory out of 5000000
- 17635 multiletter control sequences out of 15000+600000
+ 14432 strings out of 492995
+ 272409 string characters out of 6132705
+ 581598 words of memory out of 5000000
+ 17645 multiletter control sequences out of 15000+600000
  28621 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,9n,54p,422b,686s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,9n,54p,452b,686s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -1143,10 +1151,10 @@ cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
 xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2017/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on index.pdf (9 pages, 173642 bytes).
+Output written on index.pdf (10 pages, 179705 bytes).
 PDF statistics:
- 92 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

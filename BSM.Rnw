@@ -85,3 +85,113 @@ In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an opt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Solution for vanilla option pricing method}
 \label{sec:Solution for vanilla option pricing method}
+
+
+According to the terminal (\ref{eq:BSMterminal}) and boundaries conditions (\ref{eq:BSMboundary0}, \ref{eq:BSMboundaryinf}), the Black--Scholes--Merton solution for call option happens to be given by equation (\ref{BSMsol}). This equation takes two arguments, being the time and the stock price at that time. In addition to these, two other parameters are required, the strike ($k$) and the riskless interest rate ($r$).
+The solution provided by the equation is the fair price of a vanilla call, at each time t, given a precise maturity date and depending on a stock price. The stock price is simulated by (\ref{eq:Scontinuous}) or with its approximation (\ref{eq:ScontinuousDiff}).
+
+\begin{center}
+  \begin{equation}
+    \BSMsol
+    \label{eq:BSMsol}
+  \end{equation}
+\end{center}
+
+with,
+
+\begin{center}
+  \begin{equation}
+    \dpm
+    \label{eq:dpm}
+  \end{equation}
+\end{center}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: The greeks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The greeks}
+\label{sec:greeks}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Overview
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview}
+\label{sub:GreeksOverview}
+
+The Black--Scholes--Merton equation (\ref{eq:BSMeq}) can be divided into differents parts.
+Each one is identified through a greek letter. These letters are the purpose of this section and would be therefore described here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Delta}
+\label{sub:Delta}
+
+Delta represents the derivative of the call function ($\call{t}{\St}$) with respect to the stock price, as shown with equation (\ref{eq:call}).
+Delta represents therefore the instantaneous rise or fall of a call price while the price of its undlerlying changes, over an infinitesimally small gap of time, $dt$.
+
+\begin{center}
+  \begin{equation}
+    \Delta (t) = \frac{\partial \call{t}{\St}}{\partial \St}
+    \label{eq:call}
+  \end{equation}
+\end{center}
+
+At any time $t$, a hedged portfolio for a short position in a call option would be to hold $\Delta(t)$ share of stock, in order to protect the whole portfolio from an adverse stock movement.
+
+Taking the slope-intercept form of the tangent line below the function $\call{t}{x}$, keeping t constant. Consider that the stock price is equal to $S$ and the corresponding call price, at a fixed time $t$ and stroke at $k$, is $c$. 
+we therefore get (\ref{eq:slopeInterceptCallStock}) as equation of the tangent line below $\call{t}{x}$.
+
+\begin{center}
+  \begin{equation}
+       y  =  \frac{\partial \call{t}{\St}}{\partial \St}  ( x - S) + c
+       \label{eq:slopeInterceptCallStock}
+  \end{equation}
+\end{center}
+
+According to \ref{eq:slopeInterceptCallStock}, the price of the call, for a stock price $S$ at a fixed time is given by $y = c$. Con
+If -- over an infinitesimally small delta time -- a positive movement on the stock price is now considered, says that the stock price rises from $S \to S + \epsilon$. the price of the call also is going to change from $y = c$ to $y = \Delta \epsilon + c$.
+Consequently, in odrer to hedge a short position, $\Delta$ share of stocks should be detain. Indeed, by getting $\Delta$ shares, the loss incured by the higher value of the call $y = c + \Delta \epsilon$ will be offset by an inscrease of $\Delta \epsilon$ thanks to the $\Delta$ shares held.
+It makes sense that a hege on a long position is achieve by setting up a short position in the underlying, according to the same parameter $\Delta$.
+
+The hedge works well for small price movement in the underlying and is closely related to the curvature of the function $\call{t}{c}$, keeping $t$ constant.
+It would therefore be interesting to look at the second derivative of the call function with respect to the stock price.
+It is the purpose of the next subsection.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Gamma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gamma}
+\label{sub:Gamma}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

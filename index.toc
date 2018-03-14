@@ -11,11 +11,15 @@
 \contentsline {section}{\numberline {2.2}Assumptions}{7}
 \contentsline {section}{\numberline {2.3}The Black--Sholes--Merton equation}{8}
 \contentsline {section}{\numberline {2.4}Solution for vanilla option pricing method}{8}
-\contentsline {chapter}{\numberline {3}The Greeks}{9}
-\contentsline {section}{\numberline {3.1}The purpose of the Greeks}{9}
-\contentsline {section}{\numberline {3.2}Delta}{9}
-\contentsline {section}{\numberline {3.3}Theta}{9}
-\contentsline {section}{\numberline {3.4}Gamma}{9}
-\contentsline {section}{\numberline {3.5}Vega}{9}
-\contentsline {section}{\numberline {3.6}Rho}{9}
-\contentsline {section}{\numberline {3.7}An hedging strategy involving the Greeks and Black--Scholes--Merton }{9}
+\contentsline {section}{\numberline {2.5}The greeks}{9}
+\contentsline {subsection}{\numberline {2.5.1}Overview}{9}
+\contentsline {subsection}{\numberline {2.5.2}Delta}{9}
+\contentsline {subsection}{\numberline {2.5.3}Gamma}{9}
+\contentsline {chapter}{\numberline {3}The Greeks}{10}
+\contentsline {section}{\numberline {3.1}The purpose of the Greeks}{10}
+\contentsline {section}{\numberline {3.2}Delta}{10}
+\contentsline {section}{\numberline {3.3}Theta}{10}
+\contentsline {section}{\numberline {3.4}Gamma}{10}
+\contentsline {section}{\numberline {3.5}Vega}{10}
+\contentsline {section}{\numberline {3.6}Rho}{10}
+\contentsline {section}{\numberline {3.7}An hedging strategy involving the Greeks and Black--Scholes--Merton }{10}
