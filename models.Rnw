@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  CHAPTER:Other Models to be considered
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Other Models to be considered}
+\label{cha:OtherModel}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Jump-diffusion process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Jump process}
+\label{sec:Jump}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Overview
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview}
+\label{sub:OverviewJump}
+Jump processes could be separated into two different category. 
+In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
+Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
+In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
+The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Mixed jump-diffusionModel
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Mixed jump-diffusionModel}
+\label{sub:MixedJump}
+
+Merton (1976) provides the model for stock price evolution (\ref{}) involving jumps according to a specified number of jump per year and the mean size of the occuring jump. 
+
+
+\begin{align}
+   \dSr  &= \left(\alpha - \lambda k\right) dt + \sigma \dBm + \dpoiss \\ \intertext{where}
+     \label{eq:mertonmixedjump}
+    k &= \epsilon\left(Y-1\right)
+\end{align}
+
+In his model he define two distinct source of price variation. The one is given by a Wiener process, such as for model \ref{eq:Scontinuousdiff} $d\Bm$. Merton argues about this changes occuring often with small amount of change that it is caused by temporary unbalanced between the supply and demand and therefore those changes arised to correct the discrepency. Even he talked about the previous change as ''normal'', he also defines "abnormal" changes, occuring more rarely but with potentialy huge effect. These large amount of change occurs when information arising has big effect on the stock price, such as bad results for a company, IPO, mass firing \ldots
+
+consequenty in (\ref{eq:mertonmixedjump}), $\dBm$ refers to the normal changes, which are continuous in time whereas $dq$ stands for the abnormal qualified changes, only occuring at discrete point in time and brings jumps.
+
+The ingrendients inside (\ref{eq:mertonmixedjump}) are sightly the same as in equation \ref{eq:Scontinous}, expect for $\lambda$, and $\dpoiss$. 
+
+$\dpoiss$ is an independent poisson process idependents from $\dBm$ described in (\ref{eq:PA} - \ref{eq:PC}), where $A, B, C$ are respectively "No jump occurs during $\left( t, t + h \right)$", "A unique jump occurs during $\left( t, t + h \right)$", "More than one jumps occur during $\left( t, t + h \right)$".
+
+\begin{align}
+  \mathop{\mathbb{P}} \{A\}&= 1 - \lambda h + O\left(h \right) \label{eq:PA}\\
+  \mathop{\mathbb{P}} \{B\}&= \lambda h O\left(h \right) \label{eq:PB}\\
+  \mathop{\mathbb{P}} \{C\}&=   O\left(h \right) \label{eq:PC}
+\end{align}
+
+If the jump occurs, $k$ is a random variable that give a measure of its impact, as a percentage of change in the stock price while $\lambda$ is the average of occuring by unit of time. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Pure jump model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Pure jump model}
+\label{sub:PureJump}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Heston stochastic volatility model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Heston stochastic volatility model}
+\label{sec:Heston}
+
+The HSV model (\ref{eq:HSVstock}) give the derivation of a stock price where the mean rate of return stays the same as that provided by equation (\ref{eq:Scontinuous}).
+The change is connected to the way of the volatility is computed.
+
+\begin{center}
+  \begin{equation}
+    \HSVstock
+    \label{eq:HSVstock}
+  \end{equation}
+\end{center}
+
+Under the Heston model, the variance of the process $\frac{d\St}{\St}$ is equal to $\Vt dt$ (\ref{eq:HSVvol}). The volatility equation process is a CIR.
+
+\begin{center}
+  \begin{equation}
+    \HSVvol
+    \label{eq:HSVvol}
+  \end{equation}
+\end{center}
+
+The Brownian motions $d\Bmsub{S}$ and $d\Bmsub{V}$ are correlated with parameter $\rho$.
+
+
+By using Itô formula over the Black--Scholes--Merton equation, (Heston, 1993) shows that the price of a call option for which the underlying is given by (\ref{eq:HSVstock}), is given by the following equations (XXX - XXX).
+
+\begin{align}
+  c\left(\St, \Vt, t\right) & = \St P_1 - K P(t, T)P_2 \\ \intertext{with}
+  P_j\left(x, v, T; ln\left[K\right]\right) & = \frac{1}{2} + \frac{1}{\pi} \int_{0}^{\infty} Re \left[ \frac{e^{-i \phi \ln{K}} f_j \left( x, v, T; \phi \right)}{i \phi} \right] d\phi \\ \intertext{and}
+  f_j(x, v, t; \phi) & = e^{i \phi x}
+\end{align}

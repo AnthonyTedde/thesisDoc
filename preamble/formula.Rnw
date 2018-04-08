@@ -3,8 +3,10 @@
 % 
 % brownian motion
 \newcommand{\dBm}{dW\left(t\right)}
+\newcommand{\dpoiss}{dq\left(t\right)}
 \newcommand{\DBm}{\delta{W\left(t\right)}}
 \newcommand{\Bm}{W\left(t\right)}
+\newcommand{\Bmsub}[1]{W_{#1}\left(t\right)}
 \newcommand{\Dt}{\Delta t} 
 \newcommand{\Bmdist}{\DBm \sim N \left( 0, \Dt \right)}
 \newcommand{\ft}{f\left(t, \Bm \right)}
@@ -18,6 +20,7 @@
 \newcommand{\call}[2]{c\left( #1, #2\right)}
 % % about stock
 \newcommand{\St}{S\left(t\right)}
+\newcommand{\Vt}{V\left(t\right)}
 \newcommand{\Si}{S\left(0\right)}
 \newcommand{\dSt}{dS\left(t\right)}
 \newcommand{\DSt}{\Delta S\left(t\right)}
@@ -41,5 +44,9 @@
 \newcommand{\CCRtdist}{X \sim N\left(\alpha - \frac{\sigma^2}{2}, \frac{\sigma^2}{t}\right)}
 \newcommand{\BSMpde}{\dct + r x \dcx + \frac{1}{2} \sigma^2 x^2 \dciix = r\ct}
 \newcommand{\BSMeq}[1]{r\call{t}{#1} = \frac{\partial \call{t}{#1}}{\partial t} + r #1 \frac{\partial \call{t}{#1}}{\partial #1} + \frac{1}{2} \sigma ^2 #1 ^2 \frac{\partial ^2 \call{t}{#1}}{\partial #1 ^2}}
-\newcommand{\BSMsol}{\ct = x\N{\dsub{+}} - K e^{-r\Dt} \N{\dsub{-}}}
-\newcommand{\dpm}{\dsub{\pm} = \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}
+\newcommand{\BSMGreeks}[1]{r\call{t}{#1} = \Theta + r #1 \Delta + \frac{1}{2} \sigma ^2 #1 ^2 \Gamma}
+\newcommand{\BSMsol}{\ct &= x\N{\dsub{+}} - K e^{-r\Dt} \N{\dsub{-}}}
+\newcommand{\dpm}{\dsub{\pm} &= \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}
+\newcommand{\HSVstock}{d\St = \alpha \St dt + \sqrt{\Vt} \St d \Bmsub{S}}
+\newcommand{\HSVvol}{d\Vt = \kappa\left(\theta - \Vt \right) + \omega \sqrt{\Vt} d \Bmsub{V}}
+\newcommand{\dportfolio}{dX\left(t\right) &= \Delta\left(t\right) d\St + r \left(X\left(t\right) - \Delta\left(t\right) \St \right) dt}

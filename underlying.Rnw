@@ -15,9 +15,9 @@
 \section{Overview}
 \label{sec:Overview}
 
-This chapter highlights one specific model that is used to model the price ticker of a share of stock for any time $t$ in the future.
+This chapter highlights one specific model that is used to model the motion that a stock price path would follow. It is the former one used in the Black--Scholes model.
 
-Equation (\ref{eq:Scontinuous}) features a stochastic process where the only random component is the Brownian motion $\Bm$.
+The equation (\ref{eq:Scontinuous}), provided by \citet{shreve}, features a stochastic process where the only random component is the Brownian motion $\Bm$.
 The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which respectively are the mean rate of return and the volatility of a stock price whose path is described by that model.
 
 \begin{center}
@@ -26,8 +26,11 @@ The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which
     \label{eq:Scontinuous}
   \end{equation}
 \end{center}
+ 
+In order to match the constraints underlying the Black and Scholes' pricing model, the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
+Furthermore, the path following by any walks of the stock price motion should be  a continuous process, as the time frame decrease $\Dt \to 0$.
+Therefore in addition to develop the model, all its previous stated characteristic are shown to be truth within this chapter.
 
- The condition underlying by (\ref{eq:Scontinuous}) is that the mean rate of return and the volatility of the stock price is constant. The path is continuous, there is no jump in the course of the stock price evolution. Moreover it will be shown in subsequent section that the stochastic process (\ref{eq:Scontinuous}) is log-normally distributed.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Derivation
@@ -35,7 +38,7 @@ The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which
 \section{Derivation}
 \label{sec:Derivation}
 
-The equation (\ref{eq:Scontinuous}) could be derived using Itô's formula (\ref{eq:Itobmdiff}) in order to get the differential form of that equation. The provided differential formula will be next used to find out the first and second moments of the distribution underpinned by the stock price random process.
+In order to get the differential form of equation \ref{eq:Scontinuous}, the Itô's formula (\ref{eq:Itobmdiff}) is used. The provided differential formula will be next used to find out what distribution qualifies the stock price $\St$ random variable along with the first and second moments associated.
 
 \begin{center}
   \begin{equation}
@@ -43,6 +46,7 @@ The equation (\ref{eq:Scontinuous}) could be derived using Itô's formula (\ref{
   \end{equation}
 \end{center}
 
+[HERE]
 The term $d\ft$ in (\ref{eq:Itobmdiff}) represents any changes in the value of a function $\ft$ occuring over a infinitesimally small move in time $dt$. The related function is any one involving time along with a Brownian motion. For that matter in the present case, $ \ft = \St $.
 By applying the tranformation inccured by Itô, the two following equations (\ref{eq:Scontinuousdiff}, \ref{eq:Scontinuousrate}) emerge:
  

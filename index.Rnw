@@ -24,10 +24,17 @@
 \chapter*{Introduction}
 \label{cha:Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
+
 Talk about what is done to price a vanilla option throuhout the BSM method.
+How does the BSM model is fair under its assumption. What about if we are going beyond ?
+How perfomant is it ? 
+What about other model such as \ldots ?
+
+Using R. \cite{R}
 \SweaveInput{underlying}
 \SweaveInput{BSM}
-\SweaveInput{greeks}
+\SweaveInput{models}
+\SweaveInput{methodology}
 
 TEST
 
@@ -35,5 +42,6 @@ TEST
 
 
 
-
+\bibliography{bibl.bib}
+\bibliographystyle{plainnat}
 \end{document}
