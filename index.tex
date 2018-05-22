@@ -15,6 +15,12 @@
 % \usepackage{indentfirst}
 \usepackage{cite}
 \usepackage{natbib}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[capposition=top]{floatrow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xfrac}
+\usepackage{braket}
 
 %%
 % to enumerate subsubsection
@@ -79,8 +85,16 @@
 \newcommand{\BSMGreeks}[1]{r\call{t}{#1} = \Theta + r #1 \Delta + \frac{1}{2} \sigma ^2 #1 ^2 \Gamma}
 \newcommand{\BSMsol}{\ct &= x\N{\dsub{+}} - K e^{-r\Dt} \N{\dsub{-}}}
 \newcommand{\dpm}{\dsub{\pm} &= \frac{1}{\sigma\sqrt{\Dt}} \left[\log\frac{x}{K} + \left(r \pm \frac{\sigma^2}{2}\Dt\right)\right]}
-\newcommand{\HSVstock}{d\St = \alpha \St dt + \sqrt{\Vt} \St d \Bmsub{S}}
-\newcommand{\HSVvol}{d\Vt = \kappa\left(\theta - \Vt \right) + \omega \sqrt{\Vt} d \Bmsub{V}}
+
+% CIR Stock price Stochastic process
+\newcommand{\HSVstock}{
+  d\St &= \alpha \St dt + \sqrt{\Vt} \St d \Bmsub{S}
+}
+
+% CIR volatility
+\newcommand{\HSVvol}{
+  d\Vt &= \kappa\left(\theta - \Vt \right) dt + \sigma \sqrt{\Vt} d \Bmsub{V}
+}
 \newcommand{\dportfolio}{dX\left(t\right) &= \Delta\left(t\right) d\St + r \left(X\left(t\right) - \Delta\left(t\right) \St \right) dt}
 
 \usepackage{Sweave}
@@ -105,527 +119,10 @@ How perfomant is it ?
 What about other model such as \ldots ?
 
 Using R. \cite{R}
-%\SweaveUTF8
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%
-%  CHAPTER:The underlying models
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The underlying model}
-\label{cha:underlying}
-  
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sec:Overview}
-
-This chapter highlights one specific model that is used to model the motion that a stock price path would follow. It is the former one used in the Black--Scholes model.
-
-The equation (\ref{eq:Scontinuous}), provided by \citet{shreve}, features a stochastic process where the only random component is the Brownian motion $\Bm$.
-The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which respectively are the mean rate of return and the volatility of a stock price whose path is described by that model.
-
-\begin{center}
-  \begin{equation}
-    \Scontinuous
-    \label{eq:Scontinuous}
-  \end{equation}
-\end{center}
- 
-In order to match the constraints underlying the Black and Scholes' pricing model, the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
-Furthermore, the path following by any walks of the stock price motion should be  a continuous process, as the time frame decrease $\Dt \to 0$.
-Therefore in addition to develop the model, all its previous stated characteristic are shown to be truth within this chapter.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Derivation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Derivation}
-\label{sec:Derivation}
-
-In order to get the differential form of equation \ref{eq:Scontinuous}, the Itô's formula (\ref{eq:Itobmdiff}) is used. The provided differential formula will be next used to find out what distribution qualifies the stock price $\St$ random variable along with the first and second moments associated.
-
-\begin{center}
-  \begin{equation}
-    \Itobmdiff \label{eq:Itobmdiff}
-  \end{equation}
-\end{center}
-
-[HERE]
-The term $d\ft$ in (\ref{eq:Itobmdiff}) represents any changes in the value of a function $\ft$ occuring over a infinitesimally small move in time $dt$. The related function is any one involving time along with a Brownian motion. For that matter in the present case, $ \ft = \St $.
-By applying the tranformation inccured by Itô, the two following equations (\ref{eq:Scontinuousdiff}, \ref{eq:Scontinuousrate}) emerge:
- 
-\begin{center}
-  \begin{subequations}
-    \begin{align}
-      \Scontinousdiff \label{eq:Scontinuousdiff} \\
-      \Scontinuousrate \label{eq:Scontinuousrate}
-    \end{align}
-  \end{subequations}
-\end{center}
-
-In one hand, the equation (\ref{eq:Scontinuousdiff}) shows that any change occuring in the stock price over an small amount of time is due to one fully predictable element -- its drift rate ($\alpha \St$) -- and another one that brings uncertainty.
-
-In the other hand, equation (\ref{eq:Scontinuousrate}) relates the rate of return of the stock price over a small amount of time. Because the uncertainty given is given by the Browinan motion has an expectation of zero, it could be shown that the mean rate of return of a stock price following the model (\ref{Scontinuous}) is equal to $\alpha$, as stated through (\ref{eq:return.s.dist}).
-
-\begin{center}
-  \begin{equation}
-     \dSr \sim N(\mu dt, \sigma^2 t)
-     \label{eq:return.s.dist}
-  \end{equation}
-\end{center}
-
-
-The figure (\ref{plot:returnDensity}) shows that the normality expectation holds, for equation \ref{eq:return.s.dist}. The solid line exibits the normal distribution bell curve ($N \sim (0, 40 * 360^{-1}$)). While the bins represent the distribution of the increments from a stock processes, with parameters $\alpha = 0$, $\sigma = 40\%$ and $\Dt = 360^{-1}$.
-
- 
-\begin{figure}[!h]
-\centering
-\input{figures/stock_return_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{plot:returnDensity}
-\end{figure}
-
-
-
-In other way, the stochastic price motion process (\ref{eq:Scontinuous}), throughout the Itô approximation, could led to another representation than the one highlighted by equation \ref{eq:Scontinuousdiff}.
-
-\begin{center}
-  \begin{subequations}
-    \begin{align}
-      \Sdiscretediff \label{eq:Sdiscretediff} \\
-      \Sdiscreterate \label{eq:Sdiscreterate}
-    \end{align}
-  \end{subequations}
-\end{center}
-
-The unique difference between respectively (\ref{eq:Scontinuousdiff}) -- (\ref{eq:Sdiscretediff}) and (\ref{eq:Scontinuousrate}) -- (\ref{eq:Sdiscreterate}) is the frequence at which data are recorded.
-In the realm of real world, the model described by (\ref{eq:Sdiscretediff}) fairly matches the data pickup requirements in the sense that only discrete measurement can be performed from the bunch of market available data.
- 
-
-\begin{figure}[h]
-\centering
-\input{figures/ItoAccuracy.tex}
-\caption{Accuracy of Itô approximation}
-\label{plot:ItoAccuracy}
-\end{figure}
-
-
-The figure (\ref{plot:ItoAccuracy}) is purposed to show how precise is the estimation made by using the approximation (\ref{eq:Scontinuousdiff}) against (\ref{eq:Scontinuous}) as $\Dt \to 0$.
-Four graphs are bundled, each one represents a stock price motion. The blue line is made by the stricky application of (\ref{eq:Scontinuous}) while the dark red one is gotten thanks to the Itô's approximation (\ref{eq:Scontinuousdiff}).
-They vary among themselves by, in turn, either a different value for the variance parameter or a different recording frequency or both.
-In one hand, horizontally the stock volatility change whilst the time duration between two measures remains identical. 
-While in the other hand, vertically, whether the volatilities are equal, the time steps are differents. Indeed the measurement is simulated with a daily basis for the two charts above whereas fixed quarterly for the bottom ones.
-It is obvious, following these representations that the less the volatility and time step, the better the approximation. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Distribution of the stock price process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Distribution of the stock price process}
-\label{sub:Distribution of the stock price process}
-
-According to Itô's approximation and by setting $\ft$ to be $\ln{\St}$ it is showed that the natural logarith of $\St$ is normaly distributed with mean
-$\left(\alpha - \frac{\sigma^2}{2}\right) \Dt$ and variance $\sigma^2 \Dt$.
-Because every process with normally distributed logarithm are log--normally distributed, and following the relationship between the two laws, $\St$ is consequently log--normally distributed with mean () and var ().
-
-MEAN
-VAR
-
-
-+ FIGURE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Flaws
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Flaws}
-\label{sub:Flaws}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Volatility issues
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Volatility issues}
-\label{sec:Volatility issues}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump issues
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jump issues}
-\label{sec:Jump issues}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:The \BSM model
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The \BSM model}
-\label{cha:The \BSM model}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: OverView
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{OverView}
-\label{sec:OverView}
-
-In this present section the Black--Scholes--Merton model is explained and developed. Stricly speaking, it would be talked about the BSM (Black--Scholes--Merton) model but not BSM equation. In turn the equation would be refered to as the BS (Black and Scholes) equation. This distinction is made because the model encompasses the derivation of the BS equation, either using the CAPM (Capital Asset Pricing Model) for \citet{bs} or  by setting up a riskless portfolio providing an expected return identiacal to risk-free rate for \citet{merton73}.
-
-The BSM model is meant to provide the non arbitrage price of derivative assets such as european stock option (\citet{hull}). In the present master thesis the model derived from the BS formula is focused on the pricing of one of a kind trivial derivative, the vanilla call option.
-
-In order to price call option throughout the model highlighted in this present chapter, some contraints have been set by \citet{bs}. 
-The section \ref{sec:Assumptions} quotes the assumptions made to keep the model usage between boundaries. In latter chapter however it will be shown how the model is relevant by going on the edge and even beyond these constraints.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Assumptions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Assumptions}
-\label{sec:Assumptions}
-
-\citet{bs} have provided a framework defining a bunch of constraints qualified as "ideal conditions" under which the market would behave in order to make the BS equation works with accuracy. All of these conditions are below--mentioned.
-
-\begin{enumerate}
-  \item The short-term risk free rate $r$ is known and constant
-  \item The stock return involving in the computation of BS equation is lognormally distributed with constant mean and variance rate
-  \item No dividend are provided with the considered share of stock
-  \item The option considered within the computation is european
-  \item The price for bid and ask quote are identical. It means that there is no bid--ask spread to be considerered
-  \item Share of stock can be divided into any portions such as needed for the computation
-  \item Short selling is allowed with no penalties
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The partial differential BSM equation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Black--Scholes equation}
-\label{sec:BSequation}
-
-The pricing method of an option underpinned by the BSM model is closely related to an underlying for which its price $\St$ is random and log--normally distributed, such the one developed in chapter \ref{cha:underlying} throughout equation \ref{eq:Scontinuous} (\citet{bs}).
-
-In order to provide a unique fair price to a stock option (e.g. a vanilla european call option) which depends on an underlying such as described above, all the uncertainty associated to the stock price motion has to disappear. To do so, one have to first construct such a portofolio $X(t)$ which encompasses the same source on uncertainty as the option itself, i.e., the geometric brownian motion $\St$ and then choosing the adequate position $\Delta(t)$ to take  so that all randomness cancels out (\citet{shreve}).
- 
-\begin{align}
-  \dportfolio \label{eq:dportfolio} \\ 
-  \intertext{The goal is to hedge dynamically the position taken in the option. It means that the position has to be frequently rebalanced. Consequently, at any times, the present value of the changes occuring in the portfolio, due to stock price evolution should be equal to the one occuring in the derivative. The only way to achieve this equality is to adapt the delta (\citet{shreve}).}
-   d\left(e^{-rt} X\left(t\right)\right) &= d\left(e^{-rt} \ct \right)
-\intertext{In that way, one can take a position in the derivatives (short / long) and hedge them by taking $\pm \Delta(t)$ shares of stock. $X(0)$ being the price of the call at time zero}
- X\left(0\right) &= c\left(0, S\left(0\right)\right)
-\end{align}
-
-
-
-
-Following the method forementioned, the BSM differential equation is given by equation (\ref{eq:BSMeq}),  with terminal condition (\ref{eq:BSMterminal}) and boundary condition (\ref{eq:BSMboundary0}) -- (\ref{eq:BSMboundaryinf}), (\citet{shreve}).
-
-\begin{center}
-  \begin{equation}
-     \BSMeq{x}
-    \label{eq:BSMeq}
-  \end{equation}
-\end{center}
- 
-\begin{center}
-  \begin{equation}
-    \call{T}{x} = \left(x - K\right) ^+
-    \label{eq:BSMterminal}
-  \end{equation}
-\end{center}
-
-Whilst the terminal condition focuses on the value taken at maturity, the boundary conditions fix some constraints on the extreme values likely to be taken by the shares of stock at any times during the option life. 
-In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an option with an worthless underlying is itself valueless, while whenever the option is deep in the money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
-
-\begin{center}
-  \begin{equation}
-    \call{t}{0} = 0
-    \label{eq:BSMboundary0}
-  \end{equation}
-\end{center}
-
-\begin{center}
-  \begin{equation}
-    \lim_{x\to\infty} \left[ \call{t}{x} - \left(x - e^{-r \left(T - t \right)} \right) \right] = 0
-    \label{eq:BSMboundaryinf}
-  \end{equation}
-\end{center}
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Solution for vanilla option pricing method
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solution for vanilla option pricing method}
-\label{sec:Solution for vanilla option pricing method}
-
-
-According to the terminal (\ref{eq:BSMterminal}) and boundaries conditions (\ref{eq:BSMboundary0}, \ref{eq:BSMboundaryinf}), the Black--Scholes--Merton solution for call option happens to be given by equation (\ref{eq:BSMsol}), (\citet{shreve}). 
-The right hand side of the equation, $\ct$, denotes the price of a call option depending on the time to maturity and the stock price at that time.
-In addition to these arguments, two other parameters are required, the strike ($k$) and the riskless interest rate ($r$).
-
-\begin{align}
-    \BSMsol
-    \label{eq:BSMsol}
-\intertext{with}
-    \dpm
-    \label{eq:dpm}
-\end{align}
-
-
-
-
-
-% \begin{figure}[!h]
-% \centering
-% \input{figures/BSMvsSt.tex}
-% \caption{Relation between call price and underlying}
-% \label{plot:BSMvsSt}
-% \end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The greeks
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The greeks}
-\label{sec:greeks}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
-\label{sub:GreeksOverview}
-
-The Black--Scholes--Merton equation (\ref{eq:BSMeq}) can be divided into differents parts.
-Each one is identified through a greek letter. These letters are the purpose of this section and would be therefore described here.
-
-The Greeks will be next used to show hown the hedge of a call option behave under some variation from the former conditions defined by Black and Scholes. Hence, only the Greeks for call options are considered.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Delta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Delta}
-\label{sub:Delta}
-
-Delta is the derivative of the call function (\ref{eq:BSMsol}) with respect to the stock price, as shown by equation (\ref{eq:call}).
-It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
-
-\begin{align}
-    \Delta (t) &= \frac{\partial \call{t}{\St}}{\partial \St}
-    \label{eq:call}
-    \intertext{Whereas pratically, the derivation of delta for a call is given by equation \ref{eq:deltaCall}, (\citet{shreve}).}
-    \Delta_{call}(t) &= \N{\dsub{+}}
-    \label{eq:deltaCall}
-\end{align}
-
-At any time $t$, in order to hedge a short call one should hold $\Delta(t)$ share of stock. Consequently a portfolio comprised of one short position in a call along with $\Delta$ shares of stock is said to be delta neutral, because each movement in the stock price is compensated as well by  the position in the call as the one in the stock (\citet{hull}).
-
-The delta neutrality could otherwise be explained using the slope-intercept form of the tangent line below the function $\call{t}{x}$, keeping t constant. If the stock price is equal to $S$ and the corresponding call price, for a fixed time $t$ and stroke at $k$, is $c$, we consequently get (\ref{eq:slopeInterceptCallStock}) as equation of the tangent line below $\call{t}{x}$.
-\begin{center}
-  \begin{equation}
-       y  =  \frac{\partial \call{t}{\St}}{\partial \St}  ( x - S) + c
-       \label{eq:slopeInterceptCallStock}
-  \end{equation}
-\end{center}
-According to \ref{eq:slopeInterceptCallStock}, the price of the call, for a stock price $S$ at a fixed time $t$ is given by $y = c$.
-If -- over an infinitesimally small delta time -- a positive stock price movement occurs, says that the stock price rises from $S \to S + \epsilon$. The price of the call is therefore going to change as well, from $y = c$ to $y = \Delta \epsilon + c$.
-Consequently, in odrer to hedge a short position in the call, $\Delta$ shares of stock should be owned. Indeed, by kepping $\Delta$ shares, the loss incured by the higher value of the call $y = c + \Delta \epsilon$ will be offset by an inscrease of $\Delta \epsilon$ thanks to the $\Delta$ shares held.
-It makes sense that the hedge of a long call is achieved by setting up a short position in the underlying, according to the same parameter $\Delta$.
-
-The hedge works well for small price movement in the underlying and closely depends on the curvature of the function $\call{t}{c}$, keeping $t$ constant (\citet{shreve}).
-It would therefore be interesting to look at the second derivative of the call function with respect to the stock price, in order to get the rate of the rate of change of the call with respect to the underlying price.
-It is the purpose of the next subsection (\ref{sub:Gamma}).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Gamma
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Gamma}
-\label{sub:Gamma}
-
-Gamma is the second derivative of the price of the option with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
-
-\begin{center}
-  \begin{equation}
-    \Gamma = \frac{\partial^2\call{t}{\St}}{\partial \St^2}
-    \label{eq:GammaDerivative}
-  \end{equation}
-\end{center}
-
-It provides the acceleration at with the price of a call option move when the underlying price also move, ceteris paribus. From Taylor expansion formula, it also gives information on the curvature of the function to be approximated using a differential form.
-Consequently, by gathering gamma and delta both together, a given more precise information on hedging against the only stock price movement is achieved.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Theta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Theta}
-\label{sub:Theta}
-
-Theta is the derivative of the price of an option with respect to the time, stock price unchanges (\ref{eq:ThetaDerivative})
-
-\begin{center}
-  \begin{equation}
-    \Theta (t) = \frac{\partial \call{t}{\St}}{\partial t}
-    \label{eq:ThetaDerivative}
-  \end{equation}
-\end{center}
-
-(Hull), Theta can be used as a proxy for Gamma in a delta neutral portfolio.
-No need to hedge against time therefore no need to neutralize theta.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Relation between BSM and the greeks
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Relation between BSM and the greeks}
-\label{sec:BSMGreeks}
-
-The Black--Scholes--Merton equation and the greeks are closely related together.
-In deed the BSM partial derivative formula (\ref{eq:BSMeq}) could equally be written using the greeks (\ref{eq:BSMGreeks})
-
-\begin{center}
-  \begin{equation}
-    \BSMGreeks{\St}
-    \label{eq:BSMGreeks}
-  \end{equation}
-\end{center}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:Other Models to be considered
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Other Models to be considered}
-\label{cha:OtherModel}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jump process}
-\label{sec:Jump}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
-\label{sub:OverviewJump}
-Jump processes could be separated into two different category. 
-In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
-Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
-In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
-The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Mixed jump-diffusionModel
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Mixed jump-diffusionModel}
-\label{sub:MixedJump}
-
-Merton (1976) provides the model for stock price evolution (\ref{}) involving jumps according to a specified number of jump per year and the mean size of the occuring jump. 
-
-
-\begin{align}
-   \dSr  &= \left(\alpha - \lambda k\right) dt + \sigma \dBm + \dpoiss \\ \intertext{where}
-     \label{eq:mertonmixedjump}
-    k &= \epsilon\left(Y-1\right)
-\end{align}
-
-In his model he define two distinct source of price variation. The one is given by a Wiener process, such as for model \ref{eq:Scontinuousdiff} $d\Bm$. Merton argues about this changes occuring often with small amount of change that it is caused by temporary unbalanced between the supply and demand and therefore those changes arised to correct the discrepency. Even he talked about the previous change as ''normal'', he also defines "abnormal" changes, occuring more rarely but with potentialy huge effect. These large amount of change occurs when information arising has big effect on the stock price, such as bad results for a company, IPO, mass firing \ldots
-
-consequenty in (\ref{eq:mertonmixedjump}), $\dBm$ refers to the normal changes, which are continuous in time whereas $dq$ stands for the abnormal qualified changes, only occuring at discrete point in time and brings jumps.
-
-The ingrendients inside (\ref{eq:mertonmixedjump}) are sightly the same as in equation \ref{eq:Scontinous}, expect for $\lambda$, and $\dpoiss$. 
-
-$\dpoiss$ is an independent poisson process idependents from $\dBm$ described in (\ref{eq:PA} - \ref{eq:PC}), where $A, B, C$ are respectively "No jump occurs during $\left( t, t + h \right)$", "A unique jump occurs during $\left( t, t + h \right)$", "More than one jumps occur during $\left( t, t + h \right)$".
-
-\begin{align}
-  \mathop{\mathbb{P}} \{A\}&= 1 - \lambda h + O\left(h \right) \label{eq:PA}\\
-  \mathop{\mathbb{P}} \{B\}&= \lambda h O\left(h \right) \label{eq:PB}\\
-  \mathop{\mathbb{P}} \{C\}&=   O\left(h \right) \label{eq:PC}
-\end{align}
-
-If the jump occurs, $k$ is a random variable that give a measure of its impact, as a percentage of change in the stock price while $\lambda$ is the average of occuring by unit of time. 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Pure jump model
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Pure jump model}
-\label{sub:PureJump}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Heston stochastic volatility model
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Heston stochastic volatility model}
-\label{sec:Heston}
-
-The HSV model (\ref{eq:HSVstock}) give the derivation of a stock price where the mean rate of return stays the same as that provided by equation (\ref{eq:Scontinuous}).
-The change is connected to the way of the volatility is computed.
-
-\begin{center}
-  \begin{equation}
-    \HSVstock
-    \label{eq:HSVstock}
-  \end{equation}
-\end{center}
-
-Under the Heston model, the variance of the process $\frac{d\St}{\St}$ is equal to $\Vt dt$ (\ref{eq:HSVvol}). The volatility equation process is a CIR.
-
-\begin{center}
-  \begin{equation}
-    \HSVvol
-    \label{eq:HSVvol}
-  \end{equation}
-\end{center}
-
-The Brownian motions $d\Bmsub{S}$ and $d\Bmsub{V}$ are correlated with parameter $\rho$.
-
-
-By using Itô formula over the Black--Scholes--Merton equation, (Heston, 1993) shows that the price of a call option for which the underlying is given by (\ref{eq:HSVstock}), is given by the following equations (XXX - XXX).
-
-\begin{align}
-  c\left(\St, \Vt, t\right) & = \St P_1 - K P(t, T)P_2 \\ \intertext{with}
-  P_j\left(x, v, T; ln\left[K\right]\right) & = \frac{1}{2} + \frac{1}{\pi} \int_{0}^{\infty} Re \left[ \frac{e^{-i \phi \ln{K}} f_j \left( x, v, T; \phi \right)}{i \phi} \right] d\phi \\ \intertext{and}
-  f_j(x, v, t; \phi) & = e^{i \phi x}
-\end{align}
+% \SweaveInput{upstream}
+% \SweaveInput{underlying}
+% \SweaveInput{BSM}
+% \SweaveInput{models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  CHAPTER:Methodology
@@ -634,7 +131,146 @@ By using Itô formula over the Black--Scholes--Merton equation, (Heston, 1993) s
 \chapter{Methodology}
 \label{cha:Methodology}
 
-TEST
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: General overview
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General overview}
+\label{sec:methodology:general}
+
+My work is roughly cut into three parts, that is to say, the upstream analysis, the analysis and a discussion.
+
+Firstly I will perform an upstream analysis meant to make the machinery (i.e. the algorithms I have created using \cite{R}) works together with market-calibrated data.
+The whole step is altogether explained in \cref{sec:methodology:market}.
+
+Afterward comes the analysis part where the delta--hedging rule will be measured according to different scenarios.
+Latter will only focus on the benchmarking of hedges involving european short call derivatives priced across the Black--Scholes--Meron formula.
+In order to construct such experiments, I will create as a collection of call prices, distinguished among themselves by different triples, each comprised of a maturity date ($T$), a stike price ($K$) and a volatility factor ($\sigma$).
+\cref{eq:methodology:general:call} vanishes ambiguity by providing the mathematical counterpart of the previous statement.
+
+\begin{align}
+C \equiv \left\{ c_{t s k} \right\} \forall & t \in T \equiv \left\{ \frac{1}{4}, \frac{1}{2}, \frac{3}{4}, 1\right\}, \label{eq:methodology:general:call}\\
+& s \in \sigma \equiv \left\{ \sigma_i \right\}_{i \in \set{5\%, 25\%, 50\%, 75\%, 95\% }}, \nonumber \\
+& k \in K \equiv 
+\left\{ \begin{array}{l}
+\text{deep--in--the--money},\\
+\text{in--the--money},\\
+\text{at--the--money},\\
+\text{out--of--the--money},\\
+\text{deep--out--of--the--money}
+\end{array} \right\} \nonumber
+\end{align}
+Where $(T, \sigma, k)$ are respectively the set of the considered maturities, volatilities and strike price. The subscript of the volatility set stands for the percentiles kept from the upstream analysis. [NOT GOOD]
+
+So far, it lacks some time series, representing the evolution of the underlying over time, in order to construct the hedges.
+To do so, I will implement the different techinques convered in the previous chapters, namely the geometric Brownian motion (GBM), the Merton jump diffusion (MJD) and the Heston stochastic volatility (HSV) processes and I will feed each of them with sets of arguments being relevant with the whole subset of distict double $(T, \sigma)$ constructed from the collection (\ref{eq:methodology:general:call}) so that the generated sampled series shall be pairwise consistent with one and only atoms of the set \ref{eq:methodology:general:call}.
+
+Under the hood, the experiments on delta--hedging will be each constructed over 500 trials.
+For instance, in order to measure the hedge of a european call stroke at \$ 40 with a maturity of 3 months and an estimated volatility of .20, I will store in a data table, 500 differents times series of sampled GBM computed in accordance with all members of $\Set{(t, s) | \forall t \in T, s \in \sigma}$.
+Nevertheless, even though the number of 500 trials is purely arbitrary, it sounds a good trade--off between a reasonable computational time needed to run the analysis  and obtaining a big large view of the underpinned data which is broad enough to decipher trends.
+
+The final step of the analysis will be the performance measure of each specific hedging scenario.
+This quantitative assessment will be performed through a purposely tool I have developed.
+More details of the latter is given at \cref{sec:methodology:hedging}.
+
+Ultimately though, the discussion part comes where the results grouped by hypothesis will be commented.
+Let's first begin with the data calibration.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Market data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Market data}
+\label{sec:methodology:market}
+
+In order to correctly feed the developed models, an upstream analysis is needed to define a range of values to take as arguments.
+Latter can be subdivided by their belonging model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Arguments for geometric Brownian motion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arguments for geometric Brownian motion}
+\label{sub:methodology:market:geometric}
+
+The drift and volatility rates, respectively $\alpha$ and $\sigma$, will be estimated using market data, especially the stocks from the S\&P500.
+
+First and foremost, daily data will be downloaded to construct the set of vectors $S_s$, where the subscript $s$ denotes a specific symbol such as AAPL, for Apple.
+Next, the algorithm will compute the daily basis log--return on each series belongong to $S_s$, as stated by \cref{eq:methodology:market:geometric:log}.
+
+\begin{align}
+\ln \frac{S_{s, i+1}}{S_{s, i}} \label{eq:methodology:market:geometric:log}
+\end{align}
+Because it exists some days where prices are not quoted, it is therefore necessary to be sure that the indexes $i$ and $i + 1$ are together separated by only one calendar day. This requirement provides the log-returns on the same basis and therefore make it comparable.
+
+Once the log--returns will have been computed, \crefrange{eq:upstream:logreturn:sample}{eq:upstream:volatility:estimator} give a method to compute an estimation of the variance rate.
+
+[TODO:+++]
+
+\begin{align}
+\hat{\sigma} \equiv \Set{\sigma_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
+\end{align}
+Where p are percentiles.
+
+
+\begin{align}
+\hat{param} \equiv \Set{\left(\alpha, \sigma\right)_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
+\end{align}
+By linear model.
+
+
+[TODO:---]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Arguments for Merton Jump--diffusion process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arguments for Merton Jump--diffusion process}
+\label{sub:methodology:market:merton}
+
+The arguments to be assessed for the current model come in two distinctive flavours; the ones describing the normal move in the stock prices $(\alpha, \sigma)$ and those defining the frequency $(\lambda)$ and the intensity $(\mu, \delta^2)$ of jumps.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Scenarios
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scenarios}
+\label{sec:methodology:scenarios}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Hedging performance tool
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hedging performance tool}
+\label{sec:methodology:hedging}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Group construction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Group construction}
+\label{sec:methodology:group}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analysis}
+\label{sec:methodology:analysis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+\label{sec:methodology:discussion}
+
+
+
+
+
+
+
 
 
 

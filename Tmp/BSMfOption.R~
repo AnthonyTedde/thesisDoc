@@ -1,0 +1,28 @@
+library(fOptions)
+library(quantmod)
+
+o <- getOptionChain("AAPL", "2018")
+p <- getQuote("AAPL")
+
+dt <-  as.double(ISOdate(2018, 11, 16) - Sys.time())
+
+o[[6]][[1]][10, ]
+
+GBSVolatility(price = 36.5,
+              TypeFlag = "c",
+              S = 186.4,
+              X = 155,
+              Time = dt,
+              r = 0.03,
+              b = 0)
+         
+
+GBSOption(TypeFlag = "c",
+          S = ,
+          X = 90,
+          Time = 1/4,
+          r = 0.08,
+          b = 0,
+          sigma = .30)
+
+

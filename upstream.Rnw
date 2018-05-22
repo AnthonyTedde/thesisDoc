@@ -1,0 +1,282 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  CHAPTER:Upstream concepts
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Upstream concepts}
+\label{cha:upstream}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Overview
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview}
+\label{sec:upstream:overview}
+
+The material covered in the current chapter is meant to be intensively used further, either in theoretical models or custom--produced algorithm. A few of them have for the only purpose to introduce some concepts subsequently developed in the current master thesis' framework, though. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Vanilla options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vanilla options}
+\label{sec:upstream:vanilla}
+
+The so--called vanilla options, in opposition to the more complex -- not covered in this master thesis -- exotic ones, are specifics kind of derivatives coming along with some good--to--know jargons. 
+
+First and foremost, an option is a contract between two stakeholders with different interests or at least distinctive motivations, who want to buy or sell a product, broadly a financial asset called the underlying. Indeed, one can look for hedge oneself against risk while the other party wants to make a profit on a speculative move.
+Likewise other financial contracts, one agrees to buy and the other to sell at a fixed amount of money, namely the strike price denoted by $k$. The main difference being that they would effectively complete the purchase or the sale of the underlying at a future date than the one they enter into the bargain.
+
+
+Another key characteristic of options is that they are not symmetric contracts, in the sense that both parties do not have the same rights, depending on their position along with the option's type. Two positions can be taken when entering into such a derivative, long or short. Going short roughly means purchase the option whereas going long implies writing, or synonymously selling, the derivative. Beyond the position, the contract can be of call or put type. The following sentences encompass a unique mix of type--position combination that gives an overview of all the possible scenarios:
+
+\begin{itemize}
+\item Someone who is going long into a call gains the right to purchase the underlying at a future date for a fixed price. He has to pay some fees to enter into the contract.
+\item Someone who is going short into a call is forced to sell the underlying at a future date for a fixed price. He receives financial compensation to enter into the contract.
+\item Someone who is going long into a put gains the right to sell the underlying at a future date for a fixed price. He has to pay some fees to enter into the contract.
+\item Someone who is going short into a put is forced to buy the underlying at a future date for a fixed price. He receives financial compensation to enter into the contract.
+\end{itemize}
+
+Moreover, vanilla options may be European or American. The latter can be exercised at any time during the whole life of the contract while the European can only be at maturity.
+
+Finally, the payoff provided by all aforementioned European options are summarized throughout \crefrange{eq:upstream:cl}{eq:upstream:ps}, where $C_l$, $C_s$, $P_l$ and $P_s$ respectively stand for the long call, short call, long put and short put payoffs. $S(T)$ being the price of the underlying at maturity.
+
+\begin{align}
+C_l &= \left(S(T) - k\right)^+ \label{eq:upstream:cl}\\
+C_s &= \left(k - S(T)\right)^- \label{eq:upstream:cs}\\
+P_l &= \left(k - S(T)\right)^+ \label{eq:upstream:pl}\\
+P_s &= \left(S(T) - k\right)^- \label{eq:upstream:ps}
+\end{align}
+
+The derivative considered in this master thesis document is mainly the European call option, even though the link with European put could somehow be done without being mandatory to exhibit the issue here raised. Therefore such reference to put should only be done when necessary.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Brownian Motion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Brownian Motion}
+\label{sec:upstream:brownian}
+ 
+All over the present document, Brownian motion, Wiener / Markov processes are considered to be equivalent terminology and therefore used as such. However strictly speaking, even though the Brownian motion is in every respect a Wiener process, stricto sensu, the term Markov process is broader. Indeed, the more remarkable Markov property is to be a process with independent future increments, putting it in line with the  weak form of market efficiency (\citet{hull}).
+Whilst, on the other hand, even if the Brownian motion, and thus the Wiener process, share this property, they are defined with the idiosyncrasy to have mean zero and a variance rate of one per unit of time (\citet{hull}).
+
+Brownian motion is a masterpiece broadly used subsequent development. It is notably involved in many algorithms such as the ones for geometric Brownian motion [REF], Black--Scholes--Merton equation [REF], jump--diffusion process [REF] and Heston [REF].
+
+Brownian motion is a continuous function $\Bm$ satisfying $W(0)$ with independent and identically distributed (iid) increments, characterized such as the following \cref{eq:upstream:increment:dist}
+
+\begin{align}
+W(t_{i+1}) - W(t_i) \sim
+  iid N \left(0, t_{i+1} - t_i\right) \label{eq:upstream:increment:dist}
+\end{align}
+
+This Markov process is qualified as being time and path dependent in its building blocks. Time dependency implies that likewise other functions its value evolves over time. However, the Wiener process is meant to randomly move between two time--steps as well, which directly lie on the path dependency. Practically at any time $t$, the Brownian motion may take any value as \cref{eq:upstream:brownian:dist} shows.
+
+\begin{align}
+\Bm \sim N(0, t) \label{eq:upstream:brownian:dist}
+\end{align}
+
+The construction of such a Markov process could be achieved following various techniques. Either by computing the differential process for every time-steps and then combining it. This procedure gives one possible path of the Brownian motion (see \cref{eq:upstream:brownian:diff,eq:upstream:brownian:cumsum}). Or either by constructing the joint moment generating function of the iid random variables' vector ($W(t_i)$ \ldots $W(t_m)$), following \cref{eq:upstream:brownian:joint}.
+
+\begin{align}
+  d\Bm &= \phi \left(0, t + \epsilon_i \right) \label{eq:upstream:brownian:diff} \\
+  \intertext{
+  $\phi$ is a function that generate a random number according to the normal law with parameter $\mu = 0$ and $\sigma^2 = t + \epsilon_i$, with $\epsilon_i$ being any arbitrary small delta time step.
+  }
+  W\left(t + \epsilon_i\right) &= \Bm + d\Bm \label{eq:upstream:brownian:cumsum}
+\end{align}
+
+\begin{align}
+  \varphi\left(u_1 \ldots u_m\right) = \exp{\left( \frac{1}{2} \sum_{i = 1}^m \left[ \sum_{j = i}^m u_j \right]^2 \left( t_i - t_{i-1} \right) \right)} \label{eq:upstream:brownian:joint}
+\end{align}
+
+\Cref{fig:upstream:brownian} (QA) displays a simulation of one hundred Brownian motions over a time frame of five years. While in turn \cref{fig:upstream:brownian} (QB) shows how the experiment's outcomes are distributed after five years, with characteristics such as shown by \cref{eq:upstream:increment:dist}. The black outlined curve is the density of the normal distribution.
+
+\begin{figure}[H]
+\centering
+\input{figures/brownianmotion.tex}
+\caption{Multiple Brownian Motion}
+\floatfoot{\textit{Note.} (QA): Simulation of one hundred Brownian motions using the R package \citet{randomwalk} with a timeframe of five units (five years) with a time-step of one over one hundred.
+(QB): Density computed on a simulation of one hundred thousand Brownian motions. The calculation has been made by taking all the final value $W(5)$ and by plotting them as a density function. The Black bell curve is the normal density with mean zero and a standard deviation of square root of five, as expected (\cref{eq:incrementsdist}).}
+\label{fig:upstream:brownian}
+\end{figure}
+
+Lastly, a Brownian motion has no tendency to rise or fall as time passes thanks to its martingale property. Therefore, because its initial value is zero, a Wiener process only brings noise by being incorporated into other stochastic series, such as those proposed further on.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Correlated Brownian Motion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Correlated Brownian Motions}
+\label{sub:upstream:brownian:correlated}
+
+Correlated Brownian motions are Wiener processes that related together according to the factor $\rho$ \cref{eq:upstream:brownian:corr}.
+Following \citet{shreve}, these processes happens to be modeled by \cref{eq:upstream:brownian:corr:1,eq:upstream:brownian:corr:2}.
+
+\begin{align}
+  dB_1(t) dB_2(t) &= \rho(t) dt \label{eq:upstream:brownian:corr} \\
+  \intertext{Where $dB_1(t)$ and $dB_2(t)$ are Wiener process }
+  B_1(t) &= W_1(t) \label{eq:upstream:brownian:corr:1} \\
+  B_2(t) &= \int_0^t \rho(s) dW_1(s) + \int_0^t \sqrt{1 - \rho^2(s)} dW_2(s) \label{eq:upstream:brownian:corr:2}
+\end{align}
+
+When $\rho$ is constant over time however, the simple form of \cref{eq:upstream:brownian:corr:deterministic:2} is enough.
+
+\begin{align}
+B_2(t) &= \rho W_1(s) + \sqrt{1 - \rho^2} W_2(s) \label{eq:upstream:brownian:corr:deterministic:2}
+\end{align}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Cox--Ingersoll--Ross
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ito's lemma}
+\label{sec:upstream:ito}
+
+Based on Taylor approximation theorem, Ito formulae are meant to provide the differential form of such a function $f \circ g$ where the function $f$ can be differentiate with respect to its independent variable whilst g cannot.
+
+\begin{align}
+  f(T, W(T)) &= f(0, W(0))
+               + \int_0^T \frac{\partial f(t, W(t))}{\partial t} dt
+               + \int_0^T \frac{\partial f(t, W(t))}{\partial W(t)} dW(t)
+               + \frac{1}{2} \int_0^T \frac{\partial^2 f(t, W(t))}{\partial W(t)^2} dt \label{eq:upstream:itodiff:brownian}
+\end{align}
+
+Whilst the \cref{eq:upstream:itodiff:brownian} shows the formula for Brownian motion, the \cref{eq:upstream:itodiff:itopro} represents the form used to differentiate the more complex Ito process (\ref{eq:upstream:itopro}).
+
+\begin{align}
+  X(T) &= X(0)
+         + \int_0^T \Delta(u) dW(u)
+         + \int_0^T \Theta(u) du \label{eq:upstream:itopro} \\
+  \intertext{
+  Where $\Delta(u)$ and $\Theta(u)$ are stochastic process, adapted to a filtration f(t)
+  }
+  f(T, X(T)) &= \ldots
+\end{align}
+
+Ito formulae it thereafter applied to derive such a process like the geometric Brownian motion [REF] or the Black--Scholes--Merton partial differential equation. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Cox--Ingersoll--Ross
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Cox--Ingersoll--Ross}
+\label{sec:CoxIngersollRoss}
+
+The Cox--Ingersoll--Ross (CIR) stochastic model $R(t)$, defined by the differential \cref{eq:upstream:CIR}), can be used to simulate interest rates' evolution over time thanks to some of its related properties. Indeed it gives a good fit owing to two of them, namely the mean--reversion and its ability to only be positive (\citet{shreve}).
+
+\begin{align}
+dR(t) &= (\alpha - \beta R(t)) dt + \sigma \sqrt{R(t)} dW(t)
+\label{eq:upstream:CIR}
+\end{align}
+
+A mean--reverting stochastic process tends to navigate, such a pointy sinusoidal motion, around its mean (see [FIGURE]).
+The CIR inherits this behaviour from the construction of its differential's drift part, i.e. $(\alpha - \beta R(t))dt$.
+Indeed when $R(t) = \sfrac{\alpha}{\beta}$, then the drift term $dt = 0$ with the consequence of status quo.
+In addition, whether $R(t) > \sfrac{\alpha}{\beta}$ or $R(t) < \sfrac{\alpha}{\beta}$, the next value of $R(t + \epsilon) = R(t) + dR(t)$ is pushed back toward $\sfrac{\alpha}{\beta}$.
+Actually, as showing by \cref{eq:upstream:CIR:exp}, the long--run expected value for the process $R(t)$ is $\sfrac{\alpha}{\beta}$ (\citet{shreve}).
+
+\begin{align}
+\lim_{t \to \infty}  \mathop{\mathbb{E}} R(t) = \frac{\alpha}{\beta} \label{eq:upstream:CIR:exp}
+\end{align}
+
+On the other hand, the non-negativity property is explained by the fact that if $R(t) \to 0$ then $dR(t) \simeq \alpha dt > 0$ making $R(t+\epsilon)$ bounced off the x axis, running it away from negative realm (\citet{shreve}).
+
+Ultimately though, the CIR mean--reverting \cref{eq:upstream:CIR} is used by \citet{heston1993} in its model in order to drive stochastic interest rates.
+Heston's model is covered throughout \cref{sec:othermodel:heston}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Moments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Skewness and Kurtosis}
+\label{sec:Moments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Definition
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Definition}
+\label{sub:Definition}
+
+
+The skewness and kurtosis for a random variable's distribution, are respectivaly the third and fourth moment characterizing either the asymetry and the degree of flatness.
+
+The theoretical moments are defined by \cref{eq:upstream:moment:theoretical} while the empirical ones can be estimated using \cref{eq:upstream:moment:empirical}, with $r = 3$ to compute the skewness or $r= 4$ for the kurtosis.
+
+\begin{align}
+\gamma_r = \mathop{{}\mathbb{E}} \left[ \left( \frac{X - \mu}{\sigma} \right) ^r \right] \label{eq:upstream:moment:theoretical}
+\intertext{where $X$ is any random variable}
+m_r = \frac{1}{n} \sum_{i = 1}^n (x_i - \overline{\rm x}) ^r \label{eq:upstream:moment:empirical}
+\end{align}
+with $\{x_i\}_{i \in n}$ being a set of outcomes, belonging to the sample set.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Estimation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Estimation}
+\label{sub:Estimation}
+
+Sampled skewness and kurtosis formulae exist in different fashion with their precisions depending on the size of the sample along with the skewed of the theoretical distribution to be estimated (\citet{sk}).
+
+The chosen method to use to estimate the skewness and kurtosis needs a prudent selection especially for small sized sample. Actually, in order to minimize the mean--squared error and the associated variance, the \cref{eq:upstream:skewness:normal,eq:upstream:kurtosis:normal} are used as an reliable  unbiased estimator for sample with normal shaped theoretical distribution.
+
+\begin{align}
+  b_{skewness} &= \frac{m_3}{S^3} \label{eq:upstream:skewness:normal} \\ 
+  b_{kurtosis} &= \frac{m_4}{S^4} \label{eq:upstream:kurtosis:normal} \\
+  \intertext{
+  where
+  }
+  S^2 &= \frac{1}{n - 1} \sum_{i = 1}^n \left( x_i - \overline{\rm x} \right)^2 \\
+  \intertext{
+  Conversely, \cref{eq:upstream:skewness:skewed,eq:upstream:kurtosis:skewed} are the ones providing a better unbiased estimation than the latters for more skewed distribution, such as for log--normal random variable's sample.
+  }
+  G_{skewness} &= \frac{k_3}{\sqrt{k_2^3}} \label{eq:upstream:skewness:skewed} \\ 
+  G_{kurtosis} &= \frac{k_4}{k_2^2} \label{eq:upstream:kurtosis:normal}  \\
+  \intertext{
+  where
+  }
+  K_2 &= \frac{n}{n-1} m_2 \\
+  K_3 &= \frac{n}{(n-1)(n-2)} m_3 \\
+  K_4 &= \frac{n}{\prod_{i = 1}^3 n - i} \Big[ (n+1)m_4 - 3(n-1) m_2 ^2 \Big]
+\end{align}
+
+Consequently the algorithm to apply in order to estimate the skewness and kurtosis from samples should therefore be chosen with respect to the theoretical underpinned distribution. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Log--return and compounded interest rate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Log--return and compounded interest rate}
+\label{sec:upstreamlogreturn}
+
+The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:continuousrate}{eq:logreturn}
+
+\begin{align}
+&S(0) e^{Rt} = \St \label{eq:continuousrate} \\
+\Longleftrightarrow  &\ln{S(0)} + Rt = \ln{\St} \\
+\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = Rt \label{eq:logreturn}
+\end{align}
+Where $R$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interest are compounded (in year) and the left--hand side of \cref{eq:logreturn} stands for the natural logarithm of the stock return occuring during the period $t$, the so--called log--return.
+
+For what matter in this current document, the focus is set to the sample's log--returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:Scontinuous} to simulate geometric Brownian motion.
+
+Following \citet{hull}, if $S_i$ and $n$ respectively denote the stock price at the end of interval $i$ and the total number of observation then the log--return of the ordered sample set $\{S-i\}_{i \in n}$ is give by \cref{eq:upstream:logreturn:sample}.
+
+\begin{align}
+  u_i &= \ln \frac{S_i}{S_{i-1}} \label{eq:upstream:logreturn:sample} \\
+  \intertext{
+  Whilst the estimation of the standard deviation of all the $u_i$ is defined such as in \cref{eq:upstream:logreturn:sample:sd}
+  }
+  s = \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n \left(u_i - \bar{u} \right) ^2} \label{eq:upstream:logreturn:sd} \\
+\end{align}
+
+Consequently if the volatility of a stochastic process, simulatating a stock price motion, is given by $\sigma \sqrt{t}$, then it could therefore be estimated using market data throughout \cref{eq:upstream:volatility:estimator}
+
+\begin{align}
+  \hat{\sigma} = \frac{s}{\sqrt{t}} \label{eq:upstream:volatility:estimator}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Arbitrage strategy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arbitrage strategy}
+\label{sec:upstreamarbitrage}
+
+The 

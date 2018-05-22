@@ -25,7 +25,7 @@ The section \ref{sec:Assumptions} quotes the assumptions made to keep the model 
 % SECTION: Assumptions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assumptions}
-\label{sec:Assumptions}
+\label{sec:bsm:assumption}
 
 \citet{bs} have provided a framework defining a bunch of constraints qualified as "ideal conditions" under which the market would behave in order to make the BS equation works with accuracy. All of these conditions are below--mentioned.
 
@@ -115,6 +115,9 @@ In addition to these arguments, two other parameters are required, the strike ($
 
 
 
+
+
+
 <<echo=FALSE, results=hide>>=
 # library(StockPriceSimulator)
 # library(ggplot2)
@@ -169,10 +172,10 @@ Delta is the derivative of the call function (\ref{eq:BSMsol}) with respect to t
 It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
 
 \begin{align}
-    \Delta (t) &= \frac{\partial \call{t}{\St}}{\partial \St}
+    \Delta \left(t, \St \right) &= \frac{\partial \call{t}{\St}}{\partial \St}
     \label{eq:call}
     \intertext{Whereas pratically, the derivation of delta for a call is given by equation \ref{eq:deltaCall}, (\citet{shreve}).}
-    \Delta_{call}(t) &= \N{\dsub{+}}
+    \Delta_{call} \left(t, \St \right) &= \N{\dsub{+}}
     \label{eq:deltaCall}
 \end{align}
 
@@ -201,16 +204,20 @@ It is the purpose of the next subsection (\ref{sub:Gamma}).
 \subsection{Gamma}
 \label{sub:Gamma}
 
-Gamma is the second derivative of the price of the option with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
+Gamma is the second derivative of the option's price function with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
 
-\begin{center}
-  \begin{equation}
-    \Gamma = \frac{\partial^2\call{t}{\St}}{\partial \St^2}
+\begin{align}
+    \Gamma \left(t, \St \right) &= \frac{\partial^2\call{t}{\St}}{\partial \St^2}
     \label{eq:GammaDerivative}
-  \end{equation}
-\end{center}
+    \intertext{Whereas pratically, the derivation of gamma for a call is given by equation \ref{eq:gammaCall}, (\citet{shreve}).}
+    \Gamma_{call} \left(t, \St \right) &= \frac{1}{\sigma \St \sqrt{\Delta t}} N^\prime \left( \dsub{+} \right)
+    \label{eq:gammaCall}
+\end{align}
 
-It provides the acceleration at with the price of a call option move when the underlying price also move, ceteris paribus. From Taylor expansion formula, it also gives information on the curvature of the function to be approximated using a differential form.
+It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. It gives information on the curvature of the function to be approximated using the differential form. 
+It is crutial to know how big is the value of gamma in order to adequatly hedge a position in a call. Indeed, if gamma is low, the rebalancing of the hedge does not have to occur frequently but if gamma 
+It gives as information the frequency needed in order to lower the error due to too large price movement.
+With the delta hedging rule, the more the price moves from its current value the more 
 Consequently, by gathering gamma and delta both together, a given more precise information on hedging against the only stock price movement is achieved.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

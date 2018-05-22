@@ -13,113 +13,70 @@
 % SECTION: Overview
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview}
-\label{sec:Overview}
+\label{sec:underlying:overview}
 
-This chapter highlights one specific model that is used to model the motion that a stock price path would follow. It is the former one used in the Black--Scholes model.
+This chapter highlights one specific model used to model the motion that a stock price time serie would follow. It is the one used in the Black--Scholes--Merton model, \citet{hull}.
 
-The equation (\ref{eq:Scontinuous}), provided by \citet{shreve}, features a stochastic process where the only random component is the Brownian motion $\Bm$.
-The others parameters of (\ref{eq:Scontinuous}) are $\alpha$ and $\sigma$, which respectively are the mean rate of return and the volatility of a stock price whose path is described by that model.
+Following \citet{shreve}, The \cref{eq:underlying:geometric:closed}, called a geometric Brownian motion, features a stochastic process where the only random component is the Brownian motion $\Bm$. Whilst the others parameters, $\alpha$ and $\sigma$, stand respectively for the annualized expected return and volatility of the theoretical stock price process, \citet{hull}.
 
 \begin{center}
   \begin{equation}
     \Scontinuous
-    \label{eq:Scontinuous}
+    \label{eq:underlying:geometric:closed}
   \end{equation}
 \end{center}
  
-In order to match the constraints underlying the Black and Scholes' pricing model, the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
+In order to match with the constraints introduced by the Black and Scholes' pricing formula (\cref{sec:bsm:assumption}), the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
+
 Furthermore, the path following by any walks of the stock price motion should be  a continuous process, as the time frame decrease $\Dt \to 0$.
-Therefore in addition to develop the model, all its previous stated characteristic are shown to be truth within this chapter.
+Therefore in addition to develop the model, all the aforementioned characteristics are shown to be true within this chapter.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Derivation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Derivation}
-\label{sec:Derivation}
+\label{sec:underlying:derivation}
 
-In order to get the differential form of equation \ref{eq:Scontinuous}, the Itô's formula (\ref{eq:Itobmdiff}) is used. The provided differential formula will be next used to find out what distribution qualifies the stock price $\St$ random variable along with the first and second moments associated.
-
-\begin{center}
-  \begin{equation}
-    \Itobmdiff \label{eq:Itobmdiff}
-  \end{equation}
-\end{center}
-
-[HERE]
-The term $d\ft$ in (\ref{eq:Itobmdiff}) represents any changes in the value of a function $\ft$ occuring over a infinitesimally small move in time $dt$. The related function is any one involving time along with a Brownian motion. For that matter in the present case, $ \ft = \St $.
-By applying the tranformation inccured by Itô, the two following equations (\ref{eq:Scontinuousdiff}, \ref{eq:Scontinuousrate}) emerge:
+In order to get the differential form of equation \ref{eq:underlying:geometric:closed}, the Itô's formula (\cref{sec:upstream:ito}) is used. By applying the tranformation incurred by Itô, the \cref{eq:underlying:geometric:diff,eq:underlying:geometric:rate,eq:underlying:geometric:diff} emerge:
  
 \begin{center}
   \begin{subequations}
     \begin{align}
-      \Scontinousdiff \label{eq:Scontinuousdiff} \\
-      \Scontinuousrate \label{eq:Scontinuousrate}
+      \Scontinousdiff \label{eq:underlying:geometric:diff} \\
+      \Scontinuousrate \label{eq:underlying:geometric:rate}
     \end{align}
   \end{subequations}
 \end{center}
 
-In one hand, the equation (\ref{eq:Scontinuousdiff}) shows that any change occuring in the stock price over an small amount of time is due to one fully predictable element -- its drift rate ($\alpha \St$) -- and another one that brings uncertainty.
+The \cref{eq:underlying:geometric:closed} shows that any change occuring in the stock price $S$ over a small amount of time is due to the deterministic expected drift rate ($\alpha \St$) along with some amounts of added noise included by the random part ($\sigma d\Bm$). The \cref{eq:underlying:geometric:closed} denotes the stock return stochastic process, \citet{hull}.
 
-In the other hand, equation (\ref{eq:Scontinuousrate}) relates the rate of return of the stock price over a small amount of time. Because the uncertainty given is given by the Browinan motion has an expectation of zero, it could be shown that the mean rate of return of a stock price following the model (\ref{Scontinuous}) is equal to $\alpha$, as stated through (\ref{eq:return.s.dist}).
+\begin{align}
+  d\ln{\St} &= (\alpha - \frac{\sigma ^2}{2}) dt 
+              + \sigma d\Bm \label{eq:underlying:logreturn:diff} \\
+  \ln{\frac{\St}{S(0)}} &= (\alpha - \frac{\sigma ^2}{2}) t 
+              + \sigma \Bm \label{eq:underlying:log:return}
+\end{align}
 
-\begin{center}
-  \begin{equation}
-     \dSr \sim N(\mu dt, \sigma^2 t)
-     \label{eq:return.s.dist}
-  \end{equation}
-\end{center}
+The \cref{eq:underlying:logreturn} exibits the natual logarithm of the stock price return occuring all over the period $t$. In other words, the expectation of this process, given by $(\alpha - \frac{\sigma ^2}{2}) \times t$ happens to be the expected value of the continously compounded rate of return for the aformentioned period of time, \citet{hull}.
 
-
-The figure (\ref{plot:returnDensity}) shows that the normality expectation holds, for equation \ref{eq:return.s.dist}. The solid line exibits the normal distribution bell curve ($N \sim (0, 40 * 360^{-1}$)). While the bins represent the distribution of the increments from a stock processes, with parameters $\alpha = 0$, $\sigma = 40\%$ and $\Dt = 360^{-1}$.
-
-<<echo=FALSE, results=hide>>=
-# source('analysis/stock_return_ito_density.R')
-# The code MUST be pasted  from the source file
-@
- 
-\begin{figure}[!h]
-\centering
-\input{figures/stock_return_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{plot:returnDensity}
-\end{figure}
-
-
-
-In other way, the stochastic price motion process (\ref{eq:Scontinuous}), throughout the Itô approximation, could led to another representation than the one highlighted by equation \ref{eq:Scontinuousdiff}.
-
-\begin{center}
-  \begin{subequations}
-    \begin{align}
-      \Sdiscretediff \label{eq:Sdiscretediff} \\
-      \Sdiscreterate \label{eq:Sdiscreterate}
-    \end{align}
-  \end{subequations}
-\end{center}
-
-The unique difference between respectively (\ref{eq:Scontinuousdiff}) -- (\ref{eq:Sdiscretediff}) and (\ref{eq:Scontinuousrate}) -- (\ref{eq:Sdiscreterate}) is the frequence at which data are recorded.
-In the realm of real world, the model described by (\ref{eq:Sdiscretediff}) fairly matches the data pickup requirements in the sense that only discrete measurement can be performed from the bunch of market available data.
- 
-<<echo=false>>=
-# Uncomment the following if figure need to be reconstructed
-# source('analysis/stock.R')
-@
 
 \begin{figure}[h]
 \centering
 \input{figures/ItoAccuracy.tex}
 \caption{Accuracy of Itô approximation}
-\label{plot:ItoAccuracy}
+\floatfoot{
+  The above processes have been constructed over four distinctive groups of two "equivalent" geometric Brownian motions, following \cref{eq:underlying:geometric:closed,eq:underlying:geometric:diff}, respectively for the red and blue coloured path. 
+The only parameters that change over the group are the couples $(dt, \sigma)$ which are set to $QA \equiv (360, 0.2)$, $QB \equiv (4, 0.2)$, $QC \equiv (360, 1)$ and $QD \equiv (4, 1)$. 
+All the processes cover a period of four years and begin with initial value set to $50$.
+}
+\label{p:itoaccuracy}
 \end{figure}
 
+The approximation of the stochastic process \ref{eq:Scontinuous} achieved using the Itô's lemma depends exclusively on two factors; the volatility parameter $\sigma$ and the time period occuring between two measures $dt$. 
+As shown throughout the \cref{p:itoaccuracy}, the less the volatility or time step, the better the approximation.
+It is therefore key, during an analysis process to choose an appropriate time step according to a given volatility in order to provide accurate retults.
 
-The figure (\ref{plot:ItoAccuracy}) is purposed to show how precise is the estimation made by using the approximation (\ref{eq:Scontinuousdiff}) against (\ref{eq:Scontinuous}) as $\Dt \to 0$.
-Four graphs are bundled, each one represents a stock price motion. The blue line is made by the stricky application of (\ref{eq:Scontinuous}) while the dark red one is gotten thanks to the Itô's approximation (\ref{eq:Scontinuousdiff}).
-They vary among themselves by, in turn, either a different value for the variance parameter or a different recording frequency or both.
-In one hand, horizontally the stock volatility change whilst the time duration between two measures remains identical. 
-While in the other hand, vertically, whether the volatilities are equal, the time steps are differents. Indeed the measurement is simulated with a daily basis for the two charts above whereas fixed quarterly for the bottom ones.
-It is obvious, following these representations that the less the volatility and time step, the better the approximation. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Distribution of the stock price process
@@ -127,33 +84,110 @@ It is obvious, following these representations that the less the volatility and 
 \subsection{Distribution of the stock price process}
 \label{sub:Distribution of the stock price process}
 
-According to Itô's approximation and by setting $\ft$ to be $\ln{\St}$ it is showed that the natural logarith of $\St$ is normaly distributed with mean
-$\left(\alpha - \frac{\sigma^2}{2}\right) \Dt$ and variance $\sigma^2 \Dt$.
-Because every process with normally distributed logarithm are log--normally distributed, and following the relationship between the two laws, $\St$ is consequently log--normally distributed with mean () and var ().
+The distributions here developed concern the \cref{eq:Scontinuous,eq:Scontinuousdiffrate,eq:underlyinglogreturn}. They are described using the first two moments, namely the expectation and variance.
 
-MEAN
-VAR
+The first distribution (\ref{eq:scontinuousdist}) is related to \cref{eq:Scontinuousdiffrate}. What is learnt from it, is that the process followed by \cref{eq:Scontinuous} has normally distributed returns with expected value and variance relying on the time period $dt$, \citet{shreve}.
+
+\begin{center}
+\begin{equation}
+\dSr \sim N(\alpha dt, \sigma^2 dt)
+\label{eq:scontinuousdist}
+\end{equation}
+\end{center}  
+According to the (\cref{p:returndensity}), the normality qualification from equation \ref{eq:scontinuousdist} holds.
+
+ 
+\begin{figure}[!h]
+\centering
+\input{figures/stock_return_density.tex}
+\caption{Daily Basis Stock Return Density}
+\label{p:returndensity}
+\floatfoot{
+The above density function has been constructed over 10000 samples of a unique process. The samples has been constructed following \cref{eq:Scontinuousdiffrate}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the normal bell curve with mean $\alpha$ and standard deviation of $\sigma \times \sqrt{dt}$. The period between each measure, namely $dt$ has been set to $10000^{-1}$. 
+}
+\end{figure}
 
 
-+ FIGURE
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Log-return
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+According to \cref{eq:underlyinglogreturn}, The distribution of the natural logarithm of the stock price return recorded over a time period of $t$ is characterized by \cref{eq:logreturndist}
+
+\begin{center}
+\begin{equation}
+\ln{\frac{\St}{S\left(0\right)}} 
+  \sim N((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t)
+\label{eq:logreturndist}
+\end{equation}
+\end{center}  
+
+\begin{figure}[!h]
+\centering
+\input{figures/stock_logreturn_density.tex}
+\caption{Daily Basis Stock Return Density}
+\label{p:logreturndensity}
+\floatfoot{
+The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:underlyinglogreturn}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the normal bell curve with mean $(\alpha - \frac{\sigma^2}{2}) \times t$ and standard deviation of $\sigma \times \sqrt{dt}$. The time frame is one year ($t = 1$) and period between each measure, namely $dt$ has been set to $500^{-1}$. 
+}
+\end{figure}
+
+From \cref{eq:underlyinglogreturn}, it could also be shown, by setting $X = \ln{\St}$ and $Y = \St$, that the randomly simulated stock price outcomes' distribution, following \cref{eq:Scontinuous}, match with the log--normal law [REF].
+The above point directly echoes the upstream ideal conditions set by \citet{bs} , especially the one relating the stock price process.
+
+The following equations shows the relation between the distribution of the log--return and the stock process itself. Let
+\begin{align}
+  X &= \ln{\St} \sim N\left(\mu \equiv \ln{S(0)} + \left(\alpha - \frac{\sigma^2}{2}\right) t, \delta^2 \equiv \sigma^2 t\right)
+  \intertext{and}
+  Y &= \St
+  \intertext{
+  By the existing relation between the log--normal law with respect to the normal law, the following relations emerges.
+  }
+  \mathop{\mathbb{E}} Y &= e^{\ln{S(0) + (\alpha - \frac{\sigma^2}{2}) t + \frac{\sigma ^2 t}{2}}} \\
+  &= S(0) e^{\alpha t}
+  \intertext{
+  and
+  }
+  var(Y) &= (e^{\sigma^2 t} - 1) * e^{2 \mu * \delta^2} \\
+  &= S(0)^2 e^{2 \alpha t} (e^{\sigma^2 t} - 1)
+  \intertext{
+  Consequently the stock price random variable $\St$ as relation [REF] for distribution.
+  }
+  \St \sim lognormal(\mu, \delta^2)
+\end{align}
+
+\begin{align}
+\ln{\frac{\St}{S\left(0\right)}}  \sim N((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t)
+\label{eq:logdist}
+\end{align}
+
+The \cref{p:logreturndensty,p:logdensity} refers respectively to distributions (\ref{eq:logreturndist}) and (\ref{eq:logdist}).
+
+\begin{figure}[!h]
+\centering 
+\input{figures/stock_log_density.tex}
+\caption{Daily Basis Stock Return Density}
+\label{p:logdensity}
+\floatfoot{
+The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:Scontinuous}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the log--normal curve with mean and standard deviation such as described in [REF]. The time frame is one year ($t = 1$) and period between each measure, namely $dt$ has been set to $500^{-1}$. 
+}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Flaws
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Flaws}
-\label{sub:Flaws}
+\section{Flaws}
+\label{sec:Flaws}
 
+Even if the \cref{eq:Scontinuous} is used to model the stock price process, it exists some lacks with the observed real processes. The analysis ([CHA REF]) mainly covers the following discrepancy of the model against empirical results.
+  
+The volatility appearing in the aformentioned underlying model (\ref{eq:Scontinuous}) is constant as time passes.
+Even if this consideration can be considered as true for short period of time, it is not the case over the long--run \citet{teneng2011limitations}.
+Other model substitutes the process defined throughout this chapter with other ones including stochastic volatility processes, making it changing over time.
+For this purpose, the Heston's model is developed in this current master thesis, which encompasses two stochastic processes, a geometric Brownian motion [???? + REF] for the stock price diffusion model [DIFUSION??] and a mean-reverting CIR model to compute the volatility as a stochastic process.
+This model is exposed in \cref{sec:Heston}.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Volatility issues
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Volatility issues}
-\label{sec:Volatility issues}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump issues
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jump issues}
-\label{sec:Jump issues}
+Following [REF and REF], the uderlying log--returns distribution is characterized by the normal law. Consequently, the random variable $\St$, at the fixed time $t$, is normal. 
+However, according to empirical results, the random variable $d\St$ do not fit with the normal bell curve (\citet{clark1973}).
+Therefore if the price changes are not normally distribution neither is the log--return and thus $\St$, at a fixed time $t$, is not log--normally distributed.
+Along with the Heston model, another one is considerd; the Merton's jump--diffusion model. Both are able to modify the skewness and kurtosis of the log--return distibution curve. The Merton framework is developed in \cref{sec:MixedJump}. 

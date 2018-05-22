@@ -8,3 +8,9 @@
 % \usepackage{indentfirst}
 \usepackage{cite}
 \usepackage{natbib}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[capposition=top]{floatrow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xfrac}
+\usepackage{braket}

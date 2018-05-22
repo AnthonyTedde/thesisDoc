@@ -8,62 +8,104 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jump process}
-\label{sec:Jump}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Overview
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
+\section{Overview}
 \label{sub:OverviewJump}
-Jump processes could be separated into two different category. 
-In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
-Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
-In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
-The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
+% Jump processes could be separated into two different category. 
+% In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
+% Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
+% In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
+% The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Mixed jump-diffusionModel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Mixed jump-diffusionModel}
-\label{sub:MixedJump}
+\section{Merton Mixed jump-diffusion Model}
+\label{sec:MixedJump}
 
-Merton (1976) provides the model for stock price evolution (\ref{}) involving jumps according to a specified number of jump per year and the mean size of the occuring jump. 
+In his paper, \citet{merton76} provides a model for stock price evolution involving jumps (\cref{eq:mertonjump}). 
 
 
 \begin{align}
-   \dSr  &= \left(\alpha - \lambda k\right) dt + \sigma \dBm + \dpoiss \\ \intertext{where}
-     \label{eq:mertonmixedjump}
-    k &= \epsilon\left(Y-1\right)
+  \St &= S\left(0\right) e^{\left(\alpha - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
+  \label{eq:mertonjump}
 \end{align}
+  
+According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:mertonjump}). 
+The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:Scontinuous}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
+Another type of changes, occuring during the stock lifecycle, are qualified as abnormal. Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effect on the stock price by giving rise to jumps in the course of stock path and therefore breaking its continuity (\citet{merton76}). The jump process is constructed on double basis. 
 
-In his model he define two distinct source of price variation. The one is given by a Wiener process, such as for model \ref{eq:Scontinuousdiff} $d\Bm$. Merton argues about this changes occuring often with small amount of change that it is caused by temporary unbalanced between the supply and demand and therefore those changes arised to correct the discrepency. Even he talked about the previous change as ''normal'', he also defines "abnormal" changes, occuring more rarely but with potentialy huge effect. These large amount of change occurs when information arising has big effect on the stock price, such as bad results for a company, IPO, mass firing \ldots
-
-consequenty in (\ref{eq:mertonmixedjump}), $\dBm$ refers to the normal changes, which are continuous in time whereas $dq$ stands for the abnormal qualified changes, only occuring at discrete point in time and brings jumps.
-
-The ingrendients inside (\ref{eq:mertonmixedjump}) are sightly the same as in equation \ref{eq:Scontinous}, expect for $\lambda$, and $\dpoiss$. 
-
-$\dpoiss$ is an independent poisson process idependents from $\dBm$ described in (\ref{eq:PA} - \ref{eq:PC}), where $A, B, C$ are respectively "No jump occurs during $\left( t, t + h \right)$", "A unique jump occurs during $\left( t, t + h \right)$", "More than one jumps occur during $\left( t, t + h \right)$".
+Firstly, the occurence (i.e. the number of jumps arising throughout a given period of time) is computed thanks to a Poisson--driven process according to a parameter $\lambda$. 
+$\lambda$ denotes the number of jumps per unit of time. Consequently, the probability that a jump occurs during a time range of $\Delta t$ is equal to $\lambda dt$ (event $A$, eq. \ref{eq:PA}), whereas the probability that there are no jump during the same range of time is $1 - \lambda dt$, (event $B$, eq. \ref{eq:PB}) (\citet{matsuda2004}). While C, eq. \ref{eq:PC}, refers to the event that more than one jump occur during the same small delta time.
 
 \begin{align}
-  \mathop{\mathbb{P}} \{A\}&= 1 - \lambda h + O\left(h \right) \label{eq:PA}\\
-  \mathop{\mathbb{P}} \{B\}&= \lambda h O\left(h \right) \label{eq:PB}\\
-  \mathop{\mathbb{P}} \{C\}&=   O\left(h \right) \label{eq:PC}
+  \mathop{\mathbb{P}} \{A\}&\cong \lambda dt  \label{eq:PA}\\
+  \mathop{\mathbb{P}} \{B\}&\cong 1 - \lambda dt  \label{eq:PB}\\
+  \mathop{\mathbb{P}} \{C\}&\cong   0 \label{eq:PC}
 \end{align}
 
-If the jump occurs, $k$ is a random variable that give a measure of its impact, as a percentage of change in the stock price while $\lambda$ is the average of occuring by unit of time. 
+On the other hand, after the occurence comes the size of the jump. Such as the frequency, the importance of the jump can be characterized by a statistic law. Following \citet{heston}, the log--normal law is used. \citet{matsuda2004}, gives a summary in oder to grips with the concept of jump size  \crefrange{eq:yt}{eq:lny}.
+ 
+\begin{align}
+  y_t  &\sim lognormal( e^{\mu + \frac{1}{2} \delta^2}, 
+                        e^{2 \mu + \delta ^2} (e^{\delta^2} - 1)) 
+  \label{eq:yt} \\
+  y_t - 1 &\sim lognormal( \kappa \equiv e^{\mu + \frac{1}{2} \delta^2} - 1, 
+                        e^{2 \mu + \delta ^2} (e^{\delta^2} - 1)) 
+  \label{eq:ytminus1} \\
+  \ln{y_t} &\sim normal(\mu, \delta^ 2)
+  \label{eq:lny}
+\end{align}
+with $y_t$, $y_t - 1$ and $\ln{y_t} \equiv Y_t$ standing respectively for "absolute price jump size", "relative price jump size" and "log price jump size" (\citet{matsuda2004}).
 
-
-
-
+ 
+The Merton's jump-diffusion process is be able to capture positive / negative skewness (see \cref{sub:MertonSkewness}) and excess kurtosis (see \cref{sub:MertonKurtosis}) of the log--return density function \citet{merton76}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Pure jump model
+% SUBSECTION: Skewness
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Pure jump model}
-\label{sub:PureJump}
+\subsection{Impact on the skewness log--return}
+\label{sub:MertonSkewness}
+
+The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. The figure [REF] shows how the density's shape of the log--return may vary along with this parameter.
+
+
+\begin{figure}[!h]
+\centering
+\input{figures/MertonJumpReturn.tex}
+\caption{Merton: Daily Basis Stock Return Density}
+\floatfoot{
+The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:mertonjump}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
+}
+\label{plot:MertonReturnDensity}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: kurtosis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Impact on kurtosis log--return}
+\label{sub:MertonKurtosis}
+
+The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
+
+\begin{figure}[!h]
+\centering
+\input{figures/MertonJumpReturnTails.tex}
+\caption{Merton: Daily Basis Stock Return Density}
+\floatfoot{
+The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:mertonjump}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
+}
+\label{plot:MertonReturnDensityTails}
+\end{figure}
+
+
+
+
+
+
+
+
 
 
 
@@ -75,32 +117,79 @@ If the jump occurs, $k$ is a random variable that give a measure of its impact, 
 \section{Heston stochastic volatility model}
 \label{sec:Heston}
 
-The HSV model (\ref{eq:HSVstock}) give the derivation of a stock price where the mean rate of return stays the same as that provided by equation (\ref{eq:Scontinuous}).
-The change is connected to the way of the volatility is computed.
+In his paper, \citet{heston1993} tackles with another discrepancy against the real world behaviour introduced by the geometric Brownian motion, namely, its deterministic and immutable volatility $\sigma$.
 
-\begin{center}
-  \begin{equation}
-    \HSVstock
-    \label{eq:HSVstock}
-  \end{equation}
-\end{center}
-
-Under the Heston model, the variance of the process $\frac{d\St}{\St}$ is equal to $\Vt dt$ (\ref{eq:HSVvol}). The volatility equation process is a CIR.
-
-\begin{center}
-  \begin{equation}
-    \HSVvol
-    \label{eq:HSVvol}
-  \end{equation}
-\end{center}
-
-The Brownian motions $d\Bmsub{S}$ and $d\Bmsub{V}$ are correlated with parameter $\rho$.
-
-
-By using Itô formula over the Black--Scholes--Merton equation, (Heston, 1993) shows that the price of a call option for which the underlying is given by (\ref{eq:HSVstock}), is given by the following equations (XXX - XXX).
+In addition to provide a model where the volatility is stochastic (\cref{eq:HSVvol}), \citet{heston1993} gives the possibility to make this volatility in correlation with the stock price process (\cref{eq:HSVstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relates together.
 
 \begin{align}
-  c\left(\St, \Vt, t\right) & = \St P_1 - K P(t, T)P_2 \\ \intertext{with}
-  P_j\left(x, v, T; ln\left[K\right]\right) & = \frac{1}{2} + \frac{1}{\pi} \int_{0}^{\infty} Re \left[ \frac{e^{-i \phi \ln{K}} f_j \left( x, v, T; \phi \right)}{i \phi} \right] d\phi \\ \intertext{and}
-  f_j(x, v, t; \phi) & = e^{i \phi x}
+    \HSVvol \label{eq:HSVvol} \\
+    \HSVstock \label{eq:HSVstock} \\
+    \intertext{
+    The drift part of the risk stochastic process (\ref{eq:HSVvol} is made up of the long--run mean $\theta$ togehter with the mean reversion speed, given by $\kappa$, \citet{heston1993}.
+    }
+    d\Bmsub{v} d\Bmsub{s} &= \rho \label{eq:rhoheston}
 \end{align}
+
+The framework [REF + REF], simulating the behavior of an asset, includes a mean reverting Cox--Ingersoll--Ross(CIR) stochastic process (\cref{eq:HSVvol}) as volatility component.
+
+From \cref{p:negativecorrelatedheston,p:positivecorrelatedheston}, it is gotten an hands-on insight on how correlated Brownian motions work on the way the Heston's stock price and volatility framework interact with each other.
+In \cref{p:negativecorrelatedheston} the correlation between the Wiener processes is set to $\rho = -1$, making the two Markov motion perfectly negatively correlated. 
+It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
+Likewise \cref{p:positivecorrelatedheston} points out the positive correlation occuring between the processes \ref{eq:HSVvol} and \ref{eq:HSVstock} whilst the Brownian motion correlation is set to one. 
+
+\begin{figure}[!h]
+\centering
+\input{figures/UncorrelatHeston.tex}
+\caption{Heson Framework Using Negative Correllated Brownian Motions}
+\floatfoot{
+The above stochastic processes have been constructed following \crefrange{eq:HSVvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = -1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+}
+\label{p:negativecorrelatedheston}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\input{figures/correlatHeston.tex}
+\caption{Heson Framework Using Positive Correllated Brownian Motion}
+\floatfoot{
+The above stochastic processes have been constructed following \crefrange{eq:HSVvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = 1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+}
+\label{p:positivecorrelatedheston}
+\end{figure}
+
+The usage of the forementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:HSVvol}), (\citet{heston1993})
+It may consequently be consistent with what happens in equity market, namely sharp decrease in equity price implies increase in stock volatility (\citet{criso2015}).
+% Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Impact on skewness density return
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Impact on log--return density's skewness}
+\label{sub:hestonskewness}
+
+The skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$.
+When a positive correlation exists between the two Brownian motion, an increase in the asset price implies more variance than the one recorded for lower stock price. 
+Consequently a fat log--return distribution's right--hand tail is noticed.
+The opposite relation is noticed with negative correlation, namely, lower prices bring higher volatility generating a fatter left--hand tail in the log--return distribution (\citet{heston1993}).
+These statements are observed in [REF].
+
+
+
+\begin{figure}[!h]
+\centering
+\input{figures/skewnessHeston.tex}
+\caption{Merton: Log--return skewness on Heston}
+\floatfoot{
+The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:HSVstock}, with stochastic volatility defined by \cref{eq:HSVvol}. The only parameter that changes over the group is $\rho$ which is set to ($-0.5$, $1$, $0.5$) respectively for the red, green and blue outlined density functions. The black density belongs to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log--price return cover a period of one year with a time step of 500.
+}
+\label{plot:hestontails}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Impact on kurtosis density return
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Impact on kurtosis density return}
+\label{sub:hestonkurtosis}
+
+
