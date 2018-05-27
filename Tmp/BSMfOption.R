@@ -35,16 +35,99 @@ dfs_call <- map(AAPL_o, `$`, call) %>%
   map(~.x[, 1:2]) %>%
   Filter(f = Negate(is.null))
 
-a <- dfs_call[[1]]
+price_surface <- dfs_call[[1]]
 for(i in names(dfs_call[-1])){
   print(i)
-  a <- merge(a, dfs_call[[i]], by = "Strike", all = T)
+  price_surface <- merge(price_surface, dfs_call[[i]], by = "Strike", all = T)
 }
-colnames(a) <- names(c("Strike", dfs_call))
+colnames(price_surface) <- c("Strike", names(dfs_call))
 
-merge_recurse(dfs_call, by = "Strike")
+# Find the implied volatility
+# 1. Delta date
+maturity <- names(price_surface)[-1] %>%
+  as.Date(format = "%b.%d.%Y") - as.Date("2018-05-18")
+  
+for(i in seq_along(names(price_surface)[-1])){
+  print(price_surface[[i + 1]])
+  print(maturity[i])
+  print(price_surface$Strike)
+  print(AAPL$Last)
+}
 
-merge(AAPL_o[[1]]$calls[, 1:2], AAPL_o[[3]]$calls[, 1:2], by = "Strike", all = T)
+
+volatility_surface <- vector("list", length(price_surface))
+volatility_surface[[1]] <- price_surface[1]
+for(i in seq_along(names(price_surface)[-1])){
+  a <-  rbind(price_surface[[i + 1]],
+              maturity[i] / 365,
+              price_surface$Strike,
+              AAPL$Last)
+  a <- map(as.data.frame(a), .f = function(x){
+    structure(as.list(x),
+              names = c("price", "Time", "X", "S" ))
+  })
+  b <- a %>%
+    map(c,TypeFlag = "c", r = .05, b= 0) %>%
+    map(.f = function (x){
+      if(!is.na(x$price))
+        tryCatch(do.call(GBSVolatility, x),
+                 error = function(c) NA)
+      else NA
+    })
+  volatility_surface[[i + 1]] <- unname(unlist(b))
+}
+
+q <- as.data.frame(volatility_surface) %>% round(digit = 4)
+names(q) <- names(price_surface)
+q
+
+b <- map(as.data.frame(a), .f = function(x){
+  structure(as.list(x),
+            names = c("price", "Time", "X", "S" ))
+})  %>%
+  map(c,TypeFlag = "c", r = .05, b= 0) %>%
+  map(.f = function (x){
+    print(x)
+    if(!is.na(x$price))
+      do.call(GBSVolatility, x)
+    else NA
+    })
+
+
+130, 59.13, 186.31
+dt <- as.double(ISOdate(2018, 05, 25) - ISOdate(2018, 05, 18))
+GBSVolatility(price = (59.25 + 58.15)/2,
+              TypeFlag = 'c',
+              S = (187.81 + 186.13) / 2,
+              X = 130,
+              Time = (dt) / 250,
+              r = .05,
+              b = 0)
+
+GBSVolatility(price = 187.49,
+              TypeFlag = 'c',
+              S = 186.31,
+              X = 2.5,
+              Time = 0.4219,
+              r = .05,
+              b = 0.0)
+
+dt <- as.double(ISOdate(2018, 06, 08) - ISOdate(2018, 05, 18))
+GBSVolatility(price = 44.85,
+              TypeFlag = 'c',
+              S = 186.31,
+              X = 145,
+              Time = (dt) / 365,
+              r = .05,
+              b = 0.0)
+
+
+
+
+
+
+
+
 
 dt <-  as.double(ISOdate(2018, 11, 16) - Sys.time())
 
