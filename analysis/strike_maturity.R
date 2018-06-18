@@ -27,68 +27,6 @@ days <- seq(ISOdate(2017,01,01), by = "day", length.out = day) %>%
   format("%F") %>%
   paste(collapse = ",")
 
-###################
-## Download data ##
-###################
-## 1. Load the data
-## Option Datalist 18 May 16h00 (FRIDAY)
-##
-Quandl.api_key("VZSMB9uWUzm_VBrugWy5") 
-AAPL <- Quandl.datatable('WIKI/PRICES', date = days, ticker = "AAPL")
-
-##################
-## Extract data ##
-##################
-quote <- (AAPL$high + AAPL$low)/2
-day <- AAPL$date
-days <- length(day)
-interval <- day[-1] - day[-days]
-
-quotes <- length(quote)
-quotediff <- quote[-1] / quote[-quotes]
-
-df <- data.frame(quotediff, interval)
-u <- log(dplyr::filter(df, interval ==1 )$quotediff)
-
-
-## u <- log(quote[-1] / quote[-quotes])
-ubar <- mean(u)
-
-s <- sqrt(1/(length(u) - 1) * sum((u - ubar)^2)) 
-
-#
-# Sigma and mean will be used inside the GBM simulation
-#
-sigma <- s / sqrt(t)
-alpha <- ubar / t + sigma ^2 / 2
-
-######################################################################
-## Simulate a Geometric Brownian Motion based on the collected data ##
-######################################################################
-GBM <- sstock(initial_stock_price = quote[1],
-              seed = 1,
-              alpha = alpha,
-              sigma = sigma,
-              time_to_maturity = 1,
-              scale = 365)
-# and compute the log-return
-GBM_price <- GBM$stock_price_path
-GBM_prices <- length(GBM_price)
-GBM_logreturn <- log(GBM_price[-1] / GBM_price[-GBM_prices])
-
-  
-ggplot(data.frame(u)) +
-  stat_density(aes(u),
-               geom = "line",
-               colour = 'steelblue') +
-  stat_density(data = data.frame(GBM_logreturn), aes(GBM_logreturn),
-               geom = "line",
-               colour = 'darkred') +
-  stat_function(fun = dnorm,
-                colour = "black",
-                args = list(
-                  mean = ubar,
-                  sd = sigma * sqrt(t) ))
 
 ########################################################################
 ##  Hedging strategy using GBM 
@@ -156,43 +94,24 @@ volatility_surface
 maturity <- as.double(maturity)
 strike <- volatility_surface$Strike
 
+maturity_mtrx <- matrix(maturity, ncol = 9, byrow = T)
+strike_mtrx <- matrix(strike, ncol = 7, byrow = T)
 
-# 1. BSM price at time zero
-# sigma, mean, 
-# time to maturity: 7  21  35  63  91 126 154 182 245 399
-
-# maturity is in year
-
-# strike <- AAPL$Last
-# strike <- 300
-
-S <- AAPL$Last
-# strike <- 130
-r <- .05
-scale <- 365 * 24
-# maturity <- 399 / 365
-constraint <- expand.grid(list(maturity, strike))
-names(constraint) <- c("maturity", "strike")
-# Delta hedging
-hedge <- map(as.data.frame(t(constraint)), 
-             ~ delta_hedging(time_to_maturity = .x[1]/365,
-                             S = S,
-                             strike = .x[2],
-                             sigma = sigma,
-                             alpha = alpha,
-                             r = r,
-                             scale = 365,
-                             full = T))
+library("xtable")
+print(
+  xtable(data.frame("maturity" = maturity_mtrx),
+         caption = "Maturities explored during the hedging performance measurement"),
+  include.rownames = FALSE,
+  include.colnames = F
+)
 
 
-
-
-
-
-
-
-
-
+print(
+  xtable(data.frame("strike" = strike_mtrx),
+         caption = "strike prices explored during the hedging performance measurement"),
+  include.rownames = FALSE,
+  include.colnames = F
+)
 
 
 

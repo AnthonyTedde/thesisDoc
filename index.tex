@@ -138,132 +138,177 @@ Using R. \cite{R}
 \section{General overview}
 \label{sec:methodology:general}
 
-My work is roughly cut into three parts, that is to say, the upstream analysis, the analysis and a discussion.
+The general purpose of this master thesis is to measure the performance of the \BSM model when we deviate from the ideal conditions (\cref{sec:bsm:assumption}).
+To do so, I will use the delta--hedging rule as described in \cref{sec:bsm:delta:hedge}. Indeed, the more \cref{bsm:delta:hedge:perf} goes to zero, the better the hedge be and consequently better is the \BSM model's performance.
 
-Firstly I will perform an upstream analysis meant to make the machinery (i.e. the algorithms I have created using \cite{R}) works together with market-calibrated data.
-The whole step is altogether explained in \cref{sec:methodology:market}.
+Three different scenarios will be tested and compared. The first one is that developed by \citet{bs}, where the underlying's returns distribution is log--normal, the volatility is constant and no jump occurs. The litterature (REF) shows that this model perfoms well and hence the obtained results will serve as a benchmark to assess the other studied models.
+The next framework I will analyse is that developed by \citet{merton76} where the underlying allows jumps to occur.
+The last model for which I will measure the performance will be the one developed by \citet{heston1993}. In that latter, the volatility follows a CIR process and consequently is not deterministic anymore.
 
-Afterward comes the analysis part where the delta--hedging rule will be measured according to different scenarios.
-Latter will only focus on the benchmarking of hedges involving european short call derivatives priced across the Black--Scholes--Meron formula.
-In order to construct such experiments, I will create as a collection of call prices, distinguished among themselves by different triples, each comprised of a maturity date ($T$), a stike price ($K$) and a volatility factor ($\sigma$).
-\cref{eq:methodology:general:call} vanishes ambiguity by providing the mathematical counterpart of the previous statement.
+For each of these scenarios, I will create an algorithm, based on monte--carlo simulation, to generate time series to simulate the stock price motion based on either the \BSM geometric brownian motion, the Merton jump diffusion process or on the Heston stochastic volatility.
+I will also use historical data to feed the models with consistent arguments.
 
-\begin{align}
-C \equiv \left\{ c_{t s k} \right\} \forall & t \in T \equiv \left\{ \frac{1}{4}, \frac{1}{2}, \frac{3}{4}, 1\right\}, \label{eq:methodology:general:call}\\
-& s \in \sigma \equiv \left\{ \sigma_i \right\}_{i \in \set{5\%, 25\%, 50\%, 75\%, 95\% }}, \nonumber \\
-& k \in K \equiv 
-\left\{ \begin{array}{l}
-\text{deep--in--the--money},\\
-\text{in--the--money},\\
-\text{at--the--money},\\
-\text{out--of--the--money},\\
-\text{deep--out--of--the--money}
-\end{array} \right\} \nonumber
-\end{align}
-Where $(T, \sigma, k)$ are respectively the set of the considered maturities, volatilities and strike price. The subscript of the volatility set stands for the percentiles kept from the upstream analysis. [NOT GOOD]
+For comparative purpose, the only data that will be identical in all thee scenarios are the strike price ,the maturities and the riskless rate. Therefore in order to keep things relating to reality, I have chosen to download option quote from the market. I found out that an option providing a sufficent range of strikes and maturities is the call contract for Apple.
+I have arbitrarily fixed the initial time $t_0$ to be the 18 of May 2018 and at that time, the proposed maturities (in days) are given by \cref{tab:methodology:maturity} and all the associated strike prices are given by \cref{tab:methodology:strike}.
 
-So far, it lacks some time series, representing the evolution of the underlying over time, in order to construct the hedges.
-To do so, I will implement the different techinques convered in the previous chapters, namely the geometric Brownian motion (GBM), the Merton jump diffusion (MJD) and the Heston stochastic volatility (HSV) processes and I will feed each of them with sets of arguments being relevant with the whole subset of distict double $(T, \sigma)$ constructed from the collection (\ref{eq:methodology:general:call}) so that the generated sampled series shall be pairwise consistent with one and only atoms of the set \ref{eq:methodology:general:call}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Maturities
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrrr}
+  \hline
+  \multicolumn{9}{c}{Maturity} \\
+  \hline
+7.00 & 21.00 & 63.00 & 91.00 & 126.00 & 154.00 & 182.00 & 245.00 & 399.00 \\ 
+   \hline
+\end{tabular}
+\caption{Maturities explored during the hedging performance measurement} 
+\label{tab:methodology:maturity}
+\end{table}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Strikes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+  \hline
+  \multicolumn{7}{c}{Strike} \\
+  \hline
+130.00 & 135.00 & 140.00 & 145.00 & 149.00 & 150.00 & 152.50 \\ 
+  155.00 & 157.50 & 160.00 & 162.50 & 165.00 & 167.50 & 170.00 \\ 
+  172.50 & 175.00 & 177.50 & 180.00 & 182.50 & 185.00 & 187.50 \\ 
+  190.00 & 192.50 & 195.00 & 197.50 & 200.00 & 202.50 & 205.00 \\ 
+  207.50 & 210.00 & 212.50 & 215.00 & 217.50 & 220.00 & 222.50 \\ 
+   \hline
+\end{tabular}
+\caption{strike prices explored during the hedging performance measurement} 
+\label{tab:methodology:strike}
+\end{table}
 
-Under the hood, the experiments on delta--hedging will be each constructed over 500 trials.
-For instance, in order to measure the hedge of a european call stroke at \$ 40 with a maturity of 3 months and an estimated volatility of .20, I will store in a data table, 500 differents times series of sampled GBM computed in accordance with all members of $\Set{(t, s) | \forall t \in T, s \in \sigma}$.
-Nevertheless, even though the number of 500 trials is purely arbitrary, it sounds a good trade--off between a reasonable computational time needed to run the analysis  and obtaining a big large view of the underpinned data which is broad enough to decipher trends.
+I found out the the treasury bill are quote (https://www.treasury.gov/) following \cref{tab:methodology:Tbill}
 
-The final step of the analysis will be the performance measure of each specific hedging scenario.
-This quantitative assessment will be performed through a purposely tool I have developed.
-More details of the latter is given at \cref{sec:methodology:hedging}.
-
-Ultimately though, the discussion part comes where the results grouped by hypothesis will be commented.
-Let's first begin with the data calibration.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Market data
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Market data}
-\label{sec:methodology:market}
-
-In order to correctly feed the developed models, an upstream analysis is needed to define a range of values to take as arguments.
-Latter can be subdivided by their belonging model.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Arguments for geometric Brownian motion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Arguments for geometric Brownian motion}
-\label{sub:methodology:market:geometric}
-
-The drift and volatility rates, respectively $\alpha$ and $\sigma$, will be estimated using market data, especially the stocks from the S\&P500.
-
-First and foremost, daily data will be downloaded to construct the set of vectors $S_s$, where the subscript $s$ denotes a specific symbol such as AAPL, for Apple.
-Next, the algorithm will compute the daily basis log--return on each series belongong to $S_s$, as stated by \cref{eq:methodology:market:geometric:log}.
-
-\begin{align}
-\ln \frac{S_{s, i+1}}{S_{s, i}} \label{eq:methodology:market:geometric:log}
-\end{align}
-Because it exists some days where prices are not quoted, it is therefore necessary to be sure that the indexes $i$ and $i + 1$ are together separated by only one calendar day. This requirement provides the log-returns on the same basis and therefore make it comparable.
-
-Once the log--returns will have been computed, \crefrange{eq:upstream:logreturn:sample}{eq:upstream:volatility:estimator} give a method to compute an estimation of the variance rate.
-
-[TODO:+++]
-
-\begin{align}
-\hat{\sigma} \equiv \Set{\sigma_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
-\end{align}
-Where p are percentiles.
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+  \hline
+  \multicolumn{4}{c}{T-bills} \\
+  \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.66\% & 1.90\% & 2.09\% & 2.30\% \\
+  \hline
+\end{tabular}
+\caption{Treasury bill quotes 18 May 2018} 
+\label{tab:methodology:Tbill}
+\end{table}
 
 
-\begin{align}
-\hat{param} \equiv \Set{\left(\alpha, \sigma\right)_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
-\end{align}
-By linear model.
-
-
-[TODO:---]
+In \cref{sec:methodology:hedgingbsm}, I explain how I will contruct and measure the hedge on an underlying asset where the motion depend on the framework developed by \cite{bs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Arguments for Merton Jump--diffusion process
+% SECTION: Hedging under Black--Scholes--Merton constraints
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Arguments for Merton Jump--diffusion process}
-\label{sub:methodology:market:merton}
+\section{Hedging under Black--Scholes--Merton constraints}
+\label{sec:methodology:hedgingbsm}
 
-The arguments to be assessed for the current model come in two distinctive flavours; the ones describing the normal move in the stock prices $(\alpha, \sigma)$ and those defining the frequency $(\lambda)$ and the intensity $(\mu, \delta^2)$ of jumps.
+In this first section I will measure the performance of the hedging rules describes in section (REF), as if all the constraint of BSM were true(REF).
+Subsequently, the model used to genereate the time series will be comparared with the historical one, in term of the distribution of their log--return. 
 
+Following REF:Delta-hedging, to measure the performance of the delta--hedging, I first need the stock price at time zero along with the associated volatility, the strike price, the riskless rate and the time to maturity in order to get the \BSM price of the option. (How to get these ingredients is described in \cref{sub:methodology:hedgingbsm:compute}.)
 
+I do next need to compute time series, by using a monte-carlo simulation, representing the evolution of the underlying asset price across time. I will have to define a rebalancing frequency by which I will apply the delta hedging rule.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Scenarios
+% SUBSECTION: Compute the option price
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Scenarios}
-\label{sec:methodology:scenarios}
+\subsection{Compute the option price}
+\label{sub:methodology:hedgingbsm:compute}
+
+To measure the performance of the delta hedging rule under the constraint defined by \citet{bs}, I will create an algorithm of \cref{eq:bsm:bsm:sol} to compute the \BSM price based on argument such as the initial stok price, strike price, the time to maturity, the underlying volatility and the riskless rate.
+
+All the maturities I will used for analysis are are that listed in \cref{tab:methodology:maturity}. 
+
+I won't use all the strike prices described in \cref{tab:methodology:maturity}, mainly because the set is too wide. Instead I choose to only keep one deep-in-the-money, one in-the-money, one at-the-money, one out-of-the-money and one deep-out-of-the-money option. According to the price of the Apple share of stock at the 18th of May 2018, the strike I will use in the analysis are: 130, 175, 185, 195 and 220.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Hedging performance tool
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Hedging performance tool}
-\label{sec:methodology:hedging}
+The stock price at time zero will be the price of the share of stock APPL the 18 of May 2018. Whereas the volatility of the stock will be computed using historical data and the method described in \cref{sec:upstreamlogreturn}.
+
+According to table {tab:methodology:Tbill}, I apply linear interpolation to find the corresponding riskless rate to apply to the maturity of \cref{tab:methodology:maturity}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|rrrrrrrrr}
+
+  \hline
+Maturity & 7.00 & 21.00 & 63.00 & 91.00 & 126.00 & 154.00 & 182.00 & 245.00 & 399.00 \\ 
+Riskless rate & 1.66\% & 1.66\% & 1.79\% & 1.90\% & 1.97\% & 2.03\% & 2.09\% & 2.16\% & 2.30\% \\
+   \hline
+\end{tabular}
+\caption{Maturities explored during the hedging performance measurement} 
+\label{tab:methodology:maturity}
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Group construction
+% SUBSECTION: Scenarios
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Group construction}
-\label{sec:methodology:group}
+\subsection{Scenarios}
+\label{sub:HedgingBSM:Scenarios}
+
+The hedging scenario occurs between the initial time up to option's maturity, under real condition. Real condition means that the drift rate that will be used won't be the risk--neutral but another related to the volatility of the underlying asset.
+
+According to \cref{tab:methodology:maturity}, there are options with differents maturities to be hedged. Consequently, to simulate the underlying asset price evolution through time, I will create time series covering each of these maturities.
+
+First I will define a time step. This step will be used in the monte-carlo simulation to dicretize the Stochastic Brownian motion exposed in \citet{bs}. Furthermore.
+In order to be consistent with the data I gathered from the market, I have choosen to take a time step of one day.
+
+To feed the algorithm based on \cref{eq:underlying:geometric:closed} and in order to genereate the time series, I need to provide some arguments, namely, The initial stock price along with the drift and variance rates.
+Even if all the option to hedge have different maturities, they all have the same starting date, which is the 18 of May 2018. Consequently the initial value of all the time series will be the same, that is to say, the value of the apple stock at that time, which was \$$186.31$.
+The drift and variance rate will be computed using historical data and method exposed through  \crefrange{eq:upstream:stock:valued}{eq:upstream:volatility:estimator}.
+
+This method to generate time series will be processed 500 times, for each maturity.
+It means that there will be 500 different scenarios to hedge for all double $(T_i, K_j)$, where $T_i$ is a maturity from \cref{tab:methodology:maturity} and $K_j$ is a strike price defined in \cref{tab:methodology:strike}.
+
+The portfolio (STEP 1.) will be rebalanced each $\delta t$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Analysis
+% SUBSECTION: Performance measure
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Analysis}
-\label{sec:methodology:analysis}
+\subsection{Performance measure}
+\label{sub:HedgingBSM:Performance}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Benchmark
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Benchmark}
+\label{sub:HedgingBSM:Benchmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Discussion}
+\label{sub:HedgingBSM:Discussion}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Discussion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-\label{sec:methodology:discussion}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

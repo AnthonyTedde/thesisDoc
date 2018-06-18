@@ -4,33 +4,41 @@ library(purrr)
 library(reshape)
 
 
-#
-# Download the data: 20 May
-#
+#######################################################
+## (I)                                               ##
+## Get historical data (AAPL) to construct the hedge ##
+## Download the data: 20 May                         ##
+#######################################################
 
-# 1. Option Datalist 18 May 16h00 (FRIDAY)
-# remove all data from workspace before saving
+## 0. prerequisites
 rm(list = ls())
-TSLA_o <- getOptionChain("TSLA", "2018/2019")
-get
-AAPL_o <- getOptionChain("AAPL", "2018/2019")
-AAPL <- getQuote("AAPL")
-TSLA <- getQuote("TSLA")
-# Save the data to deal with 
 setwd("/Users/anthony/workspace/thesis/thesis/data")
-save(list = ls(), file="option-quote.RData")
 
-# Deal with option AAPL
-# 1. Construct the volatility surface
-# 1.1 Covered strike price
+## 1. Load the data
+## Option Datalist 18 May 16h00 (FRIDAY)
+##
+
+## (Down)Load the data
+if(file.exists("option-quote.RData")){
+    load(file="option-quote.RData")
+}else{
+    AAPL_o <- getOptionChain("AAPL", "2018/2019")
+    AAPL <- getQuote("AAPL")
+    save(list = ls(), file="option-quote.RData")
+}
+
+## avail_strikes: All the strikes available for the dowloaded option quotes
 avail_stikes <- map(AAPL_o, `$`, calls) %>%
   map(`$`, Strike) %>%
   unlist %>% unname %>% unique %>% sort
-# 1.2 Covered maturities
+
+## maturity: All the maturity available for the downloaded option quotes
+## maturity is still a character vector, it will be subsequently transformed
+## into a date vector
 maturity <- names(AAPL_o)
 
-# 1.3 Construct the data.frame
-# Remove period with no value (NULL in list)
+## dfs_call: temporary data used to construct the price surface
+## It is a list containing all the option price  for all strike and maturity.
 dfs_call <- map(AAPL_o, `$`, call) %>%
   map(~.x[, 1:2]) %>%
   Filter(f = Negate(is.null))

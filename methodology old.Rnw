@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  CHAPTER:Methodology
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Methodology}
+\label{cha:Methodology}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: General overview
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General overview}
+\label{sec:methodology:general}
+
+My work is roughly cut into three parts, that is to say, the upstream analysis, the analysis and a discussion.
+
+Firstly I will perform an upstream analysis meant to make the machinery (i.e. the algorithms I have created using \cite{R}) works together with market-calibrated data.
+The whole step is altogether explained in \cref{sec:methodology:market}.
+
+Afterward comes the analysis part where the delta--hedging rule will be measured according to different scenarios.
+Latter will only focus on the benchmarking of hedges involving european short call derivatives priced across the Black--Scholes--Meron formula.
+In order to construct such experiments, I will create as a collection of call prices, distinguished among themselves by different triples, each comprised of a maturity date ($T$), a stike price ($K$) and a volatility factor ($\sigma$).
+\cref{eq:methodology:general:call} vanishes ambiguity by providing the mathematical counterpart of the previous statement.
+
+\begin{align}
+C \equiv \left\{ c_{t s k} \right\} \forall & t \in T \equiv \left\{ \frac{1}{4}, \frac{1}{2}, \frac{3}{4}, 1\right\}, \label{eq:methodology:general:call}\\
+& s \in \sigma \equiv \left\{ \sigma_i \right\}_{i \in \set{5\%, 25\%, 50\%, 75\%, 95\% }}, \nonumber \\
+& k \in K \equiv 
+\left\{ \begin{array}{l}
+\text{deep--in--the--money},\\
+\text{in--the--money},\\
+\text{at--the--money},\\
+\text{out--of--the--money},\\
+\text{deep--out--of--the--money}
+\end{array} \right\} \nonumber
+\end{align}
+Where $(T, \sigma, k)$ are respectively the set of the considered maturities, volatilities and strike price. The subscript of the volatility set stands for the percentiles kept from the upstream analysis. [NOT GOOD]
+
+So far, it lacks some time series, representing the evolution of the underlying over time, in order to construct the hedges.
+To do so, I will implement the different techinques convered in the previous chapters, namely the geometric Brownian motion (GBM), the Merton jump diffusion (MJD) and the Heston stochastic volatility (HSV) processes and I will feed each of them with sets of arguments being relevant with the whole subset of distict double $(T, \sigma)$ constructed from the collection (\ref{eq:methodology:general:call}) so that the generated sampled series shall be pairwise consistent with one and only atoms of the set \ref{eq:methodology:general:call}.
+
+Under the hood, the experiments on delta--hedging will be each constructed over 500 trials.
+For instance, in order to measure the hedge of a european call stroke at \$ 40 with a maturity of 3 months and an estimated volatility of .20, I will store in a data table, 500 differents times series of sampled GBM computed in accordance with all members of $\Set{(t, s) | \forall t \in T, s \in \sigma}$.
+Nevertheless, even though the number of 500 trials is purely arbitrary, it sounds a good trade--off between a reasonable computational time needed to run the analysis  and obtaining a big large view of the underpinned data which is broad enough to decipher trends.
+
+The final step of the analysis will be the performance measure of each specific hedging scenario.
+This quantitative assessment will be performed through a purposely tool I have developed.
+More details of the latter is given at \cref{sec:methodology:hedging}.
+
+Ultimately though, the discussion part comes where the results grouped by hypothesis will be commented.
+Let's first begin with the data calibration.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Market data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Market data}
+\label{sec:methodology:market}
+
+In order to correctly feed the developed models, an upstream analysis is needed to define a range of values to take as arguments.
+Latter can be subdivided by their belonging model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Arguments for geometric Brownian motion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arguments for geometric Brownian motion}
+\label{sub:methodology:market:geometric}
+
+The drift and volatility rates, respectively $\alpha$ and $\sigma$, will be estimated using market data, especially the stocks from the S\&P500.
+
+First and foremost, daily data will be downloaded to construct the set of vectors $S_s$, where the subscript $s$ denotes a specific symbol such as AAPL, for Apple.
+Next, the algorithm will compute the daily basis log--return on each series belongong to $S_s$, as stated by \cref{eq:methodology:market:geometric:log}.
+
+\begin{align}
+\ln \frac{S_{s, i+1}}{S_{s, i}} \label{eq:methodology:market:geometric:log}
+\end{align}
+Because it exists some days where prices are not quoted, it is therefore necessary to be sure that the indexes $i$ and $i + 1$ are together separated by only one calendar day. This requirement provides the log-returns on the same basis and therefore make it comparable.
+
+Once the log--returns will have been computed, \crefrange{eq:upstream:logreturn:sample}{eq:upstream:volatility:estimator} give a method to compute an estimation of the variance rate.
+
+[TODO:+++]
+
+\begin{align}
+\hat{\sigma} \equiv \Set{\sigma_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
+\end{align}
+Where p are percentiles.
+
+
+\begin{align}
+\hat{param} \equiv \Set{\left(\alpha, \sigma\right)_p | p \in \set{5\%, 25\%, 50\%, 75\%, 95\%}}
+\end{align}
+By linear model.
+
+
+[TODO:---]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Arguments for Merton Jump--diffusion process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Arguments for Merton Jump--diffusion process}
+\label{sub:methodology:market:merton}
+
+The arguments to be assessed for the current model come in two distinctive flavours; the ones describing the normal move in the stock prices $(\alpha, \sigma)$ and those defining the frequency $(\lambda)$ and the intensity $(\mu, \delta^2)$ of jumps.
+
+On the one hand, the instantaneous expected return $(\alpha)$ and the associated instantaneous volatility $(\sigma)$ of the return and provided that no jump occurs will be the same as those computed in the previous section, that is to say, $(\alpha, \sigma)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Scenarios
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scenarios}
+\label{sec:methodology:scenarios}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Hedging performance tool
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hedging performance tool}
+\label{sec:methodology:hedging}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Group construction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Group construction}
+\label{sec:methodology:group}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analysis}
+\label{sec:methodology:analysis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Discussion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+\label{sec:methodology:discussion}
+
+
+
+
+
+

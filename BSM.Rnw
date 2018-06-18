@@ -4,14 +4,14 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{The \BSM model}
-\label{cha:The \BSM model}
+\label{cha:bsm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: OverView
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{OverView}
-\label{sec:OverView}
+\section{Overview}
+\label{sec:bsm:overview}
 
 In this present section the Black--Scholes--Merton model is explained and developed. Stricly speaking, it would be talked about the BSM (Black--Scholes--Merton) model but not BSM equation. In turn the equation would be refered to as the BS (Black and Scholes) equation. This distinction is made because the model encompasses the derivation of the BS equation, either using the CAPM (Capital Asset Pricing Model) for \citet{bs} or  by setting up a riskless portfolio providing an expected return identiacal to risk-free rate for \citet{merton73}.
 
@@ -25,7 +25,7 @@ The section \ref{sec:Assumptions} quotes the assumptions made to keep the model 
 % SECTION: Assumptions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assumptions}
-\label{sec:bsm:assumption}
+\label{sec:bsm:assumptions}
 
 \citet{bs} have provided a framework defining a bunch of constraints qualified as "ideal conditions" under which the market would behave in order to make the BS equation works with accuracy. All of these conditions are below--mentioned.
 
@@ -43,8 +43,8 @@ The section \ref{sec:Assumptions} quotes the assumptions made to keep the model 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: The partial differential BSM equation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Black--Scholes equation}
-\label{sec:BSequation}
+\section{The \BSM equation}
+\label{sec:bsm:equation}
 
 The pricing method of an option underpinned by the BSM model is closely related to an underlying for which its price $\St$ is random and log--normally distributed, such the one developed in chapter \ref{cha:underlying} throughout equation \ref{eq:Scontinuous} (\citet{bs}).
 
@@ -61,12 +61,12 @@ In order to provide a unique fair price to a stock option (e.g. a vanilla europe
 
 
 
-Following the method forementioned, the BSM differential equation is given by equation (\ref{eq:BSMeq}),  with terminal condition (\ref{eq:BSMterminal}) and boundary condition (\ref{eq:BSMboundary0}) -- (\ref{eq:BSMboundaryinf}), (\citet{shreve}).
+Following the method forementioned, the BSM differential equation is given by equation (\ref{eq:bsm:bsm:eq}),  with terminal condition (\ref{eq:BSMterminal}) and boundary condition (\ref{eq:BSMboundary0}) -- (\ref{eq:BSMboundaryinf}), (\citet{shreve}).
 
 \begin{center}
   \begin{equation}
      \BSMeq{x}
-    \label{eq:BSMeq}
+    \label{eq:bsm:bsm:eq}
   \end{equation}
 \end{center}
  
@@ -101,13 +101,13 @@ In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an opt
 \label{sec:Solution for vanilla option pricing method}
 
 
-According to the terminal (\ref{eq:BSMterminal}) and boundaries conditions (\ref{eq:BSMboundary0}, \ref{eq:BSMboundaryinf}), the Black--Scholes--Merton solution for call option happens to be given by equation (\ref{eq:BSMsol}), (\citet{shreve}). 
+According to the terminal (\ref{eq:BSMterminal}) and boundaries conditions (\ref{eq:BSMboundary0}, \ref{eq:BSMboundaryinf}), the Black--Scholes--Merton solution for call option happens to be given by equation (\ref{eq:bsm:bsm:sol}), (\citet{shreve}). 
 The right hand side of the equation, $\ct$, denotes the price of a call option depending on the time to maturity and the stock price at that time.
 In addition to these arguments, two other parameters are required, the strike ($k$) and the riskless interest rate ($r$).
 
 \begin{align}
     \BSMsol
-    \label{eq:BSMsol}
+    \label{eq:bsm:bsm:sol}
 \intertext{with}
     \dpm
     \label{eq:dpm}
@@ -157,7 +157,7 @@ In addition to these arguments, two other parameters are required, the strike ($
 \subsection{Overview}
 \label{sub:GreeksOverview}
 
-The Black--Scholes--Merton equation (\ref{eq:BSMeq}) can be divided into differents parts.
+The Black--Scholes--Merton equation (\ref{eq:bsm:bsm:eq}) can be divided into differents parts.
 Each one is identified through a greek letter. These letters are the purpose of this section and would be therefore described here.
 
 The Greeks will be next used to show hown the hedge of a call option behave under some variation from the former conditions defined by Black and Scholes. Hence, only the Greeks for call options are considered.
@@ -168,7 +168,7 @@ The Greeks will be next used to show hown the hedge of a call option behave unde
 \subsection{Delta}
 \label{sub:Delta}
 
-Delta is the derivative of the call function (\ref{eq:BSMsol}) with respect to the stock price, as shown by equation (\ref{eq:call}).
+Delta is the derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price, as shown by equation (\ref{eq:call}).
 It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
 
 \begin{align}
@@ -246,7 +246,7 @@ No need to hedge against time therefore no need to neutralize theta.
 \label{sec:BSMGreeks}
 
 The Black--Scholes--Merton equation and the greeks are closely related together.
-In deed the BSM partial derivative formula (\ref{eq:BSMeq}) could equally be written using the greeks (\ref{eq:BSMGreeks})
+In deed the BSM partial derivative formula (\ref{eq:bsm:bsm:eq}) could equally be written using the greeks (\ref{eq:BSMGreeks})
 
 \begin{center}
   \begin{equation}
@@ -254,6 +254,84 @@ In deed the BSM partial derivative formula (\ref{eq:BSMeq}) could equally be wri
     \label{eq:BSMGreeks}
   \end{equation}
 \end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: The delta hedging rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The delta hedging rules}
+\label{sec:bsm:delta:hedge}
+
+The purpose of the delta hedging rules is to fully replicate the reverse position taken in an option in order to cover oneself against lost. The technique is achieved by continuously rebalancing its position in order to keep an amount of $\Delta(t)$ share of stock at each time $t$.
+
+One scenario could be the following. One party write an option at some initial time $t_0$ at a certain price (given by the Black--Scholes--Merton equation (REF)) $X(0)$, and he / she puts that earning money into a bank account, in which the annual interest rate in action is given by $r$.
+
+\begin{align}
+X(0) = BSM(S_0, T, \sigma, k)
+\end{align}
+
+Incidentally, following (EQUATION DELTA), he / she computes the delta at time zero and buys exactly that amount of share of stock. Additionaly, he / she divides the whole time frame into $n$ smaller time steps $\delta t$ in order to subsequently rebalance its position in the stock, according to the evolution of the underlying.
+
+\begin{align}
+\left\{
+  \begin{array}{l}
+    p(0) = \Delta(t_0) S(t_0) \\
+    p(1) = \left(\Delta(t_1) - \Delta(t_0) \right) S(t_1) \\
+    p(2) = \left(\Delta(t_2) - \Delta(t_1) \right) S(t_2) \\
+    \vdots \\
+    p(i) = \left(\Delta(t_i) - \Delta(t_{i + 1}) \right) S(t_i) \\
+    \vdots \\
+    p(n) = \left(\Delta(t_i) - \Delta(t_{n + 1}) \right) S(t_n) \\
+  \end{array}
+\right.
+\end{align}
+
+Finally, to see if the hedge works, we value all operation made up to T and sum the whole part
+
+\begin{align}
+ \left\{
+  \begin{array}{l}
+    P(0) = p(0) e ^{r \times (T - t_0)} = p(0) e ^{r \times T} \\
+    P(1) = p(1) e ^{r \times (T - t_1)} \\
+    P(2) = p(2) e ^{r \times (T - t_2)} \\
+    \vdots \\
+    P(i) = p(i) e ^{r \times (T - t_i)} \\
+    \vdots \\
+    P(n) = p(n) e ^{r \times (T - t_n)} = p(n) \\
+  \end{array}
+\right.
+\end{align}
+
+Now we get the valued portfolio, we have to compare it with something. At the beging we got an amount of money, priced at $X(0)$ which were the Black -- Scholes -- Merton Price. This amount of money has been put in a money market account with an interest rate of $r$. 
+At maturity we therefore get the amout of money given by (REFENCE EQUATION).
+
+\begin{align}
+  X(T) = X(0)  e ^{r T}
+\end{align}
+
+At maturity, another operation occurs. If the option is in-the-market, it will be exercised and furthermore $\Delta(T) = 1$, meaning that we have one share of stock to honour the transaction. In exchange we get \$$K$ from the counterparty. It means that in the end we have a positive amount of:
+
+\begin{align}
+  X(T) + \Delta(T) * k
+\end{align}
+
+Consequently to check if the hedge works well, we should get the following relation:
+
+\begin{align}
+ \sum_{i = 0}^{n = T} P(i) \cong X(T) + \Delta(T) * k
+\end{align}
+
+Because the position could vary, we have to adapt the relation above (REF) in order to remove all unit from the comparison.
+According to hull, a measure of performance of the hedge could be to take the ratio of the standard deviation of the cost to hedge to the option price. In that case, the measure could be comparated among themselve even if the position taken into the underlying difer.
+
+\begin{align}
+  \frac{sd(hedge)}{C_0 e ^{r T}}
+  \label{bsm:delta:hedge:perf}
+\end{align}
+where hedge is a vector containing $n$ sample generated, and $C_0$ is the price of the call option at time zero value up to maturity.
+
+
 
 
 

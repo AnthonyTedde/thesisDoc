@@ -1,9 +1,28 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Black and Scholes(1973)]{bs}
+Fischer Black and Myron Scholes.
+\newblock The pricing of options and corporate liabilities.
+\newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
+  637--654, 1973.
+
+\bibitem[Heston(1993)]{heston1993}
+Steven~L Heston.
+\newblock A closed-form solution for options with stochastic volatility with
+  applications to bond and currency options.
+\newblock \emph{The review of financial studies}, 6\penalty0 (2):\penalty0
+  327--343, 1993.
+
+\bibitem[Merton(1976)]{merton76}
+Robert~C Merton.
+\newblock Option pricing when underlying stock returns are discontinuous.
+\newblock \emph{Journal of financial economics}, 3\penalty0 (1-2):\penalty0
+  125--144, 1976.
 
 \bibitem[{R Core Team}(2017)]{R}
 {R Core Team}.

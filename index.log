@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  6 MAY 2018 22:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  12 JUN 2018 14:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1183,7 +1183,14 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/ae/t1aer.fd
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-)))) (./index.aux)
+)))) (./index.aux
+
+LaTeX Warning: Label `tab:methodology:maturity' multiply defined.
+
+
+LaTeX Warning: Label `tab:methodology:maturity@cref' multiply defined.
+
+)
 \openout1 = `index.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 101.
@@ -1201,8 +1208,7 @@ LaTeX Font Info:    ... okay on input line 101.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 101.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 101.
 
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 101.
@@ -1325,50 +1331,86 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]
 Chapter 1.
+
+LaTeX Warning: Reference `sec:bsm:assumption' on page 1 undefined on input line
+ 141.
+
+
+LaTeX Warning: Reference `sec:bsm:delta:hedge' on page 1 undefined on input lin
+e 142.
+
+
+LaTeX Warning: Reference `bsm:delta:hedge:perf' on page 1 undefined on input li
+ne 142.
+
+
+Overfull \hbox (7.52216pt too wide) in paragraph at lines 212--212
+[]\T1/aer/bx/n/17.28 Hedging un-der Black--Scholes--Merton con-straints 
+ []
+
 [3
 
 ]
 
-LaTeX Warning: Reference `eq:upstream:logreturn:sample' on page 4 undefined on 
-input line 204.
+LaTeX Warning: Reference `eq:bsm:bsm:sol' on page 1 undefined on input line 229
+.
 
 
-LaTeX Warning: Reference `eq:upstream:volatility:estimator' on page 4 undefined
- on input line 204.
+LaTeX Warning: Reference `sec:upstreamlogreturn' on page 1 undefined on input l
+ine 237.
 
-[4] (./index.bbl [5]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 12.
+
+Overfull \hbox (17.10373pt too wide) in paragraph at lines 243--250
+ [][] 
+ []
+
+[4]
+
+LaTeX Warning: Reference `eq:underlying:geometric:closed' on page 1 undefined o
+n input line 268.
+
+
+LaTeX Warning: Reference `eq:upstream:stock:valued' on page 5 undefined on inpu
+t line 270.
+
+
+LaTeX Warning: Reference `eq:upstream:volatility:estimator' on page 5 undefined
+ on input line 270.
+
+(./index.bbl [5]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 31.
  (/usr/local/texlive/2017/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)) [6
+))
+[6
 
 ] (./index.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 25512 strings out of 492995
- 497142 string characters out of 6132705
- 521300 words of memory out of 5000000
- 28667 multiletter control sequences out of 15000+600000
- 34252 words of font info for 70 fonts, out of 8000000 for 9000
+ 25526 strings out of 492995
+ 497403 string characters out of 6132705
+ 523409 words of memory out of 5000000
+ 28683 multiletter control sequences out of 15000+600000
+ 31251 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,54p,10375b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,9n,54p,10375b,366s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
-al/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
-/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/
-texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on index.pdf (6 pages, 118014 bytes).
+></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
+usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on index.pdf (6 pages, 88996 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
+ 62 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  45 words of extra memory for PDF output out of 10000 (max. 10000000)
 

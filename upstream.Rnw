@@ -94,7 +94,7 @@ The construction of such a Markov process could be achieved following various te
 \input{figures/brownianmotion.tex}
 \caption{Multiple Brownian Motion}
 \floatfoot{\textit{Note.} (QA): Simulation of one hundred Brownian motions using the R package \citet{randomwalk} with a timeframe of five units (five years) with a time-step of one over one hundred.
-(QB): Density computed on a simulation of one hundred thousand Brownian motions. The calculation has been made by taking all the final value $W(5)$ and by plotting them as a density function. The Black bell curve is the normal density with mean zero and a standard deviation of square root of five, as expected (\cref{eq:incrementsdist}).}
+(QB): Density computed on a simulation of one hundred thousand Brownian motions. The calculation has been made by taking all the final value $W(5)$ and by plotting them as a density function. The Black bell curve is the normal density with mean zero and a standard deviation of square root of five, as expected (\cref{eq:upstream:incrementsdist}).}
 \label{fig:upstream:brownian}
 \end{figure}
 
@@ -246,16 +246,16 @@ Consequently the algorithm to apply in order to estimate the skewness and kurtos
 \section{Log--return and compounded interest rate}
 \label{sec:upstreamlogreturn}
 
-The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:continuousrate}{eq:logreturn}
+The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:upstream:stock:valued}{eq:upstream:logreturn}
 
 \begin{align}
-&S(0) e^{Rt} = \St \label{eq:continuousrate} \\
+&S(0) e^{Rt} = \St \label{eq:upstream:stock:valued} \\
 \Longleftrightarrow  &\ln{S(0)} + Rt = \ln{\St} \\
-\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = Rt \label{eq:logreturn}
+\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = Rt \label{eq:upstream:logreturn}
 \end{align}
-Where $R$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interest are compounded (in year) and the left--hand side of \cref{eq:logreturn} stands for the natural logarithm of the stock return occuring during the period $t$, the so--called log--return.
+Where $R$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interest are compounded (in year) and the left--hand side of \cref{eq:upstream:logreturn} stands for the natural logarithm of the stock return occuring during the period $t$, the so--called log--return.
 
-For what matter in this current document, the focus is set to the sample's log--returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:Scontinuous} to simulate geometric Brownian motion.
+For what matter in this current document, the focus is set to the sample's log--returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:upstream:Scontinuous} to simulate geometric Brownian motion.
 
 Following \citet{hull}, if $S_i$ and $n$ respectively denote the stock price at the end of interval $i$ and the total number of observation then the log--return of the ordered sample set $\{S-i\}_{i \in n}$ is give by \cref{eq:upstream:logreturn:sample}.
 
