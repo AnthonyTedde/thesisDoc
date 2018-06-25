@@ -13,7 +13,7 @@ library(FME)
 #######################################3
 # Creation of the data table
 #######################################3
-setwd("/Users/anthony/workspace/thesis/thesis/data")
+setwd("c:/Users/ATE/thesisDoc/data")
 load(file="option-quote.RData")
 
 # 1.1. All the strike price available for all the maturity
@@ -47,9 +47,13 @@ continuous <- 365/m * log(1 + r * (m/365))
 rate <- data.frame(maturity = m, riskless = r, continuous = continuous)
 
 DATA <- plyr::join(call, rate)
+DATA <- DATA[DATA$maturity >= 63 & DATA$maturity <= 399 & 
+               DATA$Strike %in% c(130, 140, 150, 160, 170, 180, 190, 200, 210, 220), ]
+rownames(DATA) <- 1:nrow(DATA)
 
 cost <- function(x){
   cst <- vector("double", length = nrow(DATA)) 
+  
   for(i in 1:nrow(DATA)){
     cst[i] <- DATA[i, 4] - call_heston(DATA[i, 1], 
                                        x[1],
@@ -63,91 +67,181 @@ cost <- function(x){
                                        DATA[i, 3])
   }
 
-  sum(cst)^2
+  print(sum(cst^2))
+  print(x)
+  
+  sum(cst^2)
   
 }
 
-x0 <- c("v0" = .2, "theta" = .2, "sigma" = .4, "rho" = -.5, "kappa" = 1.2)
-lower <- c(0,0,0,-1,0)
-upper <- c(1,1,5,1,20)
+# Initial valued vector
+  # OK:
+# GOOD
+x0 <- c("v0" = .3, "theta" = .3, "sigma" = .4, "rho" = -.85, "kappa" = 3.) 
+x0 <- c("v0" = .3, "theta" = .3, "sigma" = .5, "rho" = -.4, "kappa" = 1) 
+# test
 
-lsqnonlin(cost, x0, options = list(maxeval = 2000))
-modFit(cost, x0, lower = lower, upper = upper)
+# Optimized result
+detach("package:StockPriceSimulator", unload = T)
+library(StockPriceSimulator)
+
+x1 <- c("v0" = 0, "theta" = 0, "sigma" = .6, "rho" = -.8, "kappa" = 1) 
+x2 <- c("v0" = .3, "theta" = .3, "sigma" = .5, "rho" = -.4, "kappa" = 1) 
+
+v0 <- .3
+theta <- .3
+sigma <- seq(.5, .7, by = .1)
+rho <- seq(-.4, -.9, by = -.1)
+kappa <- seq(2, 4, by = 1)
+
+xo <- as.data.frame(t(expand.grid(v0, theta, sigma, rho, kappa)))
+# xo <- data.frame(x1, x2)
+
+# tosave <- l
+
+l2 <- map(xo , function(y){
+  x0 <- c("v0" = y[1], "theta" = y[2], "sigma" = y[3], "rho" = y[4], "kappa" = y[5]) 
+  
+  x <- tryCatch(
+    lsqnonlin(cost, x0, options = list(maxeval = 2000))$x,
+    error = function(c) {
+      message(c)
+      return(c)
+    }
+  )
+  if(inherits(x, "error")){
+    x <- c(v0 = 0, theta = 0, sigma = 0, rho = 0, kappa = 0)
+  }
+  
+  message(x)
+  
+  
+  # Check optimized results accuracy   
+  cst <- vector("double", length = nrow(DATA))
+  for(i in 1:nrow(DATA)){
+    cst[i] <- tryCatch(call_heston(DATA[i, 1], 
+                                   x[1],
+                                   x[2],
+                                   # (x[5] + x[3]^2) / (2 * x[2]),
+                                   x[5],
+                                   x[3],
+                                   DATA[i, 8],
+                                   x[4],
+                                   DATA[i, 2] / 365,
+                                   DATA[i, 3]),
+                       error = function(c) NA 
+    )
+    if(is.na(cst[i])){
+      cst[i] <- 0
+      next
+    }
+  }
+  sum(cst - DATA$Last)
+  
+  
+  # Gather both DATA and cst into a unique dataframe
+  heston <- data.frame(DATA, 
+                       heston = cst, 
+                       diff = cst - DATA$Last, 
+                       within.spread = (DATA$Ask - DATA$Bid) >= abs(cst - DATA$Last))
+  
+  
+  list(check <- sum(heston$within.spread),
+       feller <-  2 * x["kappa"] * x["theta"] - x["sigma"] ^2,
+       x0,
+       x)
+  
+})
 
 
-x <- c(0.02924656,  0.15179058,  0.20226292, -0.80011677,  0.99861074) 
-x <- c(0.02187661,  0.15032430,  0.20198890, -0.50006493,  0.99838052)
-v0       theta       sigma         rho       kappa 
-0.02041248  0.26148421  0.20458438 -0.50043906  0.49515858
-v0       theta       sigma         rho       kappa 
-x <- c(0.03804248,  0.28543453,  0.20543522, -0.80042459,  0.19479137) 
-x <- c(0.03843349,  0.17386345,  0.50712030, -0.80170592,  0.49718398)
-x <- c(0.02794343,  0.10050789,  0.50505045, -0.80097830,  1.99891370)
-x0 <- c("v0" = .2, "theta" = .2, "sigma" = .5, "rho" = -.5, "kappa" = 1):
-x <- c(0.02508427,  0.14854600,  0.50480220, -0.50060892,  0.99788751) 
+# Measure the performance of the callibration
+optim.1 <- l
+optim.2 <- l2
+within.spread.1 <- map_dbl(optim.1, ~ .x[[1]])
 
-cst <- vector("double", length = nrow(DATA))
-for(i in 1:nrow(DATA)){
-cst[i] <- call_heston(DATA[i, 1], 
-            x[1],
-            x[2],
-            # (x[5] + x[3]^2) / (2 * x[2]),
-            x[5],
-            x[3],
-            DATA[i, 8],
-            x[4],
-            DATA[i, 2] / 365,
-            DATA[i, 3])
+remove_negative_feller <- function(y){
+  if(y[[2]] > 0.1){
+    return(y[[1]])
+  }else{
+    return(0)
+  }
 }
 
-sum(cst - DATA$Last)
+within.spread.1 <- map_dbl(optim.1, .f = remove_negative_feller ) %>%
+  unname 
+within.spread.2 <- map_dbl(optim.2, .f = remove_negative_feller) %>%
+  unname
 
-heston(186.31,
-       x[1],
-       399/365,
-       1,
-       365,
-       0.40,
-       x[4],
-       x[5],
-       x[2],
-       x[3])
+# Keep the best fit
+bstfit.optim.1 <-  map(which(within.spread.1 >= 20),
+                       ~ optim.1[[.x]][[4]])
+bstfit.optim.2 <-  map(which(within.spread.2 >= 20),
+                       ~ optim.2[[.x]][[4]])
 
-2 * x[5] * x[2] - x[3]^2
+cost_bstfit <- function(x){
+  cst <- vector("double", length = nrow(DATA)) 
+  
+  for(i in 1:nrow(DATA)){
+    cst[i] <- DATA[i, 4] - call_heston(DATA[i, 1], 
+                                       x[1],
+                                       x[2],
+                                       # (x[5] + x[3]^2) / (2 * x[2]),
+                                       x[5],
+                                       x[3],
+                                       DATA[i, 8],
+                                       x[4],
+                                       DATA[i, 2] / 365,
+                                       DATA[i, 3])
+  }
+  
+  list(x,
+       sum(cst ^ 2),
+       sum(cst),
+       cst)
+}
+
+summary.bstfit <- map(c(bstfit.optim.1, bstfit.optim.2), cost_bstfit)
+
+cst1 <- map_dbl(summary.bstfit, ~ .x[[2]]) %>% 
+  unname
+min.cst1 <- which(cst1 == min(cst1))
+
+cst2 <- map_dbl(summary.bstfit, ~ .x[[3]]) %>% 
+  unname
+min.cst2 <- which(abs(cst2) == min(abs(cst2)))
 
 
-################################################################################
-# # Use modFit
-# ## initial "guess"
-# parms <-  c(v0 = .02, theta = .2, sigma = .5, rho = -.5, kappa = 1)
-# i <- nrow(DATA)
-# # 
-# # ## analytical solution
-# model <- function(parms, i){
-#   with(as.list(parms),
-#   return(
-#     call_heston(DATA[i, 1],
-#                 v0,
-#                 theta,
-#                 (kappa + sigma ^2) / (2 * theta),
-#                 #kappa,
-#                 sigma,
-#                 DATA[i, 8],
-#                 rho,
-#                 DATA[i, 2] / 365,
-#                 DATA[i, 3])
-#   ))
-# }
-# 
-# # 
-# # ## FITTING algorithm 1
-# ModelCost <- function(P) {
-#   out <- map_dbl(1:i, ~model(P, .x))
-#   return(DATA$Last-out)  # residuals
-# }
-# 
-# (Fita <- modFit(f = ModelCost, p = parms))
-# ################################################################################
+# Winner:
+bstfit <- summary.bstfit[[min.cst1]]
+bstfit.idx <- map_lgl(c(optim.1, optim.2), .f = function(x){
+  sum(x[[4]] == bstfit[[1]]) == 5
+}) %>% unname %>% which
+
+c(optim.1, optim.2)[[bstfit.idx]]
+  
+
+
+# #### End measure Perf ###
+
+
+x <- bstfit[[1]]
+
+# Feller constraint
+2 * x["kappa"] * x["theta"] - x["sigma"] ^2
+
+h <- heston(initial_stock_price = AAPL$Last,
+       initial_volatility = x["v0"],
+       time_to_maturity = 1,
+       seed = 1,
+       scale = 365,
+       alpha = 0.02,
+       rho = x["rho"],
+       kappa = x["kappa"],
+       theta = x["theta"],
+       sigma = x["sigma"])
+
+
+
 
 
 
