@@ -163,15 +163,15 @@ Using R. \cite{R}
 \section{Merton Mixed jump-diffusion Model}
 \label{sec:other:merton}
 
-In his paper, \citet{merton76} provides a model for stock price evolution involving jumps (\cref{eq:mertonjump}). 
+In his paper, \citet{merton76} provides a model for stock price evolution involving jumps (\cref{eq:other:merton:pde}). 
 
 
 \begin{align}
   \St &= S\left(0\right) e^{\left(\alpha - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
-  \label{eq:mertonjump}
+  \label{eq:other:merton:pde}
 \end{align}
   
-According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:mertonjump}). 
+According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:other:merton:pde}). 
 The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:Scontinuous}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
 Another type of changes, occuring during the stock lifecycle, are qualified as abnormal. Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effect on the stock price by giving rise to jumps in the course of stock path and therefore breaking its continuity (\citet{merton76}). The jump process is constructed on double basis. 
 
@@ -201,6 +201,68 @@ with $y_t$, $y_t - 1$ and $\ln{y_t} \equiv Y_t$ standing respectively for "absol
  
 The Merton's jump-diffusion process is be able to capture positive / negative skewness (see \cref{sub:MertonSkewness}) and excess kurtosis (see \cref{sub:MertonKurtosis}) of the log--return density function \citet{merton76}. 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Risk-neutralized process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Risk-neutralized process}
+\label{sub:other:merton:risk}
+
+In order to find the fair price of an option depending on an underlying that follows such a jump-diffusion process, \citet{merton76} turns \cref{eq:other:merton:pde} into one risk-neutral.
+
+\begin{align}
+  \St &= S\left(0\right) e^{\left(r - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
+  \label{eq:other:merton:pde:riskneutral}
+\end{align}
+
+\citet{merton76} argues in his paper that the jump component of \cref{eq:other:merton:pde} can be diversified in a well-balanced portfolio and consequently does not need to be risk-neutralized.
+
+However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:merton:pde} is risk-neutralized by turning the rate $\alpha$ into its riskfree counterpart $r$, as shown by \cref{eq:other:merton:pde:riskneutral}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Graphical representation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Graphical representation}
+\label{sub:other:merton:graphical}   
+
+\Cref{p:other:merton:path} shows a unique time serie generated using an implementation of \cref{eq:other:merton:pde}. A jump is clearly noticed at day 363. While
+\Cref{t:other:merton:path}, which is a subset of the time serie drawn in \cref{p:other:merton:path}, illustrates numerically when the jump occurs.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \hline
+ time periods (days)& stock price\\ 
+  \hline
+  0   &50.00 \\ 
+  1   &49.72 \\ 
+  2   &49.87 \\ 
+  \vdots & \vdots \\
+  323 &83.44 \\ 
+  324 &94.98 \\ 
+  \vdots & \vdots \\
+  363 &97.41 \\ 
+  364 &97.07 \\ 
+  365 &97.00 \\ 
+   \hline
+\end{tabular}
+\caption{Merton Mixed jump-diffusion time serie}
+\label{t:other:merton:path}
+\end{table}
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/merton.path.tex} 
+  \floatfoot{Simulation of one Merton mixed jump-diffusion time serie. Data have been output by the R function \textit{sstoch\_jump()} which is an implementation of equation \cref{eq:other:merton:pde} (see appendix \ref{sub:r:time:merton}, for more information). The parameters passed to the function are:  $S(0) = 50$,   $T = 1$ (in year, along with a time step of 365 measures per year),  $\sigma = 0.2$, $\alpha = 0.5$,  $\lambda = 2$,  $\mu = 0.05$, and $\delta = 0.1$.}
+  \caption{Merton mixed jump-diffusion time serie}
+  \label{p:other:merton:path}
+\end{figure}
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Skewness
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,12 +272,12 @@ The Merton's jump-diffusion process is be able to capture positive / negative sk
 The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. The figure [REF] shows how the density's shape of the log--return may vary along with this parameter.
 
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \input{figures/MertonJumpReturn.tex}
 \caption{Merton: Daily Basis Stock Return Density}
 \floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:mertonjump}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
+The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
 }
 \label{plot:MertonReturnDensity}
 \end{figure}
@@ -228,12 +290,12 @@ The above density function has been constructed over three distinctive groups of
 
 The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \input{figures/MertonJumpReturnTails.tex}
 \caption{Merton: Daily Basis Stock Return Density}
 \floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:mertonjump}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
+The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
 }
 \label{plot:MertonReturnDensityTails}
 \end{figure}
@@ -334,17 +396,14 @@ Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively de
 \label{sub:other:heston:graphical}   
 
 Figures \ref{p:other:uncorrelatedheston} and \ref{p:other:correlatedheston}, get a hands-on insight into how the correlation between the underlying Brownian motions of the stock and volatility time series affect both processes.
-
 \cref{p:other:uncorrelatedheston} shows a correlation between the Wiener processes $B_1$ and $B_2$ sets to $\rho = -1$, making the two Markov motions perfectly negatively correlated. 
 It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
-
-Likewise figure \ref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \cref{eq:other:hsvvol} and \cref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
+Likewise, \cref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \ref{eq:other:hsvvol} and \ref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
 
 \begin{figure}[H]
 \centering
 \input{figures/UncorrelatHeston.tex} 
-\floatfoot{
-The above stochastic processes have been constructed following \crefrange{eq:other:hsvvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = -1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = -1$. 
 } 
 \caption{Heson Framework Using Negative Correllated Brownian Motions}
 \label{p:other:uncorrelatedheston}
@@ -355,16 +414,15 @@ The above stochastic processes have been constructed following \crefrange{eq:oth
 \centering
 \input{figures/correlatHeston.tex}
 \caption{Heson Framework Using Positive Correllated Brownian Motion}
-\floatfoot{
-The above stochastic processes have been constructed following \crefrange{eq:other:hsvvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = 1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = 1$.
 }
 \label{p:other:correlatedheston}
 \end{figure}
 
 
 
-The usage of the forementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
-It may consequently be consistent with what happens in equity market, namely sharp decrease in equity price implies increase in stock volatility (\citet{criso2015}).
+The usage of the aforementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
+It may consequently be consistent with what happens in the equity market, namely a sharp decrease in equity price implies an increase in stock volatility (\citet{criso2015}).
 % Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -373,11 +431,14 @@ It may consequently be consistent with what happens in equity market, namely sha
 \subsection{Impact on log--return density's skewness}
 \label{sub:hestonskewness}
 
-The skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$.
-When a positive correlation exists between the two Brownian motion, an increase in the asset price implies more variance than the one recorded for lower stock price. 
-Consequently a fat log--return distribution's right--hand tail is noticed.
-The opposite relation is noticed with negative correlation, namely, lower prices bring higher volatility generating a fatter left--hand tail in the log--return distribution (\citet{heston1993}).
-These statements are observed in [REF].
+Through the Heston stochastic volatility model, the skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$. 
+
+When a positive correlation exists between both Brownian motions, an increase in the volatility implies a rise in the asset price whereas a decrease in the volatility tend to lower the asset price.
+In other words, when the uncertainty is high and consequently the changes in the asset price are numerous, these latter tend to be positive. 
+That is why the distribution of the spot return is offset to the left with a right fat tail when $\rho$ is positive.
+
+The opposite relation is noticed with negative correlation, namely, lower prices relate to higher volatility generating a left fat tail in the log–return distribution (\citet{heston1993}).
+These statements are observed in \cref{p:other:heston:skewness}.
 
 
 
@@ -385,10 +446,12 @@ These statements are observed in [REF].
 \centering
 \input{figures/skewnessHeston.tex}
 \caption{Merton: Log--return skewness on Heston}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:other:hsvstock}, with stochastic volatility defined by \cref{eq:other:hsvvol}. The only parameter that changes over the group is $\rho$ which is set to ($-0.5$, $1$, $0.5$) respectively for the red, green and blue outlined density functions. The black density belongs to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log--price return cover a period of one year with a time step of 500.
+\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
+All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information).
+The only parameter that changes over the groups is $\rho$ which is set to $-0.5$, $1$, $0.5$. The log-return densities of these groups are respectively represented by the red, green and blue outlined density functions. 
+The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
 }
-\label{plot:hestontails}
+\label{p:other:heston:skewness}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -397,8 +460,28 @@ The above density function has been constructed over three distinctive groups of
 \subsection{Impact on kurtosis density return}
 \label{sub:hestonkurtosis}
 
+Following \citet{heston1993}, the kurtosis of the distribution of the spot return may be affected by the parameter $\sigma$, which represent the volatility of the volatility.
+
+First and foremost, following \cref{eq:other:hsvvol} if $\sigma = 0$, the volatility V of the Heston model turns out to be deterministic and \cref{eq:other:hsvstock}  becomes a geometric Brownian motion with normal distribution for the time series' log-returns.
+Otherwise, \citet{heston1993} showed that by rising $\sigma$, the kurtosis of the spot returns increases. Consequently, within the Heston stochastic volatility model, the bigger $\sigma$, the fatter the tail, ceteris paribus. These statements are observed in \cref{p:other:heston:kurtosis}.
+
+\begin{figure}[H]
+\centering
+\input{figures/density.heston.kurtosis.tex}
+\caption{Merton: Log--return skewness on Heston}
+\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
+All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information). The only parameter that changes over the groups is $\sigma$ which is set to 0, 0.2, 0.4. The log-return densities of these groups are respectively represented by the green, blue and red outlined density curves. 
+The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
+}
+\label{p:other:heston:kurtosis}
+\end{figure}
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Option pricing method
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Option pricing method}
 \label{sec:other:option}
 
@@ -488,9 +571,13 @@ Unlike "Random walk", the package "Stock price simulator" is more multipurpose. 
 \section{Time series simulation}
 \label{sec:r:time}
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GBM
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Geometric Brownian motion}
 \label{sub:r:time:geometric}
 
@@ -561,9 +648,96 @@ It outputs a R data.frame comprised of two columns, namely "time\_periods" and "
 \caption{A sample of time-discretized geometric Brownian motion}
 \end{table}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Merton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Merton Mixed jump-diffusion}
+\label{sub:r:time:merton}
+
+Based on \cref{eq:other:merton:pde}, this function provides one possible path of a time-discretized version of the Merton Mixed jump-diffusion model.
+It outputs a R data.frame comprised of three columns. 
+There are "time\_periods" ,"stock\_price\_path" which respectively denotes the period expressed in year and the corresponding values of the stock at that time.
+In addition, the variable "grp" stand for "group" and allows to regroup the time series by jumps. Hunder the hood, a number, which is initialized to 0, is incremented as soon as a jump occurs, in this way, a whole series with the same number means that no jump occurred during its course.
+
+\subsubsection*{function}
+
+\begin{Schunk}
+\begin{Sinput}
+> sstock_jump(initial_stock_price, time_to_maturity, 
+        seed, scale, sigma, alpha, lambda, jumps_intensity_parameters)
+\end{Sinput}
+\end{Schunk}
+
+\subsubsection*{Arguments}
+
+\begin{tabularx}{\textwidth}{lX}
+  initial\_stock\_price & Price of the stock at time zero.\\
+  time\_to\_maturity & Duration of the simulation, expressed in year.\\
+  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
+  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
+  sigma & Annualized volatility rate. \\
+  alpha & Annualized drift rate.\\
+  lambda & Annualized jump frequency. \\
+  jumps\_intensity\_parameters & List containing the parameters of the jump intensity. 
+\end{tabularx}
+
+\subsubsection*{examples}
+\label{sec:r:time:geometric:ex}
+
+\begin{Schunk}
+\begin{Sinput}
+> s <- sstock_jump(initial_stock_price = 100,
+                  time_to_maturity = 1,
+                  seed = 1,
+                  scale = 52,
+                  sigma = .2,
+                  alpha = .15,
+                  lambda = 5,
+                  jumps_intensity_parameters = list(mean = .15, sd = .2))
+\end{Sinput}
+\end{Schunk}
+
+
+\begin{Schunk}
+\begin{Sinput}
+> print(s)
+\end{Sinput}
+\end{Schunk}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+  \hline
+ time\_periods & stock\_price\_path &  grp \\ 
+  \hline
+   0.00 &100.00 &  0 \\ 
+   0.02 &96.78  &  0 \\ 
+   0.04 &95.80  &  0 \\ 
+   0.06 &92.18  &  0 \\ 
+   0.08 &94.89  &  0 \\ 
+   0.10 &94.30  &  0 \\ 
+   0.12 &90.78  &  0 \\ 
+   0.13 &102.05 &  1 \\ 
+ \vdots & \vdots & \vdots \\
+ 0.96 &55.02  &  3 \\ 
+ 0.98 &54.78  &  3 \\ 
+ 1.00 &53.04  &  3 \\ 
+   \hline
+\end{tabular}
+\caption{A sample of time-discretized Merton Mixed jump-diffusion}
+\end{table}
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Heston
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Heston stochastic volatility}
 \label{sub:r:time:heston}
 

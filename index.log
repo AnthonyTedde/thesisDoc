@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  12 JUL 2018 00:23
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  12 JUL 2018 23:16
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1211,6 +1211,12 @@ LaTeX Warning: Label `sec:r:time:geometric:ex' multiply defined.
 
 LaTeX Warning: Label `cref@sec:r:time:geometric:ex' multiply defined.
 
+
+LaTeX Warning: Label `sec:r:time:geometric:ex' multiply defined.
+
+
+LaTeX Warning: Label `cref@sec:r:time:geometric:ex' multiply defined.
+
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
 LaTeX Font Info:    ... okay on input line 116.
@@ -1313,68 +1319,54 @@ Package natbib Warning: Citation `heston' on page 3 undefined on input line 187
 
 [3
 
-] (C:\Users\ATE\thesisDoc\figures/MertonJumpReturn.tex)
+] (C:\Users\ATE\thesisDoc\figures/merton.path.tex)
+(C:\Users\ATE\thesisDoc\figures/MertonJumpReturn.tex) [4]
 
 LaTeX Warning: Reference `p:MertonReturnDensityTails' on page 1 undefined on in
-put line 229.
+put line 291.
 
-(C:\Users\ATE\thesisDoc\figures/MertonJumpReturnTails.tex)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4]
+(C:\Users\ATE\thesisDoc\figures/MertonJumpReturnTails.tex) [5] [6]
 
 LaTeX Warning: Reference `eq:underlying:geometric:closed' on page 1 undefined o
-n input line 272.
+n input line 334.
 
-[5] [6] (C:\Users\ATE\thesisDoc\figures/UncorrelatHeston.tex)
-
-LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 348.
-
-
-LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 348.
-
-(C:\Users\ATE\thesisDoc\figures/correlatHeston.tex)
-
-LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 360.
-
-
-LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 360.
-
-[7] (C:\Users\ATE\thesisDoc\figures/skewnessHeston.tex) [8] [9]
+[7] (C:\Users\ATE\thesisDoc\figures/UncorrelatHeston.tex) [8]
+(C:\Users\ATE\thesisDoc\figures/correlatHeston.tex) [9]
+(C:\Users\ATE\thesisDoc\figures/skewnessHeston.tex) [10]
+(C:\Users\ATE\thesisDoc\figures/density.heston.kurtosis.tex) [11] [12]
 
 LaTeX Warning: Reference `eq:other:call:heston:pi' on page 1 undefined on input
- line 426.
+ line 509.
 
 
-Overfull \hbox (19.7348pt too wide) in paragraph at lines 433--433
+Overfull \hbox (19.7348pt too wide) in paragraph at lines 516--516
 []\T1/aer/bx/n/14.4 Characteristic func-tion for He-s-ton stochas-tic volatil-i
 ty model 
  []
 
-[10] [11
+[13] [14
 
 
 ]
 Appendix A.
 
-Overfull \hbox (97.32413pt too wide) in paragraph at lines 480--481
+Overfull \hbox (97.32413pt too wide) in paragraph at lines 563--564
 \T1/aer/m/n/12 through my GitHub ac-count. Names are Ran-dom walk (https://gi
 thub.com/AnthonyTedde/RandomWalk)
  []
 
 
 LaTeX Warning: Reference `eq:underlying:geometric:closed' on page 1 undefined o
-n input line 497.
+n input line 584.
 
-LaTeX Font Info:    Try loading font information for T1+aett on input line 503.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 590.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [12
+) [15
 
-] [13]
-(C:\Users\ATE\thesisDoc\index.bbl [14]
+] [16] [17]
+[18] (C:\Users\ATE\thesisDoc\index.bbl [19]
 Underfull \hbox (badness 10000) in paragraph at lines 29--34
 []\T1/aer/m/n/12 J. Gatheral and N.N. Taleb.  \T1/aer/m/it/12 The Volatil-ity S
 ur-face: A Prac-ti-tioner's
@@ -1390,7 +1382,7 @@ Underfull \hbox (badness 8094) in paragraph at lines 29--34
 
 Package natbib Warning: There were undefined citations.
 
-[15
+[20
 
 ] (C:\Users\ATE\thesisDoc\index.aux)
 
@@ -1401,37 +1393,37 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 35501 strings out of 494045
- 667746 string characters out of 3145976
- 965144 words of memory out of 3000000
- 38339 multiletter control sequences out of 15000+200000
- 39092 words of font info for 88 fonts, out of 3000000 for 9000
+ 36705 strings out of 494045
+ 691852 string characters out of 3145976
+ 963875 words of memory out of 3000000
+ 39540 multiletter control sequences out of 15000+200000
+ 38432 words of font info for 85 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,14n,55p,608b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fil
-es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+ 56i,14n,55p,545b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb>
-Output written on index.pdf (15 pages, 450974 bytes).
+Output written on index.pdf (20 pages, 482942 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
+ 164 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

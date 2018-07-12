@@ -19,9 +19,13 @@ Unlike "Random walk", the package "Stock price simulator" is more multipurpose. 
 \section{Time series simulation}
 \label{sec:r:time}
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GBM
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Geometric Brownian motion}
 \label{sub:r:time:geometric}
 
@@ -89,9 +93,93 @@ print(s)
 \caption{A sample of time-discretized geometric Brownian motion}
 \end{table}
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Merton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Merton Mixed jump-diffusion}
+\label{sub:r:time:merton}
+
+Based on \cref{eq:other:merton:pde}, this function provides one possible path of a time-discretized version of the Merton Mixed jump-diffusion model.
+It outputs a R data.frame comprised of three columns. 
+There are "time\_periods" ,"stock\_price\_path" which respectively denotes the period expressed in year and the corresponding values of the stock at that time.
+In addition, the variable "grp" stand for "group" and allows to regroup the time series by jumps. Hunder the hood, a number, which is initialized to 0, is incremented as soon as a jump occurs, in this way, a whole series with the same number means that no jump occurred during its course.
+
+\subsubsection*{function}
+
+<<echo=true,eval=false,tidy=true>>= 
+sstock_jump(initial_stock_price, time_to_maturity, 
+       seed, scale, sigma, alpha, lambda, jumps_intensity_parameters)
+@
+
+\subsubsection*{Arguments}
+
+\begin{tabularx}{\textwidth}{lX}
+  initial\_stock\_price & Price of the stock at time zero.\\
+  time\_to\_maturity & Duration of the simulation, expressed in year.\\
+  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
+  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
+  sigma & Annualized volatility rate. \\
+  alpha & Annualized drift rate.\\
+  lambda & Annualized jump frequency. \\
+  jumps\_intensity\_parameters & List containing the parameters of the jump intensity. 
+\end{tabularx}
+
+\subsubsection*{examples}
+\label{sec:r:time:geometric:ex}
+
+<<echo=true>>= 
+s <- sstock_jump(initial_stock_price = 100,
+                 time_to_maturity = 1,
+                 seed = 1,
+                 scale = 52,
+                 sigma = .2,
+                 alpha = .15,
+                 lambda = 5,
+                 jumps_intensity_parameters = list(mean = .15, sd = .2))
+@
+
+<<echo=false,eval=false>>= 
+xtable(s[c(1:8, 51:53), ])
+@
+
+<<echo=true,eval=false>>= 
+print(s)
+@
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lll}
+  \hline
+ time\_periods & stock\_price\_path &  grp \\ 
+  \hline
+   0.00 &100.00 &  0 \\ 
+   0.02 &96.78  &  0 \\ 
+   0.04 &95.80  &  0 \\ 
+   0.06 &92.18  &  0 \\ 
+   0.08 &94.89  &  0 \\ 
+   0.10 &94.30  &  0 \\ 
+   0.12 &90.78  &  0 \\ 
+   0.13 &102.05 &  1 \\ 
+ \vdots & \vdots & \vdots \\
+ 0.96 &55.02  &  3 \\ 
+ 0.98 &54.78  &  3 \\ 
+ 1.00 &53.04  &  3 \\ 
+   \hline
+\end{tabular}
+\caption{A sample of time-discretized Merton Mixed jump-diffusion}
+\end{table}
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Heston
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Heston stochastic volatility}
 \label{sub:r:time:heston}
 
