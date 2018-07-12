@@ -53,8 +53,20 @@
   d\St &= \alpha \St dt + \sqrt{\Vt} \St d \Bmsub{S}
 }
 
+% CIR Stock price Stochastic process
+\newcommand{\HSVstockriskless}{
+  d\St &= r \St dt + \sqrt{\Vt} \St d \Bmsub{S}
+}
+
 % CIR volatility
 \newcommand{\HSVvol}{
   d\Vt &= \kappa\left(\theta - \Vt \right) dt + \sigma \sqrt{\Vt} d \Bmsub{V}
 }
+
+
+% CIR volatility
+\newcommand{\HSVvolriskless}{
+  d\Vt &= \kappa^{*} \left(\theta^{*} - \Vt \right) dt + \sigma \sqrt{\Vt} d \Bmsub{V}
+}
+
 \newcommand{\dportfolio}{dX\left(t\right) &= \Delta\left(t\right) d\St + r \left(X\left(t\right) - \Delta\left(t\right) \St \right) dt}

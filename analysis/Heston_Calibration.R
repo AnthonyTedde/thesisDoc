@@ -258,9 +258,9 @@ tic()
 
 initial_stock_price = AAPL$Last
 initial_volatility = x["v0"]
-time_to_maturity = 100/365
+time_to_maturity = 67/365
 seed = 1
-scale = 365 * 24
+scale = 365
 alpha = 0.02369057
 r <- alpha
 K = 180
@@ -271,7 +271,7 @@ theta = x["theta"]
 sigma = x["sigma"]
 
 ## 2. Simulate 500 GRM that correspond to that date
-GBM <- purrr::map(1:10, ~heston(initial_stock_price = initial_stock_price,
+GBM <- purrr::map(1:50, ~heston(initial_stock_price = initial_stock_price,
                                 initial_volatility = initial_volatility,
                                 time_to_maturity = time_to_maturity,
                                 seed = .x,
@@ -318,7 +318,7 @@ O <- purrr::map(GBM, .f = function(x){
 #  Computation of delta for each time series GBM
 d <- purrr::map(GBM, .f = function(x){
   delta_heston(x$stock_price_path,
-               initial_volatility,
+               x$CIR,
                theta,
                kappa,
                sigma,
@@ -391,8 +391,17 @@ hedging_cost <- purrr::map_dbl(u,
 hedging_cost_sd <- sd(hedging_cost)
 hedging_perf <- hedging_cost / (o * exp(r * time_to_maturity))
 
-toc() 
+sum(i) / length(i)
 
+toc() 
+> i
+[1]  3.7836358  1.1450726 -1.3733684  1.5018851 -0.6252957  3.1870493
+[7]  0.3670511  2.3174390 -0.9525140 -1.3005366
+> hedging_cost
+[1] 15.53286 12.89430 10.37586 13.25111 11.12393 14.93627 12.11628
+[8] 14.06666 10.79671 10.44869
+> (o * exp(r * time_to_maturity))
+[1] 11.74922
 
 
 if(full)
@@ -417,9 +426,9 @@ tic()
 
 initial_stock_price = AAPL$Last
 initial_volatility = x["v0"]
-time_to_maturity = 100/365
+time_to_maturity = 399/365
 seed = 1
-scale = 365 * 24
+scale = 365
 alpha = 0.02369057
 r <- alpha
 K = 130
@@ -493,7 +502,7 @@ O2 <- purrr::map(GBM, .f = function(x){
 #  Computation of delta for each time series GBM
 d <- purrr::map(GBM, .f = function(x){
   delta_heston(x$stock_price_path,
-               initial_volatility,
+               x$CIR,
                theta,
                kappa,
                sigma,
@@ -504,7 +513,7 @@ d <- purrr::map(GBM, .f = function(x){
 })
 d2 <- purrr::map(GBM, .f = function(x){
   delta_heston(x$stock_price_path,
-               initial_volatility,
+               x$CIR,
                theta,
                kappa,
                sigma,
@@ -517,7 +526,7 @@ d2 <- purrr::map(GBM, .f = function(x){
 
 g1 <- purrr::map(GBM, .f = function(x){
   gamma_heston(x$stock_price_path,
-               initial_volatility,
+               x$CIR,
                theta,
                kappa,
                sigma,
@@ -529,7 +538,7 @@ g1 <- purrr::map(GBM, .f = function(x){
 
 g2 <- purrr::map(GBM, .f = function(x){
   gamma_heston(x$stock_price_path,
-               initial_volatility,
+               x$CIR,
                theta,
                kappa,
                sigma,
@@ -556,8 +565,8 @@ if(!is_empty(toremove)){
   GBM <- GBM[-toremove]
 }
 
-alpha1 <- purrr::pmap(list(g1, g2), ~  -(..1 / ..2))
-alpha2 <- purrr::pmap(list(alpha1, d, d2), ~ ..2 + ..1 * ..3)
+alpha1 <- purrr::pmap(list(g1, g2), ~  ..1 / ..2)
+alpha2 <- purrr::pmap(list(alpha1, d, d2), ~ ..2 - ..1 * ..3)
 
 # Get the delta of the delta for each time series.
 diff_alpha1 <- purrr::map(alpha1,

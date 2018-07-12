@@ -6,7 +6,7 @@
 \usepackage{tikz}
 \usepackage{amsmath, amssymb}
 % \usepackage{indentfirst}
-\usepackage{cite}
+% \usepackage{cite}
 \usepackage{natbib}
 \usepackage[nameinlink,noabbrev]{cleveref}
 \usepackage[capposition=top]{floatrow}
@@ -14,3 +14,6 @@
 \usepackage{caption}
 \usepackage{xfrac}
 \usepackage{braket}
+\usepackage[toc,page]{appendix}
+\usepackage{tabularx}
+% \usepackage{hyperref}

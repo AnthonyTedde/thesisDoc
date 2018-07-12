@@ -34,14 +34,18 @@ Using R. \cite{R}
 % \SweaveInput{upstream}
 % \SweaveInput{underlying}
 % \SweaveInput{BSM}
-% \SweaveInput{models}
-\SweaveInput{methodology}
+\SweaveInput{models}
+% \SweaveInput{methodology}
+\SweaveInput{appendix}
 
 
 
 
 
 
-\bibliography{bibl.bib}
+
+
+
+\bibliography{bibl}
 \bibliographystyle{plainnat}
 \end{document}

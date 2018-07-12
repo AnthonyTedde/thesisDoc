@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  18 JUN 2018 17:54
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  12 JUL 2018 00:23
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -661,24 +661,14 @@ Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cite\cite.sty"
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 373.
-Package: cite 2010/09/10  v 5.3
-)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-
-
-Package natbib Warning: The `cite' package should not be used
-(natbib)                with natbib. Use option `sort' instead.
-
 \bibhang=\skip46
 \bibsep=\skip47
 LaTeX Info: Redefining \cite on input line 694.
-LaTeX Info: Redefining \citenum on input line 708.
 \c@NAT@ctr=\count123
-) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cleveref\cleveref.sty"
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cleveref\cleveref.sty"
 Package: cleveref 2011/10/24{} v0.18{} Intelligent cross-referencing
 Package cleveref Info: include cross-reference names in hyperlinks on input lin
 e 6739.
@@ -1149,6 +1139,31 @@ Package: xfrac 2011/10/09 v2896 L3 Experimental split-level fractions
 . Defining document command \sfrac with arg. spec. 'omom' on line 432.
 .................................................
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\braket\braket.sty")
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\appendix\appendix.sty"
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count287
+\c@@ppsavesec=\count288
+\c@@ppsaveapp=\count289
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\tabularx.sty"
+Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen273
+\extrarowheight=\dimen274
+\NC@list=\toks35
+\extratabsurround=\skip72
+\backup@length=\skip73
+)
+\TX@col@width=\dimen275
+\TX@old@table=\dimen276
+\TX@old@col=\dimen277
+\TX@target=\dimen278
+\TX@delta=\dimen279
+\TX@cols=\count290
+\TX@ftn=\toks36
+)
 (C:/PROGRA~1/R/R-33~1.3/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
@@ -1160,11 +1175,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count287
+\FV@CodeLineNo=\count291
 \FV@InFile=\read2
 \FV@TabBox=\box51
-\c@FancyVerbLine=\count288
-\FV@StepNumber=\count289
+\c@FancyVerbLine=\count292
+\FV@StepNumber=\count293
 \FV@OutFile=\write4
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
@@ -1191,31 +1206,31 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
 (C:\Users\ATE\thesisDoc\index.aux
 
-LaTeX Warning: Label `tab:methodology:maturity' multiply defined.
+LaTeX Warning: Label `sec:r:time:geometric:ex' multiply defined.
 
 
-LaTeX Warning: Label `cref@tab:methodology:maturity' multiply defined.
+LaTeX Warning: Label `cref@sec:r:time:geometric:ex' multiply defined.
 
 )
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 101.
-LaTeX Font Info:    ... okay on input line 101.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 101.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 101.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
+LaTeX Font Info:    ... okay on input line 116.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 116.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 116.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    ... okay on input line 116.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1253,17 +1268,17 @@ LaTeX Font Info:    ... okay on input line 101.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count290
-\scratchdimen=\dimen273
+\scratchcounter=\count294
+\scratchdimen=\dimen280
 \scratchbox=\box52
-\nofMPsegments=\count291
-\nofMParguments=\count292
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count293
-\MPscratchDim=\dimen274
-\MPnumerator=\count294
-\makeMPintoPDFobject=\count295
-\everyMPtoPDFconversion=\toks36
+\nofMPsegments=\count295
+\nofMParguments=\count296
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count297
+\MPscratchDim=\dimen281
+\MPnumerator=\count298
+\makeMPintoPDFobject=\count299
+\everyMPtoPDFconversion=\toks38
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
@@ -1289,60 +1304,95 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ]
 Chapter 1.
 
-LaTeX Warning: Reference `sec:bsm:assumption' on page 1 undefined on input line
- 141.
-
-
-LaTeX Warning: Reference `sec:bsm:delta:hedge' on page 1 undefined on input lin
-e 142.
-
-
-LaTeX Warning: Reference `bsm:delta:hedge:perf' on page 1 undefined on input li
-ne 142.
-
-
-Overfull \hbox (7.52216pt too wide) in paragraph at lines 212--212
-[]\T1/aer/bx/n/17.28 Hedging un-der Black--Scholes--Merton con-straints 
- []
-
-[3
-
-]
-
-LaTeX Warning: Reference `eq:bsm:bsm:sol' on page 1 undefined on input line 229
+LaTeX Warning: Reference `eq:Scontinuous' on page 3 undefined on input line 175
 .
 
 
-LaTeX Warning: Reference `sec:upstreamlogreturn' on page 1 undefined on input l
-ine 237.
+Package natbib Warning: Citation `heston' on page 3 undefined on input line 187
+.
 
+[3
 
-Overfull \hbox (17.10373pt too wide) in paragraph at lines 243--250
- [][] 
- []
+] (C:\Users\ATE\thesisDoc\figures/MertonJumpReturn.tex)
+
+LaTeX Warning: Reference `p:MertonReturnDensityTails' on page 1 undefined on in
+put line 229.
+
+(C:\Users\ATE\thesisDoc\figures/MertonJumpReturnTails.tex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4]
 
 LaTeX Warning: Reference `eq:underlying:geometric:closed' on page 1 undefined o
-n input line 268.
+n input line 272.
+
+[5] [6] (C:\Users\ATE\thesisDoc\figures/UncorrelatHeston.tex)
+
+LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 348.
 
 
-LaTeX Warning: Reference `eq:upstream:stock:valued' on page 5 undefined on inpu
-t line 270.
+LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 348.
+
+(C:\Users\ATE\thesisDoc\figures/correlatHeston.tex)
+
+LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 360.
 
 
-LaTeX Warning: Reference `eq:upstream:volatility:estimator' on page 5 undefined
- on input line 270.
+LaTeX Warning: Reference `eq:rhomerton' on page 7 undefined on input line 360.
 
-(C:\Users\ATE\thesisDoc\index.bbl [5]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 31.
+[7] (C:\Users\ATE\thesisDoc\figures/skewnessHeston.tex) [8] [9]
+
+LaTeX Warning: Reference `eq:other:call:heston:pi' on page 1 undefined on input
+ line 426.
+
+
+Overfull \hbox (19.7348pt too wide) in paragraph at lines 433--433
+[]\T1/aer/bx/n/14.4 Characteristic func-tion for He-s-ton stochas-tic volatil-i
+ty model 
+ []
+
+[10] [11
+
+
+]
+Appendix A.
+
+Overfull \hbox (97.32413pt too wide) in paragraph at lines 480--481
+\T1/aer/m/n/12 through my GitHub ac-count. Names are Ran-dom walk (https://gi
+thub.com/AnthonyTedde/RandomWalk)
+ []
+
+
+LaTeX Warning: Reference `eq:underlying:geometric:closed' on page 1 undefined o
+n input line 497.
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 503.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)) [6
+) [12
 
-]
-(C:\Users\ATE\thesisDoc\index.aux)
+] [13]
+(C:\Users\ATE\thesisDoc\index.bbl [14]
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+[]\T1/aer/m/n/12 J. Gatheral and N.N. Taleb.  \T1/aer/m/it/12 The Volatil-ity S
+ur-face: A Prac-ti-tioner's
+ []
+
+
+Underfull \hbox (badness 8094) in paragraph at lines 29--34
+\T1/aer/m/it/12 Guide\T1/aer/m/n/12 .  Wi-ley Fi-nance. Wi-ley, 2006.  ISBN 978
+0470068250.  URL
+ []
+
+)
+
+Package natbib Warning: There were undefined citations.
+
+[15
+
+] (C:\Users\ATE\thesisDoc\index.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1351,23 +1401,37 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 20681 strings out of 494045
- 376600 string characters out of 3145976
- 427872 words of memory out of 3000000
- 23555 multiletter control sequences out of 15000+200000
- 31251 words of font info for 68 fonts, out of 3000000 for 9000
+ 35501 strings out of 494045
+ 667746 string characters out of 3145976
+ 965144 words of memory out of 3000000
+ 38339 multiletter control sequences out of 15000+200000
+ 39092 words of font info for 88 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,9n,55p,454b,371s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on index.pdf (6 pages, 95523 bytes).
+ 56i,14n,55p,608b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/symbols/msbm10.pfb>
+Output written on index.pdf (15 pages, 450974 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
+ 148 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,171 @@
+\begin{appendices}
+\chapter{R functions catalogue}
+
+<<echo=false>>= options(continue=" ")
+library(StockPriceSimulator)
+library(xtable)
+options(continue=" ")
+# dummy arguments
+@
+
+For this master thesis, I created two R packages to help me in the analysis and in the related experiments. These packages are available, under open-source software license, through my GitHub account. Names are ”Random walk”  (https://github.com/AnthonyTedde/RandomWalk) and ”Stock price simulator” (https://github.com/AnthonyTedde/StockPriceSimulator).
+
+The R package ”Random walk” contains functions that simulate time-discretized Brownian motions. It is widely used inside ”Stock price simulator”, mainly to add noise in the simulation of stock price time series. 
+
+Unlike "Random walk", the package "Stock price simulator" is more multipurpose. The algorithms I developed inside range from the simulation of stock price path to the computation of option fair price and include hedging strategies, Greeks computation, Itô's approximation, characteristic functions and so on.
+
+\Cref{sec:r:time} describes the functions inside the ”Stock price simulator” package that simulate time series by using a time discretization approximation.
+
+\section{Time series simulation}
+\label{sec:r:time}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GBM
+%
+\subsection{Geometric Brownian motion}
+\label{sub:r:time:geometric}
+
+Based on \cref{eq:underlying:geometric:closed}, this function provides one possible path of a time-discretized version of the geometric Brownian motion.
+It outputs a R data.frame comprised of two columns, namely "time\_periods" and "stock\_price\_path", which respectively denotes the period expressed in year and the corresponding value of the stock at that time.
+
+\subsubsection*{function}
+
+<<echo=true,eval=false>>= 
+sstock(initial_stock_price, time_to_maturity, 
+       seed, scale, sigma, alpha)
+@
+
+\subsubsection*{Arguments}
+
+\begin{tabularx}{\textwidth}{lX}
+  initial\_stock\_price & Price of the stock at time zero.\\
+  time\_to\_maturity & Duration of the simulation, expressed in year.\\
+  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
+  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
+  sigma & Annualized volatility rate. \\
+  alpha & Annualized drift rate.
+\end{tabularx}
+
+\subsubsection*{examples}
+\label{sec:r:time:geometric:ex}
+
+<<echo=true>>= 
+s <- sstock(initial_stock_price = 100,
+       time_to_maturity = 1,
+       seed = 1,
+       scale = 52,
+       sigma = .2,
+       alpha = .15)
+@
+
+<<echo=false,eval=false>>= 
+xtable(s[-(10:355), ])
+@
+
+<<echo=true,eval=false>>= 
+print(s)
+@
+
+\begin{table}[H]
+\begin{tabular}{cc}
+  \hline
+ time\_periods (Year) & stock\_price\_path \\ 
+  \hline
+ 0.00 & 100.00 \\ 
+ 0.02 & 98.52 \\ 
+ 0.04 & 99.27 \\ 
+ 0.06 & 97.24 \\ 
+ 0.08 & 101.90 \\ 
+ \vdots & \vdots \\
+ 0.88 & 122.33 \\ 
+ 0.90 & 123.88 \\ 
+ 0.92 & 126.87 \\ 
+ 0.94 & 126.79 \\ 
+ 0.96 & 130.25 \\ 
+ 0.98 & 132.03 \\ 
+ 1.00 & 130.13 \\ 
+   \hline
+\end{tabular}
+\caption{A sample of time-discretized geometric Brownian motion}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Heston
+%
+\subsection{Heston stochastic volatility}
+\label{sub:r:time:heston}
+
+Based on \cref{eq:other:hsvvol,eq:other:hsvstock,eq:other:rho}, this function provides one possible path of a time-discretized version of the Heston stochastic volatility model.
+It outputs a R data.frame comprised of five columns. 
+There are "time\_periods" ,"stock\_price\_path" and "CIR", which respectively denotes the period expressed in year the corresponding values of the stock and of the volatility at that time.
+In addition, the two more variables ”B1” and ”B2” stand for the Brownian motions that bring the noise in both stochastic processes $S(t)$ and $V(t)$.
+
+\subsubsection*{function}
+
+<<echo=true,eval=false,tidy=true>>= 
+heston(initial_stock_price, initial_volatility, time_to_maturity, 
+       seed, scale, alpha, rho, kappa, theta, sigma)
+@
+
+\subsubsection*{Arguments}
+
+\begin{tabularx}{\textwidth}{lX}
+  initial\_stock\_price & Price of the stock at time zero.\\
+  initial\_volatility & Volatility of the stock at time zero.\\
+  time\_to\_maturity & Duration of the simulation, expressed in year.\\
+  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
+  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
+  alpha & Annualized drift rate. \\
+  rho & Correlation between the Stock price and volatility processes.\\
+  kappa & Mean-reversion speed. \\
+  theta & Volatility's long-run mean. \\
+  sigma & Volatility of the volatility. 
+\end{tabularx}
+
+\subsubsection*{examples}
+\label{sec:r:time:geometric:ex}
+
+<<echo=true>>= 
+s <- heston(initial_stock_price = 100,
+            initial_volatility = .2,
+            time_to_maturity = 1,
+            seed = 1,
+            scale = 52,
+            alpha = .15,
+            rho = -.8,
+            kappa = 2,
+            theta = .2,
+            sigma = .1)
+@
+
+<<echo=false,eval=false>>= 
+xtable(s[-(6:48), ])
+@
+
+<<echo=true,eval=false>>= 
+print(s)
+@
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllll}
+  \hline
+ time\_periods & stock\_price\_path & B1 & B2 & CIR \\ 
+  \hline
+  0.00 & 100.00 & 0.00 & 0.00 & 0.20 \\ 
+  0.02 & 96.40 & -0.09 & 0.10 & 0.20 \\ 
+  0.04 & 97.79 & -0.06 & -0.02 & 0.20 \\ 
+  0.06 & 93.02 & -0.18 & 0.20 & 0.21 \\ 
+  0.08 & 102.68 & 0.04 & 0.18 & 0.21 \\ 
+  \vdots &\vdots &\vdots &\vdots &\vdots\\
+  0.92 & 142.21 & 0.59 & 0.03 & 0.20 \\ 
+  0.94 & 141.64 & 0.57 & -0.01 & 0.20 \\ 
+  0.96 & 149.70 & 0.70 & -0.10 & 0.19 \\ 
+  0.98 & 153.75 & 0.75 & -0.22 & 0.19 \\ 
+  1.00 & 148.56 & 0.67 & -0.14 & 0.19 \\ 
+   \hline
+\end{tabular}
+\caption{A sample of time-discretized Heston stochastic volatility process}
+\end{table}
+
+\end{appendices}

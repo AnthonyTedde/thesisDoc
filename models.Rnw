@@ -22,7 +22,7 @@
 % SUBSECTION: Mixed jump-diffusionModel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Merton Mixed jump-diffusion Model}
-\label{sec:MixedJump}
+\label{sec:other:merton}
 
 In his paper, \citet{merton76} provides a model for stock price evolution involving jumps (\cref{eq:mertonjump}). 
 
@@ -115,50 +115,116 @@ The above density function has been constructed over three distinctive groups of
 % SECTION: Heston stochastic volatility model
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Heston stochastic volatility model}
-\label{sec:Heston}
+\label{sec:other:heston}
 
 In his paper, \citet{heston1993} tackles with another discrepancy against the real world behaviour introduced by the geometric Brownian motion, namely, its deterministic and immutable volatility $\sigma$.
 
-In addition to provide a model where the volatility is stochastic (\cref{eq:HSVvol}), \citet{heston1993} gives the possibility to make this volatility in correlation with the stock price process (\cref{eq:HSVstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relates together.
+In addition to provide a model where the volatility is stochastic (\cref{eq:other:hsvvol}), \citet{heston1993} gives the possibility to make that volatility in correlation with the stock price process (\cref{eq:other:hsvstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relates together.
 
 \begin{align}
-    \HSVvol \label{eq:HSVvol} \\
-    \HSVstock \label{eq:HSVstock} \\
+    \HSVvol \label{eq:other:hsvvol} \\
+    \HSVstock \label{eq:other:hsvstock} \\
     \intertext{
-    The drift part of the risk stochastic process (\ref{eq:HSVvol} is made up of the long--run mean $\theta$ togehter with the mean reversion speed, given by $\kappa$, \citet{heston1993}.
+    The drift part of the risk stochastic process (\ref{eq:other:hsvvol} is made up of the long--run mean $\theta$ togehter with the mean reversion speed, given by $\kappa$, \citet{heston1993}.
     }
-    d\Bmsub{v} d\Bmsub{s} &= \rho \label{eq:rhoheston}
+    d\Bmsub{v} d\Bmsub{s} &= \rho \label{eq:other:rho}
 \end{align}
 
-The framework [REF + REF], simulating the behavior of an asset, includes a mean reverting Cox--Ingersoll--Ross(CIR) stochastic process (\cref{eq:HSVvol}) as volatility component.
+\Cref{eq:other:hsvstock} represents the evolution of an asset though time given, by its differential form. Such as \cref{eq:underlying:geometric:closed}, developed by \citet{bs}, the parameter $\alpha$ gives the drift rate of return. The difference between both models lies in the way the volatility is perceived. In \citet{heston1993}, the asset volatility is given by the stochastic \cref{eq:other:hsvvol}. More specifically, the volatility thus defined follows a Cox--Ingersoll--Ross process.
 
-From \cref{p:negativecorrelatedheston,p:positivecorrelatedheston}, it is gotten an hands-on insight on how correlated Brownian motions work on the way the Heston's stock price and volatility framework interact with each other.
-In \cref{p:negativecorrelatedheston} the correlation between the Wiener processes is set to $\rho = -1$, making the two Markov motion perfectly negatively correlated. 
+\Crefrange{eq:other:hsvvol}{eq:other:hsvstock} will be used to build Monte Carlo simulations with the goal of getting samples of dummy stock price motions under real--world assumptions. The framework to use for option pricing purpose is given in \cref{sub:other:heston:risk}.
+
+\subsection{Model parameters}
+\label{sub:other:heston:model}
+
+Here are described all the parameters appearing in the Heston stochastic volatility model.
+
+\begin{tabular}{ll}
+  $S(t)$ & Price of the stock at time t \\
+  $\alpha$ &  Annualized -- and deterministic -- expected return \\
+  $V(t)$ & Observed volatility of the stock at time t \\
+  $\kappa$ & Mean-reversion speed \\
+  $\theta$ & Volatility's long-run mean \\
+  $\sigma$ & Volatility of the volatility 
+\end{tabular}
+
+\subsection{Feller condition}
+\label{sub:other:heston:feller}
+
+Due to the time discretisation brung by The Monte Carlo simulation, the stochastic process \ref{eq:other:hsvvol} may turn out to be negative sometime. If such a negative value is appear at time $t$, the next value computed for $t+\epsilon$ will raise an error, due to the term $\sqrt{V(t)}$ that obviously does not exist for negative value.
+
+In his paper, \citet{feller1951} demonstrates that a process such the one described by \cref{eq:other:hsvvol} does not reach negative value if the following relation \ref{eq:other:feller} is respected.
+
+\begin{align}
+  &\lim_{V\to 0} \left( \kappa \theta - V - \frac{1}{2} \frac{\partial(\sigma \sqrt{V})^2}{\partial V} \right) \geq 0 \label{eq:other:feller} \\
+  \iff &\lim_{V\to 0} \left( \kappa \theta - V - \frac{1}{2} \sigma^2 \right) \geq 0 \notag \\
+  \iff &\kappa \theta  - \frac{1}{2} \sigma^2  \geq 0 \notag \\
+  \iff & 2 \kappa \theta  - \sigma^2  \geq 0 \label{eq:other:feller:heston}
+\end{align}
+
+Consequently, if the condition related by \cref{eq:other:feller:heston} is respected, no negative values would occur by using a Monte Carlo simulation to compute the CIR stochastic volatility.
+
+\subsection{Risk--neutralized processes}
+\label{sub:other:heston:risk}
+
+Likewise it has been done by \citet{bs}, \citet{heston1993} used a risk-neutral framework to price options.
+To do so, Heston modified the drift parameters of both price and volatility stochastic processes.
+
+The drift part of the price diffusion (\cref{eq:other:hsvstock}) is risk--neutralized by turning the rate $\alpha$ into its riskless counterpart $r$, as shown by \cref{eq:other:hsvstock:riskless}.
+
+\begin{align}
+    \HSVstockriskless \label{eq:other:hsvstock:riskless}
+\end{align}
+
+In order to make the volatility process risk--neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. The risk--neutralized CIR process is given by cref{eq:other:hsvvol:riskless}.
+
+\begin{align}
+    \HSVvolriskless \label{eq:other:hsvvol:riskless} \\
+    \intertext{where}
+    \kappa^{*} & = \kappa + \lambda \\
+    \intertext{and}
+    \theta^{*} & = \frac{\kappa \theta}{\kappa^{*}}
+\end{align}
+
+Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively denote the long--run mean and mean--reversion speed, are the ones to estimate while dealing with pricing options purposes. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Graphical representation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Graphical representation}
+\label{sub:other:heston:graphical}   
+
+Figures \ref{p:other:uncorrelatedheston} and \ref{p:other:correlatedheston}, get a hands-on insight into how the correlation between the underlying Brownian motions of the stock and volatility time series affect both processes.
+
+\cref{p:other:uncorrelatedheston} shows a correlation between the Wiener processes $B_1$ and $B_2$ sets to $\rho = -1$, making the two Markov motions perfectly negatively correlated. 
 It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
-Likewise \cref{p:positivecorrelatedheston} points out the positive correlation occuring between the processes \ref{eq:HSVvol} and \ref{eq:HSVstock} whilst the Brownian motion correlation is set to one. 
 
-\begin{figure}[!h]
+Likewise figure \ref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \cref{eq:other:hsvvol} and \cref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
+
+\begin{figure}[H]
 \centering
-\input{figures/UncorrelatHeston.tex}
-\caption{Heson Framework Using Negative Correllated Brownian Motions}
+\input{figures/UncorrelatHeston.tex} 
 \floatfoot{
-The above stochastic processes have been constructed following \crefrange{eq:HSVvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = -1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
-}
-\label{p:negativecorrelatedheston}
+The above stochastic processes have been constructed following \crefrange{eq:other:hsvvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = -1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+} 
+\caption{Heson Framework Using Negative Correllated Brownian Motions}
+\label{p:other:uncorrelatedheston}
 \end{figure}
 
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \input{figures/correlatHeston.tex}
 \caption{Heson Framework Using Positive Correllated Brownian Motion}
 \floatfoot{
-The above stochastic processes have been constructed following \crefrange{eq:HSVvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = 1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
+The above stochastic processes have been constructed following \crefrange{eq:other:hsvvol}{eq:rhomerton}. The Brownian motion correlation is set to $\rho = 1$. The other parameters are set with the following values; $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$. 
 }
-\label{p:positivecorrelatedheston}
+\label{p:other:correlatedheston}
 \end{figure}
 
-The usage of the forementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:HSVvol}), (\citet{heston1993})
+
+
+The usage of the forementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
 It may consequently be consistent with what happens in equity market, namely sharp decrease in equity price implies increase in stock volatility (\citet{criso2015}).
 % Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
 
@@ -176,12 +242,12 @@ These statements are observed in [REF].
 
 
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \input{figures/skewnessHeston.tex}
 \caption{Merton: Log--return skewness on Heston}
 \floatfoot{
-The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:HSVstock}, with stochastic volatility defined by \cref{eq:HSVvol}. The only parameter that changes over the group is $\rho$ which is set to ($-0.5$, $1$, $0.5$) respectively for the red, green and blue outlined density functions. The black density belongs to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log--price return cover a period of one year with a time step of 500.
+The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:other:hsvstock}, with stochastic volatility defined by \cref{eq:other:hsvvol}. The only parameter that changes over the group is $\rho$ which is set to ($-0.5$, $1$, $0.5$) respectively for the red, green and blue outlined density functions. The black density belongs to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log--price return cover a period of one year with a time step of 500.
 }
 \label{plot:hestontails}
 \end{figure}
@@ -191,5 +257,79 @@ The above density function has been constructed over three distinctive groups of
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Impact on kurtosis density return}
 \label{sub:hestonkurtosis}
+
+
+
+\section{Option pricing method}
+\label{sec:other:option}
+
+As shown by \cref{sec:other:merton} and \cref{sec:other:heston}, the frameworks developed by \citet{merton76} and \citet{heston1993} drastically change the distribution of any underlying assets following such processes. Therefore, the pricing method to be used must also be adapted in order to take that update into account.
+
+In his paper, \citet{heston1993} developed a techinque to price options using the characteristic function of the underlying asset. Furthermore, according to \citet{criso2015} that method could be used to price every options provided that the underlying's characteristic  is known.
+
+\subsection{Probabilistic approach}
+\label{sub:other:option:probabilistic}
+
+\citet{heston1993} proposed the solution given by \cref{eq:other:call:heston} to price a european call option.
+
+\begin{align}
+  C(t) = S(t) P_1 - e^{-r(T-t)} K P_2 \label{eq:other:call:heston}
+\end{align}
+
+Through this method, the european call price at time $t$, namely $C(t)$, is computed thanks to \cref{eq:other:call:heston}, where $S(t)$ and $e^{r(T - t)}$ respectively stand for the stock price and the present value of the strike at that time $t$.
+
+\begin{align}
+  P_1(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi - i)}{i\phi\psi(x,V,t;-i)} \right) d\phi \label{eq:other:call:heston:pi1} \\ 
+  \intertext{}
+  P_2(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi)}{i\phi} \right) d\phi \label{eq:other:call:heston:pi2}
+\end{align}
+
+Following the development in \citet{criso2015}, \Cref{eq:other:call:heston:pi} both are probability quantities that involve the underlying characteristic function, namely $\psi(x,V,t;\phi)$. Once these quantities are computed, they are substituted in \cref{eq:other:call:heston} in order to get the call price at time $t$.
+
+The characteristic functions for the Merton jump--diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
+
+\subsection{Characteristic function for Merton Mixed jump--diffusion model}
+\label{sub:other:option:merton}
+
+\subsection{Characteristic function for Heston stochastic volatility model}
+\label{sub:other:option:heston}
+
+Following the development proposed by \citet{gatheral2006}, \citet{criso2015} provided the Heston characteristic function (\cref{eq:other:heston:psi}) based on the process $\ln S(t)$.
+
+\begin{align}
+  &\psi^{heston}(\ln(S(t)),V(t),t;\phi) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \label{eq:other:heston:psi} \\
+  \intertext{where}
+  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
+  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
+  \intertext{and}
+  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
+  &g = \frac{r_{-}}{r_{+}} \notag \\
+  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
+\end{align}
+
+\Cref{eq:other:heston:psi} can be directly used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Heston stochastic volatility model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
