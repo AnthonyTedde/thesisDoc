@@ -10,10 +10,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Overview
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sec:upstream:overview}
+% \section{Overview}
+% \label{sec:upstream:overview}
 
-The material covered in the current chapter is meant to be intensively used further, either in theoretical models or custom--produced algorithm. A few of them have for the only purpose to introduce some concepts subsequently developed in the current master thesis' framework, though. 
+The material covered in the current chapter is meant to be thereafter intensively used, either by being applied in the studied theoretical models or by entering in the construction of the theory-based algorithms.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Vanilla options
@@ -21,13 +21,18 @@ The material covered in the current chapter is meant to be intensively used furt
 \section{Vanilla options}
 \label{sec:upstream:vanilla}
 
-The so--called vanilla options, in opposition to the more complex -- not covered in this master thesis -- exotic ones, are specifics kind of derivatives coming along with some good--to--know jargons. 
+The so-called vanilla options, in opposition to the more complex -- not covered in this master thesis -- exotic ones, are specifics kind of derivatives coming along with some good-to-know jargons. 
 
-First and foremost, an option is a contract between two stakeholders with different interests or at least distinctive motivations, who want to buy or sell a product, broadly a financial asset called the underlying. Indeed, one can look for hedge oneself against risk while the other party wants to make a profit on a speculative move.
-Likewise other financial contracts, one agrees to buy and the other to sell at a fixed amount of money, namely the strike price denoted by $k$. The main difference being that they would effectively complete the purchase or the sale of the underlying at a future date than the one they enter into the bargain.
+First and foremost,  as defined in \citet{hull}, an option is a contract between two stakeholders with different interests or at least distinctive motivations, who want to buy or sell a product, which generally is a financial asset called "the underlying." 
+Indeed, someone can look for hedge oneself against risk while the other party wants to make a profit on a speculative move.
+Likewise other financial contracts, one agrees to buy and the other to sell at a fixed amount of money, namely "the strike price", usually denoted by $k$ with the difference that they would effectively realize the purchase or the sale of the underlying at a future date than the one they enter into the bargain. That date is called "the maturity".
 
 
-Another key characteristic of options is that they are not symmetric contracts, in the sense that both parties do not have the same rights, depending on their position along with the option's type. Two positions can be taken when entering into such a derivative, long or short. Going short roughly means purchase the option whereas going long implies writing, or synonymously selling, the derivative. Beyond the position, the contract can be of call or put type. The following sentences encompass a unique mix of type--position combination that gives an overview of all the possible scenarios:
+Another key characteristic of options is that they are not symmetric contracts, in the sense that both parties do not have the same rights, depending on their position along with the option's type. 
+Two positions can be taken when entering into such a derivative, either long or short. 
+Going short broadly means purchase the option whereas going long implies writing, or synonymously, selling the derivative. Beyond the position, the contract can be of call or put type. 
+
+The following sentences encompass a mix of type (call/put) and position (short/long) combination that gives an overview of all the possible scenarios:
 
 \begin{itemize}
 \item Someone who is going long into a call gains the right to purchase the underlying at a future date for a fixed price. He has to pay some fees to enter into the contract.
@@ -36,7 +41,7 @@ Another key characteristic of options is that they are not symmetric contracts, 
 \item Someone who is going short into a put is forced to buy the underlying at a future date for a fixed price. He receives financial compensation to enter into the contract.
 \end{itemize}
 
-Moreover, vanilla options may be European or American. The latter can be exercised at any time during the whole life of the contract while the European can only be at maturity.
+Moreover, vanilla options may be "European" or "American". Latter can be exercised at any time during the whole life of the contract while the European can only be at maturity.
 
 Finally, the payoff provided by all aforementioned European options are summarized throughout \crefrange{eq:upstream:cl}{eq:upstream:ps}, where $C_l$, $C_s$, $P_l$ and $P_s$ respectively stand for the long call, short call, long put and short put payoffs. $S(T)$ being the price of the underlying at maturity.
 
@@ -47,7 +52,7 @@ P_l &= \left(k - S(T)\right)^+ \label{eq:upstream:pl}\\
 P_s &= \left(S(T) - k\right)^- \label{eq:upstream:ps}
 \end{align}
 
-The derivative considered in this master thesis document is mainly the European call option, even though the link with European put could somehow be done without being mandatory to exhibit the issue here raised. Therefore such reference to put should only be done when necessary.
+The derivative considered in this master thesis is mainly the European call option, even though the link with European put could somehow be done without being mandatory to exhibit the issue so raised. Therefore such reference to put should only be done if necessary.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Brownian Motion
@@ -55,25 +60,28 @@ The derivative considered in this master thesis document is mainly the European 
 \section{Brownian Motion}
 \label{sec:upstream:brownian}
  
-All over the present document, Brownian motion, Wiener / Markov processes are considered to be equivalent terminology and therefore used as such. However strictly speaking, even though the Brownian motion is in every respect a Wiener process, stricto sensu, the term Markov process is broader. Indeed, the more remarkable Markov property is to be a process with independent future increments, putting it in line with the  weak form of market efficiency (\citet{hull}).
+All over the present document, the terms "Brownian motion", "Wiener" or "Markov" processes are considered to be equivalent terminology and therefore used as such. However strictly speaking, even though the Brownian motion is in every respect a Wiener process, stricto sensu, the term Markov process is broader. 
+Actually, the more remarkable Markov property is to be a process with independent future increments, putting it in line with the weak form of market efficiency (\citet{hull}).
 Whilst, on the other hand, even if the Brownian motion, and thus the Wiener process, share this property, they are defined with the idiosyncrasy to have mean zero and a variance rate of one per unit of time (\citet{hull}).
 
-Brownian motion is a masterpiece broadly used subsequent development. It is notably involved in many algorithms such as the ones for geometric Brownian motion [REF], Black--Scholes--Merton equation [REF], jump--diffusion process [REF] and Heston [REF].
+Brownian motion is a centerpiece broadly used in subsequent developments. It is notably applied in many models such as in the geometric Brownian motion (\cref{cha:underlying}),  in the Black-Scholes-Merton (BSM) equation (\cref{cha:bsm}) and in the Merton mixed jump-diffusion (MJD) and Heston stochastic volatility (HSV) model (\cref{cha:model}).
 
-Brownian motion is a continuous function $\Bm$ satisfying $W(0)$ with independent and identically distributed (iid) increments, characterized such as the following \cref{eq:upstream:increment:dist}
+The Brownian motion is a stochastic process, denoted by $\Bm$ and satisfying $W(0) = 0$, with independent and identically distributed (iid) increments, such as defined by \cref{eq:upstream:increment:dist}
 
 \begin{align}
 W(t_{i+1}) - W(t_i) \sim
   iid N \left(0, t_{i+1} - t_i\right) \label{eq:upstream:increment:dist}
 \end{align}
 
-This Markov process is qualified as being time and path dependent in its building blocks. Time dependency implies that likewise other functions its value evolves over time. However, the Wiener process is meant to randomly move between two time--steps as well, which directly lie on the path dependency. Practically at any time $t$, the Brownian motion may take any value as \cref{eq:upstream:brownian:dist} shows.
+That Markov process is qualified as being time and path dependent in its building blocks. Time dependency implies that like many other functions its value evolves over time. 
+Whereas path dependency means that the Wiener process is also meant to randomly move between two time-steps.
+Practically, at any time $t$ and from its origin, the Brownian motion may take any value as shown by \cref{eq:upstream:brownian:dist}.
 
 \begin{align}
 \Bm \sim N(0, t) \label{eq:upstream:brownian:dist}
 \end{align}
 
-The construction of such a Markov process could be achieved following various techniques. Either by computing the differential process for every time-steps and then combining it. This procedure gives one possible path of the Brownian motion (see \cref{eq:upstream:brownian:diff,eq:upstream:brownian:cumsum}). Or either by constructing the joint moment generating function of the iid random variables' vector ($W(t_i)$ \ldots $W(t_m)$), following \cref{eq:upstream:brownian:joint}.
+As described by \citet{shreve}, the construction of such a process could be achieved by following various techniques. Either by computing the differential process (\cref{eq:upstream:brownian:diff,eq:upstream:brownian:cumsum}) for every time-steps and then combining them, by constructing a unique time series in that way; or by resolving the joint moment generating function of the iid random variables' vector ($W(t_i)$ \ldots $W(t_m)$), through \cref{eq:upstream:brownian:joint}.
 
 \begin{align}
   d\Bm &= \phi \left(0, t + \epsilon_i \right) \label{eq:upstream:brownian:diff} \\
@@ -87,7 +95,7 @@ The construction of such a Markov process could be achieved following various te
   \varphi\left(u_1 \ldots u_m\right) = \exp{\left( \frac{1}{2} \sum_{i = 1}^m \left[ \sum_{j = i}^m u_j \right]^2 \left( t_i - t_{i-1} \right) \right)} \label{eq:upstream:brownian:joint}
 \end{align}
 
-\Cref{fig:upstream:brownian} (QA) displays a simulation of one hundred Brownian motions over a time frame of five years. While in turn \cref{fig:upstream:brownian} (QB) shows how the experiment's outcomes are distributed after five years, with characteristics such as shown by \cref{eq:upstream:increment:dist}. The black outlined curve is the density of the normal distribution.
+\Cref{fig:upstream:brownian} (QA) displays a simulation of one hundred Brownian motions over a time frame of five years. While in turn, \cref{fig:upstream:brownian} (QB) shows the distribution of the possible outcomes of that experiment, after five years. The black outlined curve is the density of the normal distribution, with mean and variance chose such as exposed by \cref{eq:upstream:increment:dist}.
 
 \begin{figure}[H]
 \centering
@@ -98,7 +106,7 @@ The construction of such a Markov process could be achieved following various te
 \label{fig:upstream:brownian}
 \end{figure}
 
-Lastly, a Brownian motion has no tendency to rise or fall as time passes thanks to its martingale property. Therefore, because its initial value is zero, a Wiener process only brings noise by being incorporated into other stochastic series, such as those proposed further on.
+Lastly, \citet{shreve} demonstrates that a Brownian motion has no tendency to rise or fall as time passes thanks to its martingale property. Therefore, because its initial value is zero, a Wiener process only brings noise by being incorporated into other stochastic series.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Correlated Brownian Motion

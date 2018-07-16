@@ -133,7 +133,7 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. The figure [REF] shows how the density's shape of the log--return may vary along with this parameter.
 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/MertonJumpReturn.tex}
 \caption{Merton: Daily Basis Stock Return Density}
@@ -151,7 +151,7 @@ The above density function has been constructed over three distinctive groups of
 
 The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/MertonJumpReturnTails.tex}
 \caption{Merton: Daily Basis Stock Return Density}
@@ -261,7 +261,7 @@ Figures \ref{p:other:uncorrelatedheston} and \ref{p:other:correlatedheston}, get
 It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
 Likewise, \cref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \ref{eq:other:hsvvol} and \ref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/UncorrelatHeston.tex} 
 \floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = -1$. 
@@ -271,7 +271,7 @@ Likewise, \cref{p:other:correlatedheston} points out the fully positive correlat
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/correlatHeston.tex}
 \caption{Heson Framework Using Positive Correllated Brownian Motion}
@@ -285,6 +285,9 @@ Likewise, \cref{p:other:correlatedheston} points out the fully positive correlat
 The usage of the aforementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
 It may consequently be consistent with what happens in the equity market, namely a sharp decrease in equity price implies an increase in stock volatility (\citet{criso2015}).
 % Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Impact on skewness density return
@@ -303,7 +306,7 @@ These statements are observed in \cref{p:other:heston:skewness}.
 
 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/skewnessHeston.tex}
 \caption{Merton: Log--return skewness on Heston}
@@ -326,7 +329,7 @@ Following \citet{heston1993}, the kurtosis of the distribution of the spot retur
 First and foremost, following \cref{eq:other:hsvvol} if $\sigma = 0$, the volatility V of the Heston model turns out to be deterministic and \cref{eq:other:hsvstock}  becomes a geometric Brownian motion with normal distribution for the time series' log-returns.
 Otherwise, \citet{heston1993} showed that by rising $\sigma$, the kurtosis of the spot returns increases. Consequently, within the Heston stochastic volatility model, the bigger $\sigma$, the fatter the tail, ceteris paribus. These statements are observed in \cref{p:other:heston:kurtosis}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \input{figures/density.heston.kurtosis.tex}
 \caption{Merton: Log--return skewness on Heston}
@@ -350,6 +353,10 @@ As shown by \cref{sec:other:merton} and \cref{sec:other:heston}, the frameworks 
 
 In his paper, \citet{heston1993} developed a techinque to price options using the characteristic function of the underlying asset. Furthermore, according to \citet{criso2015} that method could be used to price every options provided that the underlying's characteristic  is known.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Probabilistic approach
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probabilistic approach}
 \label{sub:other:option:probabilistic}
 
@@ -371,16 +378,41 @@ Following the development in \citet{criso2015}, \Cref{eq:other:call:heston:pi} b
 
 The characteristic functions for the Merton jump--diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Characteristic function for Merton Mixed jump--diffusion model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Characteristic function for Merton Mixed jump--diffusion model}
 \label{sub:other:option:merton}
 
+\citet{matsuda2004} demonstrates that the characteristic function of the Merton mixed jump-diffusion process is given by \cref{eq:other:merton:psi}. The baseline equation to construct the Merton's process characteristic function is the risk-neutralized version, namely \cref{eq:other:merton:pde:riskneutral}.
+
+\begin{align}
+\psi^{merton}(\phi) &= e^{ 
+  \lambda (T - t) \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
+  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) (T - t) \right) -
+  \sigma^2 \frac{\phi^2}{2} (T - t)
+}
+\label{eq:other:merton:psi} \\
+\intertext{where}
+\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
+\end{align}
+  
+According to the method given by \citet{heston1993}, the characteristic function \ref{eq:other:merton:psi} will be used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Merton mixed jump--diffusion model.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Characteristic function for Heston stochastic volatility model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Characteristic function for Heston stochastic volatility model}
 \label{sub:other:option:heston}
 
 Following the development proposed by \citet{gatheral2006}, \citet{criso2015} provided the Heston characteristic function (\cref{eq:other:heston:psi}) based on the process $\ln S(t)$.
 
 \begin{align}
-  &\psi^{heston}(\ln(S(t)),V(t),t;\phi) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \label{eq:other:heston:psi} \\
+  &\psi^{heston}\left(\ln(S(t)),V(t),t;\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \label{eq:other:heston:psi} \\
   \intertext{where}
   &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
   &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 

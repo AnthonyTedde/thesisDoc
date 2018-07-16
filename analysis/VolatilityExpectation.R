@@ -15,10 +15,10 @@ days <- seq(ISOdate(2015,1,12), by = "day", length.out = day) %>%
   paste(collapse = ",")
 
 # Load data
-setwd("/Users/anthony/workspace/thesis/thesis/data")
+setwd("c:/Users/ATE/thesisDoc/data")
 load("S_list.RData")
 
-S_list[[1]]$
+S_list[[1]]
   
 ##################
 ## compute data ##
@@ -33,7 +33,7 @@ moment <- map(S_list, .f = function(x){
   quotediff <- quote[-1] / quote[-quotes]
   
   df <- data.frame(quotediff, interval)
-  u <- log(filter(df, interval ==1 )$quotediff)
+  u <- log(dplyr::filter(df, interval ==1 )$quotediff)
   
   
   ubar <- mean(u)  

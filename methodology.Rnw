@@ -7,184 +7,145 @@
 \label{cha:Methodology}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: General overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{General overview}
-\label{sec:methodology:general}
+\section{Overview}
+\label{sec:methodology:overview}
 
-The general purpose of this master thesis is to measure the performance of the \BSM model when we deviate from the ideal conditions (\cref{sec:bsm:assumption}).
-To do so, I will use the delta--hedging rule as described in \cref{sec:bsm:delta:hedge}. Indeed, the more \cref{bsm:delta:hedge:perf} goes to zero, the better the hedge be and consequently better is the \BSM model's performance.
+The objective of this master thesis is to measure the performances of the Black-Scholes-Merton pricing method when the assumption of normality for the log-return's distribution is not met.
+In order to measure such performances, the method I will follow is to apply the delta-hedging rule on options for which the underlying distribution is not log-normal.
+Instead of fully use market data to make those experiments, I will rather construct some theoretical time series based on the theories developed by \citet{merton76} and \citet{heston1993} in order to repectively obtains path with jumps and others with stochastic volatility.
+To do so, I will construct algorithms to implement those models. 
 
-Three different scenarios will be tested and compared. The first one is that developed by \citet{bs}, where the underlying's returns distribution is log--normal, the volatility is constant and no jump occurs. The litterature (REF) shows that this model perfoms well and hence the obtained results will serve as a benchmark to assess the other studied models.
-The next framework I will analyse is that developed by \citet{merton76} where the underlying allows jumps to occur.
-The last model for which I will measure the performance will be the one developed by \citet{heston1993}. In that latter, the volatility follows a CIR process and consequently is not deterministic anymore.
+Even though I won't construct my hedge directly on market data, I will furthermore use them to calibrate the parameters I will pass to the algorithms I developed.
+I chose to use the available market data on Apple stock and Apple call option for the calibration process.
 
-For each of these scenarios, I will create an algorithm, based on monte--carlo simulation, to generate time series to simulate the stock price motion based on either the \BSM geometric brownian motion, the Merton jump diffusion process or on the Heston stochastic volatility.
-I will also use historical data to feed the models with consistent arguments.
+Once all my parameters will be calibrated, I will simulate time series representing as many paths that could be followed by a share of stock. The simulation of that asset path will be driven either by a Merton mixed jump-diffusion process or by a Heston stochastic volatility process.
 
-For comparative purpose, the only data that will be identical in all thee scenarios are the strike price ,the maturities and the riskless rate. Therefore in order to keep things relating to reality, I have chosen to download option quote from the market. I found out that an option providing a sufficent range of strikes and maturities is the call contract for Apple.
-I have arbitrarily fixed the initial time $t_0$ to be the 18 of May 2018 and at that time, the proposed maturities (in days) are given by \cref{tab:methodology:maturity} and all the associated strike prices are given by \cref{tab:methodology:strike}.
+Thereafter I will apply multiple scenarios of delta-hedging on each path of all sampled processes for different options with different maturities and strike.
+Ultimately though, I will compare the result of each delta hedging scenario.
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Maturities
+% SECTION: calibration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calibration}
+\label{sec:methodology:calibration}
+
+Whenever one deals with functions aimed to reproduce some real life experiments, the calibration process is crutial because it gives to the functions the capacity to behave within the right borders along with the right values.
+
+For what matter in the analysis I want to perform is to find consistent values for the parameters to pass to the functions aimed to either determine option prices or to simulate stock market data.
+By consistent, I mean that they should make the functions' output connected with what is observer in the real world.
+
+The process of calibration concerns two distinctive groups of parameters. Those intended to compute the european call price and those used to simulate the hypothetical stock market movements.
+Consequently, the method to calibrate both kinds of arguments differs, mainly because option prices calculation must be performed under risk-neutral environment.
+
+To do so, I am going to use the available option price data to calibrate the arguments aimed to compute the price of that latter.
+Whilst I am going to use the stock's historical data to get the right values for the time serie's functions.
+
+\Cref{sub:methodology:calibration:option} explains how I will operate for the options' parameters, whereas \cref{sub:methodology:calibration:asset} shows the procedure I will follow for the stock simulation's arguments.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Option prices' calibration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Option prices based calibration}
+\label{sub:methodology:calibration:option}
+
+Following \citet{heston1993} and \citet{criso2015}, provided that the characteristic functions of the model of Merton mixed-jump diffusion or the one of Heston stochastic volatility is known, the european call option price of such processes can be computed using \cref{eq:other:call:heston}.
+although known, these characteristics functions needs somes parameters to work and those parameters need values to best fit with what is observed in reality.
+That is why both functions need to be benchmarked with a referential value  before being used.
+
+To do so, I will apply the same method followed by \citet{criso2015}, namely, I will iterativaly minimize the difference between the Apple option market prices and those generated by the function that compute the option prices based on the characteristic functions.
+
+The option market prices were downloaded using the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as provider. The dataset so downloaded is available in appendix \ref{cha:appendix:market}.
+\cref{t:methodology:maturity,t:methodology:strike} respectively show the maturities and the strike that will be considered during the analysis.
+
 \begin{table}[ht]
 \centering
-\begin{tabular}{rrrrrrrrr}
-  \hline
-  \multicolumn{9}{c}{Maturity} \\
-  \hline
-7.00 & 21.00 & 63.00 & 91.00 & 126.00 & 154.00 & 182.00 & 245.00 & 399.00 \\ 
-   \hline
+\begin{tabular}{lllllll}
+  63 & 91 & 126 & 154 & 182 & 245 & 399 \\
 \end{tabular}
-\caption{Maturities explored during the hedging performance measurement} 
-\label{tab:methodology:maturity}
+\caption{Taking into account maturities during calibration stage} 
+\label{t:methodology:maturity}
 \end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllllll}
+  130 & 140 & 150 & 160 & 170 & 180 & 190 & 200 & 210 & 220 \\  
+\end{tabular}
+\caption{Taking into account strikes during calibration stage} 
+\label{t:methodology:strike}
+\end{table}
+
+The next step is the creation of algorithm aimed to compute the option prices. To do so I have created two R functions to compute the characteristic functions of the Merton jump-diffusion and Heston stochastic characteristic process. For more information see REF + REF on appendix \cref{cha:r}.
+
+Once both market data gathered and pricing algorithm created, the next step is the set up of the cost function to be minimized, by using the least-square non linear regession model.
+As previously mentioned, the optimal result is the one that minimize the squared difference between market and genereated data, as exposed by \cref{eq:methodology:cost}
+
+\begin{align}
+ &\left(C_{K,T}^{mkt} - C_{K,T}^{h|m}(arguments)\right)^2
+ \label{eq:methodology:cost}\\
+ \forall &K \in \{130, 140, 150, 160, 170, 180, 190, 200, 210, 220\}, \notag\\
+ &T \in \left \{63, 91, 126, 154, 182, 245, 399\right \}\notag 
+\end{align}
+Where the subscript $K$ and $T$ respectively stand for strike price and maturity date. While the superscript $mkt$ denotes the "market price" and $h|m$ refers to either Heston or Merton process based prices.
+
+Consequently, \cref{eq:methodology:cost} will be the one to minimize using the least-square non linear regression model, for all strikes and maturities.
+The output of this process will evetually be the calibrated arguments that maximize the performance of the model across what is observed in the reality.
+
+One dificulty to deal with is that the least-square non linear approach may return several best fit arguments due to the existence of multiple local minima in the cost function, depending on the parater given to the theoretical model.
+Therefore, in order to choose among all the outputs, I will select the one with which I get the most returns within the bid-ask spread of option market data.
+
+\begin{align}
+ \left | C_{K,T}^{mkt} - C_{K,T}^{h|m}(arguments) \right | \leq C_{ask}^{mkt} - C_{bid}^{mkt}
+ \label{eq:methodology:cost}
+\end{align}
+
+Even though the cost fustion to be optimized is the same for both Heston and Merton pricing option procedure, the arguments to calibrate are different. \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston} respectively show the procedure for Merton and Heston.
+
+[TODO: NOM DES FONCTIONS + OU LES TROUVER]
  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Strikes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrr}
-  \hline
-  \multicolumn{7}{c}{Strike} \\
-  \hline
-130.00 & 135.00 & 140.00 & 145.00 & 149.00 & 150.00 & 152.50 \\ 
-  155.00 & 157.50 & 160.00 & 162.50 & 165.00 & 167.50 & 170.00 \\ 
-  172.50 & 175.00 & 177.50 & 180.00 & 182.50 & 185.00 & 187.50 \\ 
-  190.00 & 192.50 & 195.00 & 197.50 & 200.00 & 202.50 & 205.00 \\ 
-  207.50 & 210.00 & 212.50 & 215.00 & 217.50 & 220.00 & 222.50 \\ 
-   \hline
-\end{tabular}
-\caption{strike prices explored during the hedging performance measurement} 
-\label{tab:methodology:strike}
-\end{table}
+% SUBSECTION: Asset prices based calibration
 
-I found out the the treasury bill are quote (https://www.treasury.gov/) following \cref{tab:methodology:Tbill}
+\subsection{Asset prices based calibration}
+\label{sub:methodology:calibration:asset}
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{cccc}
-  \hline
-  \multicolumn{4}{c}{T-bills} \\
-  \hline
-  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
-  1.66\% & 1.90\% & 2.09\% & 2.30\% \\
-  \hline
-\end{tabular}
-\caption{Treasury bill quotes 18 May 2018} 
-\label{tab:methodology:Tbill}
-\end{table}
+In order to calibrate the parameters to pass to the Merton jump-difusion and Heston stochastic volatility model, to generate all the times series that will serve for the analysis of the delta hedging, I will use the historical market data on the Apple stock.
+
+To do so, I will use an approximation method to find the arguments with which the models better fit the distribution curve of the historical log-return.
+
+To get the historical data, I will once more use the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as provider. The dataset so downloaded is available in appendix \ref{cha:appendix:apple} and concern the daily stock price from 18th May 2017 to 18th May 2018.
+
+Practically, to perform the calibration, I will use an approximation algorithm developed by \cite{MASS} which is directly available in R through the R package \textit{MASS::fitdistr}. To work, that algorithm needs a density function to be fitted along with a sample of random data as a template.
+
+Following \citet{heston1993}, the characteristic function can be reverted to give the density function. consequently if \cref{eq:methodology:characteristic} is the characteristic functin then \cref{eq:methodology:density} is the corresponding density where the interesting random variable $x$ is the log-return of the stock price.
+
+\begin{align}
+\psi(\phi) &= \int_{-\infty}^{\infty} e^{i \phi x} f(x) dx \label{eq:methodology:characteristic} \\
+f(x) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i \phi x} \psi(\phi) d\phi \label{eq:methodology:density}
+\end{align}
+
+The procedures to calibrate the arguments for Merton jump-diffusion process and Heston stochastic volatility are respectively explained at \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston}.
 
 
-In \cref{sec:methodology:hedgingbsm}, I explain how I will contruct and measure the hedge on an underlying asset where the motion depend on the framework developed by \cite{bs}.
+% SUBSECTION: Merton's model calibration
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Hedging under Black--Scholes--Merton constraints
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Hedging under Black--Scholes--Merton constraints}
-\label{sec:methodology:hedgingbsm}
-
-In this first section I will measure the performance of the hedging rules describes in section (REF), as if all the constraint of BSM were true(REF).
-Subsequently, the model used to genereate the time series will be comparared with the historical one, in term of the distribution of their log--return. 
-
-Following REF:Delta-hedging, to measure the performance of the delta--hedging, I first need the stock price at time zero along with the associated volatility, the strike price, the riskless rate and the time to maturity in order to get the \BSM price of the option. (How to get these ingredients is described in \cref{sub:methodology:hedgingbsm:compute}.)
-
-I do next need to compute time series, by using a monte-carlo simulation, representing the evolution of the underlying asset price across time. I will have to define a rebalancing frequency by which I will apply the delta hedging rule.
+\subsection{Merton's model calibration}
+\label{sub:methodology:calibration:merton}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Compute the option price
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Compute the option price}
-\label{sub:methodology:hedgingbsm:compute}
+% SUBSECTION: Heston's model calibration
 
-To measure the performance of the delta hedging rule under the constraint defined by \citet{bs}, I will create an algorithm of \cref{eq:bsm:bsm:sol} to compute the \BSM price based on argument such as the initial stok price, strike price, the time to maturity, the underlying volatility and the riskless rate.
+\subsection{Heston's model calibration}
+\label{sub:methodology:calibration:heston}
 
-All the maturities I will used for analysis are are that listed in \cref{tab:methodology:maturity}. 
+\subsubsection*{Calibration of parameters for time series}
 
-I won't use all the strike prices described in \cref{tab:methodology:maturity}, mainly because the set is too wide. Instead I choose to only keep one deep-in-the-money, one in-the-money, one at-the-money, one out-of-the-money and one deep-out-of-the-money option. According to the price of the Apple share of stock at the 18th of May 2018, the strike I will use in the analysis are: 130, 175, 185, 195 and 220.
-
-
-
-The stock price at time zero will be the price of the share of stock APPL the 18 of May 2018. Whereas the volatility of the stock will be computed using historical data and the method described in \cref{sec:upstreamlogreturn}.
-
-According to table {tab:methodology:Tbill}, I apply linear interpolation to find the corresponding riskless rate to apply to the maturity of \cref{tab:methodology:maturity}.
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{l|rrrrrrrrr}
-
-  \hline
-Maturity & 7.00 & 21.00 & 63.00 & 91.00 & 126.00 & 154.00 & 182.00 & 245.00 & 399.00 \\ 
-Riskless rate & 1.66\% & 1.66\% & 1.79\% & 1.90\% & 1.97\% & 2.03\% & 2.09\% & 2.16\% & 2.30\% \\
-   \hline
-\end{tabular}
-\caption{Maturities explored during the hedging performance measurement} 
-\label{tab:methodology:maturity}
-\end{table}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Scenarios
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Scenarios}
-\label{sub:HedgingBSM:Scenarios}
-
-The hedging scenario occurs between the initial time up to option's maturity, under real condition. Real condition means that the drift rate that will be used won't be the risk--neutral but another related to the volatility of the underlying asset.
-
-According to \cref{tab:methodology:maturity}, there are options with differents maturities to be hedged. Consequently, to simulate the underlying asset price evolution through time, I will create time series covering each of these maturities.
-
-First I will define a time step. This step will be used in the monte-carlo simulation to dicretize the Stochastic Brownian motion exposed in \citet{bs}. Furthermore.
-In order to be consistent with the data I gathered from the market, I have choosen to take a time step of one day.
-
-To feed the algorithm based on \cref{eq:underlying:geometric:closed} and in order to genereate the time series, I need to provide some arguments, namely, The initial stock price along with the drift and variance rates.
-Even if all the option to hedge have different maturities, they all have the same starting date, which is the 18 of May 2018. Consequently the initial value of all the time series will be the same, that is to say, the value of the apple stock at that time, which was \$$186.31$.
-The drift and variance rate will be computed using historical data and method exposed through  \crefrange{eq:upstream:stock:valued}{eq:upstream:volatility:estimator}.
-
-This method to generate time series will be processed 500 times, for each maturity.
-It means that there will be 500 different scenarios to hedge for all double $(T_i, K_j)$, where $T_i$ is a maturity from \cref{tab:methodology:maturity} and $K_j$ is a strike price defined in \cref{tab:methodology:strike}.
-
-The portfolio (STEP 1.) will be rebalanced each $\delta t$
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Performance measure
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Performance measure}
-\label{sub:HedgingBSM:Performance}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Benchmark
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Benchmark}
-\label{sub:HedgingBSM:Benchmark}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Discussion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Discussion}
-\label{sub:HedgingBSM:Discussion}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsubsection*{Calibration of parameters for option pricing}
 
 
 
