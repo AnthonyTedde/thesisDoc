@@ -252,7 +252,7 @@ Consequently the algorithm to apply in order to estimate the skewness and kurtos
 % SECTION: Log--return and compounded interest rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Log--return and compounded interest rate}
-\label{sec:upstreamlogreturn}
+\label{sec:upstream:logreturn}
 
 The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:upstream:stock:valued}{eq:upstream:logreturn}
 

@@ -243,9 +243,9 @@ In order to make the volatility process risk--neutralized, Heston added the risk
 \begin{align}
     \HSVvolriskless \label{eq:other:hsvvol:riskless} \\
     \intertext{where}
-    \kappa^{*} & = \kappa + \lambda \\
+    \kappa^{*} & = \kappa + \lambda \label{eq:other:kappa:riskless} \\
     \intertext{and}
-    \theta^{*} & = \frac{\kappa \theta}{\kappa^{*}}
+    \theta^{*} & = \frac{\kappa \theta}{\kappa^{*}} \label{eq:other:theta:riskless}
 \end{align}
 
 Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively denote the long--run mean and mean--reversion speed, are the ones to estimate while dealing with pricing options purposes. 

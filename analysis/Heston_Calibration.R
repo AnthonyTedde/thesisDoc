@@ -75,19 +75,9 @@ cost <- function(x){
   
 }
 
-# Initial valued vector
-  # OK:
-# GOOD
-x0 <- c("v0" = .3, "theta" = .3, "sigma" = .4, "rho" = -.85, "kappa" = 3.) 
-x0 <- c("v0" = .3, "theta" = .3, "sigma" = .5, "rho" = -.4, "kappa" = 1) 
-# test
+
 
 # Optimized result
-detach("package:StockPriceSimulator", unload = T)
-library(StockPriceSimulator)
-
-x1 <- c("v0" = 0, "theta" = 0, "sigma" = .6, "rho" = -.8, "kappa" = 1) 
-x2 <- c("v0" = .3, "theta" = .3, "sigma" = .5, "rho" = -.4, "kappa" = 1) 
 
 v0 <- .3
 theta <- .3
@@ -157,8 +147,6 @@ l <- map(xo , function(y){
 
 # Measure the performance of the callibration
 optim.1 <- l
-optim.2 <- l2
-optim.spread.2 <- map_dbl(optim.2, ~ .x[[1]])
 
 remove_negative_feller <- function(y){
   if(y[[2]] > 0.1){
@@ -170,8 +158,26 @@ remove_negative_feller <- function(y){
 
 within.spread.1 <- map_dbl(optim.1, .f = remove_negative_feller ) %>%
   unname 
-within.spread.2 <- map_dbl(optim.2, .f = remove_negative_feller) %>%
-  unname
+
+remove_negative_feller_fromlist <- function(y){
+  if(y[[2]] > 0.1 & y[[4]][1] >0 & y[[1]] >= 42){
+    return(y)
+  }else{
+    NA
+  }
+}
+optim.2.logical <- map(optim.1, .f = remove_negative_feller_fromlist ) %>%
+  is.na %>% `!`
+optim.2 <- optim.1[optim.2.logical]
+
+optim.toprint <- map(optim.2, `[[`, 4) %>% as.data.frame %>% t
+
+xt <- xtable(optim.toprint,
+             caption = "Best estimates for HSV call option model",
+             digits=c(0,5,5,5,5,5))
+print(xt,  include.rownames=FALSE)
+
+
 
 # Keep the best fit
 bstfit.optim.1 <-  map(which(within.spread.1 >= 50),

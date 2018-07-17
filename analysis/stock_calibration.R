@@ -208,13 +208,13 @@ ggplot() +
   
   
   
-  
-  1.0953862751   -2.0000000000 
-  alpha    
-  -4.7883278229 
-  ( 0.0003861428
+  # 
+  # 1.0953862751   -2.0000000000 
+  # alpha    
+  # -4.7883278229 
+  # ( 0.0003861428
     
-  kappa <- x["kappa"] + 10
+  kappa <- x["kappa"] + 4.7883278229
   theta <- x["theta"] * x["kappa"] / kappa
   # sigma <- x["v0"] / sqrt(t)
   alpha <- 4.596164e-04 / t + sigma ^2 / 2
@@ -272,7 +272,7 @@ ggplot() +
   ########################################################################
   
   
-  kappa <- x["kappa"]
+  
   
   heston_probability <- function(z,
                                  t,
@@ -284,7 +284,6 @@ ggplot() +
     # kappa <- kappa - lambda
     # theta <- theta * x["kappa"] / kappa
     integrand <- function(w, iix){
-      print(iix)
       gamma <- kappa + 1i * rho * sigma * w
       omega <- sqrt(gamma ^2 + sigma ^2 * (w^2 - 1i * w))
       Ft <- kappa * theta / sigma ^ 2 * gamma * t -
@@ -294,14 +293,13 @@ ggplot() +
             (omega ^2 - gamma ^2 + 2 * kappa * gamma) / (2 * kappa * omega) * 
             sinh(omega * t / 2)
         )
-      # Re(exp(1i * w * x + Ft))
-      exp(1i * w * x + Ft)
+      Re(exp(1i * w * x + Ft))
+      # exp(1i * w * x + Ft)
     }
     map_dbl(z, function(y){
-      # 1/(2 * pi) * integrate(integrand, -Inf, Inf, x = y,subdivisions = 5000,
-      #                        rel.tol = 1.5e-8)$value
+      1/(2 * pi) * integrate(integrand, -Inf, Inf, iix = y,subdivisions = 5000,
+                              rel.tol = 1.5e-8)$value
       
-      1/(2 * pi) * myintegrate(integrand, -Inf, Inf, iix = y)[1]
     })
   }
   
@@ -322,12 +320,14 @@ ggplot() +
                      sigma = x['sigma'],
                      theta = x['theta'])
   
-  heston_probability(x = c(-0.015),
+  kappa <- x["kappa"] + 4.7883278229
+  theta <- x["theta"] * x["kappa"] / kappa 
+  heston_probability(z = c(0),
                      t = t,
-                     kappa = x['kappa'],
+                     kappa = kappa,
                      rho = x['rho'],
                      sigma = x['sigma'],
-                     theta = x['theta'])
+                     theta = theta)
   
   
   
