@@ -70,6 +70,20 @@ s <- sqrt(1/(length(u) - 1) * sum((u - ubar)^2))
 sigma <- s / sqrt(t)
 alpha <- ubar / t + sigma ^2 / 2
 
+
+########################################################
+# Plot the graph for log-return only
+########################################################
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.logreturns.density.tex", width = 6, height = 3)
+ggplot() +
+  stat_density(data = data.frame(u), aes(u),
+               geom = "line",
+               colour = 'steelblue') +
+  xlab("log-returns")
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
 ########################################################
 # Heston on the same period with risk neutral data
 ########################################################
@@ -105,6 +119,9 @@ u_heston <- log(quotediff)
 # alpha <- ubar / t + sigma ^2 / 2
 
 
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 6, height = 3)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
@@ -112,12 +129,9 @@ ggplot() +
   stat_density(data = data.frame(u_heston),aes(u_heston),
                geom = "line",
                colour = 'darkred')+
-  stat_function(fun = dnorm,
-                colour = "black",
-                args = list(
-                  mean = 1,
-                  sd = .2 ))
-  
+  xlab("log-returns")
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
   ########################################################################
   # fit the distrib
   ########################################################################

@@ -55,6 +55,9 @@ imply.volatility_heston <- map_dbl(as.data.frame(t(DATA)), function(y){
 }) %>% unname
 
 DATA <- data.frame(DATA, imply.volatility, imply.volatility_heston)
+DATA$maturity <- str_pad(DATA$maturity, 3, pad = "0")
+maturity.verbose <- paste(DATA$maturity, "days up to maturity", sep = " ")
+DATA <- data.frame(DATA, maturity.verbose)
 
 
 ####################################################################
@@ -65,6 +68,20 @@ ggplot(DATA, aes(Strike, imply.volatility)) +
   geom_line() +
   geom_point(data = DATA, aes(Strike, imply.volatility_heston))+
   facet_grid(. ~ maturity)
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.impliedvol.heston.tex", width = 6)
+ggplot(DATA, aes(Strike, imply.volatility)) + 
+  geom_line(color = "steelblue") +
+  geom_point(data = DATA, 
+             aes(Strike, imply.volatility_heston),
+             color = "darkred")+
+  xlab("Strike") + ylab("Implied maturity")+
+  facet_wrap( ~ maturity.verbose, ncol = 2)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
 
 
 

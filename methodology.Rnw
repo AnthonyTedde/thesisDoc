@@ -10,22 +10,36 @@
 \section{Overview}
 \label{sec:methodology:overview}
 
-The objective of this master thesis is to measure the performances of the Black-Scholes-Merton pricing method when the assumption of normality for the log-return's distribution is not met.
-In order to measure such performances, the method I will follow is to apply the delta-hedging rule on options for which the underlying distribution is not log-normal.
-Instead of fully use market data to make those experiments, I will rather construct some theoretical time series based on the theories developed by \citet{merton76} and \citet{heston1993} in order to repectively obtains path with jumps and others with stochastic volatility.
-To do so, I will construct algorithms to implement those models. 
+The objective of this master thesis is to measure the performances of the Black-Scholes-Merton pricing method when the assumption of normality for the log-returns distribution is not met.
 
-Even though I won't construct my hedge directly on market data, I will furthermore use them to calibrate the parameters I will pass to the algorithms I developed.
-I chose to use the available market data on Apple stock and Apple call option for the calibration process.
+In order to measure such performances, I will (i) compute the options price by using in turn the models BSM, Merton mixed jump-diffusion and Heston stochastic volatility models. 
+Thereafter, I will (ii) compare the implied volatility of those computed prices split by maturities and by models.
+Finally, I will (iii) construct delta-neutral portfolios to measure the hedging performance of the aforementioned models.
 
-Once all my parameters will be calibrated, I will simulate time series representing as many paths that could be followed by a share of stock. The simulation of that asset path will be driven either by a Merton mixed jump-diffusion process or by a Heston stochastic volatility process.
+Instead of exclusively using market data, whether to gather option prices or to build the delta-neutral portfolio, I will rather construct some theoretical based algorithm.
+Depending on the framework to explore, the option prices will be computed either by using the BSM equation, if the underlying process relates to a geometric Brownian motion or by using the method developed by \citet{heston1993}, it the underlying process relates to the model MJD or HSV.
+To assess the delta-neutral portfolio, I will need time series to measure its evolution across time. those series will be simulated based on the theories developed by \citet{merton76} and \citet{heston1993} in order to respectively obtain paths with jumps and others with stochastic volatility.
+Consequently, I have built some functions in the R language to perform those tasks. \cref{t:methodology:r} is a summary of a few of them used in that chapter and in the analysis. More details on them are given in appendix \cref{R functions catalogue}.
 
-Thereafter I will apply multiple scenarios of delta-hedging on each path of all sampled processes for different options with different maturities and strike.
-Ultimately though, I will compare the result of each delta hedging scenario.
+\begin{table}[ht]
+  \begin{tabularx}{\textwidth}{llX}
+    \hline
+    Function name & Arguments & Purpose \\
+    \hline
+    bsm\_call & $\left \{ S(0), T, k, r, \sigma \right \}$ & Compute the BSM price of an option \\
+    mjd\_call & $\left \{ S(0), T, k, r, \lambda, \mu, \delta \sigma \right \}$ & Compute the Merton price of an option \\
+    hsv\_call & $\left \{ S(0), T, k, r, V(0), \theta, \kappa, \sigma, \rho \right \}$ & Compute the heston price of an option \\
+    bsm\_ts & $\left \{ S(0), T, \sigma, \alpha, dt \right \}$ & Simulate BSM time series \\
+    mjd\_ts & $\left \{ S(0), T, \sigma, \alpha, \lambda, \mu, \delta dt \right \}$ & Simulate MJD time series \\
+    hsv\_ts & $\left \{ S(0), T, V(0), \alpha, \rho, \kappa, \theta, \sigma, dt \right \}$ & Simulate HSV time series \\
+  \end{tabularx}
+  \caption{R functions dealing with options and time series}
+  \label{t:methodology:r}
+\end{table}
 
-
-
-
+Even though I won't construct my hedge directly on market data, I need those data to calibrate the parameters to pass into the functions listed in \cref{t:methodology:r}.
+Therefore, the functions with the objective to provide european call price will be calibrated with the Apple european call market data while, to stay consistent, the functions that simulate time series will be benchmarked using the Apple stock data available on the market.
+This process of calibration is fully explained at \cref{sec:methodology:calibration}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,18 +48,17 @@ Ultimately though, I will compare the result of each delta hedging scenario.
 \section{Calibration}
 \label{sec:methodology:calibration}
 
-Whenever one deals with functions aimed to reproduce some real life experiments, the calibration process is crutial because it gives to the functions the capacity to behave within the right borders along with the right values.
+Whenever one deals with functions aimed to reproduce some real-life experiments, the calibration process is crucial because it gives to the functions the capacity to act within appropriate boundaries.
 
-For what matter in the analysis I want to perform is to find consistent values for the parameters to pass to the functions aimed to either determine option prices or to simulate stock market data.
-By consistent, I mean that they should make the functions' output connected with what is observer in the real world.
+The process of calibration which will be applied in the current section concerns two distinctive groups of parameters. 
+Those intended to the functions that compute the European call price and those used by the functions that simulate the hypothetical stock market movements.
+Consequently, the methods to calibrate both kinds of arguments differ, mainly because the options prices calculation must be performed under risk-neutral environment and the delta hedging is measured on time-series evolving under a risk-averse world.
 
-The process of calibration concerns two distinctive groups of parameters. Those intended to compute the european call price and those used to simulate the hypothetical stock market movements.
-Consequently, the method to calibrate both kinds of arguments differs, mainly because option prices calculation must be performed under risk-neutral environment.
+To do so, I am going to use the available option price data to calibrate the arguments aimed to the functions that compute the price of the latter. 
+Whilst I am going to use the stock's historical data to estimate the right values for the time-series output-related functions.
+The option market prices and stock data were downloaded using the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as provider. The datasets so downloaded are available in appendix \ref{cha:appendix:market}.
 
-To do so, I am going to use the available option price data to calibrate the arguments aimed to compute the price of that latter.
-Whilst I am going to use the stock's historical data to get the right values for the time serie's functions.
-
-\Cref{sub:methodology:calibration:option} explains how I will operate for the options' parameters, whereas \cref{sub:methodology:calibration:asset} shows the procedure I will follow for the stock simulation's arguments.
+\Cref{sub:methodology:calibration:option} explains how I am going to operate for the options' parameters, whereas \cref{sub:methodology:calibration:asset} shows the procedure I am going to follow for the assets simulations' arguments.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,15 +67,12 @@ Whilst I am going to use the stock's historical data to get the right values for
 \subsection{Option prices based calibration}
 \label{sub:methodology:calibration:option}
 
-Following \citet{heston1993} and \citet{criso2015}, provided that the characteristic functions of the model of Merton mixed-jump diffusion or the one of Heston stochastic volatility is known, the european call option price of such underlying processes can be computed using \cref{eq:other:call:heston}.
-although known, these characteristics functions needs somes parameters to work and those parameters need values to best fit with what is observed in reality.
-That is why both functions need to be benchmarked with a referential value  before being used.
-For what matter in this current master thesis, the referential value for option calibration is the Apple option martket prices.
+In accordance to \citet{heston1993} and \citet{criso2015}, provided that the characteristic functions of the MJD and HSV models are known, the European call option price of such underlying processes can be computed using \cref{eq:other:call:heston}.
+Although known, these characteristics functions (\cref{eq:other:merton:psi,eq:other:heston:psi}) need some parameters to work and these parameters need appropriates values to best fit with what is observed in reality.
+That is why both functions need to be benchmarked with referential values before being used.
 
-To do so, I will apply the same method followed by \citet{criso2015}, namely, I will iterativaly minimize the difference between the Apple option market prices and those generated by the function that compute the option prices based on the characteristic functions.
-
-The option market prices were downloaded using the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as provider. The dataset so downloaded is available in appendix \ref{cha:appendix:market}.
-\cref{t:methodology:maturity,t:methodology:strike} respectively show the maturities and the strike that will be considered during the analysis.
+To do so, I am going to apply the same method followed by \citet{criso2015}, namely, iteratively minimizing the difference between the options market prices and those generated by the functions that compute the option prices based on the characteristic functions.
+As the market data comes with a large number of maturities and stikes, \cref{t:methodology:maturity,t:methodology:strike} list those considered during the analysis.
 
 \begin{table}[ht]
 \centering
@@ -82,10 +92,12 @@ The option market prices were downloaded using the package \textit{quantmod}, de
 \label{t:methodology:strike}
 \end{table}
 
-The next step is the creation of algorithm aimed to compute the option prices. To do so I have created two R functions to compute the characteristic functions of the Merton jump-diffusion and Heston stochastic characteristic process. For more information see REF + REF on appendix \cref{cha:r}.
+The optimization method used is the least-square non-linear analysis. 
+To work, such a method need (i) a function that returns dummy data, (ii) a dataset of data to serve as a template, (iii) a cost function to minimize and (iv) the parameters to optimize.
 
-Once both market data gathered and pricing algorithm created, the next step is the set up of the cost function to be minimized, by using the least-square non linear regession model.
-As previously mentioned, the optimal result is the one that minimize the squared difference between market and genereated data, as exposed by \cref{eq:methodology:cost}
+The functions that return the artificial data are those exhibited in \cref{t:methodology:r}, that is to say, \textit{mjd\_call} and \textit{hsv\_call} for the computation of call price using MJD and HSV, respectively.
+The dataset template is the one in \cref{t:market:option} (see appendix \ref{cha:appendix:market}).
+While the cost function is given by \cref{eq:methodology:cost}, the parameters to assess depend on the underlying model (either MJD or HSV).
 
 \begin{align}
  &\left(C_{K,T}^{mkt} - C_{K,T}^{h|m}(arguments)\right)^2
@@ -93,40 +105,48 @@ As previously mentioned, the optimal result is the one that minimize the squared
  \forall &K \in \{130, 140, 150, 160, 170, 180, 190, 200, 210, 220\}, \notag\\
  &T \in \left \{63, 91, 126, 154, 182, 245, 399\right \}\notag 
 \end{align}
-Where the subscript $K$ and $T$ respectively stand for strike price and maturity date. While the superscript $mkt$ denotes the "market price" and $h|m$ refers to either Heston or Merton process based prices.
+Where the subscripts $K$ and $T$ respectively stand for strike price and maturity date, while the superscripts $mkt$ denotes the "market price" and $h|m$ refers to either Heston or Merton process based prices.
 
-Consequently, \cref{eq:methodology:cost} will be the one to minimize using the least-square non linear regression model, for all strikes and maturities.
-The output of this process will evetually be the calibrated arguments that maximize the performance of the model across what is observed in the reality.
+Consequently, the \cref{eq:methodology:cost} is that to be minimized using the least-square non-linear analysis, for all strikes and maturities.
+The output of this process will eventually be the calibrated arguments that maximize the performance of the model with respect to what is observed in the reality.
 
-One dificulty to deal with is that the least-square non linear approach may return several best fit arguments due to the existence of multiple local minima in the cost function, depending on the parater given to the theoretical model.
-Therefore, in order to choose among all the outputs, I will select the one with which I get the most returns within the bid-ask spread of option market data.
+One difficulty when dealing with such an algorithm is that the least-square non-linear approach may return several best-fit sets of arguments due to the existence of multiple local minima in the cost function.
+Therefore, in order to choose among all the outputs provided by the optimization method, I will select those that ensure that the pricing function gives the most of its returns within the bid-ask spread of the option data, as shown by \cref{eq:methodology:bidask}.
 
 \begin{align}
- \left | C_{K,T}^{mkt} - C_{K,T}^{h|m}(arguments) \right | \leq C_{ask}^{mkt} - C_{bid}^{mkt}
- \label{eq:methodology:cost}
+  C_{bid}^{mkt} \leq C_{K,T}^{h|m}(arguments)  \leq C_{ask}^{mkt}
+ \label{eq:methodology:bidask}
 \end{align}
 
-Even though the cost fustion to be optimized is the same for both Heston and Merton pricing option procedure, the arguments to calibrate are different. \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston} respectively show the procedure for Merton and Heston.
+Even though the cost function to be optimized is the same for both HSV and MJD pricing option procedures, the arguments to calibrate are different. \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston} respectively illustrate the  MJD and HSV calibration process and results.
 
-[TODO: NOM DES FONCTIONS + OU LES TROUVER]
- 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Asset prices based calibration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Asset prices based calibration}
 \label{sub:methodology:calibration:asset}
 
-In order to calibrate the parameters to pass to the Merton jump-difusion and Heston stochastic volatility model, to generate all the dummy times series that will serve for the analysis of the delta hedging, I will use the historical market data on the Apple stock as template.
+In order to calibrate the parameters to pass to the MJD and HSV model, to generate all the dummy times series that will serve for the analysis of the delta hedging, I am going to use the historical market data on the Apple stock as a template.
 
 To perform such an upstream analysis, I will use an approximation method to estimate the arguments with which the distribution of the log-returns generated by both MJD and HSV models better fit the density curve of the historical log-return.
-To get the historical data, I will once more use the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as provider. The dataset so downloaded is available in appendix \ref{cha:appendix:apple} and concern the daily stock price from 18th May 2017 to 18th May 2018.
-\cref{p:methodology:density:aapl} show the density curve generated by the log-return of the historical data.
+The list of arguments to estimate will be smaller than the one needed to option calibration because I will start with the set of the already assessed parameters from options data and only (re)calibrate those risk-neutralized.
 
-[PLOT]
+To get the historical data, I will once more use the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo! finance as a provider. The dataset so downloaded is available in appendix \ref{cha:appendix:apple} and concerns the daily stock price from 18th May 2017 to 18th May 2018.
+\cref{p:methodology:density:aapl} shows the density curve generated by the log-return of the historical data.
 
-% Practically, to perform the calibration, I will use an approximation algorithm developed by \cite{MASS} which is directly available in R through the function \textit{fitdistr} from the R package \textit{MASS}. 
-% To do the job, that algorithm needs (i) a density function to be fitted along with (ii) a sample of random data as a template.
+\begin{figure}[ht]
+  \centering
+  \input{figures/appl.logreturns.density.tex}
+  \caption{Historical Apple stock Log-returns distribution}
+  \floatfoot{The above densities function is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018.
+  
+  }
+  \label{p:methodology:density:aapl}
+\end{figure}
 
-The procedures to calibrate the arguments for Merton jump-diffusion process and Heston stochastic volatility are respectively explained at \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston}.
+
+The procedures to calibrate the arguments for MJD and HSV processes are respectively explained at \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston}.
 
 
 % SUBSECTION: Merton's model calibration
@@ -142,19 +162,19 @@ The procedures to calibrate the arguments for Merton jump-diffusion process and 
 
 \subsubsection*{Calibration of parameters for option pricing}
 
-In order to use \cref{eq:other:call:heston} to compute the price of european call options on an underlying with increments driven by HSV, the parameters $(V(0), \kappa, \theta, \sigma, \rho)$ must be calibrated with respect to the available option market data.
-Consequently, the so estimated parameters would be in line with the risk-neutral measre, or specifically $\kappa$ and $\theta$, which are the only ones adapted to make \cref{eq:other:hsvvol:riskless} risk-neutral.
+In order to use the function \textit{hsv\_call} based on \cref{eq:other:call:heston} to compute the price of European call options on an underlying with increments driven by the HSV model, the parameters $(V(0), \kappa, \theta, \sigma, \rho)$ must be calibrated with respect to the available option market data.
+Consequently, the so estimated parameters will be in line with the risk-neutral measure, or more specifically $\kappa$ and $\theta$, which are the only ones adapted to make \cref{eq:other:hsvvol:riskless} risk-neutral.
 
-To do so, I am goind to use the aformentioned least-square non linear regression model together with data, described in appendix \ref{cha:appendix:market}, as template.
-In this instance, the theoretical model to calibrate is given by \crefrange{eq:other:call:heston}{eq:other:call:heston:pi2} along with \cref{eq:other:heston:psi}.
+To do so, I am going to use the aforementioned least-square non-linear analysis together with data on Apple call option as a template.
+In that respect, the theoretical models to calibrate are given by \crefrange{eq:other:call:heston}{eq:other:call:heston:pi2} along with \cref{eq:other:heston:psi}, implemented by the R function \textit{hsv\_call}.
 
-Moreover, to stay in a range of acceptable values, the parameters of the HSV model should lie between some defined boundaries and constraints. 
+Moreover, to stay in a range of acceptable values, the parameters of the HSV model should lie between some defined boundaries. 
 
-De facto, the mean-reversion speed ($\kappa$), the long-run variance ($\theta$) and the volatility of the volatility ($\sigma$) need to take values that together respect the feller condition (see \cref{sub:other:heston:feller}). Additionally, $\sigma$ ranges between 0 and 1 and, following \citet{cristo2015} $\kappa$ should be positive to avoid mean aversion.
+De facto, the mean-reversion speed ($\kappa$), the long-run variance ($\theta$) and the volatility of the volatility ($\sigma$) need to take values that together respect the Feller's condition (see \cref{sub:other:heston:feller}). 
+Additionally, $\sigma$ should range between 0 and 1 and, according to \citet{cristo2015} $\kappa$ should be positive to avoid mean aversion.
+Although the correlation coefficient $\rho$ may take any value from $[-1, 1]$, typically the correlation between the stock price increments and their intrinsic volatility is negative. Consequently, I set the borders of $\rho$ as being $]0, -1[$.
 
-Although the correlation coeficient $\rho$ may take any value from $[-1, 1]$, typically the correlation between a stock price increments and its intrinsic volatility is negative. Consequently, I choose to set the borders of $\rho$ as being $]0, -1[$.
-
-According to those boundary conditions, the \textit{nls} function returns \cref{t:methodology:call:heston:estimate1} as the whole sets of parameters that better fit the model \cref{eq:other:call:heston} to reality.
+According to those constraints and due to the presence of multiple local minima, the \textit{lsqnonlin} function returns the \cref{t:methodology:call:heston:estimate1} as the whole sets of parameters that make the function \textit{hsv\_call} better fit with reality.
 
 \begin{table}[ht]
 \centering
@@ -187,8 +207,8 @@ v0 & theta & sigma & rho & kappa \\
 \label{t:methodology:call:heston:estimate1}
 \end{table}
 
-The set \ref{eq:methodology:arg:heston:riskneutral} is the one making respond the model the best with what is observed in reality.
-Indeed when passing that set to the R function \textit{call\_heston()}, for all strikes of \cref{t:methodology:strike} and maturities of \cref{t:methodology:maturity}, more than $70\%$ of the so generated prices are within the bid-ask spread of the Apple option historical data.
+Otherwise, The set \ref{eq:methodology:arg:heston:riskneutral} is the one making respond the model the best with what is observed in reality.
+Indeed when passing that set to the R function \textit{call\_heston}, for all strikes of \cref{t:methodology:strike} and maturities of \cref{t:methodology:maturity}, more than $70\%$ of the so generated prices are within the bid-ask spread of the Apple option historical data.
 
 \begin{align}
   \left \{
@@ -203,28 +223,42 @@ Indeed when passing that set to the R function \textit{call\_heston()}, for all 
   \label{eq:methodology:arg:heston:riskneutral}
 \end{align}
 
-FIGURE X confronts the blue colored volatility smiles computed from market data, with those in red, calculated from the theoretical model generated option price.
+\cref{{p:methodology:impliedvol:aapl:heston}} confronts the blue colored volatility smiles computed from market data, with those dotted in red, calculated from the function \textit{hsv\_call}, which takes the items of the set \ref{eq:methodology:arg:heston:riskneutral} as parameters.
 
-[FIRURE]
+\begin{figure}[H]
+  \centering
+  \input{figures/appl.impliedvol.heston.tex}
+  \caption{Implied volatility of Apple option prices computed with HSV}
+  \floatfoot{The blue curves represent the implied volatility computed from the option market data on Apple while the ................
+  }
+  \label{p:methodology:impliedvol:aapl:heston}
+\end{figure}
 
 
-Consequently, the set \ref{eq:methodology:arg:heston:riskneutral} is the one I will use together with the \textit{heston\_call()} function whenever I have to compute option price using the HSV model.
+Consequently, the set \ref{eq:methodology:arg:heston:riskneutral} is the one I will use together with the \textit{hsv\_call} function whenever I have to compute option price using the HSV model on Apple data for the purpose of that master thesis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Calibration of parameters for time series}
 
-The  set \ref{eq:methodology:arg:heston:riskneutral} is calibrated under the risk-neutral world and cannot therefore be used as is to simulate the dummy time series that will be used in the analysis aimed to measure the delta hedging performance.
-In addition to those parameters, the drift rate has to be estimated as well. It was not present in the set  \ref{eq:methodology:arg:heston:riskneutral} because it is not taken into account in the computation of the options prices.
+The set \ref{eq:methodology:arg:heston:riskneutral} is calibrated under the risk-neutral world and cannot, therefore, be used as is to simulate the dummy time-series that will be used in the analysis aimed to measure the delta hedging performance.
+Furthermore, in addition to those parameters, the drift rate $\alpha$ has to be estimated as well. It was not present in the set  \ref{eq:methodology:arg:heston:riskneutral} because it is not taken into account in the computation of the options prices.
 
-FIGURE x shows the empirical density curves illustrating the distributions of the log-returns computed either from historical Apple stock data for the blue curve or from dummy time series generated by the function \textit{HSV\_ts()} fed with the risk-neutral parameters, for the red one.
-
-
-{FIGURE}
+\Cref{p:methodology:density:aapl:heston:riskneutral} shows the empirical density curves illustrating the distributions of the log-returns computed either from historical Apple stock data for the blue curve or from dummy time series generated by the function \textit{hsv\_ts()} fed with the risk-neutral parameters\ref{eq:methodology:arg:heston:riskneutral}, for the red one.
 
 
-The goal of that section is to find the parameters that make the distributions of the log-returns generated from market data or from \textit{HSV\_ts()} fit together.
+\begin{figure}[ht]
+  \centering
+  \input{figures/appl.logreturns.density.heston.riskneutral.tex}
+  \caption{Historical and HSV related Apple stock Log-returns distribution}
+  \floatfoot{The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018. while the red curve is constructed from time-series genereated by the function \textit{hsv\_ts} taking the risk-neutral parameters \ref{eq:methodology:arg:heston:riskneutral} as arguments.
+  }
+  \label{p:methodology:density:aapl:heston:riskneutral}
+\end{figure}
+
+
+The goal of that section is to find the risk-averse parameters that make both the distributions of the log-returns generated from market data or from \textit{hsv\_ts} fit together.
 To do so, and according to the differences between \cref{eq:other:hsvstock:riskless,eq:other:hsvvol:riskless} from \cref{eq:other:hsvstock,eq:other:hsvvol}, the parameters to modify are the drift rate $r \to \alpha$, the mean reversion speed $\kappa^{*} \to \kappa$ and the long-run volatility $\theta^* \to \theta$.
-Accordingly, the correlation parameter $\rho$ and the volatility of the volatility $\sigma$ stay unchanged from  the risk-neutral to risk-averse world.
+Accordingly, the correlation parameter $\rho$ and the volatility of the volatility $\sigma$ stay unchanged from the risk-neutral to risk-averse world.
 
 I followed the method exhibited at \cref{sec:upstream:logreturn} to get a rough estimate of the drift rate $\alpha$. From the log-returns' first and second moments, I find the value 0.4822917 as the estimation of $\alpha$.
 

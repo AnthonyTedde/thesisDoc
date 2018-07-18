@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  17 JUL 2018 22:42
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  18 JUL 2018 23:18
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1204,14 +1204,7 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
-(C:\Users\ATE\thesisDoc\index.aux
-
-LaTeX Warning: Label `eq:methodology:cost' multiply defined.
-
-
-LaTeX Warning: Label `cref@eq:methodology:cost' multiply defined.
-
-)
+(C:\Users\ATE\thesisDoc\index.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
@@ -1227,7 +1220,8 @@ LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 117.
 
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 117.
@@ -1303,96 +1297,107 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 ]
 Chapter 1.
+
+LaTeX Warning: Reference `R functions catalogue' on page 1 undefined on input l
+ine 163.
+
 [3
 
 ]
 
+LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
+e 200.
+
+
 LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 198.
+ne 211.
+
+
+LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
+e 212.
+
+
+LaTeX Warning: Reference `eq:other:merton:psi' on page 1 undefined on input lin
+e 212.
+
+
+LaTeX Warning: Reference `t:market:option' on page 1 undefined on input line 24
+0.
 
 
 LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
-e 205.
-
-
-LaTeX Warning: Reference `cha:r' on page 1 undefined on input line 226.
+e 240.
 
 [4]
 
 LaTeX Warning: Reference `cha:appendix:apple' on page 5 undefined on input line
- 262.
+ 276.
 
-
-LaTeX Warning: Reference `p:methodology:density:aapl' on page 1 undefined on in
-put line 263.
-
+[5] (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.tex)
 
 LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 286.
+ne 306.
 
 
 LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 287.
+t line 307.
 
 
-LaTeX Warning: Reference `cha:appendix:market' on page 5 undefined on input lin
-e 289.
+LaTeX Warning: Reference `eq:other:call:heston' on page 6 undefined on input li
+ne 310.
 
 
-LaTeX Warning: Reference `eq:other:call:heston' on page 5 undefined on input li
-ne 290.
-
-
-LaTeX Warning: Reference `eq:other:call:heston:pi2' on page 5 undefined on inpu
-t line 290.
+LaTeX Warning: Reference `eq:other:call:heston:pi2' on page 6 undefined on inpu
+t line 310.
 
 
 LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
-e 290.
+e 310.
 
-[5]
 
 LaTeX Warning: Reference `sub:other:heston:feller' on page 1 undefined on input
- line 294.
+ line 314.
 
 
 Package natbib Warning: Citation `cristo2015' on page 6 undefined on input line
- 294.
+ 315.
 
+[6] (C:\Users\ATE\thesisDoc\figures/appl.impliedvol.heston.tex) [7] [8]
+Overfull \hbox (15.71295pt too wide) in paragraph at lines 387--388
+\T1/aer/m/n/12 dummy time se-ries gen-er-ated by the func-tion \T1/aer/m/it/12 
+hsv_ts() \T1/aer/m/n/12 fed with the risk-neutral parameters1.3[],
+ []
 
-LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 298.
-
-[6]
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskneutral.tex)
 
 LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 367.
+t line 401.
 
 
 LaTeX Warning: Reference `eq:other:hsvstock:riskless' on page 1 undefined on in
-put line 367.
+put line 401.
 
 
-LaTeX Warning: Reference `eq:other:hsvvol' on page 1 undefined on input line 36
-7.
+LaTeX Warning: Reference `eq:other:hsvvol' on page 1 undefined on input line 40
+1.
 
 
 LaTeX Warning: Reference `eq:other:hsvstock' on page 1 undefined on input line 
-367.
+401.
 
 
 LaTeX Warning: Reference `sec:upstream:logreturn' on page 1 undefined on input 
-line 370.
+line 404.
 
 
 LaTeX Warning: Reference `eq:other:theta:riskless' on page 1 undefined on input
- line 372.
+ line 406.
 
 
 LaTeX Warning: Reference `eq:other:kappa:riskless' on page 1 undefined on input
- line 372.
+ line 406.
 
-[7] (C:\Users\ATE\thesisDoc\index.bbl [8]
+[9] (C:\Users\ATE\thesisDoc\index.bbl [10]
 LaTeX Font Info:    Try loading font information for T1+aett on input line 37.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
@@ -1401,38 +1406,37 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 
 Package natbib Warning: There were undefined citations.
 
-[9
+[11
 
 ] (C:\Users\ATE\thesisDoc\index.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 20806 strings out of 494045
- 378615 string characters out of 3145976
- 433793 words of memory out of 3000000
- 23675 multiletter control sequences out of 15000+200000
- 31251 words of font info for 68 fonts, out of 3000000 for 9000
+ 22651 strings out of 494045
+ 415158 string characters out of 3145976
+ 462053 words of memory out of 3000000
+ 25503 multiletter control sequences out of 15000+200000
+ 35884 words of font info for 74 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,13n,55p,425b,371s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,13n,55p,439b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
 Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on index.pdf (9 pages, 159392 bytes).
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on index.pdf (11 pages, 213513 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  45 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -260,8 +260,10 @@ print(s)
 
 
 
-\chapter{Market option price}
+\chapter{Market data}
 \label{cha:appendix:market}
+
+\section{Apple option price}
 
 \begin{table}[ht]
 \centering
@@ -328,7 +330,8 @@ print(s)
   220.00 & 6.71 & 6.30 & 6.70 & 6.50 \\  
   \cline{1-5}
 \end{tabular}
-\caption{Market option data (AAPL) }
+\caption{Market option data (AAPL)}
+\label{t:market:option}
 \end{table}
 
 

@@ -1,8 +1,8 @@
 \contentsline {chapter}{Introduction}{2}
 \contentsline {chapter}{\numberline {1}Methodology}{3}
 \contentsline {section}{\numberline {1.1}Overview}{3}
-\contentsline {section}{\numberline {1.2}Calibration}{3}
+\contentsline {section}{\numberline {1.2}Calibration}{4}
 \contentsline {subsection}{\numberline {1.2.1}Option prices based calibration}{4}
 \contentsline {subsection}{\numberline {1.2.2}Asset prices based calibration}{5}
-\contentsline {subsection}{\numberline {1.2.3}Merton's model calibration}{5}
-\contentsline {subsection}{\numberline {1.2.4}Heston's model calibration}{5}
+\contentsline {subsection}{\numberline {1.2.3}Merton's model calibration}{6}
+\contentsline {subsection}{\numberline {1.2.4}Heston's model calibration}{6}
