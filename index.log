@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  18 JUL 2018 23:18
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  18 JUL 2018 23:49
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1397,7 +1397,14 @@ LaTeX Warning: Reference `eq:other:theta:riskless' on page 1 undefined on input
 LaTeX Warning: Reference `eq:other:kappa:riskless' on page 1 undefined on input
  line 406.
 
-[9] (C:\Users\ATE\thesisDoc\index.bbl [10]
+[9]
+Overfull \hbox (10.26495pt too wide) in paragraph at lines 443--444
+\T1/aer/m/n/12 dummy time se-ries gen-er-ated by the func-tion \T1/aer/m/it/12 
+hsv_ts() \T1/aer/m/n/12 fed with the risk-averse parameters1.5[],
+ []
+
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskaverse.tex)
+(C:\Users\ATE\thesisDoc\index.bbl [10] [11]
 LaTeX Font Info:    Try loading font information for T1+aett on input line 37.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
@@ -1406,7 +1413,7 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 
 Package natbib Warning: There were undefined citations.
 
-[11
+[12
 
 ] (C:\Users\ATE\thesisDoc\index.aux)
 
@@ -1414,10 +1421,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 22651 strings out of 494045
- 415158 string characters out of 3145976
- 462053 words of memory out of 3000000
- 25503 multiletter control sequences out of 15000+200000
+ 23085 strings out of 494045
+ 423747 string characters out of 3145976
+ 463035 words of memory out of 3000000
+ 25934 multiletter control sequences out of 15000+200000
  35884 words of font info for 74 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  56i,13n,55p,439b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1434,9 +1441,9 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on index.pdf (11 pages, 213513 bytes).
+Output written on index.pdf (12 pages, 222688 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  45 words of extra memory for PDF output out of 10000 (max. 10000000)
 

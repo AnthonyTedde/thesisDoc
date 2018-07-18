@@ -228,10 +228,10 @@ setwd("c:/Users/ATE/thesisDoc/data")
   # -4.7883278229 
   # ( 0.0003861428
     
-  kappa <- x["kappa"] + 4.7883278229
+  kappa <- x["kappa"] + 5.4883278229
   theta <- x["theta"] * x["kappa"] / kappa
   # sigma <- x["v0"] / sqrt(t)
-  alpha <- 4.596164e-04 / t + sigma ^2 / 2
+  alpha <- 4.496164e-04 / t + sigma ^2 / 2
   h <- map(1:150, ~ heston(initial_stock_price = 115.5450,
               initial_volatility = x["v0"],
               time_to_maturity = 1,
@@ -256,16 +256,21 @@ setwd("c:/Users/ATE/thesisDoc/data")
   u_heston <- log(quotediff)
   
   
+
+
+  
+  setwd("c:/Users/ATE/thesisDoc")
+  tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskaverse.tex", width = 6, height = 3)
   ggplot() +
     stat_density(data = data.frame(u), aes(u),
                  geom = "line",
                  colour = 'steelblue')+
     stat_density(data = data.frame(u_heston),aes(u_heston),
                  geom = "line",
-                 colour = 'darkred')
-
-  
-  
+                 colour = 'darkred')+
+    xlab("log-returns")
+  dev.off()
+  setwd("c:/Users/ATE/thesisDoc/data")
   
   
   
