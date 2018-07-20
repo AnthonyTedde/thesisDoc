@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  18 JUL 2018 23:49
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  19 JUL 2018 09:14
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1204,7 +1204,26 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
-(C:\Users\ATE\thesisDoc\index.aux)
+(C:\Users\ATE\thesisDoc\index.aux
+
+LaTeX Warning: Label `eq:upstream:kurtosis:normal' multiply defined.
+
+
+LaTeX Warning: Label `cref@eq:upstream:kurtosis:normal' multiply defined.
+
+
+LaTeX Warning: Label `sec:r:time:geometric:ex' multiply defined.
+
+
+LaTeX Warning: Label `cref@sec:r:time:geometric:ex' multiply defined.
+
+
+LaTeX Warning: Label `sec:r:time:geometric:ex' multiply defined.
+
+
+LaTeX Warning: Label `cref@sec:r:time:geometric:ex' multiply defined.
+
+)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
@@ -1220,8 +1239,7 @@ LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 117.
 
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 117.
@@ -1288,162 +1306,363 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-))
+) [1
+
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}])
 \tf@toc=\write5
- [1
-
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+ [2] [3
 
 ]
 Chapter 1.
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 175.
 
-LaTeX Warning: Reference `R functions catalogue' on page 1 undefined on input l
-ine 163.
-
-[3
+(C:/PROGRA~1/R/R-33~1.3/share/texmf/tex/latex\ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 175.
+ [4
 
 ]
 
-LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
-e 200.
+LaTeX Warning: Reference `cha:model' on page 1 undefined on input line 204.
+
+[5] (C:\Users\ATE\thesisDoc\figures/brownianmotion.tex)
+
+LaTeX Warning: Reference `eq:upstream:incrementsdist' on page 1 undefined on in
+put line 242.
 
 
-LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 211.
+LaTeX Warning: Reference `eq:upstream:incrementsdist' on page 1 undefined on in
+put line 242.
 
-
-LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
-e 212.
-
-
-LaTeX Warning: Reference `eq:other:merton:psi' on page 1 undefined on input lin
-e 212.
-
-
-LaTeX Warning: Reference `t:market:option' on page 1 undefined on input line 24
-0.
-
-
-LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
-e 240.
-
-[4]
-
-LaTeX Warning: Reference `cha:appendix:apple' on page 5 undefined on input line
- 276.
-
-[5] (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.tex)
-
-LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 306.
-
-
-LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 307.
-
-
-LaTeX Warning: Reference `eq:other:call:heston' on page 6 undefined on input li
-ne 310.
-
-
-LaTeX Warning: Reference `eq:other:call:heston:pi2' on page 6 undefined on inpu
-t line 310.
-
-
-LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
-e 310.
-
-
-LaTeX Warning: Reference `sub:other:heston:feller' on page 1 undefined on input
- line 314.
-
-
-Package natbib Warning: Citation `cristo2015' on page 6 undefined on input line
- 315.
-
-[6] (C:\Users\ATE\thesisDoc\figures/appl.impliedvol.heston.tex) [7] [8]
-Overfull \hbox (15.71295pt too wide) in paragraph at lines 387--388
-\T1/aer/m/n/12 dummy time se-ries gen-er-ated by the func-tion \T1/aer/m/it/12 
-hsv_ts() \T1/aer/m/n/12 fed with the risk-neutral parameters1.3[],
+[6]
+Overfull \hbox (34.13013pt too wide) in paragraph at lines 284--284
+[] 
  []
 
-(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskneutral.tex)
 
-LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 401.
+LaTeX Warning: Reference `eq:upstream:itodiff:itopro' on page 1 undefined on in
+put line 286.
+
+[7]
+LaTeX Font Info:    Calculating math sizes for size <8.39996> on input line 317
+.
 
 
-LaTeX Warning: Reference `eq:other:hsvstock:riskless' on page 1 undefined on in
-put line 401.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.19998> not available
+(Font)              size <5> substituted on input line 317.
 
 
-LaTeX Warning: Reference `eq:other:hsvvol' on page 1 undefined on input line 40
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.19998> not available
+(Font)              size <5> substituted on input line 317.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.19998> not available
+(Font)              size <5> substituted on input line 317.
+
+
+LaTeX Warning: Reference `sec:othermodel:heston' on page 1 undefined on input l
+ine 328.
+
+[8]
+
+LaTeX Warning: Reference `eq:upstream:kurtosis:skewed' on page 1 undefined on i
+nput line 384.
+
+
+LaTeX Warning: Reference `eq:upstream:kurtosis:skewed' on page 1 undefined on i
+nput line 384.
+
+[9]
+
+LaTeX Warning: Reference `eq:upstream:Scontinuous' on page 1 undefined on input
+ line 403.
+
+
+LaTeX Warning: Reference `eq:upstream:logreturn:sample:sd' on page 1 undefined 
+on input line 413.
+
+
+LaTeX Warning: Reference `eq:upstream:logreturn:sample:sd' on page 1 undefined 
+on input line 413.
+
+[10]
+Chapter 2.
+
+LaTeX Warning: Reference `sec:bsm:assumption' on page 1 undefined on input line
+ 456.
+
+[11
+
+]
+
+LaTeX Warning: Reference `eq:underlying:logreturn' on page 1 undefined on input
+ line 488.
+
+(C:\Users\ATE\thesisDoc\figures/ItoAccuracy.tex)
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 12 undefined on input line 50
+3.
+
+
+LaTeX Warning: Reference `eq:underlyinglogreturn' on page 1 undefined on input 
+line 514.
+
+
+LaTeX Warning: Reference `eq:Scontinuousdiffrate' on page 1 undefined on input 
+line 514.
+
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 514
+.
+
+[12]
+
+LaTeX Warning: Reference `eq:Scontinuousdiffrate' on page 1 undefined on input 
+line 516.
+
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 516
+.
+
+(C:\Users\ATE\thesisDoc\figures/stock_return_density.tex)
+
+LaTeX Warning: Reference `eq:Scontinuousdiffrate' on page 1 undefined on input 
+line 534.
+
+
+LaTeX Warning: Reference `eq:Scontinuousdiffrate' on page 1 undefined on input 
+line 534.
+
+
+LaTeX Warning: Reference `eq:underlyinglogreturn' on page 1 undefined on input 
+line 542.
+
+(C:\Users\ATE\thesisDoc\figures/stock_logreturn_density.tex)
+
+LaTeX Warning: Reference `eq:underlyinglogreturn' on page 1 undefined on input 
+line 559.
+
+
+LaTeX Warning: Reference `eq:underlyinglogreturn' on page 1 undefined on input 
+line 559.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `eq:underlyinglogreturn' on page 1 undefined on input 
+line 562.
+
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 562
+.
+
+[13]
+
+LaTeX Warning: Reference `p:logreturndensty' on page 1 undefined on input line 
+591.
+
+(C:\Users\ATE\thesisDoc\figures/stock_log_density.tex)
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 600
+.
+
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 600
+.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 1 undefined on input line 609
+.
+
+[14]
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 15 undefined on input line 61
 1.
 
 
-LaTeX Warning: Reference `eq:other:hsvstock' on page 1 undefined on input line 
-401.
+LaTeX Warning: Reference `sec:Heston' on page 1 undefined on input line 615.
 
 
-LaTeX Warning: Reference `sec:upstream:logreturn' on page 1 undefined on input 
-line 404.
+LaTeX Warning: Reference `sec:MixedJump' on page 1 undefined on input line 620.
 
 
-LaTeX Warning: Reference `eq:other:theta:riskless' on page 1 undefined on input
- line 406.
+[15]
+Chapter 3.
+
+LaTeX Warning: Reference `sec:Assumptions' on page 16 undefined on input line 6
+41.
+
+[16
+
+]
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 17 undefined on input line 66
+9.
+
+[17] [18] [19] [20] [21]
+Chapter 4.
+
+LaTeX Warning: Reference `eq:Scontinuous' on page 22 undefined on input line 10
+05.
 
 
-LaTeX Warning: Reference `eq:other:kappa:riskless' on page 1 undefined on input
- line 406.
+Package natbib Warning: Citation `heston' on page 22 undefined on input line 10
+17.
 
-[9]
-Overfull \hbox (10.26495pt too wide) in paragraph at lines 443--444
+[22
+
+] (C:\Users\ATE\thesisDoc\figures/merton.path.tex)
+(C:\Users\ATE\thesisDoc\figures/MertonJumpReturn.tex)
+
+LaTeX Warning: Reference `p:MertonReturnDensityTails' on page 1 undefined on in
+put line 1121.
+
+(C:\Users\ATE\thesisDoc\figures/MertonJumpReturnTails.tex) [23] [24] [25]
+[26] (C:\Users\ATE\thesisDoc\figures/UncorrelatHeston.tex)
+(C:\Users\ATE\thesisDoc\figures/correlatHeston.tex) [27]
+(C:\Users\ATE\thesisDoc\figures/skewnessHeston.tex)
+(C:\Users\ATE\thesisDoc\figures/density.heston.kurtosis.tex) [28] [29]
+
+LaTeX Warning: Reference `eq:other:call:heston:pi' on page 1 undefined on input
+ line 1346.
+
+[30]
+Overfull \hbox (19.7348pt too wide) in paragraph at lines 1378--1378
+[]\T1/aer/bx/n/14.4 Characteristic func-tion for He-s-ton stochas-tic volatil-i
+ty model 
+ []
+
+[31] [32]
+Chapter 5.
+
+LaTeX Warning: Reference `R functions catalogue' on page 1 undefined on input l
+ine 1441.
+
+[33
+
+] [34]
+
+LaTeX Warning: Reference `cha:appendix:apple' on page 35 undefined on input lin
+e 1554.
+
+[35] (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.tex)
+
+Package natbib Warning: Citation `cristo2015' on page 36 undefined on input lin
+e 1593.
+
+[36] (C:\Users\ATE\thesisDoc\figures/appl.impliedvol.heston.tex) [37] [38]
+Overfull \hbox (15.71295pt too wide) in paragraph at lines 1665--1666
 \T1/aer/m/n/12 dummy time se-ries gen-er-ated by the func-tion \T1/aer/m/it/12 
-hsv_ts() \T1/aer/m/n/12 fed with the risk-averse parameters1.5[],
+hsv_ts() \T1/aer/m/n/12 fed with the risk-neutral parameters5.3[],
+ []
+
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskneutral.tex)
+[39]
+Overfull \hbox (10.26495pt too wide) in paragraph at lines 1721--1722
+\T1/aer/m/n/12 dummy time se-ries gen-er-ated by the func-tion \T1/aer/m/it/12 
+hsv_ts() \T1/aer/m/n/12 fed with the risk-averse parameters5.5[],
  []
 
 (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskaverse.tex)
-(C:\Users\ATE\thesisDoc\index.bbl [10] [11]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 37.
+[40] [41] [42
 
+
+]
+Appendix A.
+
+Overfull \hbox (97.32413pt too wide) in paragraph at lines 1757--1758
+\T1/aer/m/n/12 through my GitHub ac-count. Names are Ran-dom walk (https://gi
+thub.com/AnthonyTedde/RandomWalk)
+ []
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 1784
+.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-))
+) [43
+
+] [44] [45]
+[46] [47]
+Appendix B.
+
+LaTeX Warning: Float too large for page by 23.99232pt on input line 2089.
+
+(C:\Users\ATE\thesisDoc\index.bbl [48
+
+] [49]
+Underfull \hbox (badness 10000) in paragraph at lines 42--47
+[]\T1/aer/m/n/12 J. Gatheral and N.N. Taleb.  \T1/aer/m/it/12 The Volatil-ity S
+ur-face: A Prac-ti-tioner's
+ []
+
+
+Underfull \hbox (badness 8094) in paragraph at lines 42--47
+\T1/aer/m/it/12 Guide\T1/aer/m/n/12 .  Wi-ley Fi-nance. Wi-ley, 2006.  ISBN 978
+0470068250.  URL
+ []
+
+[50
+
+])
 
 Package natbib Warning: There were undefined citations.
 
-[12
+[51] (C:\Users\ATE\thesisDoc\index.aux)
 
-] (C:\Users\ATE\thesisDoc\index.aux)
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 2.90001pt have occurred.
+
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 23085 strings out of 494045
- 423747 string characters out of 3145976
- 463035 words of memory out of 3000000
- 25934 multiletter control sequences out of 15000+200000
- 35884 words of font info for 74 fonts, out of 3000000 for 9000
+ 44131 strings out of 494045
+ 840610 string characters out of 3145976
+ 1914300 words of memory out of 3000000
+ 46926 multiletter control sequences out of 15000+200000
+ 54540 words of font info for 121 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,13n,55p,439b,718s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
-s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on index.pdf (12 pages, 222688 bytes).
+ 56i,15n,55p,568b,719s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/cm-super/sfrm1200.pfb>
+Output written on index.pdf (51 pages, 1076625 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
+ 284 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 65 words of extra memory for PDF output out of 10000 (max. 10000000)
 
