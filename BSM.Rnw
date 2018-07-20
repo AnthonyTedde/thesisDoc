@@ -168,12 +168,12 @@ The Greeks will be next used to show hown the hedge of a call option behave unde
 \subsection{Delta}
 \label{sub:Delta}
 
-Delta is the derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price, as shown by equation (\ref{eq:call}).
+Delta is the derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price, as shown by equation (\ref{eq:bsm:call}).
 It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
 
 \begin{align}
     \Delta \left(t, \St \right) &= \frac{\partial \call{t}{\St}}{\partial \St}
-    \label{eq:call}
+    \label{eq:bsm:call}
     \intertext{Whereas pratically, the derivation of delta for a call is given by equation \ref{eq:deltaCall}, (\citet{shreve}).}
     \Delta_{call} \left(t, \St \right) &= \N{\dsub{+}}
     \label{eq:deltaCall}

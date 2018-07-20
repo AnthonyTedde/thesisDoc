@@ -8,6 +8,7 @@
 % \usepackage{tgtermes}
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage[T1]{fontenc}
+\usepackage[breaklinks]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
 \usepackage{tikz}
@@ -23,6 +24,7 @@
 \usepackage{braket}
 \usepackage[toc,page]{appendix}
 \usepackage{tabularx}
+
 % \usepackage{hyperref}
 % \usepackage{physics}
 
@@ -135,1288 +137,10 @@ How perfomant is it ?
 What about other model such as \ldots ?
 
 Using R. \cite{R}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:Upstream concepts
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Upstream concepts}
-\label{cha:upstream}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Overview}
-% \label{sec:upstream:overview}
-
-The material covered in the current chapter is meant to be thereafter intensively used, either by being applied in the studied theoretical models or by entering in the construction of the theory-based algorithms.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Vanilla options
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Vanilla options}
-\label{sec:upstream:vanilla}
-
-The so-called vanilla options, in opposition to the more complex -- not covered in this master thesis -- exotic ones, are specifics kind of derivatives coming along with some good-to-know jargons. 
-
-First and foremost,  as defined in \citet{hull}, an option is a contract between two stakeholders with different interests or at least distinctive motivations, who want to buy or sell a product, which generally is a financial asset called "the underlying." 
-Indeed, someone can look for hedge oneself against risk while the other party wants to make a profit on a speculative move.
-Likewise other financial contracts, one agrees to buy and the other to sell at a fixed amount of money, namely "the strike price", usually denoted by $k$ with the difference that they would effectively realize the purchase or the sale of the underlying at a future date than the one they enter into the bargain. That date is called "the maturity".
-
-
-Another key characteristic of options is that they are not symmetric contracts, in the sense that both parties do not have the same rights, depending on their position along with the option's type. 
-Two positions can be taken when entering into such a derivative, either long or short. 
-Going short broadly means purchase the option whereas going long implies writing, or synonymously, selling the derivative. Beyond the position, the contract can be of call or put type. 
-
-The following sentences encompass a mix of type (call/put) and position (short/long) combination that gives an overview of all the possible scenarios:
-
-\begin{itemize}
-\item Someone who is going long into a call gains the right to purchase the underlying at a future date for a fixed price. He has to pay some fees to enter into the contract.
-\item Someone who is going short into a call is forced to sell the underlying at a future date for a fixed price. He receives financial compensation to enter into the contract.
-\item Someone who is going long into a put gains the right to sell the underlying at a future date for a fixed price. He has to pay some fees to enter into the contract.
-\item Someone who is going short into a put is forced to buy the underlying at a future date for a fixed price. He receives financial compensation to enter into the contract.
-\end{itemize}
-
-Moreover, vanilla options may be "European" or "American". Latter can be exercised at any time during the whole life of the contract while the European can only be at maturity.
-
-Finally, the payoff provided by all aforementioned European options are summarized throughout \crefrange{eq:upstream:cl}{eq:upstream:ps}, where $C_l$, $C_s$, $P_l$ and $P_s$ respectively stand for the long call, short call, long put and short put payoffs. $S(T)$ being the price of the underlying at maturity.
-
-\begin{align}
-C_l &= \left(S(T) - k\right)^+ \label{eq:upstream:cl}\\
-C_s &= \left(k - S(T)\right)^- \label{eq:upstream:cs}\\
-P_l &= \left(k - S(T)\right)^+ \label{eq:upstream:pl}\\
-P_s &= \left(S(T) - k\right)^- \label{eq:upstream:ps}
-\end{align}
-
-The derivative considered in this master thesis is mainly the European call option, even though the link with European put could somehow be done without being mandatory to exhibit the issue so raised. Therefore such reference to put should only be done if necessary.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Brownian Motion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Brownian Motion}
-\label{sec:upstream:brownian}
- 
-All over the present document, the terms "Brownian motion", "Wiener" or "Markov" processes are considered to be equivalent terminology and therefore used as such. However strictly speaking, even though the Brownian motion is in every respect a Wiener process, stricto sensu, the term Markov process is broader. 
-Actually, the more remarkable Markov property is to be a process with independent future increments, putting it in line with the weak form of market efficiency (\citet{hull}).
-Whilst, on the other hand, even if the Brownian motion, and thus the Wiener process, share this property, they are defined with the idiosyncrasy to have mean zero and a variance rate of one per unit of time (\citet{hull}).
-
-Brownian motion is a centerpiece broadly used in subsequent developments. It is notably applied in many models such as in the geometric Brownian motion (\cref{cha:underlying}),  in the Black-Scholes-Merton (BSM) equation (\cref{cha:bsm}) and in the Merton mixed jump-diffusion (MJD) and Heston stochastic volatility (HSV) model (\cref{cha:model}).
-
-The Brownian motion is a stochastic process, denoted by $\Bm$ and satisfying $W(0) = 0$, with independent and identically distributed (iid) increments, such as defined by \cref{eq:upstream:increment:dist}
-
-\begin{align}
-W(t_{i+1}) - W(t_i) \sim
-  iid N \left(0, t_{i+1} - t_i\right) \label{eq:upstream:increment:dist}
-\end{align}
-
-That Markov process is qualified as being time and path dependent in its building blocks. Time dependency implies that like many other functions its value evolves over time. 
-Whereas path dependency means that the Wiener process is also meant to randomly move between two time-steps.
-Practically, at any time $t$ and from its origin, the Brownian motion may take any value as shown by \cref{eq:upstream:brownian:dist}.
-
-\begin{align}
-\Bm \sim N(0, t) \label{eq:upstream:brownian:dist}
-\end{align}
-
-As described by \citet{shreve}, the construction of such a process could be achieved by following various techniques. Either by computing the differential process (\cref{eq:upstream:brownian:diff,eq:upstream:brownian:cumsum}) for every time-steps and then combining them, by constructing a unique time series in that way; or by resolving the joint moment generating function of the iid random variables' vector ($W(t_i)$ \ldots $W(t_m)$), through \cref{eq:upstream:brownian:joint}.
-
-\begin{align}
-  d\Bm &= \phi \left(0, t + \epsilon_i \right) \label{eq:upstream:brownian:diff} \\
-  \intertext{
-  $\phi$ is a function that generate a random number according to the normal law with parameter $\mu = 0$ and $\sigma^2 = t + \epsilon_i$, with $\epsilon_i$ being any arbitrary small delta time step.
-  }
-  W\left(t + \epsilon_i\right) &= \Bm + d\Bm \label{eq:upstream:brownian:cumsum}
-\end{align}
-
-\begin{align}
-  \varphi\left(u_1 \ldots u_m\right) = \exp{\left( \frac{1}{2} \sum_{i = 1}^m \left[ \sum_{j = i}^m u_j \right]^2 \left( t_i - t_{i-1} \right) \right)} \label{eq:upstream:brownian:joint}
-\end{align}
-
-\Cref{fig:upstream:brownian} (QA) displays a simulation of one hundred Brownian motions over a time frame of five years. While in turn, \cref{fig:upstream:brownian} (QB) shows the distribution of the possible outcomes of that experiment, after five years. The black outlined curve is the density of the normal distribution, with mean and variance chose such as exposed by \cref{eq:upstream:increment:dist}.
-
-\begin{figure}[H]
-\centering
-\input{figures/brownianmotion.tex}
-\caption{Multiple Brownian Motion}
-\floatfoot{\textit{Note.} (QA): Simulation of one hundred Brownian motions using the R package \citet{randomwalk} with a timeframe of five units (five years) with a time-step of one over one hundred.
-(QB): Density computed on a simulation of one hundred thousand Brownian motions. The calculation has been made by taking all the final value $W(5)$ and by plotting them as a density function. The Black bell curve is the normal density with mean zero and a standard deviation of square root of five, as expected (\cref{eq:upstream:incrementsdist}).}
-\label{fig:upstream:brownian}
-\end{figure}
-
-Lastly, \citet{shreve} demonstrates that a Brownian motion has no tendency to rise or fall as time passes thanks to its martingale property. Therefore, because its initial value is zero, a Wiener process only brings noise by being incorporated into other stochastic series.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Correlated Brownian Motion
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Correlated Brownian Motions}
-\label{sub:upstream:brownian:correlated}
-
-Correlated Brownian motions are Wiener processes that related together according to the factor $\rho$ \cref{eq:upstream:brownian:corr}.
-Following \citet{shreve}, these processes happens to be modeled by \cref{eq:upstream:brownian:corr:1,eq:upstream:brownian:corr:2}.
-
-\begin{align}
-  dB_1(t) dB_2(t) &= \rho(t) dt \label{eq:upstream:brownian:corr} \\
-  \intertext{Where $dB_1(t)$ and $dB_2(t)$ are Wiener process }
-  B_1(t) &= W_1(t) \label{eq:upstream:brownian:corr:1} \\
-  B_2(t) &= \int_0^t \rho(s) dW_1(s) + \int_0^t \sqrt{1 - \rho^2(s)} dW_2(s) \label{eq:upstream:brownian:corr:2}
-\end{align}
-
-When $\rho$ is constant over time however, the simple form of \cref{eq:upstream:brownian:corr:deterministic:2} is enough.
-
-\begin{align}
-B_2(t) &= \rho W_1(s) + \sqrt{1 - \rho^2} W_2(s) \label{eq:upstream:brownian:corr:deterministic:2}
-\end{align}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Cox--Ingersoll--Ross
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Ito's lemma}
-\label{sec:upstream:ito}
-
-Based on Taylor approximation theorem, Ito formulae are meant to provide the differential form of such a function $f \circ g$ where the function $f$ can be differentiate with respect to its independent variable whilst g cannot.
-
-\begin{align}
-  f(T, W(T)) &= f(0, W(0))
-               + \int_0^T \frac{\partial f(t, W(t))}{\partial t} dt
-               + \int_0^T \frac{\partial f(t, W(t))}{\partial W(t)} dW(t)
-               + \frac{1}{2} \int_0^T \frac{\partial^2 f(t, W(t))}{\partial W(t)^2} dt \label{eq:upstream:itodiff:brownian}
-\end{align}
-
-Whilst the \cref{eq:upstream:itodiff:brownian} shows the formula for Brownian motion, the \cref{eq:upstream:itodiff:itopro} represents the form used to differentiate the more complex Ito process (\ref{eq:upstream:itopro}).
-
-\begin{align}
-  X(T) &= X(0)
-         + \int_0^T \Delta(u) dW(u)
-         + \int_0^T \Theta(u) du \label{eq:upstream:itopro} \\
-  \intertext{
-  Where $\Delta(u)$ and $\Theta(u)$ are stochastic process, adapted to a filtration f(t)
-  }
-  f(T, X(T)) &= \ldots
-\end{align}
-
-Ito formulae it thereafter applied to derive such a process like the geometric Brownian motion [REF] or the Black--Scholes--Merton partial differential equation. 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Cox--Ingersoll--Ross
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Cox--Ingersoll--Ross}
-\label{sec:CoxIngersollRoss}
-
-The Cox--Ingersoll--Ross (CIR) stochastic model $R(t)$, defined by the differential \cref{eq:upstream:CIR}), can be used to simulate interest rates' evolution over time thanks to some of its related properties. Indeed it gives a good fit owing to two of them, namely the mean--reversion and its ability to only be positive (\citet{shreve}).
-
-\begin{align}
-dR(t) &= (\alpha - \beta R(t)) dt + \sigma \sqrt{R(t)} dW(t)
-\label{eq:upstream:CIR}
-\end{align}
-
-A mean--reverting stochastic process tends to navigate, such a pointy sinusoidal motion, around its mean (see [FIGURE]).
-The CIR inherits this behaviour from the construction of its differential's drift part, i.e. $(\alpha - \beta R(t))dt$.
-Indeed when $R(t) = \sfrac{\alpha}{\beta}$, then the drift term $dt = 0$ with the consequence of status quo.
-In addition, whether $R(t) > \sfrac{\alpha}{\beta}$ or $R(t) < \sfrac{\alpha}{\beta}$, the next value of $R(t + \epsilon) = R(t) + dR(t)$ is pushed back toward $\sfrac{\alpha}{\beta}$.
-Actually, as showing by \cref{eq:upstream:CIR:exp}, the long--run expected value for the process $R(t)$ is $\sfrac{\alpha}{\beta}$ (\citet{shreve}).
-
-\begin{align}
-\lim_{t \to \infty}  \mathop{\mathbb{E}} R(t) = \frac{\alpha}{\beta} \label{eq:upstream:CIR:exp}
-\end{align}
-
-On the other hand, the non-negativity property is explained by the fact that if $R(t) \to 0$ then $dR(t) \simeq \alpha dt > 0$ making $R(t+\epsilon)$ bounced off the x axis, running it away from negative realm (\citet{shreve}).
-
-Ultimately though, the CIR mean--reverting \cref{eq:upstream:CIR} is used by \citet{heston1993} in its model in order to drive stochastic interest rates.
-Heston's model is covered throughout \cref{sec:othermodel:heston}.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Moments
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Skewness and Kurtosis}
-\label{sec:Moments}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Definition
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Definition}
-\label{sub:Definition}
-
-
-The skewness and kurtosis for a random variable's distribution, are respectivaly the third and fourth moment characterizing either the asymetry and the degree of flatness.
-
-The theoretical moments are defined by \cref{eq:upstream:moment:theoretical} while the empirical ones can be estimated using \cref{eq:upstream:moment:empirical}, with $r = 3$ to compute the skewness or $r= 4$ for the kurtosis.
-
-\begin{align}
-\gamma_r = \mathop{{}\mathbb{E}} \left[ \left( \frac{X - \mu}{\sigma} \right) ^r \right] \label{eq:upstream:moment:theoretical}
-\intertext{where $X$ is any random variable}
-m_r = \frac{1}{n} \sum_{i = 1}^n (x_i - \overline{\rm x}) ^r \label{eq:upstream:moment:empirical}
-\end{align}
-with $\{x_i\}_{i \in n}$ being a set of outcomes, belonging to the sample set.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Estimation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Estimation}
-\label{sub:Estimation}
-
-Sampled skewness and kurtosis formulae exist in different fashion with their precisions depending on the size of the sample along with the skewed of the theoretical distribution to be estimated (\citet{sk}).
-
-The chosen method to use to estimate the skewness and kurtosis needs a prudent selection especially for small sized sample. Actually, in order to minimize the mean--squared error and the associated variance, the \cref{eq:upstream:skewness:normal,eq:upstream:kurtosis:normal} are used as an reliable  unbiased estimator for sample with normal shaped theoretical distribution.
-
-\begin{align}
-  b_{skewness} &= \frac{m_3}{S^3} \label{eq:upstream:skewness:normal} \\ 
-  b_{kurtosis} &= \frac{m_4}{S^4} \label{eq:upstream:kurtosis:normal} \\
-  \intertext{
-  where
-  }
-  S^2 &= \frac{1}{n - 1} \sum_{i = 1}^n \left( x_i - \overline{\rm x} \right)^2 \\
-  \intertext{
-  Conversely, \cref{eq:upstream:skewness:skewed,eq:upstream:kurtosis:skewed} are the ones providing a better unbiased estimation than the latters for more skewed distribution, such as for log--normal random variable's sample.
-  }
-  G_{skewness} &= \frac{k_3}{\sqrt{k_2^3}} \label{eq:upstream:skewness:skewed} \\ 
-  G_{kurtosis} &= \frac{k_4}{k_2^2} \label{eq:upstream:kurtosis:normal}  \\
-  \intertext{
-  where
-  }
-  K_2 &= \frac{n}{n-1} m_2 \\
-  K_3 &= \frac{n}{(n-1)(n-2)} m_3 \\
-  K_4 &= \frac{n}{\prod_{i = 1}^3 n - i} \Big[ (n+1)m_4 - 3(n-1) m_2 ^2 \Big]
-\end{align}
-
-Consequently the algorithm to apply in order to estimate the skewness and kurtosis from samples should therefore be chosen with respect to the theoretical underpinned distribution. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Log--return and compounded interest rate
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Log--return and compounded interest rate}
-\label{sec:upstream:logreturn}
-
-The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:upstream:stock:valued}{eq:upstream:logreturn}
-
-\begin{align}
-&S(0) e^{Rt} = \St \label{eq:upstream:stock:valued} \\
-\Longleftrightarrow  &\ln{S(0)} + Rt = \ln{\St} \\
-\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = Rt \label{eq:upstream:logreturn}
-\end{align}
-Where $R$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interest are compounded (in year) and the left--hand side of \cref{eq:upstream:logreturn} stands for the natural logarithm of the stock return occuring during the period $t$, the so--called log--return.
-
-For what matter in this current document, the focus is set to the sample's log--returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:upstream:Scontinuous} to simulate geometric Brownian motion.
-
-Following \citet{hull}, if $S_i$ and $n$ respectively denote the stock price at the end of interval $i$ and the total number of observation then the log--return of the ordered sample set $\{S-i\}_{i \in n}$ is give by \cref{eq:upstream:logreturn:sample}.
-
-\begin{align}
-  u_i &= \ln \frac{S_i}{S_{i-1}} \label{eq:upstream:logreturn:sample} \\
-  \intertext{
-  Whilst the estimation of the standard deviation of all the $u_i$ is defined such as in \cref{eq:upstream:logreturn:sample:sd}
-  }
-  s = \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n \left(u_i - \bar{u} \right) ^2} \label{eq:upstream:logreturn:sd} \\
-\end{align}
-
-Consequently if the volatility of a stochastic process, simulatating a stock price motion, is given by $\sigma \sqrt{t}$, then it could therefore be estimated using market data throughout \cref{eq:upstream:volatility:estimator}
-
-\begin{align}
-  \hat{\sigma} = \frac{s}{\sqrt{t}} \label{eq:upstream:volatility:estimator}
-\end{align}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Arbitrage strategy
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Arbitrage strategy}
-\label{sec:upstreamarbitrage}
-
-The 
-%\SweaveUTF8
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%
-%  CHAPTER:The underlying models
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The underlying model}
-\label{cha:underlying}
-  
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sec:underlying:overview}
-
-This chapter highlights one specific model used to model the motion that a stock price time serie would follow. It is the one used in the Black--Scholes--Merton model, \citet{hull}.
-
-Following \citet{shreve}, The \cref{eq:underlying:geometric:closed}, called a geometric Brownian motion, features a stochastic process where the only random component is the Brownian motion $\Bm$. Whilst the others parameters, $\alpha$ and $\sigma$, stand respectively for the annualized expected return and volatility of the theoretical stock price process, \citet{hull}.
-
-\begin{center}
-  \begin{equation}
-    \Scontinuous
-    \label{eq:underlying:geometric:closed}
-  \end{equation}
-\end{center}
- 
-In order to match with the constraints introduced by the Black and Scholes' pricing formula (\cref{sec:bsm:assumption}), the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
-
-Furthermore, the path following by any walks of the stock price motion should be  a continuous process, as the time frame decrease $\Dt \to 0$.
-Therefore in addition to develop the model, all the aforementioned characteristics are shown to be true within this chapter.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Derivation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Derivation}
-\label{sec:underlying:derivation}
-
-In order to get the differential form of equation \ref{eq:underlying:geometric:closed}, the Itô's formula (\cref{sec:upstream:ito}) is used. By applying the tranformation incurred by Itô, the \cref{eq:underlying:geometric:diff,eq:underlying:geometric:rate,eq:underlying:geometric:diff} emerge:
- 
-\begin{center}
-  \begin{subequations}
-    \begin{align}
-      \Scontinousdiff \label{eq:underlying:geometric:diff} \\
-      \Scontinuousrate \label{eq:underlying:geometric:rate}
-    \end{align}
-  \end{subequations}
-\end{center}
-
-The \cref{eq:underlying:geometric:closed} shows that any change occuring in the stock price $S$ over a small amount of time is due to the deterministic expected drift rate ($\alpha \St$) along with some amounts of added noise included by the random part ($\sigma d\Bm$). The \cref{eq:underlying:geometric:closed} denotes the stock return stochastic process, \citet{hull}.
-
-\begin{align}
-  d\ln{\St} &= (\alpha - \frac{\sigma ^2}{2}) dt 
-              + \sigma d\Bm \label{eq:underlying:logreturn:diff} \\
-  \ln{\frac{\St}{S(0)}} &= (\alpha - \frac{\sigma ^2}{2}) t 
-              + \sigma \Bm \label{eq:underlying:log:return}
-\end{align}
-
-The \cref{eq:underlying:logreturn} exibits the natual logarithm of the stock price return occuring all over the period $t$. In other words, the expectation of this process, given by $(\alpha - \frac{\sigma ^2}{2}) \times t$ happens to be the expected value of the continously compounded rate of return for the aformentioned period of time, \citet{hull}.
-
-
-\begin{figure}[h]
-\centering
-\input{figures/ItoAccuracy.tex}
-\caption{Accuracy of Itô approximation}
-\floatfoot{
-  The above processes have been constructed over four distinctive groups of two "equivalent" geometric Brownian motions, following \cref{eq:underlying:geometric:closed,eq:underlying:geometric:diff}, respectively for the red and blue coloured path. 
-The only parameters that change over the group are the couples $(dt, \sigma)$ which are set to $QA \equiv (360, 0.2)$, $QB \equiv (4, 0.2)$, $QC \equiv (360, 1)$ and $QD \equiv (4, 1)$. 
-All the processes cover a period of four years and begin with initial value set to $50$.
-}
-\label{p:itoaccuracy}
-\end{figure}
-
-The approximation of the stochastic process \ref{eq:Scontinuous} achieved using the Itô's lemma depends exclusively on two factors; the volatility parameter $\sigma$ and the time period occuring between two measures $dt$. 
-As shown throughout the \cref{p:itoaccuracy}, the less the volatility or time step, the better the approximation.
-It is therefore key, during an analysis process to choose an appropriate time step according to a given volatility in order to provide accurate retults.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Distribution of the stock price process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Distribution of the stock price process}
-\label{sub:Distribution of the stock price process}
-
-The distributions here developed concern the \cref{eq:Scontinuous,eq:Scontinuousdiffrate,eq:underlyinglogreturn}. They are described using the first two moments, namely the expectation and variance.
-
-The first distribution (\ref{eq:scontinuousdist}) is related to \cref{eq:Scontinuousdiffrate}. What is learnt from it, is that the process followed by \cref{eq:Scontinuous} has normally distributed returns with expected value and variance relying on the time period $dt$, \citet{shreve}.
-
-\begin{center}
-\begin{equation}
-\dSr \sim N(\alpha dt, \sigma^2 dt)
-\label{eq:scontinuousdist}
-\end{equation}
-\end{center}  
-According to the (\cref{p:returndensity}), the normality qualification from equation \ref{eq:scontinuousdist} holds.
-
- 
-\begin{figure}[!h]
-\centering
-\input{figures/stock_return_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{p:returndensity}
-\floatfoot{
-The above density function has been constructed over 10000 samples of a unique process. The samples has been constructed following \cref{eq:Scontinuousdiffrate}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the normal bell curve with mean $\alpha$ and standard deviation of $\sigma \times \sqrt{dt}$. The period between each measure, namely $dt$ has been set to $10000^{-1}$. 
-}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Log-return
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-According to \cref{eq:underlyinglogreturn}, The distribution of the natural logarithm of the stock price return recorded over a time period of $t$ is characterized by \cref{eq:logreturndist}
-
-\begin{center}
-\begin{equation}
-\ln{\frac{\St}{S\left(0\right)}} 
-  \sim N((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t)
-\label{eq:logreturndist}
-\end{equation}
-\end{center}  
-
-\begin{figure}[!h]
-\centering
-\input{figures/stock_logreturn_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{p:logreturndensity}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:underlyinglogreturn}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the normal bell curve with mean $(\alpha - \frac{\sigma^2}{2}) \times t$ and standard deviation of $\sigma \times \sqrt{dt}$. The time frame is one year ($t = 1$) and period between each measure, namely $dt$ has been set to $500^{-1}$. 
-}
-\end{figure}
-
-From \cref{eq:underlyinglogreturn}, it could also be shown, by setting $X = \ln{\St}$ and $Y = \St$, that the randomly simulated stock price outcomes' distribution, following \cref{eq:Scontinuous}, match with the log--normal law [REF].
-The above point directly echoes the upstream ideal conditions set by \citet{bs} , especially the one relating the stock price process.
-
-The following equations shows the relation between the distribution of the log--return and the stock process itself. Let
-\begin{align}
-  X &= \ln{\St} \sim N\left(\mu \equiv \ln{S(0)} + \left(\alpha - \frac{\sigma^2}{2}\right) t, \delta^2 \equiv \sigma^2 t\right)
-  \intertext{and}
-  Y &= \St
-  \intertext{
-  By the existing relation between the log--normal law with respect to the normal law, the following relations emerges.
-  }
-  \mathop{\mathbb{E}} Y &= e^{\ln{S(0) + (\alpha - \frac{\sigma^2}{2}) t + \frac{\sigma ^2 t}{2}}} \\
-  &= S(0) e^{\alpha t}
-  \intertext{
-  and
-  }
-  var(Y) &= (e^{\sigma^2 t} - 1) * e^{2 \mu * \delta^2} \\
-  &= S(0)^2 e^{2 \alpha t} (e^{\sigma^2 t} - 1)
-  \intertext{
-  Consequently the stock price random variable $\St$ as relation [REF] for distribution.
-  }
-  \St \sim lognormal(\mu, \delta^2)
-\end{align}
-
-\begin{align}
-\ln{\frac{\St}{S\left(0\right)}}  \sim N((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t)
-\label{eq:logdist}
-\end{align}
-
-The \cref{p:logreturndensty,p:logdensity} refers respectively to distributions (\ref{eq:logreturndist}) and (\ref{eq:logdist}).
-
-\begin{figure}[!h]
-\centering 
-\input{figures/stock_log_density.tex}
-\caption{Daily Basis Stock Return Density}
-\label{p:logdensity}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 10000 samples eachs. All samples have been constructed following \cref{eq:Scontinuous}. The arguments are set with the following value, $\alpha = 0$, $\sigma = 30\%$. The black density belongs to the log--normal curve with mean and standard deviation such as described in [REF]. The time frame is one year ($t = 1$) and period between each measure, namely $dt$ has been set to $500^{-1}$. 
-}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Flaws
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Flaws}
-\label{sec:Flaws}
-
-Even if the \cref{eq:Scontinuous} is used to model the stock price process, it exists some lacks with the observed real processes. The analysis ([CHA REF]) mainly covers the following discrepancy of the model against empirical results.
-  
-The volatility appearing in the aformentioned underlying model (\ref{eq:Scontinuous}) is constant as time passes.
-Even if this consideration can be considered as true for short period of time, it is not the case over the long--run \citet{teneng2011limitations}.
-Other model substitutes the process defined throughout this chapter with other ones including stochastic volatility processes, making it changing over time.
-For this purpose, the Heston's model is developed in this current master thesis, which encompasses two stochastic processes, a geometric Brownian motion [???? + REF] for the stock price diffusion model [DIFUSION??] and a mean-reverting CIR model to compute the volatility as a stochastic process.
-This model is exposed in \cref{sec:Heston}.
-
-Following [REF and REF], the uderlying log--returns distribution is characterized by the normal law. Consequently, the random variable $\St$, at the fixed time $t$, is normal. 
-However, according to empirical results, the random variable $d\St$ do not fit with the normal bell curve (\citet{clark1973}).
-Therefore if the price changes are not normally distribution neither is the log--return and thus $\St$, at a fixed time $t$, is not log--normally distributed.
-Along with the Heston model, another one is considerd; the Merton's jump--diffusion model. Both are able to modify the skewness and kurtosis of the log--return distibution curve. The Merton framework is developed in \cref{sec:MixedJump}. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:The \BSM model
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The \BSM model}
-\label{cha:bsm}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: OverView
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sec:bsm:overview}
-
-In this present section the Black--Scholes--Merton model is explained and developed. Stricly speaking, it would be talked about the BSM (Black--Scholes--Merton) model but not BSM equation. In turn the equation would be refered to as the BS (Black and Scholes) equation. This distinction is made because the model encompasses the derivation of the BS equation, either using the CAPM (Capital Asset Pricing Model) for \citet{bs} or  by setting up a riskless portfolio providing an expected return identiacal to risk-free rate for \citet{merton73}.
-
-The BSM model is meant to provide the non arbitrage price of derivative assets such as european stock option (\citet{hull}). In the present master thesis the model derived from the BS formula is focused on the pricing of one of a kind trivial derivative, the vanilla call option.
-
-In order to price call option throughout the model highlighted in this present chapter, some contraints have been set by \citet{bs}. 
-The section \ref{sec:Assumptions} quotes the assumptions made to keep the model usage between boundaries. In latter chapter however it will be shown how the model is relevant by going on the edge and even beyond these constraints.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Assumptions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Assumptions}
-\label{sec:bsm:assumptions}
-
-\citet{bs} have provided a framework defining a bunch of constraints qualified as "ideal conditions" under which the market would behave in order to make the BS equation works with accuracy. All of these conditions are below--mentioned.
-
-\begin{enumerate}
-  \item The short-term risk free rate $r$ is known and constant
-  \item The stock return involving in the computation of BS equation is lognormally distributed with constant mean and variance rate
-  \item No dividend are provided with the considered share of stock
-  \item The option considered within the computation is european
-  \item The price for bid and ask quote are identical. It means that there is no bid--ask spread to be considerered
-  \item Share of stock can be divided into any portions such as needed for the computation
-  \item Short selling is allowed with no penalties
-\end{enumerate}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The partial differential BSM equation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The \BSM equation}
-\label{sec:bsm:equation}
-
-The pricing method of an option underpinned by the BSM model is closely related to an underlying for which its price $\St$ is random and log--normally distributed, such the one developed in chapter \ref{cha:underlying} throughout equation \ref{eq:Scontinuous} (\citet{bs}).
-
-In order to provide a unique fair price to a stock option (e.g. a vanilla european call option) which depends on an underlying such as described above, all the uncertainty associated to the stock price motion has to disappear. To do so, one have to first construct such a portofolio $X(t)$ which encompasses the same source on uncertainty as the option itself, i.e., the geometric brownian motion $\St$ and then choosing the adequate position $\Delta(t)$ to take  so that all randomness cancels out (\citet{shreve}).
- 
-\begin{align}
-  \dportfolio \label{eq:dportfolio} \\ 
-  \intertext{The goal is to hedge dynamically the position taken in the option. It means that the position has to be frequently rebalanced. Consequently, at any times, the present value of the changes occuring in the portfolio, due to stock price evolution should be equal to the one occuring in the derivative. The only way to achieve this equality is to adapt the delta (\citet{shreve}).}
-   d\left(e^{-rt} X\left(t\right)\right) &= d\left(e^{-rt} \ct \right)
-\intertext{In that way, one can take a position in the derivatives (short / long) and hedge them by taking $\pm \Delta(t)$ shares of stock. $X(0)$ being the price of the call at time zero}
- X\left(0\right) &= c\left(0, S\left(0\right)\right)
-\end{align}
-
-
-
-
-Following the method forementioned, the BSM differential equation is given by equation (\ref{eq:bsm:bsm:eq}),  with terminal condition (\ref{eq:BSMterminal}) and boundary condition (\ref{eq:BSMboundary0}) -- (\ref{eq:BSMboundaryinf}), (\citet{shreve}).
-
-\begin{center}
-  \begin{equation}
-     \BSMeq{x}
-    \label{eq:bsm:bsm:eq}
-  \end{equation}
-\end{center}
- 
-\begin{center}
-  \begin{equation}
-    \call{T}{x} = \left(x - K\right) ^+
-    \label{eq:BSMterminal}
-  \end{equation}
-\end{center}
-
-Whilst the terminal condition focuses on the value taken at maturity, the boundary conditions fix some constraints on the extreme values likely to be taken by the shares of stock at any times during the option life. 
-In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that an option with an worthless underlying is itself valueless, while whenever the option is deep in the money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
-
-\begin{center}
-  \begin{equation}
-    \call{t}{0} = 0
-    \label{eq:BSMboundary0}
-  \end{equation}
-\end{center}
-
-\begin{center}
-  \begin{equation}
-    \lim_{x\to\infty} \left[ \call{t}{x} - \left(x - e^{-r \left(T - t \right)} \right) \right] = 0
-    \label{eq:BSMboundaryinf}
-  \end{equation}
-\end{center}
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Solution for vanilla option pricing method
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solution for vanilla option pricing method}
-\label{sec:Solution for vanilla option pricing method}
-
-
-According to the terminal (\ref{eq:BSMterminal}) and boundaries conditions (\ref{eq:BSMboundary0}, \ref{eq:BSMboundaryinf}), the Black--Scholes--Merton solution for call option happens to be given by equation (\ref{eq:bsm:bsm:sol}), (\citet{shreve}). 
-The right hand side of the equation, $\ct$, denotes the price of a call option depending on the time to maturity and the stock price at that time.
-In addition to these arguments, two other parameters are required, the strike ($k$) and the riskless interest rate ($r$).
-
-\begin{align}
-    \BSMsol
-    \label{eq:bsm:bsm:sol}
-\intertext{with}
-    \dpm
-    \label{eq:dpm}
-\end{align}
-
-
-
-
-
-
-
-
-% \begin{figure}[!h]
-% \centering
-% \input{figures/BSMvsSt.tex}
-% \caption{Relation between call price and underlying}
-% \label{plot:BSMvsSt}
-% \end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The greeks
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The greeks}
-\label{sec:greeks}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview}
-\label{sub:GreeksOverview}
-
-The Black--Scholes--Merton equation (\ref{eq:bsm:bsm:eq}) can be divided into differents parts.
-Each one is identified through a greek letter. These letters are the purpose of this section and would be therefore described here.
-
-The Greeks will be next used to show hown the hedge of a call option behave under some variation from the former conditions defined by Black and Scholes. Hence, only the Greeks for call options are considered.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Delta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Delta}
-\label{sub:Delta}
-
-Delta is the derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price, as shown by equation (\ref{eq:call}).
-It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
-
-\begin{align}
-    \Delta \left(t, \St \right) &= \frac{\partial \call{t}{\St}}{\partial \St}
-    \label{eq:call}
-    \intertext{Whereas pratically, the derivation of delta for a call is given by equation \ref{eq:deltaCall}, (\citet{shreve}).}
-    \Delta_{call} \left(t, \St \right) &= \N{\dsub{+}}
-    \label{eq:deltaCall}
-\end{align}
-
-At any time $t$, in order to hedge a short call one should hold $\Delta(t)$ share of stock. Consequently a portfolio comprised of one short position in a call along with $\Delta$ shares of stock is said to be delta neutral, because each movement in the stock price is compensated as well by  the position in the call as the one in the stock (\citet{hull}).
-
-The delta neutrality could otherwise be explained using the slope-intercept form of the tangent line below the function $\call{t}{x}$, keeping t constant. If the stock price is equal to $S$ and the corresponding call price, for a fixed time $t$ and stroke at $k$, is $c$, we consequently get (\ref{eq:slopeInterceptCallStock}) as equation of the tangent line below $\call{t}{x}$.
-\begin{center}
-  \begin{equation}
-       y  =  \frac{\partial \call{t}{\St}}{\partial \St}  ( x - S) + c
-       \label{eq:slopeInterceptCallStock}
-  \end{equation}
-\end{center}
-According to \ref{eq:slopeInterceptCallStock}, the price of the call, for a stock price $S$ at a fixed time $t$ is given by $y = c$.
-If -- over an infinitesimally small delta time -- a positive stock price movement occurs, says that the stock price rises from $S \to S + \epsilon$. The price of the call is therefore going to change as well, from $y = c$ to $y = \Delta \epsilon + c$.
-Consequently, in odrer to hedge a short position in the call, $\Delta$ shares of stock should be owned. Indeed, by kepping $\Delta$ shares, the loss incured by the higher value of the call $y = c + \Delta \epsilon$ will be offset by an inscrease of $\Delta \epsilon$ thanks to the $\Delta$ shares held.
-It makes sense that the hedge of a long call is achieved by setting up a short position in the underlying, according to the same parameter $\Delta$.
-
-The hedge works well for small price movement in the underlying and closely depends on the curvature of the function $\call{t}{c}$, keeping $t$ constant (\citet{shreve}).
-It would therefore be interesting to look at the second derivative of the call function with respect to the stock price, in order to get the rate of the rate of change of the call with respect to the underlying price.
-It is the purpose of the next subsection (\ref{sub:Gamma}).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Gamma
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Gamma}
-\label{sub:Gamma}
-
-Gamma is the second derivative of the option's price function with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
-
-\begin{align}
-    \Gamma \left(t, \St \right) &= \frac{\partial^2\call{t}{\St}}{\partial \St^2}
-    \label{eq:GammaDerivative}
-    \intertext{Whereas pratically, the derivation of gamma for a call is given by equation \ref{eq:gammaCall}, (\citet{shreve}).}
-    \Gamma_{call} \left(t, \St \right) &= \frac{1}{\sigma \St \sqrt{\Delta t}} N^\prime \left( \dsub{+} \right)
-    \label{eq:gammaCall}
-\end{align}
-
-It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. It gives information on the curvature of the function to be approximated using the differential form. 
-It is crutial to know how big is the value of gamma in order to adequatly hedge a position in a call. Indeed, if gamma is low, the rebalancing of the hedge does not have to occur frequently but if gamma 
-It gives as information the frequency needed in order to lower the error due to too large price movement.
-With the delta hedging rule, the more the price moves from its current value the more 
-Consequently, by gathering gamma and delta both together, a given more precise information on hedging against the only stock price movement is achieved.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Theta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Theta}
-\label{sub:Theta}
-
-Theta is the derivative of the price of an option with respect to the time, stock price unchanges (\ref{eq:ThetaDerivative})
-
-\begin{center}
-  \begin{equation}
-    \Theta (t) = \frac{\partial \call{t}{\St}}{\partial t}
-    \label{eq:ThetaDerivative}
-  \end{equation}
-\end{center}
-
-(Hull), Theta can be used as a proxy for Gamma in a delta neutral portfolio.
-No need to hedge against time therefore no need to neutralize theta.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Relation between BSM and the greeks
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Relation between BSM and the greeks}
-\label{sec:BSMGreeks}
-
-The Black--Scholes--Merton equation and the greeks are closely related together.
-In deed the BSM partial derivative formula (\ref{eq:bsm:bsm:eq}) could equally be written using the greeks (\ref{eq:BSMGreeks})
-
-\begin{center}
-  \begin{equation}
-    \BSMGreeks{\St}
-    \label{eq:BSMGreeks}
-  \end{equation}
-\end{center}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: The delta hedging rules
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The delta hedging rules}
-\label{sec:bsm:delta:hedge}
-
-The purpose of the delta hedging rules is to fully replicate the reverse position taken in an option in order to cover oneself against lost. The technique is achieved by continuously rebalancing its position in order to keep an amount of $\Delta(t)$ share of stock at each time $t$.
-
-One scenario could be the following. One party write an option at some initial time $t_0$ at a certain price (given by the Black--Scholes--Merton equation (REF)) $X(0)$, and he / she puts that earning money into a bank account, in which the annual interest rate in action is given by $r$.
-
-\begin{align}
-X(0) = BSM(S_0, T, \sigma, k)
-\end{align}
-
-Incidentally, following (EQUATION DELTA), he / she computes the delta at time zero and buys exactly that amount of share of stock. Additionaly, he / she divides the whole time frame into $n$ smaller time steps $\delta t$ in order to subsequently rebalance its position in the stock, according to the evolution of the underlying.
-
-\begin{align}
-\left\{
-  \begin{array}{l}
-    p(0) = \Delta(t_0) S(t_0) \\
-    p(1) = \left(\Delta(t_1) - \Delta(t_0) \right) S(t_1) \\
-    p(2) = \left(\Delta(t_2) - \Delta(t_1) \right) S(t_2) \\
-    \vdots \\
-    p(i) = \left(\Delta(t_i) - \Delta(t_{i + 1}) \right) S(t_i) \\
-    \vdots \\
-    p(n) = \left(\Delta(t_i) - \Delta(t_{n + 1}) \right) S(t_n) \\
-  \end{array}
-\right.
-\end{align}
-
-Finally, to see if the hedge works, we value all operation made up to T and sum the whole part
-
-\begin{align}
- \left\{
-  \begin{array}{l}
-    P(0) = p(0) e ^{r \times (T - t_0)} = p(0) e ^{r \times T} \\
-    P(1) = p(1) e ^{r \times (T - t_1)} \\
-    P(2) = p(2) e ^{r \times (T - t_2)} \\
-    \vdots \\
-    P(i) = p(i) e ^{r \times (T - t_i)} \\
-    \vdots \\
-    P(n) = p(n) e ^{r \times (T - t_n)} = p(n) \\
-  \end{array}
-\right.
-\end{align}
-
-Now we get the valued portfolio, we have to compare it with something. At the beging we got an amount of money, priced at $X(0)$ which were the Black -- Scholes -- Merton Price. This amount of money has been put in a money market account with an interest rate of $r$. 
-At maturity we therefore get the amout of money given by (REFENCE EQUATION).
-
-\begin{align}
-  X(T) = X(0)  e ^{r T}
-\end{align}
-
-At maturity, another operation occurs. If the option is in-the-market, it will be exercised and furthermore $\Delta(T) = 1$, meaning that we have one share of stock to honour the transaction. In exchange we get \$$K$ from the counterparty. It means that in the end we have a positive amount of:
-
-\begin{align}
-  X(T) + \Delta(T) * k
-\end{align}
-
-Consequently to check if the hedge works well, we should get the following relation:
-
-\begin{align}
- \sum_{i = 0}^{n = T} P(i) \cong X(T) + \Delta(T) * k
-\end{align}
-
-Because the position could vary, we have to adapt the relation above (REF) in order to remove all unit from the comparison.
-According to hull, a measure of performance of the hedge could be to take the ratio of the standard deviation of the cost to hedge to the option price. In that case, the measure could be comparated among themselve even if the position taken into the underlying difer.
-
-\begin{align}
-  \frac{sd(hedge)}{C_0 e ^{r T}}
-  \label{bsm:delta:hedge:perf}
-\end{align}
-where hedge is a vector containing $n$ sample generated, and $C_0$ is the price of the call option at time zero value up to maturity.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER:Other Models to be considered
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Other Models to be considered}
-\label{cha:OtherModel}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sub:OverviewJump}
-% Jump processes could be separated into two different category. 
-% In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
-% Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
-% In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
-% The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Mixed jump-diffusionModel
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Merton Mixed jump-diffusion Model}
-\label{sec:other:merton}
-
-In his paper, \citet{merton76} provides a model for stock price evolution involving jumps (\cref{eq:other:merton:pde}). 
-
-
-\begin{align}
-  \St &= S\left(0\right) e^{\left(\alpha - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
-  \label{eq:other:merton:pde}
-\end{align}
-  
-According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:other:merton:pde}). 
-The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:Scontinuous}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
-Another type of changes, occuring during the stock lifecycle, are qualified as abnormal. Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effect on the stock price by giving rise to jumps in the course of stock path and therefore breaking its continuity (\citet{merton76}). The jump process is constructed on double basis. 
-
-Firstly, the occurence (i.e. the number of jumps arising throughout a given period of time) is computed thanks to a Poisson--driven process according to a parameter $\lambda$. 
-$\lambda$ denotes the number of jumps per unit of time. Consequently, the probability that a jump occurs during a time range of $\Delta t$ is equal to $\lambda dt$ (event $A$, eq. \ref{eq:PA}), whereas the probability that there are no jump during the same range of time is $1 - \lambda dt$, (event $B$, eq. \ref{eq:PB}) (\citet{matsuda2004}). While C, eq. \ref{eq:PC}, refers to the event that more than one jump occur during the same small delta time.
-
-\begin{align}
-  \mathop{\mathbb{P}} \{A\}&\cong \lambda dt  \label{eq:PA}\\
-  \mathop{\mathbb{P}} \{B\}&\cong 1 - \lambda dt  \label{eq:PB}\\
-  \mathop{\mathbb{P}} \{C\}&\cong   0 \label{eq:PC}
-\end{align}
-
-On the other hand, after the occurence comes the size of the jump. Such as the frequency, the importance of the jump can be characterized by a statistic law. Following \citet{heston}, the log--normal law is used. \citet{matsuda2004}, gives a summary in oder to grips with the concept of jump size  \crefrange{eq:yt}{eq:lny}.
- 
-\begin{align}
-  y_t  &\sim lognormal( e^{\mu + \frac{1}{2} \delta^2}, 
-                        e^{2 \mu + \delta ^2} (e^{\delta^2} - 1)) 
-  \label{eq:yt} \\
-  y_t - 1 &\sim lognormal( \kappa \equiv e^{\mu + \frac{1}{2} \delta^2} - 1, 
-                        e^{2 \mu + \delta ^2} (e^{\delta^2} - 1)) 
-  \label{eq:ytminus1} \\
-  \ln{y_t} &\sim normal(\mu, \delta^ 2)
-  \label{eq:lny}
-\end{align}
-with $y_t$, $y_t - 1$ and $\ln{y_t} \equiv Y_t$ standing respectively for "absolute price jump size", "relative price jump size" and "log price jump size" (\citet{matsuda2004}).
-
- 
-The Merton's jump-diffusion process is be able to capture positive / negative skewness (see \cref{sub:MertonSkewness}) and excess kurtosis (see \cref{sub:MertonKurtosis}) of the log--return density function \citet{merton76}. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Risk-neutralized process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Risk-neutralized process}
-\label{sub:other:merton:risk}
-
-In order to find the fair price of an option depending on an underlying that follows such a jump-diffusion process, \citet{merton76} turns \cref{eq:other:merton:pde} into one risk-neutral.
-
-\begin{align}
-  \St &= S\left(0\right) e^{\left(r - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
-  \label{eq:other:merton:pde:riskneutral}
-\end{align}
-
-\citet{merton76} argues in his paper that the jump component of \cref{eq:other:merton:pde} can be diversified in a well-balanced portfolio and consequently does not need to be risk-neutralized.
-
-However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:merton:pde} is risk-neutralized by turning the rate $\alpha$ into its riskfree counterpart $r$, as shown by \cref{eq:other:merton:pde:riskneutral}.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Graphical representation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Graphical representation}
-\label{sub:other:merton:graphical}   
-
-\Cref{p:other:merton:path} shows a unique time serie generated using an implementation of \cref{eq:other:merton:pde}. A jump is clearly noticed at day 363. While
-\Cref{t:other:merton:path}, which is a subset of the time serie drawn in \cref{p:other:merton:path}, illustrates numerically when the jump occurs.
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{ll}
-  \hline
- time periods (days)& stock price\\ 
-  \hline
-  0   &50.00 \\ 
-  1   &49.72 \\ 
-  2   &49.87 \\ 
-  \vdots & \vdots \\
-  323 &83.44 \\ 
-  324 &94.98 \\ 
-  \vdots & \vdots \\
-  363 &97.41 \\ 
-  364 &97.07 \\ 
-  365 &97.00 \\ 
-   \hline
-\end{tabular}
-\caption{Merton Mixed jump-diffusion time serie}
-\label{t:other:merton:path}
-\end{table}
-
-\begin{figure}[ht]
-  \centering
-  \input{figures/merton.path.tex} 
-  \floatfoot{Simulation of one Merton mixed jump-diffusion time serie. Data have been output by the R function \textit{sstoch\_jump()} which is an implementation of equation \cref{eq:other:merton:pde} (see appendix \ref{sub:r:time:merton}, for more information). The parameters passed to the function are:  $S(0) = 50$,   $T = 1$ (in year, along with a time step of 365 measures per year),  $\sigma = 0.2$, $\alpha = 0.5$,  $\lambda = 2$,  $\mu = 0.05$, and $\delta = 0.1$.}
-  \caption{Merton mixed jump-diffusion time serie}
-  \label{p:other:merton:path}
-\end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Skewness
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on the skewness log--return}
-\label{sub:MertonSkewness}
-
-The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. The figure [REF] shows how the density's shape of the log--return may vary along with this parameter.
-
-
-\begin{figure}[ht]
-\centering
-\input{figures/MertonJumpReturn.tex}
-\caption{Merton: Daily Basis Stock Return Density}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
-}
-\label{plot:MertonReturnDensity}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: kurtosis
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on kurtosis log--return}
-\label{sub:MertonKurtosis}
-
-The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
-
-\begin{figure}[ht]
-\centering
-\input{figures/MertonJumpReturnTails.tex}
-\caption{Merton: Daily Basis Stock Return Density}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
-}
-\label{plot:MertonReturnDensityTails}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Heston stochastic volatility model
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Heston stochastic volatility model}
-\label{sec:other:heston}
-
-In his paper, \citet{heston1993} tackles with another discrepancy against the real world behaviour introduced by the geometric Brownian motion, namely, its deterministic and immutable volatility $\sigma$.
-
-In addition to provide a model where the volatility is stochastic (\cref{eq:other:hsvvol}), \citet{heston1993} gives the possibility to make that volatility in correlation with the stock price process (\cref{eq:other:hsvstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relates together.
-
-\begin{align}
-    \HSVvol \label{eq:other:hsvvol} \\
-    \HSVstock \label{eq:other:hsvstock} \\
-    \intertext{
-    The drift part of the risk stochastic process (\ref{eq:other:hsvvol} is made up of the long--run mean $\theta$ togehter with the mean reversion speed, given by $\kappa$, \citet{heston1993}.
-    }
-    d\Bmsub{v} d\Bmsub{s} &= \rho \label{eq:other:rho}
-\end{align}
-
-\Cref{eq:other:hsvstock} represents the evolution of an asset though time given, by its differential form. Such as \cref{eq:underlying:geometric:closed}, developed by \citet{bs}, the parameter $\alpha$ gives the drift rate of return. The difference between both models lies in the way the volatility is perceived. In \citet{heston1993}, the asset volatility is given by the stochastic \cref{eq:other:hsvvol}. More specifically, the volatility thus defined follows a Cox--Ingersoll--Ross process.
-
-\Crefrange{eq:other:hsvvol}{eq:other:hsvstock} will be used to build Monte Carlo simulations with the goal of getting samples of dummy stock price motions under real--world assumptions. The framework to use for option pricing purpose is given in \cref{sub:other:heston:risk}.
-
-\subsection{Model parameters}
-\label{sub:other:heston:model}
-
-Here are described all the parameters appearing in the Heston stochastic volatility model.
-
-\begin{tabular}{ll}
-  $S(t)$ & Price of the stock at time t \\
-  $\alpha$ &  Annualized -- and deterministic -- expected return \\
-  $V(t)$ & Observed volatility of the stock at time t \\
-  $\kappa$ & Mean-reversion speed \\
-  $\theta$ & Volatility's long-run mean \\
-  $\sigma$ & Volatility of the volatility 
-\end{tabular}
-
-\subsection{Feller condition}
-\label{sub:other:heston:feller}
-
-Due to the time discretisation brung by The Monte Carlo simulation, the stochastic process \ref{eq:other:hsvvol} may turn out to be negative sometime. If such a negative value is appear at time $t$, the next value computed for $t+\epsilon$ will raise an error, due to the term $\sqrt{V(t)}$ that obviously does not exist for negative value.
-
-In his paper, \citet{feller1951} demonstrates that a process such the one described by \cref{eq:other:hsvvol} does not reach negative value if the following relation \ref{eq:other:feller} is respected.
-
-\begin{align}
-  &\lim_{V\to 0} \left( \kappa \theta - V - \frac{1}{2} \frac{\partial(\sigma \sqrt{V})^2}{\partial V} \right) \geq 0 \label{eq:other:feller} \\
-  \iff &\lim_{V\to 0} \left( \kappa \theta - V - \frac{1}{2} \sigma^2 \right) \geq 0 \notag \\
-  \iff &\kappa \theta  - \frac{1}{2} \sigma^2  \geq 0 \notag \\
-  \iff & 2 \kappa \theta  - \sigma^2  \geq 0 \label{eq:other:feller:heston}
-\end{align}
-
-Consequently, if the condition related by \cref{eq:other:feller:heston} is respected, no negative values would occur by using a Monte Carlo simulation to compute the CIR stochastic volatility.
-
-\subsection{Risk--neutralized processes}
-\label{sub:other:heston:risk}
-
-Likewise it has been done by \citet{bs}, \citet{heston1993} used a risk-neutral framework to price options.
-To do so, Heston modified the drift parameters of both price and volatility stochastic processes.
-
-The drift part of the price diffusion (\cref{eq:other:hsvstock}) is risk--neutralized by turning the rate $\alpha$ into its riskless counterpart $r$, as shown by \cref{eq:other:hsvstock:riskless}.
-
-\begin{align}
-    \HSVstockriskless \label{eq:other:hsvstock:riskless}
-\end{align}
-
-In order to make the volatility process risk--neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. The risk--neutralized CIR process is given by cref{eq:other:hsvvol:riskless}.
-
-\begin{align}
-    \HSVvolriskless \label{eq:other:hsvvol:riskless} \\
-    \intertext{where}
-    \kappa^{*} & = \kappa + \lambda \label{eq:other:kappa:riskless} \\
-    \intertext{and}
-    \theta^{*} & = \frac{\kappa \theta}{\kappa^{*}} \label{eq:other:theta:riskless}
-\end{align}
-
-Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively denote the long--run mean and mean--reversion speed, are the ones to estimate while dealing with pricing options purposes. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Graphical representation
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Graphical representation}
-\label{sub:other:heston:graphical}   
-
-Figures \ref{p:other:uncorrelatedheston} and \ref{p:other:correlatedheston}, get a hands-on insight into how the correlation between the underlying Brownian motions of the stock and volatility time series affect both processes.
-\cref{p:other:uncorrelatedheston} shows a correlation between the Wiener processes $B_1$ and $B_2$ sets to $\rho = -1$, making the two Markov motions perfectly negatively correlated. 
-It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
-Likewise, \cref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \ref{eq:other:hsvvol} and \ref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
-
-\begin{figure}[ht]
-\centering
-\input{figures/UncorrelatHeston.tex} 
-\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = -1$. 
-} 
-\caption{Heson Framework Using Negative Correllated Brownian Motions}
-\label{p:other:uncorrelatedheston}
-\end{figure}
-
-
-\begin{figure}[ht]
-\centering
-\input{figures/correlatHeston.tex}
-\caption{Heson Framework Using Positive Correllated Brownian Motion}
-\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = 1$.
-}
-\label{p:other:correlatedheston}
-\end{figure}
-
-
-
-The usage of the aforementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
-It may consequently be consistent with what happens in the equity market, namely a sharp decrease in equity price implies an increase in stock volatility (\citet{criso2015}).
-% Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Impact on skewness density return
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on log--return density's skewness}
-\label{sub:hestonskewness}
-
-Through the Heston stochastic volatility model, the skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$. 
-
-When a positive correlation exists between both Brownian motions, an increase in the volatility implies a rise in the asset price whereas a decrease in the volatility tend to lower the asset price.
-In other words, when the uncertainty is high and consequently the changes in the asset price are numerous, these latter tend to be positive. 
-That is why the distribution of the spot return is offset to the left with a right fat tail when $\rho$ is positive.
-
-The opposite relation is noticed with negative correlation, namely, lower prices relate to higher volatility generating a left fat tail in the log–return distribution (\citet{heston1993}).
-These statements are observed in \cref{p:other:heston:skewness}.
-
-
-
-\begin{figure}[ht]
-\centering
-\input{figures/skewnessHeston.tex}
-\caption{Merton: Log--return skewness on Heston}
-\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
-All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information).
-The only parameter that changes over the groups is $\rho$ which is set to $-0.5$, $1$, $0.5$. The log-return densities of these groups are respectively represented by the red, green and blue outlined density functions. 
-The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
-}
-\label{p:other:heston:skewness}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Impact on kurtosis density return
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on kurtosis density return}
-\label{sub:hestonkurtosis}
-
-Following \citet{heston1993}, the kurtosis of the distribution of the spot return may be affected by the parameter $\sigma$, which represent the volatility of the volatility.
-
-First and foremost, following \cref{eq:other:hsvvol} if $\sigma = 0$, the volatility V of the Heston model turns out to be deterministic and \cref{eq:other:hsvstock}  becomes a geometric Brownian motion with normal distribution for the time series' log-returns.
-Otherwise, \citet{heston1993} showed that by rising $\sigma$, the kurtosis of the spot returns increases. Consequently, within the Heston stochastic volatility model, the bigger $\sigma$, the fatter the tail, ceteris paribus. These statements are observed in \cref{p:other:heston:kurtosis}.
-
-\begin{figure}[ht]
-\centering
-\input{figures/density.heston.kurtosis.tex}
-\caption{Merton: Log--return skewness on Heston}
-\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
-All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information). The only parameter that changes over the groups is $\sigma$ which is set to 0, 0.2, 0.4. The log-return densities of these groups are respectively represented by the green, blue and red outlined density curves. 
-The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
-}
-\label{p:other:heston:kurtosis}
-\end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Option pricing method
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Option pricing method}
-\label{sec:other:option}
-
-As shown by \cref{sec:other:merton} and \cref{sec:other:heston}, the frameworks developed by \citet{merton76} and \citet{heston1993} drastically change the distribution of any underlying assets following such processes. Therefore, the pricing method to be used must also be adapted in order to take that update into account.
-
-In his paper, \citet{heston1993} developed a techinque to price options using the characteristic function of the underlying asset. Furthermore, according to \citet{criso2015} that method could be used to price every options provided that the underlying's characteristic  is known.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Probabilistic approach
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Probabilistic approach}
-\label{sub:other:option:probabilistic}
-
-\citet{heston1993} proposed the solution given by \cref{eq:other:call:heston} to price a european call option.
-
-\begin{align}
-  C(t) = S(t) P_1 - e^{-r(T-t)} K P_2 \label{eq:other:call:heston}
-\end{align}
-
-Through this method, the european call price at time $t$, namely $C(t)$, is computed thanks to \cref{eq:other:call:heston}, where $S(t)$ and $e^{r(T - t)}$ respectively stand for the stock price and the present value of the strike at that time $t$.
-
-\begin{align}
-  P_1(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi - i)}{i\phi\psi(x,V,t;-i)} \right) d\phi \label{eq:other:call:heston:pi1} \\ 
-  \intertext{}
-  P_2(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi)}{i\phi} \right) d\phi \label{eq:other:call:heston:pi2}
-\end{align}
-
-Following the development in \citet{criso2015}, \Cref{eq:other:call:heston:pi} both are probability quantities that involve the underlying characteristic function, namely $\psi(x,V,t;\phi)$. Once these quantities are computed, they are substituted in \cref{eq:other:call:heston} in order to get the call price at time $t$.
-
-The characteristic functions for the Merton jump--diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Characteristic function for Merton Mixed jump--diffusion model
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Characteristic function for Merton Mixed jump--diffusion model}
-\label{sub:other:option:merton}
-
-\citet{matsuda2004} demonstrates that the characteristic function of the Merton mixed jump-diffusion process is given by \cref{eq:other:merton:psi}. The baseline equation to construct the Merton's process characteristic function is the risk-neutralized version, namely \cref{eq:other:merton:pde:riskneutral}.
-
-\begin{align}
-\psi^{merton}(\phi) &= e^{ 
-  \lambda (T - t) \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
-  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) (T - t) \right) -
-  \sigma^2 \frac{\phi^2}{2} (T - t)
-}
-\label{eq:other:merton:psi} \\
-\intertext{where}
-\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
-\end{align}
-  
-According to the method given by \citet{heston1993}, the characteristic function \ref{eq:other:merton:psi} will be used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Merton mixed jump--diffusion model.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Characteristic function for Heston stochastic volatility model
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Characteristic function for Heston stochastic volatility model}
-\label{sub:other:option:heston}
-
-Following the development proposed by \citet{gatheral2006}, \citet{criso2015} provided the Heston characteristic function (\cref{eq:other:heston:psi}) based on the process $\ln S(t)$.
-
-\begin{align}
-  &\psi^{heston}\left(\ln(S(t)),V(t),t;\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \label{eq:other:heston:psi} \\
-  \intertext{where}
-  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
-  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
-  \intertext{and}
-  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
-  &g = \frac{r_{-}}{r_{+}} \notag \\
-  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
-\end{align}
-
-\Cref{eq:other:heston:psi} can be directly used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Heston stochastic volatility model.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% \SweaveInput{upstream}
+% \SweaveInput{underlying}
+% \SweaveInput{BSM}
+% \SweaveInput{models}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  CHAPTER:Methodology
@@ -1734,362 +458,176 @@ Consequently, the set \ref{eq:methodology:arg:heston:riskaverse} is the one I wi
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEC: DELTA HEDGING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Delta hedging}
+\label{sec:methodology:delta}
+
+In order to measure the hedging performance of the MJD and HSV models, I will (i) compute the prices of some options and then virtually sell them at that price, (ii)  construct the delta-neutral portfolio at time zero and thereafter continuously rebalance it, in accordance with the underlying asset price evolutions and (iii) measure the overall cost of the hedge as a performance indicator.
 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of the option price}
+\label{sec:methodology:determination}
 
+The computation of the option price at time zero will depend on the underlying model to be hedged.
+Indeed, the function \textit{mjd\_call} will be used to price options for which the underlying asset price evolution is driven by the MDJ model, whereas \textit{mjd\_call} will be used for HSV processes.
 
+As explain as an introduction, I will virtually sell the options I price.
+Therefore, as the writer of the options, I will raise \$ $X(0) = C_K^{m/h} (0)$.
+That cash will directly be put into a money market account to make it grow at a constant riskless rate all along the duration of the hedging process, namely, during the whole life of the option.
 
-
-
-
-
-
-
-
-
-\begin{appendices}
-\chapter{R functions catalogue}
-\label{cha:r}
-
-
-For this master thesis, I created two R packages to help me in the analysis and in the related experiments. These packages are available, under open-source software license, through my GitHub account. Names are ”Random walk”  (https://github.com/AnthonyTedde/RandomWalk) and ”Stock price simulator” (https://github.com/AnthonyTedde/StockPriceSimulator).
-
-The R package ”Random walk” contains functions that simulate time-discretized Brownian motions. It is widely used inside ”Stock price simulator”, mainly to add noise in the simulation of stock price time series. 
-
-Unlike "Random walk", the package "Stock price simulator" is more multipurpose. The algorithms I developed inside range from the simulation of stock price path to the computation of option fair price and include hedging strategies, Greeks computation, Itô's approximation, characteristic functions and so on.
-
-\Cref{sec:r:time} describes the functions inside the ”Stock price simulator” package that simulate time series by using a time discretization approximation.
-
-\section{Time series simulation}
-\label{sec:r:time}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% GBM
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Geometric Brownian motion}
-\label{sub:r:time:geometric}
-
-Based on \cref{eq:underlying:geometric:closed}, this function provides one possible path of a time-discretized version of the geometric Brownian motion.
-It outputs a R data.frame comprised of two columns, namely "time\_periods" and "stock\_price\_path", which respectively denotes the period expressed in year and the corresponding value of the stock at that time.
-
-\subsubsection*{function}
-
-\begin{Schunk}
-\begin{Sinput}
-> sstock(initial_stock_price, time_to_maturity, 
-        seed, scale, sigma, alpha)
-\end{Sinput}
-\end{Schunk}
-
-\subsubsection*{Arguments}
-
-\begin{tabularx}{\textwidth}{lX}
-  initial\_stock\_price & Price of the stock at time zero.\\
-  time\_to\_maturity & Duration of the simulation, expressed in year.\\
-  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
-  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
-  sigma & Annualized volatility rate. \\
-  alpha & Annualized drift rate.
-\end{tabularx}
-
-\subsubsection*{examples}
-\label{sec:r:time:geometric:ex}
-
-\begin{Schunk}
-\begin{Sinput}
-> s <- sstock(initial_stock_price = 100,
-        time_to_maturity = 1,
-        seed = 1,
-        scale = 52,
-        sigma = .2,
-        alpha = .15)
-\end{Sinput}
-\end{Schunk}
-
-
-\begin{Schunk}
-\begin{Sinput}
-> print(s)
-\end{Sinput}
-\end{Schunk}
-
-\begin{table}[H]
-\begin{tabular}{cc}
-  \hline
- time\_periods (Year) & stock\_price\_path \\ 
-  \hline
- 0.00 & 100.00 \\ 
- 0.02 & 98.52 \\ 
- 0.04 & 99.27 \\ 
- 0.06 & 97.24 \\ 
- 0.08 & 101.90 \\ 
- \vdots & \vdots \\
- 0.88 & 122.33 \\ 
- 0.90 & 123.88 \\ 
- 0.92 & 126.87 \\ 
- 0.94 & 126.79 \\ 
- 0.96 & 130.25 \\ 
- 0.98 & 132.03 \\ 
- 1.00 & 130.13 \\ 
-   \hline
-\end{tabular}
-\caption{A sample of time-discretized geometric Brownian motion}
-\end{table}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Merton
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Merton Mixed jump-diffusion}
-\label{sub:r:time:merton}
-
-Based on \cref{eq:other:merton:pde}, this function provides one possible path of a time-discretized version of the Merton Mixed jump-diffusion model.
-It outputs a R data.frame comprised of three columns. 
-There are "time\_periods" ,"stock\_price\_path" which respectively denotes the period expressed in year and the corresponding values of the stock at that time.
-In addition, the variable "grp" stand for "group" and allows to regroup the time series by jumps. Hunder the hood, a number, which is initialized to 0, is incremented as soon as a jump occurs, in this way, a whole series with the same number means that no jump occurred during its course.
-
-\subsubsection*{function}
-
-\begin{Schunk}
-\begin{Sinput}
-> sstock_jump(initial_stock_price, time_to_maturity, 
-        seed, scale, sigma, alpha, lambda, jumps_intensity_parameters)
-\end{Sinput}
-\end{Schunk}
-
-\subsubsection*{Arguments}
-
-\begin{tabularx}{\textwidth}{lX}
-  initial\_stock\_price & Price of the stock at time zero.\\
-  time\_to\_maturity & Duration of the simulation, expressed in year.\\
-  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
-  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
-  sigma & Annualized volatility rate. \\
-  alpha & Annualized drift rate.\\
-  lambda & Annualized jump frequency. \\
-  jumps\_intensity\_parameters & List containing the parameters of the jump intensity. 
-\end{tabularx}
-
-\subsubsection*{examples}
-\label{sec:r:time:geometric:ex}
-
-\begin{Schunk}
-\begin{Sinput}
-> s <- sstock_jump(initial_stock_price = 100,
-                  time_to_maturity = 1,
-                  seed = 1,
-                  scale = 52,
-                  sigma = .2,
-                  alpha = .15,
-                  lambda = 5,
-                  jumps_intensity_parameters = list(mean = .15, sd = .2))
-\end{Sinput}
-\end{Schunk}
-
-
-\begin{Schunk}
-\begin{Sinput}
-> print(s)
-\end{Sinput}
-\end{Schunk}
+The T-bills will serve as riskless rate. According to the available data on \url{https://www.treasury.gov/}, quotes of these are given by \cref{tab:methodology:Tbill}.
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{lll}
+\begin{tabular}{cccc}
   \hline
- time\_periods & stock\_price\_path &  grp \\ 
+  \multicolumn{4}{c}{T-bills} \\
   \hline
-   0.00 &100.00 &  0 \\ 
-   0.02 &96.78  &  0 \\ 
-   0.04 &95.80  &  0 \\ 
-   0.06 &92.18  &  0 \\ 
-   0.08 &94.89  &  0 \\ 
-   0.10 &94.30  &  0 \\ 
-   0.12 &90.78  &  0 \\ 
-   0.13 &102.05 &  1 \\ 
- \vdots & \vdots & \vdots \\
- 0.96 &55.02  &  3 \\ 
- 0.98 &54.78  &  3 \\ 
- 1.00 &53.04  &  3 \\ 
-   \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.66\% & 1.90\% & 2.09\% & 2.30\% \\
+  \hline
 \end{tabular}
-\caption{A sample of time-discretized Merton Mixed jump-diffusion}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill}
 \end{table}
 
+The rates of \cref{tab:methodology:Tbill} are annual-base, consequently to get their countinuously compounded counterpart, EQUATION X can be used to give those given by \cref{tab:methodology:Tbill:compound}.
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Heston
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Heston stochastic volatility}
-\label{sub:r:time:heston}
-
-Based on \cref{eq:other:hsvvol,eq:other:hsvstock,eq:other:rho}, this function provides one possible path of a time-discretized version of the Heston stochastic volatility model.
-It outputs a R data.frame comprised of five columns. 
-There are "time\_periods" ,"stock\_price\_path" and "CIR", which respectively denotes the period expressed in year the corresponding values of the stock and of the volatility at that time.
-In addition, the two more variables ”B1” and ”B2” stand for the Brownian motions that bring the noise in both stochastic processes $S(t)$ and $V(t)$.
-
-\subsubsection*{function}
-
-\begin{Schunk}
-\begin{Sinput}
-> heston(initial_stock_price, initial_volatility, time_to_maturity, 
-        seed, scale, alpha, rho, kappa, theta, sigma)
-\end{Sinput}
-\end{Schunk}
-
-\subsubsection*{Arguments}
-
-\begin{tabularx}{\textwidth}{lX}
-  initial\_stock\_price & Price of the stock at time zero.\\
-  initial\_volatility & Volatility of the stock at time zero.\\
-  time\_to\_maturity & Duration of the simulation, expressed in year.\\
-  seed & Parameter that fixes initial value of the pseudo random number generation in order to get reproducible experiment. \\
-  scale & Number of time steps. For instance scale = 365 would mean daily measurement.\\
-  alpha & Annualized drift rate. \\
-  rho & Correlation between the Stock price and volatility processes.\\
-  kappa & Mean-reversion speed. \\
-  theta & Volatility's long-run mean. \\
-  sigma & Volatility of the volatility. 
-\end{tabularx}
-
-\subsubsection*{examples}
-\label{sec:r:time:geometric:ex}
-
-\begin{Schunk}
-\begin{Sinput}
-> s <- heston(initial_stock_price = 100,
-             initial_volatility = .2,
-             time_to_maturity = 1,
-             seed = 1,
-             scale = 52,
-             alpha = .15,
-             rho = -.8,
-             kappa = 2,
-             theta = .2,
-             sigma = .1)
-\end{Sinput}
-\end{Schunk}
-
-
-\begin{Schunk}
-\begin{Sinput}
-> print(s)
-\end{Sinput}
-\end{Schunk}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{lllll}
-  \hline
- time\_periods & stock\_price\_path & B1 & B2 & CIR \\ 
-  \hline
-  0.00 & 100.00 & 0.00 & 0.00 & 0.20 \\ 
-  0.02 & 96.40 & -0.09 & 0.10 & 0.20 \\ 
-  0.04 & 97.79 & -0.06 & -0.02 & 0.20 \\ 
-  0.06 & 93.02 & -0.18 & 0.20 & 0.21 \\ 
-  0.08 & 102.68 & 0.04 & 0.18 & 0.21 \\ 
-  \vdots &\vdots &\vdots &\vdots &\vdots\\
-  0.92 & 142.21 & 0.59 & 0.03 & 0.20 \\ 
-  0.94 & 141.64 & 0.57 & -0.01 & 0.20 \\ 
-  0.96 & 149.70 & 0.70 & -0.10 & 0.19 \\ 
-  0.98 & 153.75 & 0.75 & -0.22 & 0.19 \\ 
-  1.00 & 148.56 & 0.67 & -0.14 & 0.19 \\ 
-   \hline
-\end{tabular}
-\caption{A sample of time-discretized Heston stochastic volatility process}
-\end{table}
-
-
-
-
-\chapter{Market data}
-\label{cha:appendix:market}
-
-\section{Apple option price}
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{|lllll|lllll|}
+\begin{tabular}{cccc}
   \hline
-  \multicolumn{5}{|c|}{63 days to maturity} & \multicolumn{5}{c|}{91 days to maturity} \\
+  \multicolumn{4}{c}{T-bills} \\
   \hline
-  Strike & Last & Bid & Ask & Mid-price & Strike & Last & Bid & Ask & Mid-Price \\
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.659\% & 1.896\% & 2.068\% & 2.274\% \\
   \hline
-  130.00 & 58.00 & 56.55 & 57.25 & 56.90 &   130.00 & 56.70 & 56.80 & 57.50 & 57.15 \\ 
-  140.00 & 47.54 & 46.65 & 47.35 & 47.00 &  140.00 & 47.10 & 46.95 & 47.65 & 47.30 \\ 
-  150.00 & 37.75 & 36.80 & 37.45 & 37.12 &  150.00 & 38.78 & 37.25 & 37.90 & 37.58 \\ 
-  160.00 & 27.91 & 27.10 & 27.70 & 27.40 &  160.00 & 29.03 & 27.85 & 28.45 & 28.15 \\ 
-  170.00 & 18.30 & 17.90 & 18.10 & 18.00 &  170.00 & 19.59 & 19.20 & 19.45 & 19.32 \\ 
-  180.00 & 9.85 & 9.80 & 9.90 & 9.85 &  180.00 & 12.00 & 11.80 & 11.90 & 11.85 \\ 
-  190.00 & 4.02 & 4.00 & 4.05 & 4.03 &  190.00 & 6.25 & 6.15 & 6.25 & 6.20 \\ 
-  200.00 & 1.18 & 1.15 & 1.18 & 1.16 &  200.00 & 2.75 & 2.70 & 2.73 & 2.71 \\ 
-  210.00 & 0.32 & 0.29 & 0.31 & 0.30 &  210.00 & 1.07 & 1.01 & 1.06 & 1.04 \\ 
-  220.00 & 0.11 & 0.10 & 0.13 & 0.12 &  220.00 & 0.42 & 0.37 & 0.42 & 0.40 \\
-  \hline
-  \multicolumn{5}{|c|}{126 days to maturity} & \multicolumn{5}{c|}{154 days to maturity} \\
-    \hline
-  Strike & Last & Bid & Ask & Mid-Price & Strike & Last & Bid & Ask & Mid-Price \\
-  \hline
-  130.00 & 56.00 & 56.80 & 57.60 & 57.20 &  130.00 & 57.50 & 57.00 & 57.75 & 57.38 \\ 
-  140.00 & 48.42 & 47.05 & 47.85 & 47.45 &  140.00 & 50.73 & 49.20 & 49.90 & 49.55 \\ 
-  150.00 & 38.90 & 37.55 & 38.20 & 37.88 &  150.00 & 37.80 & 37.90 & 38.60 & 38.25 \\ 
-  160.00 & 29.68 & 28.35 & 28.95 & 28.65 &  160.00 & 30.20 & 29.00 & 29.55 & 29.27 \\ 
-  170.00 & 20.25 & 20.10 & 20.30 & 20.20 &  170.00 & 21.45 & 21.05 & 21.20 & 21.12 \\ 
-  180.00 & 13.00 & 12.95 & 13.05 & 13.00 &  180.00 & 14.84 & 14.05 & 14.20 & 14.12 \\ 
-  190.00 & 7.63 & 7.45 & 7.55 & 7.50 &  190.00 & 8.65 & 8.55 & 8.70 & 8.62 \\ 
-  200.00 & 3.80 & 3.75 & 3.80 & 3.77 &  200.00 & 4.75 & 4.65 & 4.80 & 4.72 \\ 
-  210.00 & 1.70 & 1.67 & 1.72 & 1.69 &  210.00 & 2.35 & 2.32 & 2.40 & 2.36 \\ 
-  220.00 & 0.81 & 0.71 & 0.75 & 0.73 &  220.00 & 1.14 & 1.08 & 1.16 & 1.12 \\ 
-  \hline
-  \multicolumn{5}{|c|}{182 days to maturity} & \multicolumn{5}{c|}{245 days to maturity} \\
-  \hline
-  Strike & Last & Bid & Ask & Mid-Price & Strike & Last & Bid & Ask & Mid-Price \\
-  \hline
-  130.00 & 60.25 & 59.05 & 60.05 & 59.55 &  130.00 & 58.37 & 57.35 & 58.60 & 57.98 \\ 
-  140.00 & 49.90 & 47.75 & 48.45 & 48.10 &  140.00 & 48.30 & 48.15 & 49.35 & 48.75 \\ 
-  150.00 & 40.50 & 38.55 & 39.20 & 38.88 &  150.00 & 39.75 & 39.25 & 40.35 & 39.80 \\ 
-  160.00 & 30.60 & 29.90 & 30.45 & 30.17 &  160.00 & 31.34 & 31.35 & 31.90 & 31.62 \\ 
-  170.00 & 22.28 & 22.15 & 22.40 & 22.27 &  170.00 & 23.75 & 23.65 & 24.00 & 23.82 \\ 
-  180.00 & 16.25 & 15.40 & 15.65 & 15.53 &  180.00 & 17.57 & 17.15 & 17.30 & 17.23 \\ 
-  190.00 & 10.20 & 10.00 & 10.20 & 10.10 &  190.00 & 11.90 & 11.80 & 11.95 & 11.88 \\ 
-  200.00 & 6.10 & 6.00 & 6.15 & 6.08 &  200.00 & 7.80 & 7.65 & 7.80 & 7.72 \\ 
-  210.00 & 3.74 & 3.35 & 3.50 & 3.42 &  210.00 & 4.90 & 4.75 & 4.85 & 4.80 \\ 
-  220.00 & 1.80 & 1.76 & 1.87 & 1.81 &  220.00 & 2.95 & 2.80 & 2.93 & 2.87 \\  
-  \hline
-  \multicolumn{5}{|c|}{399 days to maturity} \\
-  \cline{1-5}
-  Strike & Last & Bid & Ask & Mid-Price \\
-  \cline{1-5}
-  130.00 & 60.00 & 58.00 & 62.00 & 60.00 \\ 
-  140.00 & 50.50 & 49.00 & 53.50 & 51.25 \\ 
-  150.00 & 43.75 & 40.40 & 44.80 & 42.60 \\ 
-  160.00 & 36.45 & 33.55 & 36.55 & 35.05 \\ 
-  170.00 & 28.00 & 26.50 & 29.35 & 27.93 \\ 
-  180.00 & 23.20 & 21.70 & 22.25 & 21.98 \\ 
-  190.00 & 17.05 & 16.70 & 17.10 & 16.90 \\ 
-  200.00 & 12.70 & 12.35 & 12.80 & 12.57 \\ 
-  210.00 & 9.77 & 8.85 & 9.40 & 9.12 \\ 
-  220.00 & 6.71 & 6.30 & 6.70 & 6.50 \\  
-  \cline{1-5}
 \end{tabular}
-\caption{Market option data (AAPL)}
-\label{t:market:option}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill:compound}
+\end{table}
+
+Thereafter by applying the bootstrap method along with linear interpolation, one can find the maturity-wise related riskless rates of the Apple call option used for the current analysis. Those rates are given by \cref{tab:methodology:tbill:maturity}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|ccccccc}
+
+  \hline
+Maturity(in days) & 63   & 91   & 126  & 154    & 182  & 245    & 399 \\ 
+Riskless rate     &  1.817\% & 1.896\% & 1.962\% & 2.015\%  & 2.068\%  & 2.139\%   & 2.311\% \\
+   \hline
+\end{tabular}
+\caption{Maturities explored during the hedging performance measurement} 
+\label{tab:methodology:tbill:maturity}
 \end{table}
 
 
-\end{appendices}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Construction of the delta-neutral portfolio}
+\label{sec:methodology:construction}
+
+At time zero, the built of the delta-neutral portfolio is achieved by the purchase of $\Delta(0)$ share of stock multiplying by the number of assets involving in the derivative product.
+Simply put, if one wants to construct such a portfolio to cover against the possible losses incurred by the selling of a call option on one hundred shares, the number of underlying to buy at that time would be of $\Delta(t) \times 100$.
+For the sake of clarity, in the analysis I will perform, it is implicit that any European call option involves the purchase of only one underlying at maturity, though.
+Consequently, at time zero, the cost of such a portfolio is given by \cref{methodology:porfolio:cost:0}.
+
+\begin{align}
+p(t_0) = \Delta^{m/h}(t_0) S(t_0) \label{methodology:porfolio:cost:0}
+\end{align}
+Where the superscripts m (Merton) and h (Heston) respectively stand for the computation of MJD and HSV delta.
+
+The objective of that portfolio is to accurately replicate the reverse position taken in a derivative, i.e., to reproduce a position in a long European call in the case that matters for that analysis.
+To be efficient in that role, it must be frequently rebalanced.
+
+Accordingly, in order to do so, I will observe the underlying's time-series at every period of time $\delta t = 1 days$ and compute the updated value of $\Delta(t)$  at each of those observational timesteps.
+Therefore, the requisite expenses aimed to keep the portfolio delta-neutral will evolve over time, as shown here below by \cref{methodology:porfolio:cost:i}.
+
+\begin{align}
+p(t_i) & = \Delta^{m/h}(t_i - t_{i - 1}) S(t_i) \label{methodology:porfolio:cost:i} \\
+\intertext{Where}
+i &\in \mathbb{Z} : i \in \left \{1, T \right \} \notag
+\end{align}
+
+The aforementioned time-series that will be daily scrutinized are obviously hypothetical. They will be generated by the functions \textit{mjd\_ts} and \textit{hsv\_ts} for which the risk-averse parameters will be passed in.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Computation of the delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the delta}
+\label{sec:methodology:computation:delta}
+
+By definition, the delta is the first derivative of the option's pricing function with respect to the stock price. It consequently, represents the instantaneous rate of change in the option value as the price of its underlying evolves, such so illustrated by \cref{eq:bsm:call}.
+
+Although \citet{bs} gives to delta the value $\N{\dsub{+}}$, with $d_{+}$ explained by \cref{eq:dpm}, latter can only be used within the framework developed by \citet{bs}, that is, if the underlying is driven by a geometric Brownian motion, the volatility is deterministic, or if no jump occurs.
+Accordingly, the solution to compute the delta provided by \citet{bs} cannot be used for such the MJD and HSV models.
+
+By following the definition of delta and because the pricing function of a European call option, for which the underlying asset price evolution is driven by either the MDJ or HSV models, is given by \cref{eq:other:call:heston}, then, the \cref{eq:methodology:delta:mh} gives the solution to compute the delta for such models.
+
+\begin{align}
+&\Delta^{m/h}\left(t, S(t)\right)  =
+  P_1^{m/h} + 
+  S(t) \frac{\partial P_1^{m/h}}{\partial S(t)} - 
+  e^{-r(T-t)} K \frac{\partial P_2^{m/h}}{\partial S(t)}
+\label{eq:methodology:delta:mh}
+\intertext{where}
+&\frac{\partial P_0^{m/h}}{\partial S(t)} = 
+  \frac{1}{\pi}
+  \int_0^{\infty} Re \left[
+    \frac{i \phi \exp\left( -i\phi\ln K \right)} {- \phi^2 \psi^{m/h}(-i)^2} \times \right. \notag\\
+    &\left.
+    \mspace{150mu} \left(
+      \frac{\partial\psi^{m/h}(\phi - i)}{\partial S(t)} \psi^{m/h}(-i) -
+      \psi^{m/h}(\phi-i) \frac{\partial\psi^{m/h}(-i)}{\partial S(t)}
+    \right)
+  \right] d\phi \label{eq:methodology:delta:p1} \\
+\intertext{and}
+&\frac{\partial P_2^{m/h}}{\partial S(t)} =
+\frac{1}{\pi}
+  \int_0^{\infty} Re \left(
+    \frac{\exp\left( -i \phi \ln K \right)}{i \phi}
+    \frac{\partial \psi^{m/h}(\phi)}{\partial S(t)}
+  \right)d\phi \label{eq:methodology:delta:p2}
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \SweaveInput{appendix}
 
 
 

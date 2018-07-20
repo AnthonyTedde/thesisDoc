@@ -315,6 +315,160 @@ Consequently, the set \ref{eq:methodology:arg:heston:riskaverse} is the one I wi
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEC: DELTA HEDGING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Delta hedging}
+\label{sec:methodology:delta}
+
+In order to measure the hedging performance of the MJD and HSV models, I will (i) compute the prices of some options and then virtually sell them at that price, (ii)  construct the delta-neutral portfolio at time zero and thereafter continuously rebalance it, in accordance with the underlying asset price evolutions and (iii) measure the overall cost of the hedge as a performance indicator.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of the option price}
+\label{sec:methodology:determination}
+
+The computation of the option price at time zero will depend on the underlying model to be hedged.
+Indeed, the function \textit{mjd\_call} will be used to price options for which the underlying asset price evolution is driven by the MDJ model, whereas \textit{mjd\_call} will be used for HSV processes.
+
+As explain as an introduction, I will virtually sell the options I price.
+Therefore, as the writer of the options, I will raise \$ $X(0) = C_K^{m/h} (0)$.
+That cash will directly be put into a money market account to make it grow at a constant riskless rate all along the duration of the hedging process, namely, during the whole life of the option.
+
+The T-bills will serve as riskless rate. According to the available data on \url{https://www.treasury.gov/}, quotes of these are given by \cref{tab:methodology:Tbill}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+  \hline
+  \multicolumn{4}{c}{T-bills} \\
+  \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.66\% & 1.90\% & 2.09\% & 2.30\% \\
+  \hline
+\end{tabular}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill}
+\end{table}
+
+The rates of \cref{tab:methodology:Tbill} are annual-base, consequently to get their countinuously compounded counterpart, EQUATION X can be used to give those given by \cref{tab:methodology:Tbill:compound}.
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+  \hline
+  \multicolumn{4}{c}{T-bills} \\
+  \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.659\% & 1.896\% & 2.068\% & 2.274\% \\
+  \hline
+\end{tabular}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill:compound}
+\end{table}
+
+Thereafter by applying the bootstrap method along with linear interpolation, one can find the maturity-wise related riskless rates of the Apple call option used for the current analysis. Those rates are given by \cref{tab:methodology:tbill:maturity}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|ccccccc}
+
+  \hline
+Maturity(in days) & 63   & 91   & 126  & 154    & 182  & 245    & 399 \\ 
+Riskless rate     &  1.817\% & 1.896\% & 1.962\% & 2.015\%  & 2.068\%  & 2.139\%   & 2.311\% \\
+   \hline
+\end{tabular}
+\caption{Maturities explored during the hedging performance measurement} 
+\label{tab:methodology:tbill:maturity}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Construction of the delta-neutral portfolio}
+\label{sec:methodology:construction}
+
+At time zero, the built of the delta-neutral portfolio is achieved by the purchase of $\Delta(0)$ share of stock multiplying by the number of assets involving in the derivative product.
+Simply put, if one wants to construct such a portfolio to cover against the possible losses incurred by the selling of a call option on one hundred shares, the number of underlying to buy at that time would be of $\Delta(t) \times 100$.
+For the sake of clarity, in the analysis I will perform, it is implicit that any European call option involves the purchase of only one underlying at maturity, though.
+Consequently, at time zero, the cost of such a portfolio is given by \cref{methodology:porfolio:cost:0}.
+
+\begin{align}
+p(t_0) = \Delta^{m/h}(t_0) S(t_0) \label{methodology:porfolio:cost:0}
+\end{align}
+Where the superscripts m (Merton) and h (Heston) respectively stand for the computation of MJD and HSV delta.
+
+The objective of that portfolio is to accurately replicate the reverse position taken in a derivative, i.e., to reproduce a position in a long European call in the case that matters for that analysis.
+To be efficient in that role, it must be frequently rebalanced.
+
+Accordingly, in order to do so, I will observe the underlying's time-series at every period of time $\delta t = 1 days$ and compute the updated value of $\Delta(t)$  at each of those observational timesteps.
+Therefore, the requisite expenses aimed to keep the portfolio delta-neutral will evolve over time, as shown here below by \cref{methodology:porfolio:cost:i}.
+
+\begin{align}
+p(t_i) & = \Delta^{m/h}(t_i - t_{i - 1}) S(t_i) \label{methodology:porfolio:cost:i} \\
+\intertext{Where}
+i &\in \mathbb{Z} : i \in \left \{1, T \right \} \notag
+\end{align}
+
+The aforementioned time-series that will be daily scrutinized are obviously hypothetical. They will be generated by the functions \textit{mjd\_ts} and \textit{hsv\_ts} for which the risk-averse parameters will be passed in.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Computation of the delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the delta}
+\label{sec:methodology:computation:delta}
+
+By definition, the delta is the first derivative of the option's pricing function with respect to the stock price. It consequently, represents the instantaneous rate of change in the option value as the price of its underlying evolves, such so illustrated by \cref{eq:bsm:call}.
+
+Although \citet{bs} gives to delta the value $\N{\dsub{+}}$, with $d_{+}$ explained by \cref{eq:dpm}, latter can only be used within the framework developed by \citet{bs}, that is, if the underlying is driven by a geometric Brownian motion, the volatility is deterministic, or if no jump occurs.
+Accordingly, the solution to compute the delta provided by \citet{bs} cannot be used for such the MJD and HSV models.
+
+By following the definition of delta and because the pricing function of a European call option, for which the underlying asset price evolution is driven by either the MDJ or HSV models, is given by \cref{eq:other:call:heston}, then, the \cref{eq:methodology:delta:mh} gives the solution to compute the delta for such models.
+
+\begin{align}
+&\Delta^{m/h}\left(t, S(t)\right)  =
+  P_1^{m/h} + 
+  S(t) \frac{\partial P_1^{m/h}}{\partial S(t)} - 
+  e^{-r(T-t)} K \frac{\partial P_2^{m/h}}{\partial S(t)}
+\label{eq:methodology:delta:mh}
+\intertext{where}
+&\frac{\partial P_0^{m/h}}{\partial S(t)} = 
+  \frac{1}{\pi}
+  \int_0^{\infty} Re \left[
+    \frac{i \phi \exp\left( -i\phi\ln K \right)} {- \phi^2 \psi^{m/h}(-i)^2} \times \right. \notag\\
+    &\left.
+    \mspace{150mu} \left(
+      \frac{\partial\psi^{m/h}(\phi - i)}{\partial S(t)} \psi^{m/h}(-i) -
+      \psi^{m/h}(\phi-i) \frac{\partial\psi^{m/h}(-i)}{\partial S(t)}
+    \right)
+  \right] d\phi \label{eq:methodology:delta:p1} \\
+\intertext{and}
+&\frac{\partial P_2^{m/h}}{\partial S(t)} =
+\frac{1}{\pi}
+  \int_0^{\infty} Re \left(
+    \frac{\exp\left( -i \phi \ln K \right)}{i \phi}
+    \frac{\partial \psi^{m/h}(\phi)}{\partial S(t)}
+  \right)d\phi \label{eq:methodology:delta:p2}
+\end{align}
+
+
+
+
+
+
+
 
 
 

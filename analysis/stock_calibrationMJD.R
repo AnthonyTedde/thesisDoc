@@ -75,13 +75,13 @@ alpha <- ubar / t + sigma ^2 / 2
 # Plot the graph for log-return only
 ########################################################
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/appl.logreturns.density.tex", width = 6, height = 3)
+# tikzDevice::tikz(file = "figures/appl.logreturns.density.tex", width = 6, height = 3)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
                colour = 'steelblue') +
   xlab("log-returns")
-dev.off()
+# dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
 ########################################################
@@ -92,7 +92,7 @@ h <- sstock_jump(initial_stock_price = 115.5450,
                  seed = 1,
                  scale = 365,
                  sigma = x_merton['sigma'],
-                 alpha = 0.02160,
+                 alpha = 0.02400,
                  lambda = x_merton['lambda'],
                  jumps_intensity_parameters = list(mean = x_merton['mu'],
                                                    sd = x_merton['delta'])
@@ -121,7 +121,7 @@ u_heston <- log(quotediff)
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 6, height = 3)
+# tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 6, height = 3)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
@@ -130,7 +130,7 @@ ggplot() +
                geom = "line",
                colour = 'darkred')+
   xlab("log-returns")
-dev.off()
+# dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
 
@@ -188,127 +188,96 @@ ggplot() +
 # fit the distrib
 # FOllowing: https://arxiv.org/pdf/cond-mat/0203046.pdf
 ########################################################################
+(2^31-1)
+
+lambda <- 1
+t <- 1/365
+sigma = 0.1958536
+alpha = 0.4822917
+mu = x_merton['mu']
+delta <- x_merton['delta']
+y <- seq(-.02, .02, by = .001)
 
 
-
-
-heston_probability <- function(z,
-                               t,
-                               kappa,
-                               rho,
-                               sigma,
-                               theta,
-                               lambda = 0){
-  # kappa <- kappa - lambda
-  # theta <- theta * x["kappa"] / kappa
-  integrand <- function(w, iix){
-    gamma <- kappa + 1i * rho * sigma * w
-    omega <- sqrt(gamma ^2 + sigma ^2 * (w^2 - 1i * w))
-    Ft <- kappa * theta / sigma ^ 2 * gamma * t -
-      2 * kappa * theta / sigma ^ 2 *
-      log(
-        cosh(omega * t / 2) +
-          (omega ^2 - gamma ^2 + 2 * kappa * gamma) / (2 * kappa * omega) * 
-          sinh(omega * t / 2)
-      )
-    Re(exp(1i * w * x + Ft))
-    # exp(1i * w * x + Ft)
-  }
-  map_dbl(z, function(y){
-    1/(2 * pi) * integrate(integrand, -Inf, Inf, iix = y,subdivisions = 5000,
-                           rel.tol = 1.5e-8)$value
-    
-  })
-}
-
-MASS::fitdistr(x = u, densfun = heston_probability, 
-               start = list(lambda = 0),
-               t = t,
-               rho = x['rho'],
-               sigma = x['sigma'],
-               kappa = x['kappa'], 
-               theta = x['theta'],
-               lower = c(-5), upper = c(5))
-
-# TEST
-heston_probability(z = c(0, 0.001, 0.002, 0.025),
-                   t = t,
-                   kappa = x['kappa'],
-                   rho = x['rho'],
-                   sigma = x['sigma'],
-                   theta = x['theta'])
-
-kappa <- x["kappa"] + 4.7883278229
-theta <- x["theta"] * x["kappa"] / kappa 
-heston_probability(z = c(0),
-                   t = t,
-                   kappa = kappa,
-                   rho = x['rho'],
-                   sigma = x['sigma'],
-                   theta = theta)
-
-
-
-
-
-
-dens <- function(y, alpha, lambda){
-  kappa <- x["kappa"] - lambda
-  theta <- x["theta"] * x["kappa"] / kappa
-  hc <- heston_characteristic(initial_stock_price = u[1],
-                              initial_volatility = x["v0"],
-                              time_to_maturity = t,
-                              alpha = alpha,
-                              rho = x["rho"],
-                              kappa = kappa,
-                              theta = theta,
-                              sigma = x["sigma"])
+Merton_logreturns_probability <- function(y,
+                                          lambda = 1,
+                                          t = 1/365,
+                                          sigma = 0.1958536,
+                                          alpha = 0.4822917,
+                                          mu = x_merton['mu'],
+                                          delta= x_merton['delta']
+                                          ){
+  i <- 0:100
+  a <- exp(-lambda * t) * (lambda * t) ^ (i) / (factorial(i))
   
-  unlist(map(y, function(x){ 
-    re_p <- function(w){
-      Re(exp(-1i  * x *w) * hc(w))
-    }
-    im_p <- function(w){
-      Im(exp(-1i  *x * w) * hc(w))
-    }
-    i <- 1/(2*pi) * (integrate(re_p, -Inf, Inf, subdivisions = 2000)$value +
-                       1i * integrate( im_p, -Inf, Inf, subdivisions = 2000)$value)
-    return(i)
-  }))
-  
-  
+  k <- exp(mu + 0.5 * delta^2) - 1
+  mean <- (alpha - sigma^2/2 - lambda * k) * t + i * mu
+  sd <- sigma^2 * t + i * delta^2
+  map_dbl(y, ~ sum(a * dnorm(.x, mean, sqrt(sd))))
 }
 
 
-alpha <- 0.001268801 
-
-theta <- 0.04871543 
-
-kappa <- 4.001055 
-dens(0.005050189, 0.001268801 ,0.04871543,4.001055 )
 
 
-
-MASS::fitdistr(x = u, densfun = dens, start = list(lambda = .5), alpha = 0.001268801, 
-               lower = c(-4), upper = c(0))
-
-ggplot(data.frame(u)) +
+ggplot(data = data.frame(u)) +
   stat_density(aes(u),
                geom = "line",
                colour = 'steelblue')+
   stat_density(data = data.frame(u_heston),aes(u_heston),
                geom = "line",
                colour = 'darkred')+
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  stat_function(fun = Merton_logreturns_probability,
+                colour = "black",
+                args = list(
+                  lambda = x_merton['lambda'],
+                  t = 1/365,
+                  sigma = x_merton['sigma'],
+                  alpha = 0.02400,
+                  mu = x_merton['mu'],
+                  delta= x_merton['delta']
+                ))
 
-x
+MASS::fitdistr(x = u, densfun = Merton_logreturns_probability , 
+               start = list(lambda = x_merton['lambda'],
+                            mu = x_merton['mu'],
+                            delta = x_merton['delta'],
+                            alpha = 0.02400,
+                            sigma = x_merton['sigma']
+                            ),
+               t = 1/365,
+               lower = c(0,-.5,0,0,0), upper = c(2,.5,.3,.04,0.20))
+
+MASS::fitdistr(x = u, densfun = Merton_logreturns_probability , 
+               start = list(
+                            mu = x_merton['mu'],
+                            lambda = x_merton['lambda'],
+                            alpha = 0.02400,
+                            delta = x_merton['delta']
+               ),
+               sigma = x_merton['sigma'],
+               t = 1/365,
+               lower = c(-.5, 0, -0.025, 0), upper = c(.5, 50,0.9, 0.5))
+
+ggplot(data = data.frame(u)) +
+  stat_density(aes(u),
+               geom = "line",
+               colour = 'steelblue')+
+  stat_density(data = data.frame(u_heston),aes(u_heston),
+               geom = "line",
+               colour = 'darkred')+
+  stat_function(fun = Merton_logreturns_probability,
+                colour = "black",
+                args = list(
+                  lambda = 5.270893280,
+                  t = 1/365,
+                  sigma = 0.153547901,
+                  alpha = 0.485301448,
+                  mu = 0.051369405,
+                  delta= 0.007509110
+                ))
+
+
+
+
+
+

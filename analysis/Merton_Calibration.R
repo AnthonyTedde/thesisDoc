@@ -79,9 +79,9 @@ cost <- function(x){
 
 # Optimized result
 
-lambda <- seq(.1, .3, by = .1)
-mu <- seq(-.1, .4, by = .1)
-delta<- seq(.1, .4, by = .1)
+lambda <- .1
+mu <- seq(-.4, .3, by = .1)
+delta<- seq(.1, .6, by = .1)
 sigma <- .119459
 
 
@@ -90,7 +90,7 @@ xo <- as.data.frame(t(expand.grid(lambda, mu, delta, sigma)))
 
 # tosave <- l
 
-l2 <- map(xo , function(y){
+l3 <- map(xo , function(y){
   x0 <- c("lambda" = y[1], 
           "mu" = y[2], 
           "delta" = y[3], 
@@ -149,7 +149,7 @@ l2 <- map(xo , function(y){
 
 
 # Measure the performance of the callibration
-optim.1 <- l2
+optim.1 <- l3
 
 remove_negative_feller <- function(y){
     return(y[[1]])
@@ -172,6 +172,7 @@ map(optim.bst, `[[`, 3)
 # X merton to keep
 # 
 x_merton <- optim.bst$V21[[3]]
+x_merton <- l3[[10]][[3]]
 
 
 remove_negative_feller_fromlist <- function(y){
