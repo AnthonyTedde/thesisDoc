@@ -463,6 +463,12 @@ By following the definition of delta and because the pricing function of a Europ
   \right)d\phi \label{eq:methodology:delta:p2}
 \end{align}
 
+Hence, the \cref{eq:methodology:delta:mh} is the one to solve for both MJD and HSV models to find them the delta at time t.
+Nonetheless, there is a difference when dealing with one model or the other. 
+Indeed, the \cref{eq:methodology:delta:p1,eq:methodology:delta:p2}, depending on whether the underlying model is MJD or HSV, are not identical.
+
+\subsubsection*{Resolution for MJD}
+
 
 
 
