@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{10}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,6 +10,12 @@ Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
   637--654, 1973.
+
+\bibitem[Borchers(2018)]{pracma}
+Hans~W. Borchers.
+\newblock \emph{pracma: Practical Numerical Math Functions}, 2018.
+\newblock URL \url{https://CRAN.R-project.org/package=pracma}.
+\newblock R package version 2.1.4.
 
 \bibitem[Cris{\'o}stomo(2015)]{criso2015}
 Ricardo Cris{\'o}stomo.
@@ -29,6 +35,12 @@ Steven~L Heston.
   applications to bond and currency options.
 \newblock \emph{The review of financial studies}, 6\penalty0 (2):\penalty0
   327--343, 1993.
+
+\bibitem[Matsuda(2004)]{matsuda2004}
+Kazuhisa Matsuda.
+\newblock Introduction to merton jump diffusion model.
+\newblock \emph{Department of Economics. The Graduate Center, The City
+  University of New York}, 2004.
 
 \bibitem[Merton(1976)]{merton76}
 Robert~C Merton.

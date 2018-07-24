@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  21 JUL 2018 00:19
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  23 JUL 2018 09:43
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1274,6 +1274,43 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 \TX@cols=\count300
 \TX@ftn=\toks36
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjustbox.sty"
+Package: adjustbox 2011/11/14 v0.8 Adjusting TeX boxes (trim, clip, ...)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+\XKV@toks=\toks37
+\XKV@tempa@toks=\toks38
+\XKV@depth=\count301
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjcalc.sty")
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\collectbox\collectbox.sty"
+Package: collectbox 2011/08/23 v0.4 Collect macro arguments as boxes
+\collectedbox=\box51
+)
+\adjbox@tllx=\dimen283
+\adjbox@tlly=\dimen284
+\adjbox@turx=\dimen285
+\adjbox@tury=\dimen286
+\adjbox@Width=\dimen287
+\adjbox@Height=\dimen288
+\adjbox@Depth=\dimen289
+\adjbox@Totalheight=\dimen290
+Package adjustbox Info: Using driver 'adjpdftex.def'. on input line 290.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjpdftex.def"
+File: adjpdftex.def 2011/11/14 v0.8 adjustbox clip driver for pdftex
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box52
+\sift@deathcycles=\count302
+\@vwid@loff=\dimen291
+\@vwid@roff=\dimen292
+))
 (C:/PROGRA~1/R/R-33~1.3/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
@@ -1285,11 +1322,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count301
+\FV@CodeLineNo=\count303
 \FV@InFile=\read2
-\FV@TabBox=\box51
-\c@FancyVerbLine=\count302
-\FV@StepNumber=\count303
+\FV@TabBox=\box53
+\c@FancyVerbLine=\count304
+\FV@StepNumber=\count305
 \FV@OutFile=\write4
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
@@ -1372,7 +1409,7 @@ LaTeX Font Info:    ... okay on input line 119.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box52
+\AtBeginShipoutBox=\box54
 Package hyperref Info: Link coloring OFF on input line 119.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -1380,7 +1417,7 @@ Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count306
 )
 LaTeX Info: Redefining \ref on input line 119.
 LaTeX Info: Redefining \pageref on input line 119.
@@ -1391,17 +1428,17 @@ LaTeX Info: Redefining \nameref on input line 119.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count305
-\scratchdimen=\dimen283
-\scratchbox=\box53
-\nofMPsegments=\count306
-\nofMParguments=\count307
-\everyMPshowfont=\toks37
-\MPscratchCnt=\count308
-\MPscratchDim=\dimen284
-\MPnumerator=\count309
-\makeMPintoPDFobject=\count310
-\everyMPtoPDFconversion=\toks38
+\scratchcounter=\count307
+\scratchdimen=\dimen293
+\scratchbox=\box55
+\nofMPsegments=\count308
+\nofMParguments=\count309
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count310
+\MPscratchDim=\dimen294
+\MPnumerator=\count311
+\makeMPintoPDFobject=\count312
+\everyMPtoPDFconversion=\toks40
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
@@ -1427,162 +1464,210 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ]
 Chapter 1.
 
-LaTeX Warning: Reference `R functions catalogue' on page 1 undefined on input l
-ine 165.
+LaTeX Warning: Reference `eq:bsm:bsm:sol' on page 1 undefined on input line 166
+.
+
+
+LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
+ne 166.
+
+
+LaTeX Warning: Reference `cha:r' on page 1 undefined on input line 170.
 
 [3
 
 ]
 
 LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
-e 202.
+e 209.
 
 
 LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 213.
+ne 220.
 
 
 LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
-e 214.
+e 221.
 
 
 LaTeX Warning: Reference `eq:other:merton:psi' on page 1 undefined on input lin
-e 214.
-
-
-LaTeX Warning: Reference `t:market:option' on page 1 undefined on input line 24
-2.
-
-
-LaTeX Warning: Reference `cha:appendix:market' on page 4 undefined on input lin
-e 242.
+e 221.
 
 [4]
 
-LaTeX Warning: Reference `cha:appendix:apple' on page 5 undefined on input line
- 278.
+LaTeX Warning: Reference `t:market:option' on page 1 undefined on input line 25
+2.
 
-[5] (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.tex)
+
+LaTeX Warning: Reference `cha:appendix:market' on page 5 undefined on input lin
+e 252.
+
+[5]
+
+LaTeX Warning: Reference `cha:appendix:apple' on page 6 undefined on input line
+ 288.
+
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.tex)
 
 LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 308.
-
-
-LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 309.
+ne 323.
 
 
 LaTeX Warning: Reference `eq:other:call:heston' on page 6 undefined on input li
-ne 312.
+ne 326.
 
 
 LaTeX Warning: Reference `eq:other:call:heston:pi2' on page 6 undefined on inpu
-t line 312.
+t line 326.
+
+
+LaTeX Warning: Reference `eq:other:merton:psi' on page 1 undefined on input lin
+e 326.
+
+
+LaTeX Warning: Reference `t:methodology:call:merton:estimate1' on page 1 undefi
+ned on input line 333.
+
+[6] (C:\Users\ATE\thesisDoc\figures/appl.impliedvol.merton.tex)
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.merton.riskneutral.tex)
+[7]
+
+LaTeX Warning: Reference `sec:other:merton' on page 1 undefined on input line 4
+28.
+
+
+LaTeX Warning: Reference `appendix' on page 1 undefined on input line 431.
+
+[8]
+(C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.merton.riskaverse.tex)
+
+LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
+ne 493.
+
+
+LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
+t line 494.
+
+[9]
+
+LaTeX Warning: Reference `eq:other:call:heston' on page 10 undefined on input l
+ine 497.
+
+
+LaTeX Warning: Reference `eq:other:call:heston:pi2' on page 10 undefined on inp
+ut line 497.
 
 
 LaTeX Warning: Reference `eq:other:heston:psi' on page 1 undefined on input lin
-e 312.
+e 497.
 
 
 LaTeX Warning: Reference `sub:other:heston:feller' on page 1 undefined on input
- line 316.
+ line 501.
 
 
-Package natbib Warning: Citation `cristo2015' on page 6 undefined on input line
- 317.
+Package natbib Warning: Citation `cristo2015' on page 10 undefined on input lin
+e 502.
 
-[6] (C:\Users\ATE\thesisDoc\figures/appl.impliedvol.heston.tex) [7] [8]
+(C:\Users\ATE\thesisDoc\figures/appl.impliedvol.heston.tex) [10]
 (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskneutral.tex)
 
 LaTeX Warning: Reference `eq:other:hsvvol:riskless' on page 1 undefined on inpu
-t line 403.
+t line 576.
 
 
 LaTeX Warning: Reference `eq:other:hsvstock:riskless' on page 1 undefined on in
-put line 403.
+put line 576.
 
 
-LaTeX Warning: Reference `eq:other:hsvvol' on page 1 undefined on input line 40
-3.
+LaTeX Warning: Reference `eq:other:hsvvol' on page 1 undefined on input line 57
+6.
 
 
 LaTeX Warning: Reference `eq:other:hsvstock' on page 1 undefined on input line 
-403.
+576.
 
+[11]
 
 LaTeX Warning: Reference `sec:upstream:logreturn' on page 1 undefined on input 
-line 406.
+line 579.
 
 
 LaTeX Warning: Reference `eq:other:theta:riskless' on page 1 undefined on input
- line 408.
+ line 581.
 
 
 LaTeX Warning: Reference `eq:other:kappa:riskless' on page 1 undefined on input
- line 408.
+ line 581.
 
-[9]
+
+LaTeX Warning: Reference `appendix' on page 1 undefined on input line 598.
+
 (C:\Users\ATE\thesisDoc\figures/appl.logreturns.density.heston.riskaverse.tex)
-[10]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 485.
+[12]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 656.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [11]
+) [13]
 
-LaTeX Warning: Reference `eq:bsm:call' on page 1 undefined on input line 576.
+LaTeX Warning: Reference `eq:bsm:call' on page 1 undefined on input line 746.
 
 
-LaTeX Warning: Reference `eq:dpm' on page 1 undefined on input line 578.
+LaTeX Warning: Reference `eq:dpm' on page 1 undefined on input line 748.
 
 
 LaTeX Warning: Reference `eq:other:call:heston' on page 1 undefined on input li
-ne 581.
+ne 751.
 
-[12] (C:\Users\ATE\thesisDoc\index.bbl [13])
+[14] [15] (C:\Users\ATE\thesisDoc\index.bbl [16])
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 648.
-[14
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 904.
+[17
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 648.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 904.
  (C:\Users\ATE\thesisDoc\index.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 648.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 648.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 904.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 904.
 Package rerunfilecheck Info: File `index.out' has not changed.
-(rerunfilecheck)             Checksum: F5BEDEC0087660E01B6FBE6B06E68DD9;863.
+(rerunfilecheck)             Checksum: 883EA1DF791B82B55084CBC971FC8862;896.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 26588 strings out of 494045
- 478089 string characters out of 3145976
- 556508 words of memory out of 3000000
- 29344 multiletter control sequences out of 15000+200000
- 35884 words of font info for 74 fonts, out of 3000000 for 9000
+ 27783 strings out of 494045
+ 499341 string characters out of 3145976
+ 635266 words of memory out of 3000000
+ 30477 multiletter control sequences out of 15000+200000
+ 40727 words of font info for 88 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,13n,55p,439b,725s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
-s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on index.pdf (14 pages, 267806 bytes).
+ 56i,14n,76p,455b,726s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/symbols/msbm10.pfb>
+Output written on index.pdf (17 pages, 359864 bytes).
 PDF statistics:
- 324 PDF objects out of 1000 (max. 8388607)
- 61 named destinations out of 1000 (max. 500000)
+ 416 PDF objects out of 1000 (max. 8388607)
+ 82 named destinations out of 1000 (max. 500000)
  141 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -75,7 +75,7 @@ alpha <- ubar / t + sigma ^2 / 2
 # Plot the graph for log-return only
 ########################################################
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/appl.logreturns.density.tex", width = 6, height = 3)
+tikzDevice::tikz(file = "figures/appl.logreturns.density.tex", width = 4, height = 2)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
@@ -121,7 +121,7 @@ u_heston <- log(quotediff)
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 6, height = 3)
+tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 4, height = 2)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
@@ -260,7 +260,7 @@ setwd("c:/Users/ATE/thesisDoc/data")
 
   
   setwd("c:/Users/ATE/thesisDoc")
-  tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskaverse.tex", width = 6, height = 3)
+  tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskaverse.tex", width = 4, height = 2)
   ggplot() +
     stat_density(data = data.frame(u), aes(u),
                  geom = "line",

@@ -1,7 +1,7 @@
 % \usepackage{tgtermes}
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[breaklinks]{hyperref}
+\usepackage[breaklinks,hidelinks]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
 \usepackage{tikz}
@@ -17,6 +17,6 @@
 \usepackage{braket}
 \usepackage[toc,page]{appendix}
 \usepackage{tabularx}
-
+\usepackage{adjustbox}
 % \usepackage{hyperref}
 % \usepackage{physics}

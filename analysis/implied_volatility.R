@@ -77,14 +77,14 @@ ggplot(DATA_heston, aes(Strike, imply.volatility)) +
   facet_grid(. ~ maturity)
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/appl.impliedvol.heston.tex", width = 6)
+tikzDevice::tikz(file = "figures/appl.impliedvol.heston.tex", width = 6, height = 3)
 ggplot(DATA_heston, aes(Strike, imply.volatility)) + 
   geom_line(color = "steelblue") +
   geom_point(data = DATA_heston, 
              aes(Strike, imply.volatility_heston),
              color = "darkred")+
   xlab("Strike") + ylab("Implied maturity")+
-  facet_wrap( ~ maturity.verbose, ncol = 2)
+  facet_wrap( ~ maturity.verbose, ncol = 3)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
@@ -151,17 +151,17 @@ DATA_merton <- data.frame(DATA_merton, maturity.verbose)
 #   geom_point(data = DATA_merton, aes(Strike, imply.volatility_merton))+
 #   facet_grid(. ~ maturity)
 
-# setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/appl.impliedvol.merton.tex", width = 6)
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.impliedvol.merton.tex", width = 6, height = 3)
 ggplot(DATA_merton, aes(Strike, imply.volatility)) + 
   geom_line(color = "steelblue") +
   geom_point(data = DATA_merton, 
              aes(Strike, imply.volatility_merton),
              color = "darkred")+
   xlab("Strike") + ylab("Implied maturity")+
-  facet_wrap( ~ maturity.verbose, ncol = 2)
-# dev.off()
-# setwd("c:/Users/ATE/thesisDoc/data")
+  facet_wrap( ~ maturity.verbose, ncol = 3)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 

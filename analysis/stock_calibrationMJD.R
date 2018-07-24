@@ -121,7 +121,7 @@ u_heston <- log(quotediff)
 
 
 setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskneutral.tex", width = 6, height = 3)
+tikzDevice::tikz(file = "figures/appl.logreturns.density.merton.riskneutral.tex", width = 4, height = 2)
 ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
@@ -130,46 +130,10 @@ ggplot() +
                geom = "line",
                colour = 'darkred')+
   xlab("log-returns")
-# dev.off()
+dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
 
-h <- map(1:150, ~ sstock_jump(initial_stock_price = 115.5450,
-                         time_to_maturity = 1,
-                         seed = .x,
-                         scale = 365,
-                         sigma = .119459,#x_merton['sigma'],
-                         alpha = 0.15324,
-                         lambda = 0.943292,
-                         jumps_intensity_parameters = list(mean = -.43742,
-                                                           sd = x_merton['delta'])))
-
-
-
-quote <- map(h, ~ .x$stock_price_path[!is.na(.x$stock_price_path)])
-
-
-
-
-quotediff <- map(quote, function(x){
-  quotes <- length(x)
-  x[-1] / x[-quotes]
-}) %>% unlist
-
-u_heston <- log(quotediff)
-
-# setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskaverse.tex", width = 6, height = 3)
-ggplot() +
-  stat_density(data = data.frame(u), aes(u),
-               geom = "line",
-               colour = 'steelblue')+
-  stat_density(data = data.frame(u_heston),aes(u_heston),
-               geom = "line",
-               colour = 'darkred')+
-  xlab("log-returns") + xlim(-0.04, 0.04)
-# dev.off()
-# setwd("c:/Users/ATE/thesisDoc/data")
 
 
 
@@ -219,65 +183,86 @@ Merton_logreturns_probability <- function(y,
 
 
 
+r <- MASS::fitdistr(x = u, densfun = Merton_logreturns_probability , 
+                    start = list(
+                      mu = x_merton['mu'],
+                      lambda = x_merton['lambda'],
+                      alpha = 0.02400,
+                      delta = x_merton['delta'],
+                      sigma = x_merton['sigma']
+                    ),
+                    t = 1/365)
+# ,  lower = c(-0.05, 0, 0, 0, 0), upper = c(0.05, 80, 0.5, 0.5, 0.5))
+
+#############################################
+# plot
+#############################################
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.logreturns.density.merton.riskaverse.tex", width = 4, height = 2)
+
+r[[1]]['delta'] <- abs(r[[1]]['delta'])
 ggplot(data = data.frame(u)) +
   stat_density(aes(u),
+               geom = "line",
+               colour = 'steelblue')+
+  # stat_density(data = data.frame(u_heston),aes(u_heston),
+  #              geom = "line",
+  #              colour = 'darkred')+
+  stat_function(fun = Merton_logreturns_probability,
+                colour = "darkred",
+                args = as.list(c(r[[1]], t = 1/365))
+  )
+
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+################################################################################
+# generation from empirical dummy log-return
+################################################################################
+
+h <- map(1:150, ~ sstock_jump(initial_stock_price = 115.5450,
+                              time_to_maturity = 1,
+                              seed = .x,
+                              scale = 365,
+                              sigma = 0.1020368856,#x_merton['sigma'],
+                              alpha = 0.4816753642,
+                              lambda = 99.5434345733,
+                              jumps_intensity_parameters = list(mean = -0.0006791266,
+                                                                sd = 0.0161092106)))
+
+
+
+quote <- map(h, ~ .x$stock_price_path[!is.na(.x$stock_price_path)])
+
+
+
+
+quotediff <- map(quote, function(x){
+  quotes <- length(x)
+  x[-1] / x[-quotes]
+}) %>% unlist
+
+u_heston <- log(quotediff)
+
+# setwd("c:/Users/ATE/thesisDoc")
+# tikzDevice::tikz(file = "figures/appl.logreturns.density.heston.riskaverse.tex", width = 6, height = 3)
+ggplot() +
+  stat_density(data = data.frame(u), aes(u),
                geom = "line",
                colour = 'steelblue')+
   stat_density(data = data.frame(u_heston),aes(u_heston),
                geom = "line",
                colour = 'darkred')+
-  stat_function(fun = Merton_logreturns_probability,
-                colour = "black",
-                args = list(
-                  lambda = x_merton['lambda'],
-                  t = 1/365,
-                  sigma = x_merton['sigma'],
-                  alpha = 0.02400,
-                  mu = x_merton['mu'],
-                  delta= x_merton['delta']
-                ))
-
-MASS::fitdistr(x = u, densfun = Merton_logreturns_probability , 
-               start = list(lambda = x_merton['lambda'],
-                            mu = x_merton['mu'],
-                            delta = x_merton['delta'],
-                            alpha = 0.02400,
-                            sigma = x_merton['sigma']
-                            ),
-               t = 1/365,
-               lower = c(0,-.5,0,0,0), upper = c(2,.5,.3,.04,0.20))
-
-MASS::fitdistr(x = u, densfun = Merton_logreturns_probability , 
-               start = list(
-                            mu = x_merton['mu'],
-                            lambda = x_merton['lambda'],
-                            alpha = 0.02400,
-                            delta = x_merton['delta']
-               ),
-               sigma = x_merton['sigma'],
-               t = 1/365,
-               lower = c(-.5, 0, -0.025, 0), upper = c(.5, 50,0.9, 0.5))
-
-ggplot(data = data.frame(u)) +
-  stat_density(aes(u),
-               geom = "line",
-               colour = 'steelblue')+
-  stat_density(data = data.frame(u_heston),aes(u_heston),
-               geom = "line",
-               colour = 'darkred')+
-  stat_function(fun = Merton_logreturns_probability,
-                colour = "black",
-                args = list(
-                  lambda = 5.270893280,
-                  t = 1/365,
-                  sigma = 0.153547901,
-                  alpha = 0.485301448,
-                  mu = 0.051369405,
-                  delta= 0.007509110
-                ))
+  xlab("log-returns") + xlim(-0.04, 0.04)
 
 
+################################################################################
+# save
+################################################################################
 
-
+setwd("c:/Users/ATE/thesisDoc/data")
+merton_riskaverse <- r[[1]]
+save(merton_riskaverse , file = "optimalMertonRiskaverse.RData")
 
 

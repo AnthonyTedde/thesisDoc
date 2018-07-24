@@ -661,6 +661,7 @@ else hedging_perf
 setwd("c:/Users/ATE/thesisDoc/data")
    
 save(x, file = "optimalHestonCalibration.RData")
+save(DATA, file = "DATA.RData")
 
 
 

@@ -79,10 +79,10 @@ cost <- function(x){
 
 # Optimized result
 
-lambda <- .1
-mu <- seq(-.4, .3, by = .1)
-delta<- seq(.1, .6, by = .1)
-sigma <- .119459
+lambda <- 0.1031218
+mu <- −0.2973769#seq(-.4, .3, by = .1)
+delta<- 0.1954519#seq(.1, .6, by = .1)
+sigma <- 0.1858289#.119459
 
 
 xo <- as.data.frame(t(expand.grid(lambda, mu, delta, sigma)))
@@ -149,6 +149,7 @@ l3 <- map(xo , function(y){
 
 
 # Measure the performance of the callibration
+
 optim.1 <- l3
 
 remove_negative_feller <- function(y){
@@ -161,12 +162,16 @@ within.spread.1 <- map_dbl(optim.1, .f = remove_negative_feller ) %>%
 # Subset optim.1 with the best values
 optim.bst <- optim.1[
   !map(optim.1, function(x){
-  if(x[[1]] == 45)
+  if(x[[1]] > 45)
     return(x)
   else return(NA)
 }) %>% is.na
 ]
-map(optim.bst, `[[`, 3)
+optimal.df <- map(optim.bst, `[[`, 3) %>%  as.data.frame %>% t %>% as.data.frame
+optimal.xt <- xtable(optimal.df, digits = 5)
+align(optimal.xt) <- rep('l', ncol(optimal.df) +1 )
+caption(optimal.xt) <- 'Best estimates for MJD call option model'
+print(optimal.xt, include.rownames = F)
 
 # 
 # X merton to keep
@@ -183,7 +188,7 @@ remove_negative_feller_fromlist <- function(y){
   }
 }
 
-x_merton <- unlist(l[[13]][3])
+x_merton <- unlist(l3[[1]][3])
 setwd("c:/Users/ATE/thesisDoc/data")
 
 save(x_merton, file = "optimalMertonCalibration.RData")
