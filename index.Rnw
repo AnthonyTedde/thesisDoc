@@ -31,11 +31,11 @@ How perfomant is it ?
 What about other model such as \ldots ?
 
 Using R. \cite{R}
-% \SweaveInput{upstream}
+\SweaveInput{upstream}
 % \SweaveInput{underlying}
 % \SweaveInput{BSM}
 % \SweaveInput{models}
-\SweaveInput{methodology}
+% \SweaveInput{methodology}
 % \SweaveInput{analysis.Rnw}
 % \SweaveInput{appendix}
 

@@ -26,7 +26,7 @@ p_along <- ggplot2::ggplot(dplyr::bind_rows(Sampled_100, .id = "uniqueID"),
         axis.title = element_text(size = rel(0.8)),
         axis.text = element_text(size = rel(0.7)),
         plot.title = element_text(size = rel(0.8))) +
-  ggplot2::labs( title = "(QB)",
+  ggplot2::labs( title = "(QA)",
                  x = 'Time period',
                  y = 'Brownian motion')
 # dev.off()
@@ -45,10 +45,12 @@ p_density <- ggplot(last) +
         axis.title = element_text(size = rel(0.8)),
         axis.text = element_text(size = rel(0.7)),
         plot.title = element_text(size = rel(0.8))) +
-  labs(title = "(QA)",
-    x = 'Brownian Motion Distribution',
+  labs(title = "(QB)",
+       x = 'Brownian Motion Distribution',
        y = 'Density')
 
+setwd("c:/Users/ATE/thesisDoc")
 tikzDevice::tikz(file = "figures/brownianmotion.tex", width = 6, height = 3)
 grid.arrange(p_along, p_density, ncol = 2)
 dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")

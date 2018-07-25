@@ -151,7 +151,7 @@ setwd("c:/Users/ATE/thesisDoc/data")
 # fit the distrib
 # FOllowing: https://arxiv.org/pdf/cond-mat/0203046.pdf
 ########################################################################
-       
+
 r <- MASS::fitdistr(x = u, densfun = dnorm , 
                     start = list(
                       mean = ubar,

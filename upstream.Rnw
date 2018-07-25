@@ -21,7 +21,7 @@ The material covered in the current chapter is meant to be thereafter intensivel
 \section{Vanilla options}
 \label{sec:upstream:vanilla}
 
-The so-called vanilla options, in opposition to the more complex -- not covered in this master thesis -- exotic ones, are specifics kind of derivatives coming along with some good-to-know jargons. 
+The so-called vanilla options, in opposition to the more complex - not covered in this master thesis - exotic ones, are specifics kind of derivatives coming along with some good-to-know jargons. 
 
 First and foremost,  as defined in \citet{hull}, an option is a contract between two stakeholders with different interests or at least distinctive motivations, who want to buy or sell a product, which generally is a financial asset called "the underlying." 
 Indeed, someone can look for hedge oneself against risk while the other party wants to make a profit on a speculative move.
@@ -101,8 +101,8 @@ As described by \citet{shreve}, the construction of such a process could be achi
 \centering
 \input{figures/brownianmotion.tex}
 \caption{Multiple Brownian Motion}
-\floatfoot{\textit{Note.} (QA): Simulation of one hundred Brownian motions using the R package \citet{randomwalk} with a timeframe of five units (five years) with a time-step of one over one hundred.
-(QB): Density computed on a simulation of one hundred thousand Brownian motions. The calculation has been made by taking all the final value $W(5)$ and by plotting them as a density function. The Black bell curve is the normal density with mean zero and a standard deviation of square root of five, as expected (\cref{eq:upstream:incrementsdist}).}
+\floatfoot{\textbf{Notes.} (QA): Simulation of one hundred Brownian motions by using the function \textit{bmotion} of the R package \citet{randomwalk}, with a timeframe of five years long and a discrete time-step of one over one hundred.
+(QB): The blue filled curve is the density computed on the simulation (QA). The distribution concerns all the final values $W(T = 5)$. The Black bell curve represents the normal density with mean zero and a standard deviation of square root of five.}
 \label{fig:upstream:brownian}
 \end{figure}
 
@@ -111,10 +111,10 @@ Lastly, \citet{shreve} demonstrates that a Brownian motion has no tendency to ri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Correlated Brownian Motion
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Correlated Brownian Motions}
+\subsection{Correlated Brownian motions}
 \label{sub:upstream:brownian:correlated}
 
-Correlated Brownian motions are Wiener processes that related together according to the factor $\rho$ \cref{eq:upstream:brownian:corr}.
+Correlated Brownian motions are Wiener processes that related together according to the factor $\rho$ \ref{eq:upstream:brownian:corr}.
 Following \citet{shreve}, these processes happens to be modeled by \cref{eq:upstream:brownian:corr:1,eq:upstream:brownian:corr:2}.
 
 \begin{align}
@@ -124,7 +124,7 @@ Following \citet{shreve}, these processes happens to be modeled by \cref{eq:upst
   B_2(t) &= \int_0^t \rho(s) dW_1(s) + \int_0^t \sqrt{1 - \rho^2(s)} dW_2(s) \label{eq:upstream:brownian:corr:2}
 \end{align}
 
-When $\rho$ is constant over time however, the simple form of \cref{eq:upstream:brownian:corr:deterministic:2} is enough.
+whenever $\rho$ is considered as constant over time, however, the simple form given by  \cref{eq:upstream:brownian:corr:deterministic:2} is enough to construct such processes.
 
 \begin{align}
 B_2(t) &= \rho W_1(s) + \sqrt{1 - \rho^2} W_2(s) \label{eq:upstream:brownian:corr:deterministic:2}
@@ -132,21 +132,21 @@ B_2(t) &= \rho W_1(s) + \sqrt{1 - \rho^2} W_2(s) \label{eq:upstream:brownian:cor
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Cox--Ingersoll--Ross
+% SECTION: Cox-Ingersoll-Ross
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ito's lemma}
 \label{sec:upstream:ito}
 
-Based on Taylor approximation theorem, Ito formulae are meant to provide the differential form of such a function $f \circ g$ where the function $f$ can be differentiate with respect to its independent variable whilst g cannot.
+Based on Taylor approximation theorem, Ito formulae are meant to provide the differential form of such a function $f \circ g$ where the function $f$ can be differentiated with respect to its independent variable whilst g cannot.
 
 \begin{align}
-  f(T, W(T)) &= f(0, W(0))
+  f(T, W(T)) = f(0, W(0))
                + \int_0^T \frac{\partial f(t, W(t))}{\partial t} dt
-               + \int_0^T \frac{\partial f(t, W(t))}{\partial W(t)} dW(t)
-               + \frac{1}{2} \int_0^T \frac{\partial^2 f(t, W(t))}{\partial W(t)^2} dt \label{eq:upstream:itodiff:brownian}
+               + \int_0^T \frac{\partial f(t, W(t))}{\partial W(t)} dW(t)\notag\\
+    \mspace{150mu} + \frac{1}{2} \int_0^T \frac{\partial^2 f(t, W(t))}{\partial W(t)^2} dt \label{eq:upstream:itodiff:brownian}
 \end{align}
 
-Whilst the \cref{eq:upstream:itodiff:brownian} shows the formula for Brownian motion, the \cref{eq:upstream:itodiff:itopro} represents the form used to differentiate the more complex Ito process (\ref{eq:upstream:itopro}).
+While \cref{eq:upstream:itodiff:brownian} shows the formula for Brownian motion, the \cref{eq:upstream:itodiff:itopro} represents the form used to differentiate the more complex Ito process (\ref{eq:upstream:itopro}).
 
 \begin{align}
   X(T) &= X(0)
@@ -155,40 +155,48 @@ Whilst the \cref{eq:upstream:itodiff:brownian} shows the formula for Brownian mo
   \intertext{
   Where $\Delta(u)$ and $\Theta(u)$ are stochastic process, adapted to a filtration f(t)
   }
-  f(T, X(T)) &= \ldots
+  f(T, X(T)) &= f(0, X(0))
+               + \int_0^T \frac{\partial f(t, X(t))}{\partial t} dt
+               + \int_0^T \frac{\partial f(t, X(t))}{\partial X(t)} \Delta(t) dW(t)\notag\\
+    &\mspace{50mu} + \int_0^T \frac{\partial f(t, X(t))}{\partial X(t)} \Theta(t) dt
+    + \frac{1}{2} \int_0^T \frac{\partial^2 f(t, X(t))}{\partial W(t)^2} \Delta^2(t)dt \label{eq:upstream:itodiff:itopro}
 \end{align}
 
-Ito formulae it thereafter applied to derive such a process like the geometric Brownian motion [REF] or the Black--Scholes--Merton partial differential equation. 
+Ito formulae are thereafter applied to derive such a process like the geometric Brownian motion or the Black-Scholes-Merton partial differential equation. 
+
+
+
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Cox--Ingersoll--Ross
+% SECTION: Cox-Ingersoll-Ross
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Cox--Ingersoll--Ross}
+\section{Cox-Ingersoll-Ross}
 \label{sec:CoxIngersollRoss}
 
-The Cox--Ingersoll--Ross (CIR) stochastic model $R(t)$, defined by the differential \cref{eq:upstream:CIR}), can be used to simulate interest rates' evolution over time thanks to some of its related properties. Indeed it gives a good fit owing to two of them, namely the mean--reversion and its ability to only be positive (\citet{shreve}).
+The Cox-Ingersoll-Ross (CIR) stochastic model $R(t)$, defined by the differential \cref{eq:upstream:cir}), can be used to simulate interest rates' evolution over time thanks to some of its intrinsic characteristics, namely the mean-reversion and its property to only take positive values (\citet{shreve}).
 
 \begin{align}
 dR(t) &= (\alpha - \beta R(t)) dt + \sigma \sqrt{R(t)} dW(t)
-\label{eq:upstream:CIR}
+\label{eq:upstream:cir}
 \end{align}
 
-A mean--reverting stochastic process tends to navigate, such a pointy sinusoidal motion, around its mean (see [FIGURE]).
+According to \citet{shreve}, a  mean-reverting stochastic process tends to navigate, such a pointy sinusoidal motion, around its mean.
 The CIR inherits this behaviour from the construction of its differential's drift part, i.e. $(\alpha - \beta R(t))dt$.
 Indeed when $R(t) = \sfrac{\alpha}{\beta}$, then the drift term $dt = 0$ with the consequence of status quo.
 In addition, whether $R(t) > \sfrac{\alpha}{\beta}$ or $R(t) < \sfrac{\alpha}{\beta}$, the next value of $R(t + \epsilon) = R(t) + dR(t)$ is pushed back toward $\sfrac{\alpha}{\beta}$.
-Actually, as showing by \cref{eq:upstream:CIR:exp}, the long--run expected value for the process $R(t)$ is $\sfrac{\alpha}{\beta}$ (\citet{shreve}).
+Actually, as showing by \cref{eq:upstream:cir:exp}, the long-run expected value for the process $R(t)$ is $\sfrac{\alpha}{\beta}$.
 
 \begin{align}
-\lim_{t \to \infty}  \mathop{\mathbb{E}} R(t) = \frac{\alpha}{\beta} \label{eq:upstream:CIR:exp}
+\lim_{t \to \infty}  \mathop{\mathbb{E}} R(t) = \frac{\alpha}{\beta} \label{eq:upstream:cir:exp}
 \end{align}
 
-On the other hand, the non-negativity property is explained by the fact that if $R(t) \to 0$ then $dR(t) \simeq \alpha dt > 0$ making $R(t+\epsilon)$ bounced off the x axis, running it away from negative realm (\citet{shreve}).
+On the other hand, depending on \citet{shreve}, the non-negativity property is explained by the fact that if $R(t) \to 0$ then $dR(t) \simeq \alpha dt > 0$ making $R(t+\epsilon)$ bounced off the x axis, running it away from negative realm.
 
-Ultimately though, the CIR mean--reverting \cref{eq:upstream:CIR} is used by \citet{heston1993} in its model in order to drive stochastic interest rates.
-Heston's model is covered throughout \cref{sec:othermodel:heston}.
+Ultimately, the CIR mean-reverting \cref{eq:upstream:cir} is used by \citet{heston1993} in its pricing model to construct stochastic interest rates.
+Heston's model is covered in \cref{sec:othermodel:heston}.
 
 
 
@@ -198,23 +206,18 @@ Heston's model is covered throughout \cref{sec:othermodel:heston}.
 \section{Skewness and Kurtosis}
 \label{sec:Moments}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Definition
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Definition}
-\label{sub:Definition}
 
 
-The skewness and kurtosis for a random variable's distribution, are respectivaly the third and fourth moment characterizing either the asymetry and the degree of flatness.
+The skewness and kurtosis of a random variable's distribution, whose respectively are the third and fourth moment, characterize either the asymmetry, for the first, or the degree of flatness, for the second.
 
-The theoretical moments are defined by \cref{eq:upstream:moment:theoretical} while the empirical ones can be estimated using \cref{eq:upstream:moment:empirical}, with $r = 3$ to compute the skewness or $r= 4$ for the kurtosis.
+The theoretical moments are defined by \cref{eq:upstream:moment:theoretical} while those empirical can be estimated using \cref{eq:upstream:moment:empirical}, with the parameter $r = 3$ to compute the skewness or $r= 4$ for the kurtosis.
 
 \begin{align}
 \gamma_r = \mathop{{}\mathbb{E}} \left[ \left( \frac{X - \mu}{\sigma} \right) ^r \right] \label{eq:upstream:moment:theoretical}
 \intertext{where $X$ is any random variable}
 m_r = \frac{1}{n} \sum_{i = 1}^n (x_i - \overline{\rm x}) ^r \label{eq:upstream:moment:empirical}
 \end{align}
-with $\{x_i\}_{i \in n}$ being a set of outcomes, belonging to the sample set.
+with $\{x_i\}_{i \in n}$ being a set of outcomes belonging to the sample set.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Estimation
@@ -222,9 +225,12 @@ with $\{x_i\}_{i \in n}$ being a set of outcomes, belonging to the sample set.
 \subsection{Estimation}
 \label{sub:Estimation}
 
-Sampled skewness and kurtosis formulae exist in different fashion with their precisions depending on the size of the sample along with the skewed of the theoretical distribution to be estimated (\citet{sk}).
+As demonstrated in \citet{sk}, sampled skewness and kurtosis formulae can be computed in some different fashions
+All of these methods bring their precisions to the calculation of those moments. 
+The precision of the method mostly depends on the size of the sample along with the skewed of the theoretical distribution to be estimated.
 
-The chosen method to use to estimate the skewness and kurtosis needs a prudent selection especially for small sized sample. Actually, in order to minimize the mean--squared error and the associated variance, the \cref{eq:upstream:skewness:normal,eq:upstream:kurtosis:normal} are used as an reliable  unbiased estimator for sample with normal shaped theoretical distribution.
+The method having to be chosen to estimate the skewness and kurtosis needs a prudent selection especially for a small sample size. 
+Actually, in order to minimize the mean-squared error and the associated variance, the \cref{eq:upstream:skewness:normal,eq:upstream:kurtosis:normal} are used as a reliable unbiased estimator for a sample with normal shaped theoretical distribution.
 
 \begin{align}
   b_{skewness} &= \frac{m_3}{S^3} \label{eq:upstream:skewness:normal} \\ 
@@ -232,59 +238,77 @@ The chosen method to use to estimate the skewness and kurtosis needs a prudent s
   \intertext{
   where
   }
-  S^2 &= \frac{1}{n - 1} \sum_{i = 1}^n \left( x_i - \overline{\rm x} \right)^2 \\
+  S^2 &= \frac{1}{n - 1} \sum_{i = 1}^n \left( x_i - \overline{\rm x} \right)^2 \notag \\
   \intertext{
-  Conversely, \cref{eq:upstream:skewness:skewed,eq:upstream:kurtosis:skewed} are the ones providing a better unbiased estimation than the latters for more skewed distribution, such as for log--normal random variable's sample.
+  Conversely, \cref{eq:upstream:skewness:skewed,eq:upstream:kurtosis:skewed} are the ones providing a better-unbiased estimation for more skewed distributions, such as for log-normal random variable's samples.
   }
   G_{skewness} &= \frac{k_3}{\sqrt{k_2^3}} \label{eq:upstream:skewness:skewed} \\ 
-  G_{kurtosis} &= \frac{k_4}{k_2^2} \label{eq:upstream:kurtosis:normal}  \\
+  G_{kurtosis} &= \frac{k_4}{k_2^2} \label{eq:upstream:kurtosis:skewed}  \\
   \intertext{
   where
   }
-  K_2 &= \frac{n}{n-1} m_2 \\
-  K_3 &= \frac{n}{(n-1)(n-2)} m_3 \\
-  K_4 &= \frac{n}{\prod_{i = 1}^3 n - i} \Big[ (n+1)m_4 - 3(n-1) m_2 ^2 \Big]
+  K_2 &= \frac{n}{n-1} m_2 \notag \\
+  K_3 &= \frac{n}{(n-1)(n-2)} m_3 \notag \\
+  K_4 &= \frac{n}{\prod_{i = 1}^3 n - i} \Big[ (n+1)m_4 - 3(n-1) m_2 ^2 \Big] \notag
 \end{align}
 
-Consequently the algorithm to apply in order to estimate the skewness and kurtosis from samples should therefore be chosen with respect to the theoretical underpinned distribution. 
+Accordingly, the algorithm to apply in order to estimate the skewness and kurtosis from samples should be chosen with respect to the theoretical underpinned distribution.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Log--return and compounded interest rate
+% SECTION: Log-return and compounded interest rate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Log--return and compounded interest rate}
+\section{Log-return and compounded interest rate}
 \label{sec:upstream:logreturn}
 
-The concept of log--return and continuously compounded interest rates are closely related together as attested by \crefrange{eq:upstream:stock:valued}{eq:upstream:logreturn}
+Following \citet{hull}, the concept of log-returns and continuously compounded interest rates are closely related together as attested by \crefrange{eq:upstream:stock:valued}{eq:upstream:logreturn}.
 
 \begin{align}
-&S(0) e^{Rt} = \St \label{eq:upstream:stock:valued} \\
-\Longleftrightarrow  &\ln{S(0)} + Rt = \ln{\St} \\
-\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = Rt \label{eq:upstream:logreturn}
+&S(0) e^{R_c t} = \St \label{eq:upstream:stock:valued} \\
+\Longleftrightarrow  &\ln{S(0)} + R_c t = \ln{\St} \\
+\Longleftrightarrow  &\ln{\frac{\St}{S(0)}} = R_c t \label{eq:upstream:logreturn}
 \end{align}
-Where $R$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interest are compounded (in year) and the left--hand side of \cref{eq:upstream:logreturn} stands for the natural logarithm of the stock return occuring during the period $t$, the so--called log--return.
+Where $R_c$ is the interest rate with continuous compounding, $t$ denotes the time period across which the interests are compounded ($t$ is yearly-based) while the left-hand side of \cref{eq:upstream:logreturn} stands for the natural logarithm of the stock return occurring during the period $t$, the so-called log-return.
 
-For what matter in this current document, the focus is set to the sample's log--returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:upstream:Scontinuous} to simulate geometric Brownian motion.
+As showed in \citet{hull}, the transformation of an equivalent rate $R_m$ with a frequency of compounding $m$ per year into one continuous could be perform thanks to \cref{eq:upstream:equivtocontinuous}
 
-Following \citet{hull}, if $S_i$ and $n$ respectively denote the stock price at the end of interval $i$ and the total number of observation then the log--return of the ordered sample set $\{S-i\}_{i \in n}$ is give by \cref{eq:upstream:logreturn:sample}.
+\begin{align}
+R_c = m \ln \left( 1 + \frac{R_m}{m} \right) \label{eq:upstream:equivtocontinuous}
+\end{align}
+
+For what matters in that master thesis, the focus is set to the sample's log-returns which are used to estimate the volatility term appearing, inter alia, in \cref{eq:upstream:scontinuous} in order to simulate geometric Brownian motion.
+
+In accordance with \citet{hull}, if $S_i$ and $n$ respectively denote the stock price at the end of interval $i$ and the total number of observations then the log-returns of the ordered sample set $\{S_i\}_{i \in n}$ is given by \cref{eq:upstream:logreturn:sample}.
 
 \begin{align}
   u_i &= \ln \frac{S_i}{S_{i-1}} \label{eq:upstream:logreturn:sample} \\
   \intertext{
-  Whilst the estimation of the standard deviation of all the $u_i$ is defined such as in \cref{eq:upstream:logreturn:sample:sd}
+  Whilst the estimation of the standard deviation of all the $u_i$ is defined as such in \cref{eq:upstream:logreturn:sample:sd}
   }
-  s = \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n \left(u_i - \bar{u} \right) ^2} \label{eq:upstream:logreturn:sd} \\
+  s &= \sqrt{\frac{1}{n - 1} \sum_{i = 1}^n \left(u_i - \bar{u} \right) ^2} \label{eq:upstream:logreturn:sd} \\
 \end{align}
 
-Consequently if the volatility of a stochastic process, simulatating a stock price motion, is given by $\sigma \sqrt{t}$, then it could therefore be estimated using market data throughout \cref{eq:upstream:volatility:estimator}
+Consequently, if the distribution of the log-returns of a stochastic process is normal and is given by \cref{eq:upstream:log:distrib:normal}, the parameters $\alpha$ and $\sigma$ can be assessed by respectively using \cref{eq:upstream:mean:estimator,eq:upstream:volatility:estimator}.
+This method will be used notably used in \cref{cha:Methodology} to find the calibrated value of some parameters.
 
 \begin{align}
-  \hat{\sigma} = \frac{s}{\sqrt{t}} \label{eq:upstream:volatility:estimator}
+  N \sim \left( \left( \alpha - \frac{\sigma^ 2}{2} \right) t, \sigma^2 t \right) \label{eq:upstream:log:distrib:normal}
 \end{align}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Arbitrage strategy
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Arbitrage strategy}
-\label{sec:upstreamarbitrage}
+\begin{align}
+  \hat{\alpha} &= \frac{\bar{x}}{t} + \frac{\hat{\sigma}^2}{2} \label{eq:upstream:mean:estimator}\\
+  \hat{\sigma} &= \frac{s}{\sqrt{t}} \label{eq:upstream:volatility:estimator}
+\end{align}
 
-The 
+
+
+
+
+
+
+
+
+
+
+
+
+
