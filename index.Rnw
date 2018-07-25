@@ -36,6 +36,7 @@ Using R. \cite{R}
 % \SweaveInput{BSM}
 % \SweaveInput{models}
 \SweaveInput{methodology}
+% \SweaveInput{analysis.Rnw}
 % \SweaveInput{appendix}
 
 

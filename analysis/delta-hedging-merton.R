@@ -84,7 +84,7 @@ o_merton_t0 <-  purrr::map(data.frame(t(domain)), function(x){
                                                 sd = x_merton['delta']),
               K = x[2])
 })
-  
+
 
 # # Option price for all Geometric BM at all times
 O_merton <- purrr::map(data.frame(t(domain)), .f = function(z){
@@ -163,7 +163,7 @@ merton_ts_bsm <- map(merton_ts, function(x){
   z <- x[, 1:2]
   names(z) <- c('stock_price_path','time_periods')
   z
-  })
+})
 
 d_bsm <- purrr::map(data.frame(t(domain)), .f = function(z){
   # print(z)
@@ -183,7 +183,7 @@ d_bsm <- purrr::map(data.frame(t(domain)), .f = function(z){
 diff_delta_bsm <- purrr::map(d_bsm, function(z){
   map(z, ~ c(.x[1], diff(.x)))
 })
-                         
+
 
 # list of arrays used in functional pmap structure.
 # l <- map(1:nrow(domain), function(x){
@@ -237,7 +237,7 @@ u <- purrr::map(l, function(x){
     # print(o_merton_t0[[paste0('X',row.names(domn))]])
     p <- o_merton_t0[[as.double(row.names(domn))]] - cumsum(dd  * g$stock_price_path)
     p_bsm <- o_merton_t0[[as.double(row.names(domn))]] - cumsum(dd_bsm  * g$stock_price_path)
-
+    
     # print(p)
     #####################
     # test
@@ -302,8 +302,14 @@ pi <- purrr::map(u, function(x){
                  + exp(dplyr::first(.x$r) * dplyr::last(.x$time.period)) * dplyr::last(.x$p)
                  - dplyr::last(.x$option))
 })
+pi_bsm <- purrr::map(u, function(x){
+  purrr::map_dbl(x,
+                 ~ dplyr::last(.x$delta.bsm) * dplyr::last(.x$s)
+                 + exp(dplyr::first(.x$r) * dplyr::last(.x$time.period)) * dplyr::last(.x$p.bsm)
+                 - dplyr::last(.x$option))
+})
 
-  
+
 # pi2 <-   purrr::map_dbl(u[[1]],
 #                  ~ .x$delta[time_to_maturity * scale + 1]
 #                  * .x$s[time_to_maturity * scale + 1]
@@ -315,9 +321,13 @@ pl <- pmap(list(u, pi), function(x, y){
   # exp(- dplyr::first(x[[1]]$r) * dplyr::last(x[[1]]$time.period)) * y / dplyr::first(x[[1]]$option)
   y / dplyr::first(x[[1]]$option)
 })
-  
-                    
-      
+pl_bsm <- pmap(list(u, pi_bsm), function(x, y){
+  # exp(- dplyr::first(x[[1]]$r) * dplyr::last(x[[1]]$time.period)) * y / dplyr::first(x[[1]]$option)
+  y / dplyr::first(x[[1]]$option)
+})
+
+
+
 
 # hedging_cost <- purrr::map_dbl(u,
 #                                ~ sum(.x$with.interest) - .x$delta[time_to_maturity * scale + 1] * strike)
@@ -326,8 +336,8 @@ pl <- pmap(list(u, pi), function(x, y){
 # 
 # sum(i) / length(i)
 
-           
-                 
+
+
 #################################
 # Plot
 #################################
@@ -341,9 +351,22 @@ ggplot(u[[1]][[9]]) +
 
 ggplot(data.frame(pl = pl[[13]])) +
   stat_density(aes(pl) ,geom = "line",
-               colour = 'steelblue')
-                 
-                 
-                 
-                 
-                 
+               colour = 'steelblue')+
+  stat_density(data = data.frame(pl_bsm = pl_bsm[[31]]), aes(pl_bsm) ,geom = "line",
+               colour = 'darkred') +
+  xlim(c(-0.5, 0.5))
+
+
+#################
+# Plot
+#################
+ggplot2::ggplot(dplyr::bind_rows(merton_ts, .id = "uniqueID"), 
+                ggplot2::aes(x = time, 
+                             y = stock_price_path, 
+                             group = uniqueID)) + 
+  ggplot2::geom_line(ggplot2::aes(alpha = 0.5)) + 
+  theme(legend.position = 'none') +
+  ggplot2::labs( x = 'Time period',
+                 y = 'Price')
+
+
