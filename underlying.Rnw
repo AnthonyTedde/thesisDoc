@@ -7,17 +7,11 @@
 \chapter{The underlying model}
 \label{cha:underlying}
   
+  
+This chapter highlights the specific geometric Brownian motion (GBM) used in \citet{bs} to model the price evolution of a financial asset, notably a share stock. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sec:underlying:overview}
-
-This chapter highlights one specific model used to model the motion that a stock price time serie would follow. It is the one used in the Black--Scholes--Merton model, \citet{hull}.
-
-Following \citet{shreve}, The \cref{eq:underlying:geometric:closed}, called a geometric Brownian motion, features a stochastic process where the only random component is the Brownian motion $\Bm$. Whilst the others parameters, $\alpha$ and $\sigma$, stand respectively for the annualized expected return and volatility of the theoretical stock price process, \citet{hull}.
+According to \citet{shreve}, The \cref{eq:underlying:geometric:closed}, so-called a geometric Brownian motion, features a stochastic process where the only random component is the Brownian motion $\Bm$. 
+The others parameters, $\alpha$ and $\sigma$,  respectively stand for the drift and volatility rate of the process.
 
 \begin{center}
   \begin{equation}
@@ -26,10 +20,8 @@ Following \citet{shreve}, The \cref{eq:underlying:geometric:closed}, called a ge
   \end{equation}
 \end{center}
  
-In order to match with the constraints introduced by the Black and Scholes' pricing formula (\cref{sec:bsm:assumption}), the value the stock price may achieve at the end of a given period, according to constant mean rate of return and volatility, should be random and log--normally distributed (\citet{bs}).
-
-Furthermore, the path following by any walks of the stock price motion should be  a continuous process, as the time frame decrease $\Dt \to 0$.
-Therefore in addition to develop the model, all the aforementioned characteristics are shown to be true within this chapter.
+In order to match with the constraints underpinned by the model developed by Black and Scholes, the distribution of the underlying asset log-returns should be log-normally distributed.
+Accordingly, the current chapter shows that this prerequisite is met when the price of a security is driven by a GBM.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

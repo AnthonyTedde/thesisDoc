@@ -403,10 +403,16 @@ setwd("c:/Users/ATE/thesisDoc/data")
 
   
   
-  
- 
-  
-  
+  #   kappa <- x["kappa"] + 5.4883278229
+  # theta <- x["theta"] * x["kappa"] / kappa
+  # alpha <- c('alpha' = 0.4822917)
+  # 
+  # 
+  # heston_riskaverse <- c(kappa, theta, alpha)
+  # 
+  # setwd("c:/Users/ATE/thesisDoc/data")
+  # 
+  # save(heston_riskaverse, file = "optimalHestonRiskaverse.RData")
   
   
   

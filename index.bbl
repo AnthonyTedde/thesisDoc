@@ -1,29 +1,33 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Heston(1993)]{heston1993}
-Steven~L Heston.
-\newblock A closed-form solution for options with stochastic volatility with
-  applications to bond and currency options.
-\newblock \emph{The review of financial studies}, 6\penalty0 (2):\penalty0
-  327--343, 1993.
+\bibitem[Black and Scholes(1973)]{bs}
+Fischer Black and Myron Scholes.
+\newblock The pricing of options and corporate liabilities.
+\newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
+  637--654, 1973.
+
+\bibitem[Clark(1973)]{clark1973}
+Peter~K Clark.
+\newblock A subordinated stochastic process model with finite variance for
+  speculative prices.
+\newblock \emph{Econometrica: journal of the Econometric Society}, pages
+  135--155, 1973.
 
 \bibitem[Hull and Basu(2012)]{hull}
 John~C Hull and Sankarshan Basu.
 \newblock \emph{Options, futures, and other derivatives}.
 \newblock Pearson Education India, 2012.
 
-\bibitem[Joanes and Gill(1998)]{sk}
-D.~N. Joanes and C.~A. Gill.
-\newblock Comparing measures of sample skewness and kurtosis.
-\newblock \emph{Journal of the Royal Statistical Society. Series D (The
-  Statistician)}, 47\penalty0 (1):\penalty0 183--189, 1998.
-\newblock ISSN 00390526, 14679884.
-\newblock URL \url{http://www.jstor.org/stable/2988433}.
+\bibitem[Merton(1973)]{merton73}
+Robert~C Merton.
+\newblock Theory of rational option pricing.
+\newblock \emph{The Bell Journal of economics and management science}, pages
+  141--183, 1973.
 
 \bibitem[{R Core Team}(2017)]{R}
 {R Core Team}.
@@ -37,9 +41,9 @@ Steven~E Shreve.
   volume~11.
 \newblock Springer Science \& Business Media, 2004.
 
-\bibitem[Tedde(2017)]{randomwalk}
-Anthony Tedde.
-\newblock \emph{RandomWalk: Generate Random Walks}, 2017.
-\newblock R package version 0.0.0.9000.
+\bibitem[Teneng(2011)]{teneng2011limitations}
+Dean Teneng.
+\newblock Limitations of the black-scholes model.
+\newblock \emph{Collection of Papers 2011--Volume I}, page 143, 2011.
 
 \end{thebibliography}

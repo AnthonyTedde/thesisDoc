@@ -1,10 +1,9 @@
 \contentsline {chapter}{Introduction}{2}{chapter*.2}
-\contentsline {chapter}{\numberline {1}Upstream concepts}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Vanilla options}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Brownian Motion}{4}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Correlated Brownian motions}{6}{subsection.1.2.1}
-\contentsline {section}{\numberline {1.3}Ito's lemma}{6}{section.1.3}
-\contentsline {section}{\numberline {1.4}Cox-Ingersoll-Ross}{7}{section.1.4}
-\contentsline {section}{\numberline {1.5}Skewness and Kurtosis}{7}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}Estimation}{8}{subsection.1.5.1}
-\contentsline {section}{\numberline {1.6}Log-return and compounded interest rate}{8}{section.1.6}
+\contentsline {chapter}{\numberline {1}Analysis}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Jump-diffusion processes: delta hedging}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Hedge with Black-Scholes delta}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Hedge with appropriate delta}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}frequency}{4}{subsection.1.1.3}
+\contentsline {section}{\numberline {1.2}Stochastic volatility processes: delta hedging}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Hedge with Black-Scholes delta}{4}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Hedge with appropriate delta}{4}{subsection.1.2.2}

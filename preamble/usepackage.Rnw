@@ -18,5 +18,7 @@
 \usepackage[toc,page]{appendix}
 \usepackage{tabularx}
 \usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{arydshln}
 % \usepackage{hyperref}
 % \usepackage{physics}
