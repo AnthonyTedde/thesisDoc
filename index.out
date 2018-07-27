@@ -1,9 +1,13 @@
 \BOOKMARK [0][-]{chapter*.2}{Introduction}{}% 1
-\BOOKMARK [0][-]{chapter.1}{Analysis}{}% 2
-\BOOKMARK [1][-]{section.1.1}{Jump-diffusion processes: delta hedging}{chapter.1}% 3
-\BOOKMARK [2][-]{subsection.1.1.1}{Hedge with Black-Scholes delta}{section.1.1}% 4
-\BOOKMARK [2][-]{subsection.1.1.2}{Hedge with appropriate delta}{section.1.1}% 5
-\BOOKMARK [2][-]{subsection.1.1.3}{frequency}{section.1.1}% 6
-\BOOKMARK [1][-]{section.1.2}{Stochastic volatility processes: delta hedging}{chapter.1}% 7
-\BOOKMARK [2][-]{subsection.1.2.1}{Hedge with Black-Scholes delta}{section.1.2}% 8
-\BOOKMARK [2][-]{subsection.1.2.2}{Hedge with appropriate delta}{section.1.2}% 9
+\BOOKMARK [0][-]{chapter.1}{The Black-Scholes-Merton option pricing model}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Assumptions}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Geometric Brownian motion}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.2.1}{Distributions of geometric Brownian motion}{section.1.2}% 5
+\BOOKMARK [1][-]{section.1.3}{The Black-Scholes-Merton equation}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.4}{The greeks}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.4.1}{Delta}{section.1.4}% 8
+\BOOKMARK [2][-]{subsection.1.4.2}{Gamma}{section.1.4}% 9
+\BOOKMARK [2][-]{subsection.1.4.3}{Theta}{section.1.4}% 10
+\BOOKMARK [1][-]{section.1.5}{Relation between BSM and the greeks}{chapter.1}% 11
+\BOOKMARK [1][-]{section.1.6}{The delta hedging rules}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.7}{Flaws}{chapter.1}% 13
