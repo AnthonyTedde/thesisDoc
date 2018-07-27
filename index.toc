@@ -8,6 +8,6 @@
 \contentsline {subsection}{\numberline {1.4.1}Delta}{10}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {1.4.2}Gamma}{11}{subsection.1.4.2}
 \contentsline {subsection}{\numberline {1.4.3}Theta}{11}{subsection.1.4.3}
-\contentsline {section}{\numberline {1.5}Relation between BSM and the greeks}{12}{section.1.5}
-\contentsline {section}{\numberline {1.6}The delta hedging rules}{12}{section.1.6}
-\contentsline {section}{\numberline {1.7}Flaws}{13}{section.1.7}
+\contentsline {subsection}{\numberline {1.4.4}Relation between BSM and the Greeks}{12}{subsection.1.4.4}
+\contentsline {section}{\numberline {1.5}The delta hedging rules}{12}{section.1.5}
+\contentsline {section}{\numberline {1.6}Flaws}{12}{section.1.6}

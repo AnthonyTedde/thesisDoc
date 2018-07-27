@@ -601,21 +601,23 @@ The next \cref{sub:Gamma} devotes to it.
 \subsection{Gamma}
 \label{sub:Gamma}
 
-Gamma is the second derivative of the option's price function with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
+According to \citet{shreve}, Gamma ($\Gamma$) is the second derivative of the option pricing function with respect to the underlying price, time been constant (\ref{eq:GammaDerivative}). 
 
 \begin{align}
     \Gamma \left(t, \St \right) &= \frac{\partial^2\call{t}{\St}}{\partial \St^2}
     \label{eq:GammaDerivative}
-    \intertext{Whereas pratically, the derivation of gamma for a call is given by equation \ref{eq:gammaCall}, (\citet{shreve}).}
+    \intertext{Whereas practically, the derivation of gamma for a call is given by equation \ref{eq:gammaCall}.}
     \Gamma_{call} \left(t, \St \right) &= \frac{1}{\sigma \St \sqrt{\Delta t}} N^\prime \left( \dsub{+} \right)
     \label{eq:gammaCall}
 \end{align}
 
-It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. It gives information on the curvature of the function to be approximated using the differential form. 
-It is crutial to know how big is the value of gamma in order to adequatly hedge a position in a call. Indeed, if gamma is low, the rebalancing of the hedge does not have to occur frequently but if gamma 
-It gives as information the frequency needed in order to lower the error due to too large price movement.
-With the delta hedging rule, the more the price moves from its current value the more 
-Consequently, by gathering gamma and delta both together, a given more precise information on hedging against the only stock price movement is achieved.
+It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. 
+Therefore, thanks to gamma,  the curvature of the function to be approximated using the differential form is known. 
+It can be crucial to at least assess how big is the value of gamma in order to adequately hedge a position in a call. 
+Indeed, if gamma is low, the rebalancing of the hedge does not have to occur as frequently as if it is high because any change in the underlying asset would bring a little move in the derivative price, letting delta be a good approximation of the option evolution with respect to the asset price.
+
+
+As a portfolio can be delta-neutral, \citet{roman} showns that it can also be gamma-neutral. However, making a portfolio gamma-neutral forces to add another derivative on the same underlying inside it to vanish the gamma, with the consequence to modify the delta of the portfolio. It, therefore, implies to recompute the delta in order to restore the delta-neutrality of the portfolio
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Theta
@@ -623,7 +625,7 @@ Consequently, by gathering gamma and delta both together, a given more precise i
 \subsection{Theta}
 \label{sub:Theta}
 
-Theta is the derivative of the price of an option with respect to the time, stock price unchanges (\ref{eq:ThetaDerivative})
+Theta is the derivative of the price of an option with respect to the time, stock price being unchanged (\ref{eq:ThetaDerivative}).
 
 \begin{center}
   \begin{equation}
@@ -632,18 +634,18 @@ Theta is the derivative of the price of an option with respect to the time, stoc
   \end{equation}
 \end{center}
 
-(Hull), Theta can be used as a proxy for Gamma in a delta neutral portfolio.
-No need to hedge against time therefore no need to neutralize theta.
+According to \citet{hull}, Theta can be used as a proxy for gamma in a delta-neutral portfolio.
+Indeed, because of its neutrality, delta so disappears of \cref{eq:BSMGreeks} letting the relation between gamma and theta become clearer, that is, according to the option price and the value of theta, gamma can be assessed.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: Relation between BSM and the greeks
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Relation between BSM and the greeks}
+\subsection{Relation between BSM and the Greeks}
 \label{sec:BSMGreeks}
 
-The Black--Scholes--Merton equation and the greeks are closely related together.
-In deed the BSM partial derivative formula (\ref{eq:bsm:bsm:eq}) could equally be written using the greeks (\ref{eq:BSMGreeks})
+The BSM equation and the Greeks closely relate together.
+Indeed, the BSM partial derivative equation (\ref{eq:bsm:bsm:eq}) could equally be written using the greeks, as shown by \cref{eq:BSMGreeks}.
 
 \begin{center}
   \begin{equation}
@@ -660,73 +662,20 @@ In deed the BSM partial derivative formula (\ref{eq:bsm:bsm:eq}) could equally b
 \section{The delta hedging rules}
 \label{sec:bsm:delta:hedge}
 
-The purpose of the delta hedging rules is to fully replicate the reverse position taken in an option in order to cover oneself against lost. The technique is achieved by continuously rebalancing its position in order to keep an amount of $\Delta(t)$ share of stock at each time $t$.
+The purpose of the delta hedging rules is to fully replicate the reverse position taken in an option to cover oneself against lost. The technique is achieved by continuously rebalancing its position in order to keep an amount of $\Delta(t)$ share of stock for each period $t$.
 
-One scenario could be the following. One party write an option at some initial time $t_0$ at a certain price (given by the Black--Scholes--Merton equation (REF)) $X(0)$, and he / she puts that earning money into a bank account, in which the annual interest rate in action is given by $r$.
+Consequently to hedge a short position in a European call option, one should construct a portfolio made up of a given amount of share of stock to replicate a long position in the same derivative.
+The quantity of the underlying asset to keep in that portfolio at any time is provided by the resolution of the delta (\ref{eq:deltaCall}) for the appropriate period.
 
-\begin{align}
-X(0) = BSM(S_0, T, \sigma, k)
-\end{align}
-
-Incidentally, following (EQUATION DELTA), he / she computes the delta at time zero and buys exactly that amount of share of stock. Additionaly, he / she divides the whole time frame into $n$ smaller time steps $\delta t$ in order to subsequently rebalance its position in the stock, according to the evolution of the underlying.
+\cref{eq:bsm:delta:reverse:portfolio} shows the relation between a European short call and the delta-neutral portfolio that replicates the reverse position in the derivative for any time $t \in [0, T]$, where $T$ denotes the time to maturity.
 
 \begin{align}
-\left\{
-  \begin{array}{l}
-    p(0) = \Delta(t_0) S(t_0) \\
-    p(1) = \left(\Delta(t_1) - \Delta(t_0) \right) S(t_1) \\
-    p(2) = \left(\Delta(t_2) - \Delta(t_1) \right) S(t_2) \\
-    \vdots \\
-    p(i) = \left(\Delta(t_i) - \Delta(t_{i + 1}) \right) S(t_i) \\
-    \vdots \\
-    p(n) = \left(\Delta(t_i) - \Delta(t_{n + 1}) \right) S(t_n) \\
-  \end{array}
-\right.
+  c(t, S(t)) = \Delta(t) S(t) + e^{r (t - t_0)} c(t_0, S(t_0)) -
+  \left(\sum_{t_i \in ]0, t]} \left( \Delta(t_{i} - t_{i-1}) S(t_i) \right) + \Delta(t_{0}) S(t_0) \right),
+  \forall i \in \mathbb{Z} : i \in \left \{1, T \right \} \label{eq:bsm:delta:reverse:portfolio}
 \end{align}
+where the set $i$ is the time-step.
 
-Finally, to see if the hedge works, we value all operation made up to T and sum the whole part
-
-\begin{align}
- \left\{
-  \begin{array}{l}
-    P(0) = p(0) e ^{r \times (T - t_0)} = p(0) e ^{r \times T} \\
-    P(1) = p(1) e ^{r \times (T - t_1)} \\
-    P(2) = p(2) e ^{r \times (T - t_2)} \\
-    \vdots \\
-    P(i) = p(i) e ^{r \times (T - t_i)} \\
-    \vdots \\
-    P(n) = p(n) e ^{r \times (T - t_n)} = p(n) \\
-  \end{array}
-\right.
-\end{align}
-
-Now we get the valued portfolio, we have to compare it with something. At the beging we got an amount of money, priced at $X(0)$ which were the Black -- Scholes -- Merton Price. This amount of money has been put in a money market account with an interest rate of $r$. 
-At maturity we therefore get the amout of money given by (REFENCE EQUATION).
-
-\begin{align}
-  X(T) = X(0)  e ^{r T}
-\end{align}
-
-At maturity, another operation occurs. If the option is in-the-market, it will be exercised and furthermore $\Delta(T) = 1$, meaning that we have one share of stock to honour the transaction. In exchange we get \$$K$ from the counterparty. It means that in the end we have a positive amount of:
-
-\begin{align}
-  X(T) + \Delta(T) * k
-\end{align}
-
-Consequently to check if the hedge works well, we should get the following relation:
-
-\begin{align}
- \sum_{i = 0}^{n = T} P(i) \cong X(T) + \Delta(T) * k
-\end{align}
-
-Because the position could vary, we have to adapt the relation above (REF) in order to remove all unit from the comparison.
-According to hull, a measure of performance of the hedge could be to take the ratio of the standard deviation of the cost to hedge to the option price. In that case, the measure could be comparated among themselve even if the position taken into the underlying difer.
-
-\begin{align}
-  \frac{sd(hedge)}{C_0 e ^{r T}}
-  \label{bsm:delta:hedge:perf}
-\end{align}
-where hedge is a vector containing $n$ sample generated, and $C_0$ is the price of the call option at time zero value up to maturity.
 
 
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -34,6 +34,14 @@ Robert~C Merton.
 \newblock \emph{R: A Language and Environment for Statistical Computing}.
 \newblock R Foundation for Statistical Computing, Vienna, Austria, 2017.
 \newblock URL \url{https://www.R-project.org/}.
+
+\bibitem[R{\"o}man(2017)]{roman}
+J.R.M. R{\"o}man.
+\newblock \emph{Analytical Finance: Volume II: The Mathematics of Interest Rate
+  Derivatives, Markets, Risk and Valuation}.
+\newblock Springer International Publishing, 2017.
+\newblock ISBN 9783319525846.
+\newblock URL \url{https://books.google.be/books?id=SCpBDwAAQBAJ}.
 
 \bibitem[Shreve(2004)]{shreve}
 Steven~E Shreve.
