@@ -436,18 +436,19 @@ These letters are described in this section as well as their implication in the 
 \subsection{Delta}
 \label{sub:Delta}
 
-Delta is the derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price, as shown by equation (\ref{eq:bsm:call}).
-It therefore represents the instantaneous rate of change in a call value as the price of its underlying evolves (\citet{hull}).
+As shown in \citet{shreve}, delta is the first derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price function, as shown by \cref{eq:bsm:call}.
+It, therefore, represents the instantaneous rate of change of a call's value as the price of its underlying evolves.
 
 \begin{align}
     \Delta \left(t, \St \right) &= \frac{\partial \call{t}{\St}}{\partial \St}
     \label{eq:bsm:call}
-    \intertext{Whereas pratically, the derivation of delta for a call is given by equation \ref{eq:deltaCall}, (\citet{shreve}).}
+    \intertext{Whereas practically, following \citet{shreve}, the derivation of delta for a call is given by equation \ref{eq:deltaCall}.}
     \Delta_{call} \left(t, \St \right) &= \N{\dsub{+}}
     \label{eq:deltaCall}
 \end{align}
 
-At any time $t$, in order to hedge a short call one should hold $\Delta(t)$ share of stock. Consequently a portfolio comprised of one short position in a call along with $\Delta$ shares of stock is said to be delta neutral, because each movement in the stock price is compensated as well by  the position in the call as the one in the stock (\citet{hull}).
+According to \citet{hull}, at each period $t$, in order to hedge a short call one should hold $\Delta(t)$ share of stock. 
+Consequently, a portfolio comprised of one short position in a call along with $\Delta$ shares of stock is said to be delta-neutral, because each movement in the stock price is compensated between the short position in the call and the long in the stock.
 
 The delta neutrality could otherwise be explained using the slope-intercept form of the tangent line below the function $\call{t}{x}$, keeping t constant. If the stock price is equal to $S$ and the corresponding call price, for a fixed time $t$ and stroke at $k$, is $c$, we consequently get (\ref{eq:slopeInterceptCallStock}) as equation of the tangent line below $\call{t}{x}$.
 \begin{center}
@@ -457,13 +458,13 @@ The delta neutrality could otherwise be explained using the slope-intercept form
   \end{equation}
 \end{center}
 According to \ref{eq:slopeInterceptCallStock}, the price of the call, for a stock price $S$ at a fixed time $t$ is given by $y = c$.
-If -- over an infinitesimally small delta time -- a positive stock price movement occurs, says that the stock price rises from $S \to S + \epsilon$. The price of the call is therefore going to change as well, from $y = c$ to $y = \Delta \epsilon + c$.
-Consequently, in odrer to hedge a short position in the call, $\Delta$ shares of stock should be owned. Indeed, by kepping $\Delta$ shares, the loss incured by the higher value of the call $y = c + \Delta \epsilon$ will be offset by an inscrease of $\Delta \epsilon$ thanks to the $\Delta$ shares held.
-It makes sense that the hedge of a long call is achieved by setting up a short position in the underlying, according to the same parameter $\Delta$.
+If -- over an infinitesimally small delta time -- a positive stock price movement occurs, e.g., the stock price rises from $S \to S + \epsilon$. The price of the call is, therefore, going to change as well, from $y = c$ to $y = \Delta \epsilon + c$.
+Consequently, in order to hedge a short position in the call, $\Delta$ shares of stock should be owned. Indeed, by keeping $\Delta$ shares, the loss incurred by the higher value of the call $y = c + \Delta \epsilon$ will be offset by an increase of $\Delta \epsilon$ thanks to the number of $\Delta$ shares held.
+It makes sense that the hedging of a long call is achieved by setting up a short position in the underlying, according to the same parameter $\Delta$.
 
-The hedge works well for small price movement in the underlying and closely depends on the curvature of the function $\call{t}{c}$, keeping $t$ constant (\citet{shreve}).
-It would therefore be interesting to look at the second derivative of the call function with respect to the stock price, in order to get the rate of the rate of change of the call with respect to the underlying price.
-It is the purpose of the next subsection (\ref{sub:Gamma}).
+According to \citet{shreve}, the hedge works well for small price movement in the underlying and is closely related to the curvature of the function $\call{t}{c}$, keeping $t$ constant.
+It would, therefore, be interesting to look at the second derivative of the call function with respect to the stock price, in order to get the rate of the rate of change (the acceleration) of the call with respect to the underlying price.
+The next \cref{sub:Gamma} devotes to it.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -472,7 +473,7 @@ It is the purpose of the next subsection (\ref{sub:Gamma}).
 \subsection{Gamma}
 \label{sub:Gamma}
 
-Gamma is the second derivative of the option's price function with respect to the underlying price, time keeping constant (\ref{eq:GammaDerivative}). 
+Gamma ($\Gamma$) is the second derivative of the option pricing function with respect to the underlying price, time been constant (\ref{eq:GammaDerivative}). 
 
 \begin{align}
     \Gamma \left(t, \St \right) &= \frac{\partial^2\call{t}{\St}}{\partial \St^2}
@@ -487,6 +488,16 @@ It is crutial to know how big is the value of gamma in order to adequatly hedge 
 It gives as information the frequency needed in order to lower the error due to too large price movement.
 With the delta hedging rule, the more the price moves from its current value the more 
 Consequently, by gathering gamma and delta both together, a given more precise information on hedging against the only stock price movement is achieved.
+
+
+It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. It gives information on the curvature of the function to be approximated using the differential form. 
+It can be crucial, at least, to assess how big is the value of gamma in order to adequately hedge a position in a call. 
+Indeed, if gamma is low, the rebalancing of the hedge does not have to occur as frequently as if it is high. 
+It gives as information the frequency needed in order to lower the error due to too large price movement.
+
+As a portfolio can be delta-neutral, it can also be gamma-neutral. However, making a portfolio gamma-neutral obligates 
+
+Consequently, by gathering gamma and delta both together, one gets a more precise information on hedging against the only stock price movement is achieved.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Theta
