@@ -58,7 +58,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
   #################################
   args_heston <- as.list(heston_riskaverse)
   args_heston_riskneutral <- as.list(x)
- 
+  
   ts <- map(1:n_delta_hedge, ~ heston(
     initial_stock_price = initial_stock_price,
     initial_volatility = args_heston_riskneutral$v0,
@@ -70,7 +70,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
     kappa = args_heston$kappa,
     theta = args_heston$theta,
     sigma = args_heston_riskneutral$sigma
-    ))
+  ))
   # remove NA
   CIR.last <- map_dbl(ts, ~ tail(.x$CIR, 1)) %>% unname
   toremove <- which(is.na(CIR.last))
@@ -145,7 +145,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
                    kappa = args_heston_riskneutral$kappa,
                    sigma = args_heston_riskneutral$sigma,
                    rho = args_heston_riskneutral$rho
-                   )
+      )
     })
   })
   
@@ -158,16 +158,17 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
   # Delta BSM computation
   #################################
   heston_ts_bsm <- map(heston_ts, function(x){
-    z <- x[, 1:2]
-    names(z) <- c('time_periods', 'stock_price_path')
+    z <- x[, c(1:2, 5)]
+    names(z) <- c('time_periods', 'stock_price_path', 'CIR')
     z
   })
   
   d_bsm <- purrr::map(data.frame(t(domain)), .f = function(z){
     # print(z)
     purrr::map(heston_ts_bsm, .f = function(x){
-      delta_bsm(x[1:(z[1] * frequency + 1), ],
-                sigma = args_heston_riskneutral$theta,
+      # print(x$CIR[1:(z[1] * frequency + 1)])
+      delta_bsm(x[1:(z[1] * frequency + 1), 1:2],
+                sigma = x$CIR[1:(z[1] * frequency + 1)],
                 strike = z[2],
                 riskless_rate = z[3])
     })
@@ -195,7 +196,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
          diff_delta_bsm[[x]],
          d_bsm[[x]])
   })
-
+  
   
   # names(l) <- paste(domain$maturity, domain$strike, sep='/')
   
@@ -262,7 +263,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
     })
   })
   print(paste('for frequency' , frequency, 'and n hedge of', n_delta_hedge))
-return(u)
+  return(u)
 }
 
 
@@ -334,7 +335,7 @@ pl_bsm <- pmap(list(u, pi_bsm), function(x, y){
 #################################
 # Plot
 #################################
-ggplot(u[[14]][[1]]) +
+ggplot(u[[12]][[1]]) +
   geom_line(aes(x = time.period, y = option),
             colour = 'blue')+
   geom_point(aes(x = time.period, y = delta* s +  p),
@@ -369,6 +370,7 @@ ggplot2::ggplot(dplyr::bind_rows(heston_ts, .id = "uniqueID"),
 
 # setwd("c:/Users/ATE/thesisDoc/data")
 # save(U_heston , file = "u_heston.RData")
+# load(file = "u_heston.RData")
 
 
 u <- U_heston[[1]]
@@ -386,3 +388,9 @@ pi_bsm <- purrr::map(u, function(x){
                  + exp(dplyr::first(.x$r) * dplyr::last(.x$time.period)) * dplyr::last(.x$p.bsm)
                  - dplyr::last(.x$option))
 })
+
+
+
+# dist <- map_dbl(U_heston[[1]][[9]], ~dplyr::last(.x$s))
+# ggplot(data.frame(dist)) +
+#   stat_density(aes(dist))

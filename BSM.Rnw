@@ -531,7 +531,7 @@ Indeed, the BSM partial derivative equation (\ref{eq:bsm:bsm:eq}) could equally 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION: The delta hedging rules
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The delta hedging rules}
+\section{The delta hedging strategy}
 \label{sec:bsm:delta:hedge}
 
 The purpose of the delta hedging rules is to fully replicate the reverse position taken in an option to cover oneself against lost. The technique is achieved by continuously rebalancing its position in order to keep an amount of $\Delta(t)$ share of stock for each period $t$.
@@ -576,6 +576,11 @@ where the set $i$ is the time-step.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Flaws}
 \label{sec:Flaws}
+
+
+* Other process than the geom
+* Volatility + volatility smiles (how option ar priced)
+* curvature of the distribution
 
 Even if the \cref{eq:underlying:geometric:closed} is used to model the stock price process, it exists some lacks with the observed real processes. The analysis ([CHA REF]) mainly covers the following discrepancy of the model against empirical results.
   

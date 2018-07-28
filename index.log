@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  27 JUL 2018 16:36
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.7.4)  28 JUL 2018 12:34
 entering extended mode
 **index.tex
 (C:\Users\ATE\thesisDoc\index.tex
@@ -1490,103 +1490,57 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ]
 Chapter 1.
 
-LaTeX Warning: Reference `sec:Assumptions' on page 1 undefined on input line 16
-0.
+LaTeX Warning: Reference `' on page 1 undefined on input line 152.
+
+
+LaTeX Warning: Reference `' on page 1 undefined on input line 154.
 
 [3
 
-]
-
-LaTeX Warning: Reference `sec:upstream:ito' on page 1 undefined on input line 2
-29.
-
-[4] (C:\Users\ATE\thesisDoc\figures/ItoAccuracy.tex)
-
-LaTeX Warning: Reference `underlying:geometric:diff' on page 5 undefined on inp
-ut line 267.
-
-
-LaTeX Warning: Reference `underlying:geometric:diff' on page 5 undefined on inp
-ut line 267.
-
-
-LaTeX Warning: Reference `eq:underlying:geometric:closed,eq:underlying:geometri
-c:diff,eq:underlying:log:return' on page 5 undefined on input line 280.
-
-[5] (C:\Users\ATE\thesisDoc\figures/stock_return_density.tex)
-(C:\Users\ATE\thesisDoc\figures/stock_logreturn_density.tex)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[6] (C:\Users\ATE\thesisDoc\figures/stock_log_density.tex)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[7] [8] [9] [10] [11]
-Overfull \hbox (81.72552pt too wide) in paragraph at lines 676--676
-[] 
- []
-
-
-LaTeX Warning: Reference `sec:Heston' on page 1 undefined on input line 714.
-
-
-LaTeX Warning: Reference `sec:MixedJump' on page 1 undefined on input line 719.
-
-
-[12] (C:\Users\ATE\thesisDoc\index.bbl [13]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 36.
+] (C:\Users\ATE\thesisDoc\figures/analysis.bsm.stocks.tex)
+(C:\Users\ATE\thesisDoc\index.bbl [4] [5]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 12.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 747.
- [14
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 315.
+ [6
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 747.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 315.
 
 (C:\Users\ATE\thesisDoc\index.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 747.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 747.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 315.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 315.
 Package rerunfilecheck Info: File `index.out' has not changed.
-(rerunfilecheck)             Checksum: B879DD75EE023D5A714BF3B561ADAA71;885.
+(rerunfilecheck)             Checksum: 5B7E4AB9AE4F978E0C3D53D3A61B9A13;183.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 33377 strings out of 494045
- 607191 string characters out of 3145976
- 799500 words of memory out of 3000000
- 36081 multiletter control sequences out of 15000+200000
- 38243 words of font info for 85 fonts, out of 3000000 for 9000
+ 32079 strings out of 494045
+ 578410 string characters out of 3145976
+ 1885322 words of memory out of 3000000
+ 34845 multiletter control sequences out of 15000+200000
+ 42293 words of font info for 88 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 56i,10n,76p,425b,724s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,17n,76p,425b,725s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/symbols/msbm10.pfb>
-Output written on index.pdf (14 pages, 368189 bytes).
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti8.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on index.pdf (6 pages, 379623 bytes).
 PDF statistics:
- 414 PDF objects out of 1000 (max. 8388607)
- 76 named destinations out of 1000 (max. 500000)
- 149 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 18 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 

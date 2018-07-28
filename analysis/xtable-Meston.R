@@ -78,11 +78,11 @@ xt <- data.frame(strike = as.integer(domain$strike),
 xt <- rbind(c(rep('', 2), map_chr(c(91, 91, 182, 182, 399, 399)
                                   , paste, 'days before maturity')),
             c(rep('', 2),
-              rep(c('$\\Delta_{mrt}$', '$\\Delta_{bsm}$'), 3)),
+              rep(c('dddhst', 'dddbsm'), 3)),
             xt)
 print(xtable::xtable(xt,
                      align = "lllllllll",  # align and put a vertical line (first "l" again represents column of row numbers)
-                     caption = "Hedging with MJD: Relative P&L", 
+                     caption = "Hedging with HSV: Relative P\\&L", 
                      label = "t:analysis:heston:pl"),
       include.rownames = FALSE,
       include.colnames = FALSE)

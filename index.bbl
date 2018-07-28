@@ -1,57 +1,14 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Black and Scholes(1973)]{bs}
-Fischer Black and Myron Scholes.
-\newblock The pricing of options and corporate liabilities.
-\newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
-  637--654, 1973.
-
-\bibitem[Clark(1973)]{clark1973}
-Peter~K Clark.
-\newblock A subordinated stochastic process model with finite variance for
-  speculative prices.
-\newblock \emph{Econometrica: journal of the Econometric Society}, pages
-  135--155, 1973.
-
-\bibitem[Hull and Basu(2012)]{hull}
-John~C Hull and Sankarshan Basu.
-\newblock \emph{Options, futures, and other derivatives}.
-\newblock Pearson Education India, 2012.
-
-\bibitem[Merton(1973)]{merton73}
-Robert~C Merton.
-\newblock Theory of rational option pricing.
-\newblock \emph{The Bell Journal of economics and management science}, pages
-  141--183, 1973.
-
 \bibitem[{R Core Team}(2017)]{R}
 {R Core Team}.
 \newblock \emph{R: A Language and Environment for Statistical Computing}.
 \newblock R Foundation for Statistical Computing, Vienna, Austria, 2017.
 \newblock URL \url{https://www.R-project.org/}.
-
-\bibitem[R{\"o}man(2017)]{roman}
-J.R.M. R{\"o}man.
-\newblock \emph{Analytical Finance: Volume II: The Mathematics of Interest Rate
-  Derivatives, Markets, Risk and Valuation}.
-\newblock Springer International Publishing, 2017.
-\newblock ISBN 9783319525846.
-\newblock URL \url{https://books.google.be/books?id=SCpBDwAAQBAJ}.
-
-\bibitem[Shreve(2004)]{shreve}
-Steven~E Shreve.
-\newblock \emph{Stochastic calculus for finance II: Continuous-time models},
-  volume~11.
-\newblock Springer Science \& Business Media, 2004.
-
-\bibitem[Teneng(2011)]{teneng2011limitations}
-Dean Teneng.
-\newblock Limitations of the black-scholes model.
-\newblock \emph{Collection of Papers 2011--Volume I}, page 143, 2011.
 
 \end{thebibliography}

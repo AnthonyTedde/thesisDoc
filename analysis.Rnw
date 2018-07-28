@@ -1,40 +1,92 @@
 \chapter{Analysis}
 \label{cha:analysis}
 
+The objective of the current chapter is to measure the hedging performance of the Black-Scholes model when the stock price evolves in a non-log-normal world.
+The studied models allowing the course of a time-series to go out of the Black-Scholes frame are the Merton jump-diffusion (MJD) and Heston stochastic volatility(HSV) models.
+In order to give realistic results, they have been adjusted in \cref{}. For both models, two kinds of parameters have been found, namely, the risk-neutral and risk-averse ones. Therefore, the "no risk" parameters are used to price option, while the risky serve to generate time-series thanks to those models.
 
+The chosen metric to compare the models is the "relative profit and loss" (P\&L). Latter is explained in \cref{}.
 
+The analysis is completed in two steps. The first concerns exclusively the BSM model with all the so related constraints respected. Even though the computation of the options' prices in such an environment does not respect those emerging from reality, the measure of the P\&L so computed serve as a benchmark for the other models.
+The next and last part of the analysis measures the P\&L for both models MJD and HSV. Those P\&L are computed using the delta-hedging strategy. On one hand by using the delta of Black and Scholes and on the other, by using the appropriate delta of the considered model.
+Although the Black and Scholes delta is purposely computed to be applied when the underlying asset is driven by a geometric Brownian motion (GBM), the goal is to assess how one can go wrong by using it within the real conditions.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Jump-diffusion processes: delta hedging}
-\label{sec:analysis:jump}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Hedge with Black-Scholes delta}
-\label{sec:analysis:hedge:bsm}
+At last, some particular results are commented.
 
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Jump-diffusion process
+% Log normal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Hedge with appropriate delta}
-\label{sec:analysis:hedge:merton}
+\section{Measuring performance in a log-normal world}
+\label{sec:section name}
+
+\Cref{t:analysis:bsm:pl} presents the results of the relative P\&Ls got concerning the process of delta-hedging on options with maturities of 3, 6 and 13 months and strikes ranging from 140 to 230.
+Those outputs are maturities column-wise and grouped by strikes in rows.
+Furthermore, each row is split into three parts, each of these subsections represents different rebalancing frequency.
+For instance, the result exhibited in the column "91 dbm" and row "140 > intraday" give the mean relative P\&L computed on a series of European call option delta hedging with a maturity of 91 days (3 months), a strike of 140 and a rebalancing occurring twice a day.
+
+The samples time-series of the underlying asset are shown in \cref{p:analysis:gbm:100}. 
+It means that any path of that series helped forty-five times the analysis because each of it has been involved in the hedge of options with five different strikes having three maturities each, along with three distinctive rebalancing frequencies.
+The total number of samples was one hundred, and consequently, \Cref{t:analysis:bsm:pl} summarizes four thousand and  five hundred delta hedging strategies.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/analysis.bsm.stocks.tex}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.} 
+  }
+  \label{p:analysis:gbm:100}
+\end{figure}
+
+
+
+\Cref{t:analysis:bsm:pl} presents the results got 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lllll}
+  \hline
+  \hline
+   &  & 91 dbm\footnote{dbm: days before maturity} & 182 dbm & 399 dbm \\ 
+   \hdashline
+  \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+   & daily & 0 & 0 & 0 \\ 
+   & weekly & 0 & 0 & -0.001 \\ 
+   \hdashline
+  \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+   & daily & 0 & -0.001 & -0.001 \\ 
+   & weekly & -0.003 & -0.005 & -0.005 \\ 
+   \hdashline
+  \multirow{3}{*}{186} & intraday & -0.005 & 0.001 & -0.002 \\ 
+   & daily & -0.01 & -0.007 & -0.005 \\ 
+   & weekly & -0.066 & -0.034 & -0.019 \\ 
+   \hdashline
+  \multirow{3}{*}{200} & intraday & -0.015 & -0.003 & -0.005 \\ 
+   & daily & -0.047 & -0.019 & -0.011 \\ 
+   & weekly & -0.229 & -0.101 & -0.039 \\ 
+   \hdashline
+  \multirow{3}{*}{230} & intraday & 0.296 & 0.009 & -0.03 \\ 
+   & daily & -0.045 & -0.059 & -0.039 \\ 
+   & weekly & -1.305 & -0.322 & -0.149 \\ 
+   \hline
+\end{tabular}
+\caption{Hedging with BSM: Relative P\&L} 
+\label{t:analysis:bsm:pl}
+\end{table}
+
+
+
+----------------------------------------------
 
 \begin{table}[ht]
 \centering
 \begin{tabular}{llllllll}
   \hline
   \hline
- Strikes & frequency  &\multicolumn{2}{c}{91 dbm\footnote{dbm: days before maturity}} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+ Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
    &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
    \hdashline
   \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
@@ -63,40 +115,42 @@
 \end{table}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{frequency}
-\label{sec:analysis:hedge:merton}
 
 
+------------------------------------
 
 
+\begin{table}[ht]
+\centering
+\begin{tabular}{llllllll}
+  \hline
+  \hline
+Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+   &  & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ \\ 
+   \hdashline
+  \multirow{3}{*}{140} & intraday & 0 & 0.002 & 0.011 & 0.011 & 0.009 & 0.038 \\ 
+  & daily & -0.001 & 0.002 & 0.01 & 0.011 & 0.009 & 0.038 \\ 
+  & weekly & 0.001 & 0.002 & 0 & 0.011 & 0.008 & 0.038 \\ 
+  \hdashline
+  \multirow{3}{*}{160} & intraday & 0.009 & 0.028 & 0.023 & 0.073 & 0.042 & 0.143 \\ 
+  & daily & 0.008 & 0.028 & 0.025 & 0.072 & 0.036 & 0.143 \\ 
+  & weekly & 0.008 & 0.028 & 0.019 & 0.073 & 0.036 & 0.143 \\ 
+  \hdashline
+  \multirow{3}{*}{186} & intraday & 0.158 & 0.252 & 0.159 & 0.392 & 0.153 & 0.524 \\ 
+  & daily & 0.15 & 0.245 & 0.195 & 0.391 & 0.156 & 0.522 \\ 
+  & weekly & 0.117 & 0.241 & 0.158 & 0.378 & 0.139 & 0.519 \\ 
+  \hdashline 
+  \multirow{3}{*}{200} & intraday & 0.459 & -0.298 & 0.43 & 0.146 & 0.279 & 0.546 \\ 
+  & daily & 0.433 & -0.361 & 0.42 & 0.126 & 0.255 & 0.544 \\ 
+  & weekly & 0.268 & -0.659 & 0.369 & 0.005 & 0.246 & 0.498 \\ 
+  \hdashline 
+  \multirow{3}{*}{230} & intraday & 2.136 & -0.527 & 1.884 & -2.452 & 1.01 & -0.235 \\ 
+  & daily & 1.948 & -1.197 & 1.893 & -2.655 & 0.989 & -0.224 \\ 
+  & weekly & 1.407 & -2.152 & 1.547 & -2.402 & 0.917 & -0.353 \\ 
+   \hline
+\end{tabular}
+\caption{Hedging with HSV: Relative P\&L} 
+\label{t:analysis:heston:pl}
+\end{table}
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Stochastic volatility processes: delta hedging}
-\label{sec:analysis:stochastic}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Hedge with Black-Scholes delta}
-\label{sec:analysis:hedge:bsm}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Jump-diffusion process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Hedge with appropriate delta}
-\label{sec:analysis:hedge:merton}

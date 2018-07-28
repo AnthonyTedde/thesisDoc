@@ -57,14 +57,14 @@ xt <- data.frame(strike = as.integer(domain$strike),
                                  length(unique(domain$strike))),
                  xt,
                  stringsAsFactors = F) 
-xt <- rbind(c(rep('', 2), map_chr(c(91, 91, 182, 182, 399, 399)
-                                  , paste, 'days before maturity')),
+xt <- rbind(c(rep('', 2), map_chr(c(91, 182,399)
+                                  , paste, 'dbe')),
             c(rep('', 2),
-              rep(c('$\\Delta_{mrt}$', '$\\Delta_{bsm}$'), 3)),
+              rep(c('dddd'), 3)),
             xt)
 print(xtable::xtable(xt,
-                     align = "lllllllll",  # align and put a vertical line (first "l" again represents column of row numbers)
-                     caption = "Hedging with MJD: Relative P&L", 
+                     align = "llllll",  # align and put a vertical line (first "l" again represents column of row numbers)
+                     caption = "Hedging with BSM: Relative P&L", 
                      label = "t:analysis:bsm:pl"),
       include.rownames = FALSE,
       include.colnames = FALSE)
@@ -103,7 +103,24 @@ ggplot(U_bsm[[x]][[13]][[79]]) +
 pl[[1]][[14]]
 
 
+names(U_bsm[[1]][[3]][[1]])
 
+
+
+S <- map(U_bsm[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/analysis.bsm.stocks.tex", width = 4, height = 2)
+ggplot2::ggplot(dplyr::bind_rows(S, .id = "uniqueID"), 
+                ggplot2::aes(x= time, 
+                             y = stock, 
+                             group = uniqueID)) + 
+  ggplot2::geom_line(ggplot2::aes(alpha = 0.5)) + 
+  theme(legend.position = 'none') +
+  ggplot2::labs( x = 'Time period',
+                 y = 'Stock price')
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 
