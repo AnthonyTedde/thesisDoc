@@ -2,9 +2,4 @@
 \contentsline {chapter}{\numberline {1}Analysis}{3}{chapter.1}
 \contentsline {section}{\numberline {1.1}Measuring performance in a log-normal world}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Merton jump-diffusion performance measuring}{6}{section.1.2}
-\contentsline {paragraph}{Distribution of the deep-in-the-money options P\&Ls.}{8}{section*.11}
-\contentsline {paragraph}{Distribution of the in-the-money options P\&Ls.}{8}{section*.13}
-\contentsline {paragraph}{Distribution of the at-the-money options P\&Ls.}{8}{section*.15}
-\contentsline {paragraph}{Distribution of the out-of-the-money options P\&Ls.}{9}{section*.17}
-\contentsline {paragraph}{Distribution of the deep-out-of-the-money options P\&Ls.}{9}{section*.19}
 \contentsline {section}{\numberline {1.3}Heston stochastic volatility performance measuring}{10}{section.1.3}

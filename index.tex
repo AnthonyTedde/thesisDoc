@@ -423,120 +423,11 @@ The total number of samples was one hundred, and consequently, \Cref{t:analysis:
 From \cref{t:analysis:bsm:pl}, the effect of the rebalancing frequency is not as clear as it was with the hedging of the BSM model in the log-normal world.
 At first sight, however, one can observe that with the increase of the balancing rhythm comes a rise in the value of the delta-neutral portfolio, on average, which even tends to systematically outperform the European call.
 Nonetheless, the information given by \cref{t:analysis:bsm:pl} is only the mean of all the computed P\&Ls and therefore lacks in exhaustiveness.
-In order to get more comprehension of that result, let us focus on the distribution of the P\&Ls.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Distribution of the deep-in-the-money options P\&Ls.}
-
-\Cref{p:analysis:mjd:pl:dist:140} shows the distributions of the P\&Ls of option with a strike fixed at \$140 for maturities of 91,  
-
-\begin{figure}[H]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.140.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:140}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Distribution of the in-the-money options P\&Ls.}
-
-\Cref{p:analysis:mjd:pl:dist:160} shows that bla bla bla bla bla ...
-
-\begin{figure}[H]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.160.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:160}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Distribution of the at-the-money options P\&Ls.}
-
-\Cref{p:analysis:mjd:pl:dist:186} shows that bla bla bla bla bla ...
-
-\begin{figure}[H]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.186.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:186}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Distribution of the out-of-the-money options P\&Ls.}
-
-\Cref{p:analysis:mjd:pl:dist:200} shows that bla bla bla bla bla ...
-
-\begin{figure}[H]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.200.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:200}
-\end{figure}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Distribution of the deep-out-of-the-money options P\&Ls.}
-
-\Cref{p:analysis:mjd:pl:dist:230} shows that bla bla bla bla bla ...
-
-\begin{figure}[H]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.230.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:230}
-\end{figure}
 
 
 
 
-\begin{figure}[ht]
-  \centering
-  \input{figures/p.analysis.merton.pl.dist.big.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:mjd:pl:dist:230}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-In the light of the above \cref{p:analysis:gbm:hedges}, and as confirmed by the \cref{t:analysis:bsm:pl}, a portfolio more regularly balanced will give a better result in the BSM delta-hedging strategy, within a log-normal world.
-
-
-
-
-
-
-
-\begin{table}[ht]
+\begin{table}[h]
 \centering
 \begin{tabular}{llllllll}
   \hline
@@ -571,8 +462,85 @@ In the light of the above \cref{p:analysis:gbm:hedges}, and as confirmed by the 
 
 
 
+In order to get more comprehension of that result, let us focus on the distribution of the P\&Ls. Latters are displayed in \cref{p:analysis:mjd:pl:dist:big} where the green, blue and red-filled densities respectively denote the P\&Ls' distributions when the delta-neutral portfolios are balanced twice a day, daily or weekly.
+
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.big.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:big}
+\end{figure}
+         
+
+In the light of \cref{p:analysis:mjd:pl:dist:big}, one can observe that as the rhythm of balancing increased, the variance of the averaged relative profits and losses decrease with the most of the distribution so concentrated around the mean.
+
+Likewise,  the time to maturity and the strike price both affect the distributions of the P\&Ls.
+%
+
+On the one hand, concerning the effect of the maturity on the shape of the distributions, the observations are split into two categories.
+The first concentrates the computed measures when $0 < K/S(t) < 1$ at time zero, that is, all the [deep]-in-the-money options, while the second gathers all the others, namely, [deep]-out-of|at-the-money. 
+To observe how such results affect the distribution, \cref{p:analysis:mjd:pl:dist:big} is zoomed-in for the interesting P\&Ls' density curves of the first considered category, so giving \cref{p:analysis:mjd:pl:dist:in}.
 
 
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.in.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:in}
+\end{figure}
+
+From \cref{p:analysis:mjd:pl:dist:in}, it can be observed that as the time to maturity increase for options with a strike below the underlying asset price at original date, the volatility of the hedging portfolios performance also increase.
+Whereas, according to \cref{p:analysis:mjd:pl:dist:big}, the inverse behavior is observed for the volatility of the performance of options with the higher strike price, i.e., the further the maturity, le lower the uncertainty about the associated P\&Ls.
+
+
+On the other hand, as shown by \cref{p:analysis:mjd:pl:dist:in,p:analysis:mjd:pl:dist:big} and \cref{t:analysis:merton:pl}, the performances of poorly rebalanced portfolios are better for options the more in-the-money. 
+Such a behavior is explain by a weaker gamma for the deep-in-the-money options.
+Indeed, as time passes, the prices of the underlying assets tend to get more valuable in the vast majority, as illustrated by \cref{p:analysis:mjd:100}. 
+Therefore, the associated options with smaller strikes continue to gain value but at a lower rate because the incidences of the stock price changes become less impacting. 
+The inverse reasoning is to be applied to deep-out-of-the-money options. 
+Effectively, the initial price of such options is near zero, so are the associated deltas.
+However, with high growth time-series as described in \cref{t:analysis:merton:pl}, the collateral effect is that they rapidly affect the option price, just as the values of the delta are influenced.
+Consequently, according to and for the measured options, gamma is lower for in-the-money and higher for out-of-the-money options.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% delta vs delta merton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cref{p:analysis:mjd:pl:dist:deltas} shows the distribution of the P\&Ls when the hedging is built with BSM or MJD deltas. The red densities concern the data related to BSM deltas while those in green represent the distributions of the performance metrics for the MJD delta-hedging.
+
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.deltas.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:deltas}
+\end{figure}
+
+According to the results of \cref{t:analysis:merton:pl} and \cref{p:analysis:mjd:pl:dist:deltas}, hedging in the real life with delta BSM seems not so bad with respect to the gotten measures.
+Let us dive more into deeply the delta-hedging by observing what happens behind the hood.
+
+\Cref{p:analysis:mjd:hedge:deltas} illustrates how the hedgings work depending on the strike prices and the deltas computed.
+The small circles represent the replicated portfolios at each rebalancing time, whereas the underpinned black lines are the course of the options' values as time passes. The blue and red circles respectively stand for the MJD and BSM delta-hedging portfolios' values.
+
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.merton.hedge.deltas.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:hedge:deltas}
+\end{figure}
 
 
 

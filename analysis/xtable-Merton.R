@@ -130,1856 +130,320 @@ setwd("c:/Users/ATE/thesisDoc/data")
 
 
 #####################################
-# P&L distrib
+# P&L distrib BIG
 #####################################
-#####################################
-# K140
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 1
-yy <- 2
-zz <- 3
-k <- 140
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.",k,".tex"), width = 6, height = 2)
-
-
-
-p1 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  # xlim(-0.0023, .025) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs( title = paste0("(A",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p2 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs(title =  paste0("(B",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p3 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-################################################################################
-#####################################
-# K160
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 4
-yy <- 5
-zz <- 6
-k <- 160
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.",k,".tex"), width = 6, height = 2)
-
-
-
-p1 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p2 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p3 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K186
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 7
-yy <- 8
-zz <- 9
-k <- 186
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.",k,".tex"), width = 6, height = 2)
-
-
-
-p1 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p2 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p3 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K200
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 10
-yy <- 11
-zz <- 12
-k <- 200
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.",k,".tex"), width = 6, height = 2)
-
-
-
-p1 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p2 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p3 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K230
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 13
-yy <- 14
-zz <- 15
-k <- 230
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.",k,".tex"), width = 6, height = 2)
-
-
-
-p1 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p2 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p3 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p1, p2, p3, ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#####################################
-# P&L distrib
-#####################################
-#####################################
-# K140
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 1
-yy <- 2
-zz <- 3
-k <- 140
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.big.tex"), width = 6, height = 2)
-
-
-
-p11 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  # xlim(-0.0023, .025) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs( title = paste0("(A",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p12 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs(title =  paste0("(B",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p13 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  scale_x_continuous(lim = c(-0.0023, .025), breaks=c(0,0.01, .02)) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-################################################################################
-#####################################
-# K160
-#####################################
-
-xx <- 4
-yy <- 5
-zz <- 6
-k <- 160
-
-
-
-p21 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p22 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p23 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.03, .06) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K186
-#####################################
-
-xx <- 7
-yy <- 8
-zz <- 9
-k <- 186
-
-
-
-p31 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p32 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p33 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-0.3, .4) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K200
-#####################################
-
-xx <- 10
-yy <- 11
-zz <- 12
-k <- 200
-
-
-
-p41 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p42 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p43 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-1,  1.5) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-
-
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K230
-#####################################
-
-xx <- 13
-yy <- 14
-zz <- 15
-k <- 230
-
-
-
-p51 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p52 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p53 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-5.51878,  5.50962) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p11, p12, p13, 
-                        p21, p22, p23, 
-                        p31, p32, p33, 
-                        p41, p42, p43, 
-                        p51, p52, p53, 
-                        ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
-
-
-
-
-
-
-
-
-
-
-
-#####################################
-# P&L distrib
-#####################################
-#####################################
-# K140
-#####################################
-setwd("c:/Users/ATE/thesisDoc")
-xx <- 1
-yy <- 2
-zz <- 3
-k <- 140
-tikzDevice::tikz(file = paste0("figures/p.analysis.merton.pl.dist.big.tex"))
-
-
-
-p11 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  # xlim(-0.0023, .025) +
-  xlim(-3,  3) +
-  labs( title = paste0("(A",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p12 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(B",k,")"),
-    x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p13 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-theme(legend.position = 'none', 
-      axis.title = element_text(size = rel(0.8)),
-      axis.text = element_text(size = rel(0.7)),
-      plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-################################################################################
-#####################################
-# K160
-#####################################
-
-xx <- 4
-yy <- 5
-zz <- 6
-k <- 160
-
-
-
-p21 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p22 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p23 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3)+
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K186
-#####################################
-
-xx <- 7
-yy <- 8
-zz <- 9
-k <- 186
-
-
-
-p31 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p32 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p33 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K200
-#####################################
-
-xx <- 10
-yy <- 11
-zz <- 12
-k <- 200
-
-
-
-p41 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p42 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p43 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3)+
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-
-
-
-
-
-
-
-
-
-
-
-################################################################################
-#####################################
-# K230
-#####################################
-
-xx <- 13
-yy <- 14
-zz <- 15
-k <- 230
-
-
-
-p51 <- ggplot(data.frame(pl = pl[[1]][[xx]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[xx]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) + 
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  # scale_x_continuous(lim = c(-0.0023, .01), breaks=c(0,0.005,0.01)) +
-  labs( title = paste0("(A",k,")"),
-        x = 'Relative profit and loss',
-        y = 'Density')
-
-#####################################################
-
-p52 <- ggplot(data.frame(pl = pl[[1]][[yy]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[yy]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(B",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-p53 <- ggplot(data.frame(pl = pl[[1]][[zz]])) +
-  stat_density(aes(pl),
-               geom =  'line',
-               # fill = 'seagreen4',
-               color = 'seagreen4'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[2]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'steelblue',
-               color = 'steelblue'
-               # alpha = .7
-  ) +
-  stat_density(data = data.frame(pl2 = pl[[3]][[zz]]) 
-               ,aes(pl2),
-               geom =  'line',
-               # fill = 'darkred',
-               color = 'darkred'
-               # alpha = .7
-  ) +
-  theme(legend.position = 'none', 
-        axis.title = element_text(size = rel(0.8)),
-        axis.text = element_text(size = rel(0.7)),
-        plot.title = element_text(size = rel(0.8))) +
-  xlim(-3,  3) +
-  labs(title =  paste0("(C",k,")"),
-       x = 'Relative profit and loss',
-       y = 'Density')
-
-#####################################################
-
-gridExtra::grid.arrange(p11, p12, p13, 
-                        p21, p22, p23, 
-                        p31, p32, p33, 
-                        p41, p42, p43, 
-                        p51, p52, p53, 
-                        ncol = 3)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
-
-
 #########
 domain
-pepe <- map(1:nrow(domain), function(x){
-  list(pl[[2]][[x]], rep(paste(domain$maturity[x],domain$strike[x], sep = '-'),
+ppl1 <- map(1:nrow(domain), function(x){
+  list(pl[[1]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
                          length(pl[[1]][[x]])))
 }) %>% map(function(x){
-  data.frame(pl = x[[1]], pivot = x[[2]])
+  data.frame(ppl1 = x[[1]], pivot = x[[2]])
 }) %>%
-do.call(what = "rbind")  
-  
+  do.call(what = "rbind")  
+ppl2 <- map(1:nrow(domain), function(x){
+  list(pl[[2]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[2]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl2 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+ppl3 <- map(1:nrow(domain), function(x){
+  list(pl[[3]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[3]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl3 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+
 
 setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/appl.impliedvol.heston.tex", width = 6, height = 3)
-ggplot(pepe) + 
-  stat_density(aes(pl),
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.big.tex", width = 6, height = 5)
+ggplot(ppl1) + 
+  stat_density(aes(ppl1),
+               # geom =  'line',
+               fill = 'seagreen4',
+               # color = 'darkred'
+               alpha = .7
+  ) + 
+  stat_density(data = ppl2, aes(ppl2),
                # geom =  'line',
                fill = 'steelblue',
                # color = 'darkred'
                alpha = .7
-  ) + 
+  ) +
+  stat_density(data = ppl3, aes(ppl3),
+               # geom =  'line',
+               fill = 'darkred',
+               # color = 'darkred'
+               alpha = .7
+  ) +
   xlab("Relative profit and loss") + ylab("Density")+
   xlim(-3,  3)+
   # ylim(0, 5) + 
   facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+
+#####################################
+# P&L distrib IN
+#####################################
+
+
+domain
+ppl1 <- map(1:6, function(x){
+  list(pl[[1]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[1]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl1 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+ppl2 <- map(1:6, function(x){
+  list(pl[[2]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[2]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl2 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+ppl3 <- map(1:6, function(x){
+  list(pl[[3]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[3]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl3 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.in.tex", width = 6, height = 3)
+ggplot(ppl1) + 
+  stat_density(aes(ppl1),
+               # geom =  'line',
+               fill = 'seagreen4',
+               # color = 'darkred'
+               alpha = .7
+  ) + 
+  stat_density(data = ppl2, aes(ppl2),
+               # geom =  'line',
+               fill = 'steelblue',
+               # color = 'darkred'
+               alpha = .7
+  ) +
+  stat_density(data = ppl3, aes(ppl3),
+               # geom =  'line',
+               fill = 'darkred',
+               # color = 'darkred'
+               alpha = .7
+  ) +
+  xlab("Relative profit and loss") + ylab("Density")+
+  xlim(-.025,  .05)+
+  # ylim(0, 5) + 
+  facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+#####################################
+# distrib of s
+#####################################
+
+domain
+186.3100
+u_91 <- map_dbl(U_merton[[3]][[1]], function(x){
+  dplyr::last(x$s)
+})
+u_182 <- map_dbl(U_merton[[3]][[2]], function(x){
+  dplyr::last(x$s)
+})
+u_399 <- map_dbl(U_merton[[3]][[3]], function(x){
+  dplyr::last(x$s)
+})
+df <- data.frame(u_91, u_182, u_399)
+
+
+setwd("c:/Users/ATE/thesisDoc")
+# tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.in.tex", width = 6, height = 3)
+ggplot(df) + 
+  stat_density(aes(u_91),
+               geom =  'line',
+               # fill = 'seagreen4',
+               color = 'seagreen4'
+               # alpha = .7
+  ) + 
+  stat_density(aes(u_182),
+               geom =  'line',
+               # fill = 'steelblue',
+               color = 'steelblue'
+               # alpha = .7
+  ) +
+  stat_density(aes(u_399),
+               geom =  'line',
+               # fill = 'darkred',
+               color = 'darkred'
+               # alpha = .7
+  ) +
+  xlab("asset price") + ylab("Density")
+  # xlim(-.025,  .05)+
+  # ylim(0, 5) + 
+  # facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+#####################################
+# Delta vs delta merton
+#####################################
+
+
+domain
+ppl1 <- map(1:nrow(domain), function(x){
+  list(pl[[1]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl[[1]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl1 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+ppl2 <- map(1:nrow(domain), function(x){
+  list(pl_bsm[[1]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
+                         length(pl_bsm[[1]][[x]])))
+}) %>% map(function(x){
+  data.frame(ppl2 = x[[1]], pivot = x[[2]])
+}) %>%
+  do.call(what = "rbind")  
+
+
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.deltas.tex", width = 6, height = 5)
+ggplot(ppl1) + 
+  stat_density(aes(ppl1),
+               # geom =  'line',
+               fill = 'seagreen4',
+               # color = 'darkred'
+               alpha = .7
+  ) + 
+  stat_density(data = ppl2, aes(ppl2),
+               # geom =  'line',
+               fill = 'darkred',
+               # color = 'darkred'
+               alpha = .7
+  ) +
+  xlab("Relative profit and loss") + ylab("Density")+
+  xlim(-3,  3)+
+  facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+
+
+
+#####################################
+# Delta hedging test
+#####################################
+
+
+domain
+ppl1 <- map(seq(2, 15, by = 3), function(x){
+  U_merton[[1]][[x]][c(14, 2, 56,77, 34)]
+}) %>% map(function(x){
+  map(x, ~.x[seq(1, nrow(.x), by = 10), ])
+})
+
+
+
+p1 <- ggplot(dplyr::bind_rows(ppl1[[1]], .id = "uniqueID")) +
+  geom_line(aes(x = time.period, y = option, 
+                group = uniqueID),
+            colour = 'black')+ 
+  geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
+                 group = uniqueID),
+             color = 'darkred') +
+  geom_point(aes(x = time.period, y = delta* s +  p, 
+                 group = uniqueID),
+             colour = 'steelblue', alpha = .5) + 
+  theme(legend.position = 'none', 
+        title = element_text(size = rel(0.8))) +
+  labs(title = "(K = 140, dbm = 182)",
+      x = 'Time period',
+       y = 'Option value')
+
+p2 <- ggplot(dplyr::bind_rows(ppl1[[2]], .id = "uniqueID")) +
+  geom_line(aes(x = time.period, y = option, 
+                group = uniqueID),
+            colour = 'black')+ 
+  geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
+                 group = uniqueID),
+             color = 'darkred') +
+  geom_point(aes(x = time.period, y = delta* s +  p, 
+                 group = uniqueID),
+             colour = 'steelblue', alpha = .5) + 
+  theme(legend.position = 'none', 
+        title = element_text(size = rel(0.8))) +
+  labs(title = "(K = 160, dbm = 182)",
+       x = 'Time period',
+       y = 'Option value')
+
+p3 <- ggplot(dplyr::bind_rows(ppl1[[3]], .id = "uniqueID")) +
+  geom_line(aes(x = time.period, y = option, 
+                group = uniqueID),
+            colour = 'black')+ 
+  geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
+                 group = uniqueID),
+             color = 'darkred') +
+  geom_point(aes(x = time.period, y = delta* s +  p, 
+                 group = uniqueID),
+             colour = 'steelblue', alpha = .5) + 
+  theme(legend.position = 'none', 
+        title = element_text(size = rel(0.8))) +
+  labs(title = "(K = 186, dbm = 182)",
+       x = 'Time period',
+       y = 'Option value')
+
+p4 <- ggplot(dplyr::bind_rows(ppl1[[4]], .id = "uniqueID")) +
+  geom_line(aes(x = time.period, y = option, 
+                group = uniqueID),
+            colour = 'black')+ 
+  geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
+                 group = uniqueID),
+             color = 'darkred') +
+  geom_point(aes(x = time.period, y = delta* s +  p, 
+                 group = uniqueID),
+             colour = 'steelblue', alpha = .5) + 
+  theme(legend.position = 'none', 
+        title = element_text(size = rel(0.8))) +
+  labs(title = "(K = 200, dbm = 182)",
+       x = 'Time period',
+       y = 'Option value')
+
+p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
+  geom_line(aes(x = time.period, y = option, 
+                group = uniqueID),
+            colour = 'black')+ 
+  geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
+                 group = uniqueID),
+             color = 'darkred') +
+  geom_point(aes(x = time.period, y = delta* s +  p, 
+                 group = uniqueID),
+             colour = 'steelblue', alpha = .5) + 
+  theme(legend.position = 'none', 
+        title = element_text(size = rel(0.8))) +
+  labs(title = "(K = 230, dbm = 182)",
+       x = 'Time period',
+       y = 'Option value')
+  
+  
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 6)
+gridExtra::grid.arrange(p1, p2, p3, p4, p5)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
 
 
 
