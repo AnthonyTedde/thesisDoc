@@ -213,7 +213,7 @@ frequency <- 2
 tic()
 U_bsm <- map(c(2, 1, 1/7), ~ delta_hedging_analysis(100, .x))
 toc()
-U_bsm <- map(c(1, 8), ~ delta_hedging_analysis(1, .x))
+U_bsm <- map(c(1 , 2, 8, 24), ~ delta_hedging_analysis(1, .x))
 
 
 pi <- purrr::map(u, function(x){
@@ -230,13 +230,16 @@ pl <- pmap(list(u, pi), function(x, y){
   y / dplyr::first(x[[1]]$option)
 })
 
-
-
-ggplot(U_bsm[[1]][[14]][[1]]) +
+bis <- U_bsm
+freq <- 4
+type <- 13
+ggplot(U_bsm[[freq]][[type]][[1]]) +
   geom_line(aes(x = time.period, y = option),
             colour = 'blue')+
   geom_point(aes(x = time.period, y = delta* s +  p),
              colour = ' red')
+
+
 data.frame(
   gamma = round(U_bsm[[1]][[13]][[1]]$gamma, 4),
   theta = round(U_bsm[[1]][[13]][[1]]$theta, 4))

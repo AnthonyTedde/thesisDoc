@@ -6,11 +6,15 @@
 \addtocounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 % \usepackage{tgtermes}
+% \usepackage{pgfplots}
+% \usepgfplotslibrary{external} 
+% \tikzexternalize
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[breaklinks,hidelinks]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
+\usepackage{color,soul}
 \usepackage{tikz}
 \usepackage{amsmath, amssymb}
 % \usepackage{indentfirst}
@@ -172,25 +176,47 @@ At last, some particular results are commented.
 \Cref{t:analysis:bsm:pl} presents the results of the relative P\&Ls got concerning the process of delta-hedging on options with maturities of 3, 6 and 13 months and strikes ranging from 140 to 230.
 Those outputs are maturities column-wise and grouped by strikes in rows.
 Furthermore, each row is split into three parts, each of these subsections represents different rebalancing frequency.
-For instance, the result exhibited in the column "91 dbm" and row "140 > intraday" give the mean relative P\&L computed on a series of European call option delta hedging with a maturity of 91 days (3 months), a strike of 140 and a rebalancing occurring twice a day.
+For instance, the result exhibited in the column "91 dbm" and row "140 > intraday" give the mean relative P\&L computed on a series of European call option delta-hedging with a maturity of 91 days (3 months), a strike of 140 and a rebalancing done twice a day.
 
 The samples time-series of the underlying asset are shown in \cref{p:analysis:gbm:100}. 
 It means that any path of that series helped forty-five times the analysis because each of it has been involved in the hedge of options with five different strikes having three maturities each, along with three distinctive rebalancing frequencies.
-The total number of samples was one hundred, and consequently, \Cref{t:analysis:bsm:pl} summarizes four thousand and  five hundred delta hedging strategies.
+The total number of samples was one hundred, and consequently, \Cref{t:analysis:bsm:pl} summarizes four thousand and  five hundred delta-hedging strategies.
 
 \begin{figure}[ht]
   \centering
-  \input{figures/analysis.bsm.stocks.tex}
+  % \input{figures/analysis.bsm.stocks.tex}
+  \rule{40mm}{20mm}
   \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.} 
+  \floatfoot{\textbf{Notes.}
   }
   \label{p:analysis:gbm:100}
 \end{figure}
 
 
 
-\Cref{t:analysis:bsm:pl} presents the results got 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Positiveness of the frequency
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+From \cref{t:analysis:bsm:pl} one can observe that the balancing frequency has a positive impact on the quality of the hedge.
+Indeed, the more frequent balancing, the better hedging.
+\Cref{p:analysis:gbm:hedges} shows an extract of the delta-hedging processes with different balancing frequencies.
+The continuous brown line represents the course of an option price and the green, blue and red dots respectively exhibits the associated delta-neutral portfolios with a rebalancing frequency of twice a day, once a day and once a week.
+
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/p.analysis.gbm.hedges.tex}
+  \caption{Delta-neutral portfolio with different frequency of balancing}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:gbm:hedges}
+\end{figure}
+
+In the light of the above \cref{p:analysis:gbm:hedges}, and as confirmed by the \cref{t:analysis:bsm:pl}, a portfolio more regularly balanced will give a better result in the BSM delta-hedging strategy, within a log-normal world.
+    
 \begin{table}[ht]
 \centering
 \begin{tabular}{lllll}
@@ -199,24 +225,24 @@ The total number of samples was one hundred, and consequently, \Cref{t:analysis:
    &  & 91 dbm\footnote{dbm: days before maturity} & 182 dbm & 399 dbm \\ 
    \hdashline
   \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
-   & daily & 0 & 0 & 0 \\ 
-   & weekly & 0 & 0 & -0.001 \\ 
+  & daily & 0 & 0 & 0 \\ 
+  & weekly & 0 & 0 & 0 \\ 
    \hdashline
   \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
-   & daily & 0 & -0.001 & -0.001 \\ 
-   & weekly & -0.003 & -0.005 & -0.005 \\ 
+  & daily & 0 & 0 & 0 \\ 
+  & weekly & -0.001 & -0.001 & -0.003 \\ 
    \hdashline
-  \multirow{3}{*}{186} & intraday & -0.005 & 0.001 & -0.002 \\ 
-   & daily & -0.01 & -0.007 & -0.005 \\ 
-   & weekly & -0.066 & -0.034 & -0.019 \\ 
+  \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+  & daily & -0.005 & -0.002 & -0.004 \\ 
+  & weekly & -0.01 & -0.019 & -0.021 \\ 
    \hdashline
-  \multirow{3}{*}{200} & intraday & -0.015 & -0.003 & -0.005 \\ 
-   & daily & -0.047 & -0.019 & -0.011 \\ 
-   & weekly & -0.229 & -0.101 & -0.039 \\ 
+  \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+  & daily & -0.002 & -0.005 & -0.006 \\ 
+  & weekly & -0.007 & -0.052 & -0.037 \\ 
    \hdashline
-  \multirow{3}{*}{230} & intraday & 0.296 & 0.009 & -0.03 \\ 
-   & daily & -0.045 & -0.059 & -0.039 \\ 
-   & weekly & -1.305 & -0.322 & -0.149 \\ 
+  \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+  & daily & 0.022 & -0.063 & -0.022 \\ 
+  & weekly & 0.317 & -0.285 & -0.136 \\ 
    \hline
 \end{tabular}
 \caption{Hedging with BSM: Relative P\&L} 
@@ -225,7 +251,290 @@ The total number of samples was one hundred, and consequently, \Cref{t:analysis:
 
 
 
-----------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% short gamma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The vast majority of these results shows that with a less rebalancing frequency, the average value of P\&Ls is negative, meaning that the delta-neutral portfolio underperform with respect to the option itself. The reason is due to the option's gamma. 
+As a reminder, gamma gives the acceleration of the call function with respect to the stock price.
+With a positive gamma, and gamma is always positive for a vanilla stock option within the BSM model, the function $c(S(t), t)$, with $t$  constant, is concave up. 
+As \citet{shreve} shows, the delta-neutral portfolio is tangent below the curve of the call function and due to the convexity of the latter, meaning that an instantaneous change of the asset price, either by increasing or decreasing, always make the related delta-neutral portfolio suffer. 
+That kind of portfolio is called short gamma.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% worst value
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+On other note, the average worst result comes from the deep-out-in-the-money options weekly rebalanced.
+However, by opting for a more frequent rebalancing strategy, the mean relative P\&L reduces.  
+Indeed, it goes from 31.7\% to 2\% by choosing a rhythm of twice a day instead of once a week.
+\Cref{p:analysis:gbm:pl:better} shows the distribution of the above-mentioned P\&Ls with a portfolio balancing occurring either daily (blue curve), twice (green curve) a day or once a week (red curve).
+As expected, the more frequently rebalanced portfolios show less variance and more value near zero for the associated P\&Ls.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/p.analysis.gbm.pl.better.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:gbm:pl:better}
+\end{figure}
+
+
+The more disruptive observation is given by the average P\&L of the deep-out-of-the-money, weekly rebalanced options with 91 days before maturity, namely, 0.317.
+Unlike the other P\&Ls, this one is positive, meaning that the delta-neutral portfolio that replicates a position in a long European call won on average.
+The underpinned reason is explained by a high value of option's theta i.e., the first derivative of the call function with respect to time, all other things staying unchanged.
+\Cref{t:analysis:bsm:pl:worst} lists all the P\&Ls of that hedging scenario.
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|llllllllll}
+  \hline
+  \hline
+  & \multicolumn{1}{c}{[1]} & \multicolumn{1}{c}{[2]} & \multicolumn{1}{c}{[3]} & \multicolumn{1}{c}{[4]} & \multicolumn{1}{c}{[5]} & \multicolumn{1}{c}{[6]} & \multicolumn{1}{c}{[7]} & \multicolumn{1}{c}{[8]} & \multicolumn{1}{c}{[9]} & \multicolumn{1}{c}{[10]} \\
+  \hline
+  [0] & 1.01 & 8.52 & -0.52 & 0.67 & -15.42 & 0.55 & 3.62 & 0.35 & 2.45 & 2.15 \\ \relax
+  [10] & 2.55 & 0.85 & 1.61 & 0.06 & -1.68 & -4.93 & 3.16 & 0.61 & 0.27 & 0.97 \\ \relax
+  [20] & -9.32 & 0.38 & 3.34 & -0.43 & -9.27 & 0.60 & -0.37 & -0.27 & 0.27 & -0.57 \\ \relax
+  [30] & 1.54 & 0.83 & 17.43 & 1.04 & -37.44 & 1.09 & 1.48 & 1.73 & 0.92 & 0.77 \\ \relax
+  [40] & 1.17 & 0.29 & -2.33 & 0.45 & -0.51 & 8.98 & -3.76 & -0.55 & 0.83 & 0.69 \\ \relax
+  [50] & -8.85 & 0.18 & -0.96 & 0.92 & 4.38 & 0.29 & 2.95 & 4.55 & 5.29 & \hl{23.50} \\ \relax
+  [60] & -0.11 & 4.71 & 3.83 & -0.26 & 3.70 & -2.95 & 1.28 & 7.00 & 0.80 & 0.15 \\ \relax
+  [70] & -0.21 & 11.00 & 0.54 & 0.23 & 0.71 & -38.71 & 15.04 & 7.75 & -0.49 & 0.85 \\ \relax
+  [80] & -15.18 & 1.62 & 5.40 & -9.23 & -0.43 & 1.39 & 0.65 & 1.31 & -7.34 & 1.53 \\ \relax
+  [90] & -0.02 & 3.19 & -1.68 & 13.05 & -0.12 & -6.70 & -0.34 & 8.68 & 0.69 & 2.18 \\ 
+   \hline
+\end{tabular}
+\caption{Worst relative P\&L for BSM} 
+\label{t:analysis:bsm:pl:worst}
+\end{table}
+
+All the value of theta for the option with the biggest P\&L (the one highlighted in \cref{t:analysis:bsm:pl:worst}) are listed in \cref{t:analysis:bsm:pl:worst:theta}.
+
+
+ 
+\begin{table}[ht]
+\centering
+\begin{tabular}{c|llllllll}
+  \hline
+  \hline
+  Time & 0.00 & 0.02 & 0.04 & 0.06 & 0.08 & 0.10 & 0.12 & \ldots\\ 
+Theta & -1.83 & -3.80 & -8.50 & -5.26 & -13.88 & -13.84 & -20.39 & \ldots \\ 
+   \hdashline
+  Time & \ldots & 0.13 & 0.15 & 0.17 & 0.19 & 0.21 & 0.23 & 0.25 \\ 
+  Theta & \ldots & -14.89 & -19.05 & -19.84 & -35.54 & -47.81 & -65.66 & Inf \\ 
+   \hline
+\end{tabular}
+\caption{Worst relative P\&L for BSM} 
+\label{t:analysis:bsm:pl:worst}
+\end{table}
+
+
+
+The biggest value of theta appears at the end of the life of the derivative. 
+The reason, as shown through FIGURE X,  is due to the fact that at the time near maturity, the values of the option's theta is computed when the option is just in-the-money, letting by consequence the time with a big influence on its value.
+
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/p.analysis.gbm.theta.high.tex}
+  % \rule{40mm}{20mm}
+  \caption{European call option with higher theta as time goes to maturity}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:gbm:pl:theta.high}
+\end{figure}
+
+
+
+By resuming the solution of theta, given in \citet{shreve}, for the European call option, one gets the following equation.
+
+\begin{align}
+  \Theta = -r K e^{-r (T-t)} N\bigg(d_{-}(T-t, S(t))\bigg) -
+    \frac{\sigma S(t)}{2\sqrt{T-t}} N^{'}\bigg(d_{+}(T-t, S(t))\bigg) \label{eq:analysis:theta}\\
+  \intertext{with}
+  d_{\pm}(\tau, x) = \frac{1}{\sigma \sqrt{\tau}} \left [
+    \ln\frac{x}{K} + \left( r \pm \frac{\sigma^2}{2} \right) \tau
+  \right]\label{eq:analysis:d}
+\end{align}
+With $N$ and $N^{-}$ respectively standing for the normal cumulative distribution function (CDF) and for the normal probability density function (PDF). 
+
+Intuitively, according to \cref{eq:analysis:theta} As $\tau \downarrow \implies \sigma S(t) / (2\sqrt{T-t}) \uparrow$ and $N^{'}(d_{+}(T-t, S(t)))$ gets its higher value when $d_{+}(T-t, S(t)) \to 0$.
+In addition, in accordance with \cref{eq:analysis:d}, for any given $\tau$ sufficiently small, the function $d_{+}$ is the nearest to zero as $x \to S(t)$.
+The \cref{XXX} shows that it is exactly what happens for the observed option.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comparison by strike / time
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Merton jump-diffusion performance measuring}
+\label{sec:section name}
+
+\Cref{t:analysis:merton:pl} is arranged the same way than \cref{t:analysis:bsm:pl} but except that the columns are subdivided to give the information on the relative P\&L obtained by either hedging with the delta MJD or BSM.
+For instance, the result exhibited in the column "91 dbm > $delta_{bsm}$" and row "140 > intraday" gives the mean relative P\&L computed on a series of delta-hedging on European call options with a maturity of 91 days (3 months), a strike of 140, a rebalancing done twice a day and with $\Delta(t)$ computed using the BSM equation, while the output in the column "91 dbm > $delta_{mjd}$" and row "140 > intraday", give the same information but with $\Delta(t)$ computed by using the Merton equation.
+
+The paths of the samples time-series of the underlying asset are all displayed in \cref{p:analysis:mjd:100}. 
+Any of them was used ninety times in the analysis because all have been involved in the hedge of options with five different strikes having three maturities each, along with three distinctive rebalancing frequencies and depending on two deltas as well.
+The total number of samples was one hundred, and consequently, \Cref{t:analysis:merton:pl} summarizes nine thousand delta-hedging strategies.
+
+\begin{figure}[ht]
+  \centering
+  % \input{figures/analysis.mjd.stocks.tex}
+  \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:100}
+\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Positiveness of the frequency
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+From \cref{t:analysis:bsm:pl}, the effect of the rebalancing frequency is not as clear as it was with the hedging of the BSM model in the log-normal world.
+At first sight, however, one can observe that with the increase of the balancing rhythm comes a rise in the value of the delta-neutral portfolio, on average, which even tends to systematically outperform the European call.
+Nonetheless, the information given by \cref{t:analysis:bsm:pl} is only the mean of all the computed P\&Ls and therefore lacks in exhaustiveness.
+In order to get more comprehension of that result, let us focus on the distribution of the P\&Ls.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Distribution of the deep-in-the-money options P\&Ls.}
+
+\Cref{p:analysis:mjd:pl:dist:140} shows the distributions of the P\&Ls of option with a strike fixed at \$140 for maturities of 91,  
+
+\begin{figure}[H]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.140.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:140}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Distribution of the in-the-money options P\&Ls.}
+
+\Cref{p:analysis:mjd:pl:dist:160} shows that bla bla bla bla bla ...
+
+\begin{figure}[H]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.160.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:160}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Distribution of the at-the-money options P\&Ls.}
+
+\Cref{p:analysis:mjd:pl:dist:186} shows that bla bla bla bla bla ...
+
+\begin{figure}[H]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.186.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:186}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Distribution of the out-of-the-money options P\&Ls.}
+
+\Cref{p:analysis:mjd:pl:dist:200} shows that bla bla bla bla bla ...
+
+\begin{figure}[H]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.200.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:200}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Distribution of the deep-out-of-the-money options P\&Ls.}
+
+\Cref{p:analysis:mjd:pl:dist:230} shows that bla bla bla bla bla ...
+
+\begin{figure}[H]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.230.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:230}
+\end{figure}
+
+
+
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/p.analysis.merton.pl.dist.big.tex}
+  % \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:pl:dist:230}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+In the light of the above \cref{p:analysis:gbm:hedges}, and as confirmed by the \cref{t:analysis:bsm:pl}, a portfolio more regularly balanced will give a better result in the BSM delta-hedging strategy, within a log-normal world.
+
+
+
+
+
+
 
 \begin{table}[ht]
 \centering
@@ -263,7 +572,34 @@ The total number of samples was one hundred, and consequently, \Cref{t:analysis:
 
 
 
-------------------------------------
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Heston
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Heston stochastic volatility performance measuring}
+\label{sec:section name}
+
+
+In \Cref{t:analysis:heston:pl}, the inforamtion are completely organized the same way that in \cref{t:analysis:heston:pl}.
+
+\Cref{p:analysis:mjd:100} illustrates all the dummy time-series that will be considered for the analysis of delta-hedging using HSV as a stochastic process for the underlying asset.
+
+
+\begin{figure}[ht]
+  \centering
+  % \input{figures/analysis.hsv.stocks.tex}
+  \rule{40mm}{20mm}
+  \caption{Sample geometric Brownian motions}
+  \floatfoot{\textbf{Notes.}
+  }
+  \label{p:analysis:mjd:100}
+\end{figure}
 
 
 \begin{table}[ht]

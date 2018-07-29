@@ -1,9 +1,13 @@
 % \usepackage{tgtermes}
+% \usepackage{pgfplots}
+% \usepgfplotslibrary{external} 
+% \tikzexternalize
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[breaklinks,hidelinks]{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} 
+\usepackage{color,soul}
 \usepackage{tikz}
 \usepackage{amsmath, amssymb}
 % \usepackage{indentfirst}

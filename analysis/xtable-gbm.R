@@ -14,6 +14,7 @@ library(purrr)
 setwd("c:/Users/ATE/thesisDoc/data")
 rm(list = ls())
 load(file = "u_bsm.RData")
+load(file = "GBM.RData")
 load(file = "DOMAIN.RData")
 
 #################################
@@ -91,14 +92,136 @@ print(xtable::xtable(xt,
 
 x <- 1 # intraday
 y <- 3 # weekly
-ggplot(U_bsm[[x]][[13]][[79]]) +
+ggplot(U_bsm[[x]][[13]][[94]]) +
   geom_line(aes(x = time.period, y = option),
             colour = 'blue')+
   geom_point(aes(x = time.period, y = delta* s +  p),
              colour = ' red')+
-  geom_point(data = U_bsm[[y]][[13]][[79]], 
+  geom_point(data = U_bsm[[y]][[13]][[64]],
              aes(x = time.period, y = delta* s +  p),
-             colour = 'black')
+             colour = 'black') +
+  geom_point(data = U_bsm[[2]][[13]][[64]], 
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'green')
+
+pl[[3]][[13]]
+U_bsm[[3]][[13]][[94]]
+
+
+
+
+
+
+data.frame(
+  gammaa = round(U_bsm[[1]][[13]][[64]]$gamma , 4),
+  thetaa = round(U_bsm[[1]][[13]][[64]]$theta, 4),
+  option = U_bsm[[1]][[13]][[64]]$option,
+  oo = U_bsm[[1]][[13]][[64]]$theta / U_bsm[[1]][[13]][[64]]$r+ 
+    .5 * GBM['sd']^2 * U_bsm[[1]][[13]][[64]]$s^2 * U_bsm[[1]][[13]][[64]]$gamma / U_bsm[[1]][[13]][[64]]$r +
+    U_bsm[[1]][[13]][[64]]$delta * U_bsm[[1]][[13]][[64]]$s
+)
+
+mean(U_bsm[[1]][[13]][[64]]$gamma, na.rm = T)
+max(U_bsm[[1]][[13]][[64]]$gamma, na.rm = T)
+
+
+#####################################
+# gamma distrib
+#####################################
+
+gamma_230_91_w <- map(U_bsm[[1]][[13]], ~.x$gamma[-length(.x$gamma)]) %>% 
+  unlist
+gamma_230_91_d <- map(U_bsm[[2]][[13]], ~.x$gamma[-length(.x$gamma)]) %>% 
+  unlist
+gamma_140_91_w <- map(U_bsm[[1]][[1]], ~.x$gamma[-length(.x$gamma)]) %>% 
+  unlist
+df <- data.frame(gamma_230_91_w,
+                 gamma_230_91_d,
+                 gamma_140_91_w)
+
+ggplot(df) +
+  stat_density(aes(gamma_230_91_w),
+               # geom =  'line',
+               fill = 'steelblue',
+               alpha = .7
+               ) +
+  stat_density(aes(gamma_140_91_w),
+               # geom =  'line',
+               fill = 'darkred',
+               alpha = .5
+               ) +
+  xlim(0, 0.04) + ylim(0, 300)
+
+> U_bsm[[3]][[13]][[3]]$theta
+[1] -1.8250165078 -2.3577427091 -3.3332632679 -6.1008332345 -1.8718114089 -1.9243347535
+[7] -2.6796883916 -1.2605775463 -0.2300142793 -0.7318687969 -0.1206997202 -0.0365084345
+[13] -0.0002176138           NaN
+> U_bsm[[3]][[13]][[94]]$theta
+
+
+#####################################
+# theta distrib
+#####################################
+
+theta_230_91_w <- map(U_bsm[[3]][[13]], ~.x$theta[-length(.x$theta)]) %>% 
+  unlist
+# theta_230_91_d <- map(U_bsm[[2]][[13]], ~.x$theta[-length(.x$theta)]) %>% 
+#   unlist
+theta_140_91_w <- map(U_bsm[[3]][[14]], ~.x$theta[-length(.x$theta)]) %>% 
+  unlist
+df1 <- data.frame(theta_230_91_w)
+                 # theta_230_91_d,
+df2 <- data.frame(theta_140_91_w)
+
+ggplot(df1) +
+  stat_density(aes(theta_230_91_w),
+               # geom =  'line',
+               fill = 'steelblue',
+               alpha = .7
+  ) +
+  stat_density(data = df2, aes(theta_140_91_w),
+               # geom =  'line',
+               fill = 'darkred',
+               alpha = .5
+  ) +
+  xlim(-3, 0.2) + ylim(0, 3.5)
+
+#####################################
+# theta / gamma distrib
+#####################################
+
+theta_230_91_w <- map(U_bsm[[1]][[13]], ~.x$theta[-length(.x$theta)] / 
+                        .x$gamma[-length(.x$gamma)]) %>% 
+  unlist
+theta_230_91_d <- map(U_bsm[[2]][[13]], ~.x$theta[-length(.x$theta)]/ 
+                        .x$gamma[-length(.x$gamma)]) %>% 
+  unlist
+theta_140_91_w <- map(U_bsm[[1]][[1]], ~.x$theta[-length(.x$theta)]/ 
+                        .x$gamma[-length(.x$gamma)]) %>%  
+  unlist
+theta_140_91_w <- theta_140_91_w[theta_140_91_w != -Inf]
+theta_140_91_w  <- theta_140_91_w[theta_140_91_w > - 10e7]
+
+df <- data.frame(theta_230_91_w = abs(theta_230_91_w[(1:10057)]),
+                 theta_140_91_w = abs(theta_140_91_w))
+
+ggplot(df) +
+  stat_density(aes(theta_230_91_w),
+               # geom =  'line',
+               fill = 'steelblue',
+               alpha = .7
+  ) +
+  stat_density(aes(theta_140_91_w),
+               # geom =  'line',
+               fill = 'darkred',
+               alpha = .5
+  ) +
+  xlim(400, 2000) + ylim(0, 0.0055)
+
+
+
+
+
 
 pl[[1]][[14]]
 
@@ -121,6 +244,141 @@ ggplot2::ggplot(dplyr::bind_rows(S, .id = "uniqueID"),
                  y = 'Stock price')
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
+
+
+#####################################
+# P&L distrib
+#####################################
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.gbm.pl.better.tex", width = 4, height = 2)
+ggplot(data.frame(pl = pl[[1]][[13]])) +
+  stat_density(aes(pl),
+               geom =  'line',
+               # fill = 'seagreen4',
+               color = 'seagreen4'
+               # alpha = .7
+  ) +
+  stat_density(data = data.frame(pl2 = pl[[2]][[13]]) 
+               ,aes(pl2),
+               geom =  'line',
+               # fill = 'steelblue',
+               color = 'steelblue'
+               # alpha = .7
+  ) +
+  stat_density(data = data.frame(pl2 = pl[[3]][[13]]) 
+               ,aes(pl2),
+               geom =  'line',
+               # fill = 'darkred',
+               color = 'darkred'
+               # alpha = .7
+  ) + xlim(-1, 3) +
+  labs(x = 'Relative profit and loss',
+       y = 'Density')
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+#####################################
+# p:analysis:gbm:hedges
+#####################################
+
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.gbm.hedges.tex", width = 4, height = 2)
+
+strouk <- 7
+
+ggplot(U_bsm[[1]][[strouk]][[1]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(aes(x = time.period, y = delta* s +  p),
+             colour = 'seagreen4')+
+  geom_point(data = U_bsm[[2]][[strouk]][[1]],
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'steelblue') +
+  geom_point(data = U_bsm[[3]][[strouk]][[1]], 
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'darkred')+
+  labs(x = 'Time period',
+       y = 'Option value')
+
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+#####################################
+# TAB BAD PL
+#####################################
+
+
+print(xtable::xtable(matrix(pl[[3]][[13]], nrow = 10, byrow = T),
+                     align = "lllllllllll",  # align and put a vertical line (first "l" again represents column of row numbers)
+                     caption = "Worst relative P&L for BSM", 
+                     label = "t:analysis:bsm:pl:worst"),
+      include.rownames = FALSE,
+      include.colnames = FALSE)
+
+
+#######################
+# theta for 60
+###
+print(xtable::xtable(matrix(c(round(c(U_bsm[[3]][[13]][[60]]$theta[-length(U_bsm[[3]][[13]][[60]]$theta)], Inf), 2),
+                              round(U_bsm[[3]][[13]][[60]]$time.period, 2)),
+                            byrow = T, nrow = 4),
+                     align = "lllllllll",  # align and put a vertical line (first "l" again represents column of row numbers)
+                     caption = "Worst relative P&L for BSM", 
+                     label = "t:analysis:bsm:pl:worst"),
+      include.rownames = FALSE,
+      include.colnames = FALSE)
+round(c(U_bsm[[3]][[13]][[60]]$theta[-length(U_bsm[[3]][[13]][[60]]$theta)], Inf), 2)
+round(U_bsm[[3]][[13]][[60]]$time.remaining, 2)
+
+
+
+
+#######################
+# Its course
+###
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.gbm.theta.high.tex", width = 4, height = 4)
+
+strouk <- 13
+samp <- 60
+
+p1 <- ggplot(U_bsm[[1]][[strouk]][[samp]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(data = U_bsm[[3]][[strouk]][[samp]], 
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'darkred')+
+  labs(x = 'Time period',
+       y = 'Option value')
+
+p2 <- ggplot(U_bsm[[1]][[strouk]][[samp]]) +
+  geom_line(aes(x = time.period, y = s),
+            color = 'chocolate4') +
+  geom_line(aes(x = time.period, y = 230),
+            color = 'steelblue')+
+  geom_vline(xintercept = U_bsm[[3]][[strouk]][[samp]]$time.period, alpha = 0.5,
+             linetype = "dotdash")+
+  labs(x = 'Time period',
+       y = 'Asset price')
+  
+gridExtra::grid.arrange(p1, p2)
+
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+
+
+
+
+
+
 
 
 
