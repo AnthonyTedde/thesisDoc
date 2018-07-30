@@ -8,6 +8,7 @@ library(tidyverse)
 library(pracma)
 library(FME)
 
+load(file = 'DATA.RData')
 ggplot(DATA, aes(Strike, price)) + 
   geom_line() +
   geom_point(data = DATA, aes(Strike, Last))+
@@ -157,6 +158,69 @@ ggplot(DATA_merton, aes(Strike, imply.volatility)) +
   geom_line(color = "steelblue") +
   geom_point(data = DATA_merton, 
              aes(Strike, imply.volatility_merton),
+             color = "darkred")+
+  xlab("Strike") + ylab("Implied maturity")+
+  facet_wrap( ~ maturity.verbose, ncol = 3)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+
+
+
+
+
+
+
+################################################################################
+#
+#
+# BSM
+#
+#
+################################################################################
+load(file = "optimalHestonCalibration.RData")
+ss <- 0.1958536
+
+
+##############################################################
+#  Compute the implied volatility
+# GBSVolatility(price, TypeFlag, S, X, Time, r, b, tol, maxiter)
+##############################################################
+
+imply.volatility <- map_dbl(as.data.frame(t(DATA)), function(y){
+  GBSVolatility(price = y[9], 
+                TypeFlag = 'c',
+                S = y[1],
+                X = y[3],
+                Time = y[2]/365,
+                r = y[8],
+                b = 0)
+}) %>% unname
+
+
+DATA_bsm <- data.frame(DATA, imply.volatility, imply.volatility.bsm = ss)
+DATA_bsm$maturity <- str_pad(DATA_bsm$maturity, 3, pad = "0")
+maturity.verbose <- paste(DATA_bsm$maturity, "days up to maturity", sep = " ")
+DATA_bsm <- data.frame(DATA_bsm, maturity.verbose)
+
+
+####################################################################
+# plot
+####################################################################
+
+ggplot(DATA_bsm, aes(Strike, imply.volatility)) + 
+  geom_line() +
+  geom_point(data = DATA_heston, aes(Strike, imply.volatility_heston))+
+  facet_grid(. ~ maturity)
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.impliedvol.bsm.tex", width = 6, height = 3)
+ggplot(DATA_bsm, aes(Strike, imply.volatility)) + 
+  geom_line(color = "steelblue") +
+  geom_point(data = DATA_bsm,
+             aes(Strike, imply.volatility.bsm),
              color = "darkred")+
   xlab("Strike") + ylab("Implied maturity")+
   facet_wrap( ~ maturity.verbose, ncol = 3)

@@ -104,20 +104,20 @@ quotediff <- quote[-1] / quote[-quotes]
 
 u_gbm <- log(quotediff)
 
-# 
+#
 # ## u <- log(quote[-1] / quote[-quotes])
-# ubar <- mean(u)
-# 
-# s <- sqrt(1/(length(u) - 1) * sum((u - ubar)^2)) 
+ubar <- mean(u)
+
+s <- sqrt(1/(length(u) - 1) * sum((u - ubar)^2))
 
 #
 # Sigma and mean will be used inside the GBM simulation
 #
-# sigma <- s / sqrt(t)
-# alpha <- ubar / t + sigma ^2 / 2
-
-sigma <- r[[1]] / sqrt(t)
+sigma <- s / sqrt(t)
 alpha <- ubar / t + sigma ^2 / 2
+# 
+# sigma <- r[[1]] / sqrt(t)
+# alpha <- ubar / t + sigma ^2 / 2
 
 setwd("c:/Users/ATE/thesisDoc")
 # tikzDevice::tikz(file = "figures/appl.logreturns.density.merton.riskneutral.tex", width = 4, height = 2)
@@ -152,13 +152,13 @@ setwd("c:/Users/ATE/thesisDoc/data")
 # FOllowing: https://arxiv.org/pdf/cond-mat/0203046.pdf
 ########################################################################
 
-r <- MASS::fitdistr(x = u, densfun = dnorm , 
+r <- MASS::fitdistr(x = u[ u > quantile(u, .05) & u < quantile(u, .95)], densfun = dnorm , 
                     start = list(
                       mean = ubar,
                       sd = s
                     ))
 
-r <- MASS::fitdistr(x = u, densfun = dnorm , 
+r <- MASS::fitdistr(x = u[ u > quantile(u, .05) & u < quantile(u, .95)], densfun = dnorm , 
                     start = list(
                       mean = .01,
                       sd = .008
@@ -169,9 +169,7 @@ r <- MASS::fitdistr(x = u, densfun = dnorm ,
 # plot
 #############################################
 setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/appl.logreturns.density.merton.riskaverse.tex", width = 4, height = 2)
-
-
+tikzDevice::tikz(file = "figures/mjd.analysis.calibrated.tex", width = 4, height = 2)
 ggplot(data = data.frame(u)) +
   stat_density(aes(u),
                geom = "line",
@@ -182,10 +180,13 @@ ggplot(data = data.frame(u)) +
   stat_function(fun = dnorm,
                 colour = "darkred",
                 args = as.list(r[[1]])
-  )
+  ) +
+  xlim(-.025, .025) +
+  ggplot2::labs( x = 'Stock log-returns',
+                 y = 'Density')
 
 dev.off()
-# setwd("c:/Users/ATE/thesisDoc/data")
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 ################################################################################
@@ -239,5 +240,6 @@ alpha <- r[[1]]['mean']  / t + sigma ^2 / 2
 GBM <- c(alpha, sigma)
 save(AAPL, file = "AAPL.RData")
 save(GBM , file = "GBM.RData")
+load(file = "GBM.RData")
 
 
