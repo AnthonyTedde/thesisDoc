@@ -14,7 +14,9 @@
 \SweaveOpts{concordance=TRUE}
 \tableofcontents{}
 
-
+\listoffigures
+ 
+\listoftables
 
 
 
@@ -23,8 +25,15 @@
 % \SweaveInput{BSM}
 % \SweaveInput{models}
 % \SweaveInput{methodology}
-% \SweaveInput{analysis.Rnw}
+\SweaveInput{analysis.Rnw}
+% \SweaveInput{conclusion}
 % \SweaveInput{appendix}
+
+\begin{appendices}
+% \SweaveInput{append.marketdata}
+\SweaveInput{append.analysis}
+\end{appendices}
+
 
 
 

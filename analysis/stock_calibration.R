@@ -415,7 +415,15 @@ setwd("c:/Users/ATE/thesisDoc/data")
   # save(heston_riskaverse, file = "optimalHestonRiskaverse.RData")
   
   
+  #XTABLE
   
+  a <- AAPL[, c("date", "ticker", "open", "close", "low", "high")]
+  a <- data.frame(date = as.character(a$date), a[, -1])
+
+  print(xtable::xtable(a, caption = "Market stock data (AAPL)", 
+                 label = "t:market:stock"),
+  include.rownames = FALSE,
+  include.colnames = FALSE)
   
 
   x

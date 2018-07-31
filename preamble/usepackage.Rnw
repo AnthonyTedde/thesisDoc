@@ -17,10 +17,13 @@
 \usepackage[nameinlink,noabbrev]{cleveref}
 \usepackage[capposition=top]{floatrow}
 \usepackage{float}
+% \usepackage[tableposition=top]{caption}
+% \floatsetup[table]{capposition=top}
 \usepackage{caption}
 \usepackage{xfrac}
 \usepackage{braket}
 \usepackage[toc,page]{appendix}
+\usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{adjustbox}
 \usepackage{multirow}
