@@ -11,21 +11,23 @@ Fischer Black and Myron Scholes.
 \newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
   637--654, 1973.
 
-\bibitem[{R Core Team}(2017)]{R}
-{R Core Team}.
-\newblock \emph{R: A Language and Environment for Statistical Computing}.
-\newblock R Foundation for Statistical Computing, Vienna, Austria, 2017.
-\newblock URL \url{https://www.R-project.org/}.
+\bibitem[Heston(1993)]{heston1993}
+Steven~L Heston.
+\newblock A closed-form solution for options with stochastic volatility with
+  applications to bond and currency options.
+\newblock \emph{The review of financial studies}, 6\penalty0 (2):\penalty0
+  327--343, 1993.
+
+\bibitem[Merton(1973)]{merton73}
+Robert~C Merton.
+\newblock Theory of rational option pricing.
+\newblock \emph{The Bell Journal of economics and management science}, pages
+  141--183, 1973.
 
 \bibitem[Shreve(2004)]{shreve}
 Steven~E Shreve.
 \newblock \emph{Stochastic calculus for finance II: Continuous-time models},
   volume~11.
 \newblock Springer Science \& Business Media, 2004.
-
-\bibitem[Tedde(2017)]{randomwalk}
-Anthony Tedde.
-\newblock \emph{RandomWalk: Generate Random Walks}, 2017.
-\newblock R package version 0.0.0.9000.
 
 \end{thebibliography}

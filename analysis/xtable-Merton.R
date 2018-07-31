@@ -112,7 +112,7 @@ print(xtable::xtable(xt,
 #####################################
 # stock price path
 #####################################
-S <- map(U_merton[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))
+S <- map(U_merton[[3]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))
 
 setwd("c:/Users/ATE/thesisDoc")
 tikzDevice::tikz(file = "figures/analysis.mjd.stocks.tex", width = 4, height = 2)
@@ -123,10 +123,11 @@ ggplot2::ggplot(dplyr::bind_rows(S, .id = "uniqueID"),
   ggplot2::geom_line(ggplot2::aes(alpha = 0.5)) + 
   theme(legend.position = 'none') +
   ggplot2::labs( x = 'Time period',
-                 y = 'Stock price')
+                 y = 'Stock price')+
+  stat_smooth(aes(x= time, 
+                  y = stock),colour='blue', span=0.2)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
-
 
 
 #####################################
@@ -158,7 +159,7 @@ ppl3 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.big.tex", width = 6, height = 5)
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.big.tex", width = 6, height = 4)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -218,7 +219,7 @@ ppl3 <- map(1:6, function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.in.tex", width = 6, height = 3)
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.in.tex", width = 6, height = 4)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -317,7 +318,7 @@ ppl2 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.deltas.tex", width = 6, height = 5)
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.deltas.tex", width = 6, height = 4)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -362,10 +363,10 @@ p1 <- ggplot(dplyr::bind_rows(ppl1[[1]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred') +
+             color = 'darkred', size = 1.5) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', alpha = .5) + 
+             colour = 'steelblue', size = .75) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 140, dbm = 182)",
@@ -378,10 +379,10 @@ p2 <- ggplot(dplyr::bind_rows(ppl1[[2]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred') +
+             color = 'darkred', size = 1.5) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', alpha = .5) + 
+             colour = 'steelblue', size = .75) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 160, dbm = 182)",
@@ -394,10 +395,10 @@ p3 <- ggplot(dplyr::bind_rows(ppl1[[3]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred') +
+             color = 'darkred', size = 1.5) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', alpha = .5) + 
+             colour = 'steelblue', size = .75) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 186, dbm = 182)",
@@ -410,10 +411,10 @@ p4 <- ggplot(dplyr::bind_rows(ppl1[[4]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred') +
+             color = 'darkred', size = 1.5) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', alpha = .5) + 
+             colour = 'steelblue', size = .75) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 200, dbm = 182)",
@@ -426,10 +427,10 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred') +
+             color = 'darkred', size = 1.5) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', alpha = .5) + 
+             colour = 'steelblue', size = .75) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 230, dbm = 182)",
@@ -438,7 +439,7 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
   
   
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 6)
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 4)
 gridExtra::grid.arrange(p1, p2, p3, p4, p5)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")

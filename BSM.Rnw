@@ -584,8 +584,8 @@ where the set $i$ is the time-step.
 
 Even if the \cref{eq:underlying:geometric:closed} is used to model the stock price process, it exists some lacks with the observed real processes. The analysis ([CHA REF]) mainly covers the following discrepancy of the model against empirical results.
   
-The volatility appearing in the aformentioned underlying model (\ref{eq:underlying:geometric:closed}) is constant as time passes.
-Even if this consideration can be considered as true for short period of time, it is not the case over the long--run \citet{teneng2011limitations}.
+The volatility appearing in the aformentioned underlying model (\ref{eq:underlying:geometric:closed}) is constant as time passes. However, as stated by \citet{teneng2011limitations}, even if this consideration can be considered as true for short period of time, it is not the case over the long-run 
+
 Other model substitutes the process defined throughout this chapter with other ones including stochastic volatility processes, making it changing over time.
 For this purpose, the Heston's model is developed in this current master thesis, which encompasses two stochastic processes, a geometric Brownian motion [???? + REF] for the stock price diffusion model [DIFUSION??] and a mean-reverting CIR model to compute the volatility as a stochastic process.
 This model is exposed in \cref{sec:Heston}.

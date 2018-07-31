@@ -2,7 +2,8 @@
 % \usepackage{pgfplots}
 % \usepgfplotslibrary{external} 
 % \tikzexternalize
-\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage[a4paper, margin=0.984252in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[breaklinks,hidelinks]{hyperref}
 \usepackage[utf8]{inputenc}

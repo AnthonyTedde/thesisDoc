@@ -16,27 +16,14 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER: Introduction
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter*{Introduction}
-\label{cha:Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
 
-Talk about what is done to price a vanilla option throuhout the BSM method.
-How does the BSM model is fair under its assumption. What about if we are going beyond ?
-How perfomant is it ? 
-What about other model such as \ldots ?
 
-Using R. \cite{R}
+\SweaveInput{introduction}
 % \SweaveInput{upstream}
-% \SweaveInput{underlying}
 % \SweaveInput{BSM}
 % \SweaveInput{models}
 % \SweaveInput{methodology}
-\SweaveInput{analysis.Rnw}
+% \SweaveInput{analysis.Rnw}
 % \SweaveInput{appendix}
 
 

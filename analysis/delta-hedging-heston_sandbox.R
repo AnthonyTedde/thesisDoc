@@ -25,7 +25,7 @@ load(file = "DATA.RData")
 # GENERALIZATION
 #################################
 # To change:
-n_delta_hedge <- 2
+n_delta_hedge <- 10
 # Frequency per day
 frequency <- 1
 
@@ -154,6 +154,29 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
     map(z, ~ c(.x[1], diff(.x)))
   })
   
+  
+  #################################
+  # GAMMA
+  #################################
+  g <- purrr::map(data.frame(t(domain)), .f = function(z){
+    # print(z)
+    purrr::map(heston_ts, .f = function(x){
+      gamma_heston(x$stock_price_path[1:(z[1] * frequency + 1)],
+                   V = x$CIR[1:(z[1] * frequency + 1)],
+                   time_to_maturity = z[1] / 365,
+                   K = z[2],
+                   alpha = z[3],
+                   theta = args_heston_riskneutral$theta,
+                   kappa = args_heston_riskneutral$kappa,
+                   sigma = args_heston_riskneutral$sigma,
+                   rho = args_heston_riskneutral$rho
+      )
+    })
+  })
+  
+  
+  
+  
   #################################
   # Delta BSM computation
   #################################
@@ -190,6 +213,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
     domn <- map(rep(x, length(d[[x]])), ~domain[.x, ])
     list(diff_delta[[x]],
          d[[x]],
+         g[x],
          ts,
          O_heston[[x]],
          domn,
@@ -211,7 +235,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
   #   * The Total amout paid to get delta stock at time t, but value for T
   u <- purrr::map(l, function(x){
     # print(x)
-    purrr::pmap(x, function(dd, d, g, O, domn, dd_bsm, d_bsm){
+    purrr::pmap(x, function(dd, d, g, O, domn, dd_bsm, d_bsm, gaga){
       # print(d)
       # time_remaining <- (time_to_maturity * scale + 1) : 1
       time_remaining <- seq(domn$maturity/365, 0, length.out = (domn$maturity * frequency + 1))
@@ -259,7 +283,8 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
                  "delta bsm" = d_bsm,
                  "diff delta bsm" = dd_bsm,
                  "ds" = d * g$stock_price_path,
-                 'h' = O - (d * g$stock_price_path + p))
+                 'h' = O - (d * g$stock_price_path + p),
+                 'gamma' = gaga)
     })
   })
   print(paste('for frequency' , frequency, 'and n hedge of', n_delta_hedge))
@@ -274,7 +299,7 @@ frequency <- 2
 tic()
 U_heston <- map(c(2, 1, 1/7), ~ delta_hedging_analysis(100, .x))
 toc()
-U_heston <- map(1, ~ delta_hedging_analysis(1, .x))
+U_heston <- map(1, ~ delta_hedging_analysis(10, .x))
 
 
 
@@ -394,3 +419,57 @@ pi_bsm <- purrr::map(u, function(x){
 # dist <- map_dbl(U_heston[[1]][[9]], ~dplyr::last(.x$s))
 # ggplot(data.frame(dist)) +
 #   stat_density(aes(dist))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###############
+# gamma distrib
+#############################
+df <- data.frame(inthemoney = unlist(g[[1]]),
+                 outthemoney = unlist(g[[13]]))
+
+
+
+
+ggplot(df) +
+  stat_density(aes(inthemoney) ,geom = "line",
+               colour = 'steelblue')+
+  stat_density(aes(outthemoney) ,geom = "line",
+               colour = 'darkred')+
+  xlim(-.005, 0.01)
+
+
+
+df <- data.frame(inthemoney = unlist(map(g[[1]], ~.x[1:20])),
+                 outthemoney = unlist(map(g[[13]], ~.x[1:20])))
+
+ggplot(df) +
+  stat_density(aes(inthemoney) ,geom = "line",
+               colour = 'steelblue')+
+  stat_density(aes(outthemoney) ,geom = "line",
+               colour = 'darkred')+
+  xlim(-.005, 0.01)
+gamma_hsv <- g
+save(gamma_hsv, file = 'GAMMA_HSV.R')
+
+
+
+
+
+
+
+
+
+
