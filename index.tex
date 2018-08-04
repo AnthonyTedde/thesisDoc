@@ -1048,16 +1048,7 @@ Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
------------------------------SSSSSSS-----------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -1066,56 +1057,29 @@ Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that
 % delta vs delta heston
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\Cref{p:analysis:hsv:pl:dist:deltas} shows the distribution of the P\&Ls when the hedging is built either with BSM or HSV deltas. The red density curve concerns the data related to BSM deltas while the green represents the distributions of the performance's metrics for the HSV delta-hedging.
+\Cref{p:analysis:hsv:pl:dist:deltas} (appendix \ref{cha:appendanalysis:plot}) shows the distribution of the P\&Ls when the hedging is built either with BSM or HSV deltas. The red density curve concerns the data related to BSM deltas while the green represents the distributions of the performance's metrics for the HSV delta-hedging.
+No real trend emerges on the hedging portfolio whether using the HSV or BSM-related delta, except for the hedge of the at-the-money options where the delta BSM implies higher values for the delta-neutral hedging portfolios.
+Nonetheless, let us dive more deeply into those delta-hedging strategies by observing what happens behind the scenes.
 
-\begin{figure}[h]
-  \centering
-  \input{figures/p.analysis.heston.pl.dist.deltas.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:hsv:pl:dist:deltas}
-\end{figure}
-
-\Cref{p:analysis:hsv:pl:dist:deltas}, shows no real trends on the hedging portfolio whether using the HSV or BSM-related delta, except for the hedge of the at-the-money options where the delta BSM implies higher values for the delta-neutral hedging portfolios.
-Nonetheless, let us dive more deeply into those delta-hedging strategies by observing what happens behind the hood.
-
-\Cref{p:analysis:hsv:hedge:deltas} illustrates how the delta-hedging works depending on the strike price and computed delta.
+\Cref{p:analysis:hsv:hedge:deltas} (appendix \ref{cha:appendanalysis:plot}) illustrates how the delta-hedging works depending on the strike price and computed delta.
 The circles represent the replicated portfolios at each rebalancing time, whereas the underpinned black lines are the courses of the options' values as time passes.
-The blue and red circles respectively stand for the MJD and BSM delta-hedging portfolios' values.
+The blue and red circles respectively stand for the HSV and BSM delta-hedging portfolios' values.
+
 % 
-\begin{figure}[h]
-  \centering
-  \input{figures/p.analysis.heston.hedge.deltas.tex}
-  % \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:hsv:hedge:deltas}
-\end{figure}
+
 
 
 Concerning options in-the-market, \cref{p:analysis:hsv:hedge:deltas} shows that the delta-neutral portfolios with delta BSM outperform those driven by a delta HSV, while the opposite claim is applicable for the hedging portfolios of out-of-the-market calls.
-The conclusion of the previous statement is not that delta BSM is "better"\footnote{Better and worse are between quotes because those qualifiers would rather be applicable for a speculative analysis than a hedging one.} than delta HSV when hedging low strikes European calls or "wore" for high strikes ones, but it actually shows that delta BSM lacks sensivity.
+The conclusion of the previous statement is not that delta BSM is "better"\footnote{the words "better" and "wore" are between quotes because those qualifiers would rather be applicable for a speculative analysis than a hedging one.} than delta HSV when hedging low strikes European calls or "wore" for high strikes ones, but it actually shows that delta BSM lacks sensitivity.
 Indeed, for options in-the-money, it tends to fastly achieve values near to one while it dramatically drops to zero for out-of-the-money calls.
 Therefore as the delta-hedging for the replication of long calls is a "buy high, sell low" strategy, it explains why the hedging of in-the-money options makes the BSM delta-neutral portfolios more valued than the HSV, at maturity. 
 Moreover, due to a slow to start delta with a value staying longer to zero, the hedging with BSM is delayed for out-of-the-money calls, letting the BSM delta-neutral portfolios taking advantage of the purchase of a low priced assets at a time near zero, for which the return exceeds that of the money market portfolios initially set up.
-To conclude, to replicate a position in a European call, delta HSV would preferably be used, concerning that case examined in this master thesis. 
+To conclude, to replicate a position in a European call, delta HSV would preferably be used, concerning that case examined in this master thesis.
 
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
------------------------------SSSSSSS-----------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % \SweaveInput{conclusion}
 % \SweaveInput{appendix}
@@ -1191,7 +1155,7 @@ To conclude, to replicate a position in a European call, delta HSV would prefera
   \begin{changemargin}{0.5cm}{0.5cm}
   \medskip
 \footnotesize
-\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$, while the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red circles and MJD delta for those in green.
+\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red circles and MJD delta for those in blue.
   \end{changemargin}
   %
   % END OF FLOATNOTE
@@ -1226,6 +1190,67 @@ To conclude, to replicate a position in a European call, delta HSV would prefera
   \label{p:analysis:hsv:pl:dist:big}
 \end{figure}
 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON density petL split by maturities and strikes IMPACT of delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.heston.pl.dist.deltas.tex}
+  % \rule{40mm}{20mm}
+  \caption{Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the delta used.}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{hsv\_call}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. While the underlying asset followed differents dummy paths constructed through the function \textit{hsv\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$ and $\alpha  = 0.4823$. The associated delta function was the BSM delta for the red densities and HSV delta for those filled in green.
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \label{p:analysis:hsv:pl:dist:deltas}
+\end{figure}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON density petL split by maturities and strikes IMPACT of delta SAMPLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h]
+  \centering
+  \input{figures/p.analysis.heston.hedge.deltas.tex}
+  % \rule{40mm}{20mm}
+  \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs HSV)}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{hsv\_call}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. While the underlying asset followed differents dummy paths constructed through the function \textit{hsv\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$ and $\alpha  = 0.4823$. The associated delta function was the BSM delta for the red circles and HSV delta for those in blue.
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \label{p:analysis:hsv:hedge:deltas}
+\end{figure}
 
 \end{appendices}
 

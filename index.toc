@@ -6,5 +6,5 @@
 \contentsline {section}{\numberline {2.1}The delta-hedging in a log-normal world}{9}{section.2.1}
 \contentsline {section}{\numberline {2.2}Merton jump-diffusion performance measuring}{14}{section.2.2}
 \contentsline {section}{\numberline {2.3}Heston stochastic volatility performance measuring}{17}{section.2.3}
-\contentsline {chapter}{Appendices}{22}{section*.21}
-\contentsline {chapter}{\numberline {A}Analysis and results: Plots}{23}{Appendix.1.A}
+\contentsline {chapter}{Appendices}{20}{section*.19}
+\contentsline {chapter}{\numberline {A}Analysis and results: Plots}{21}{Appendix.1.A}

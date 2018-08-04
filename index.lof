@@ -10,10 +10,10 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities (zoom-in on in-the-money options).\relax }}{16}{figure.caption.15}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces A sample of one hundred Heston stochastic volatility processes.\relax }}{17}{figure.caption.16}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Distributions of gamma for in-the-money vs out-of-the-money options\relax }}{19}{figure.caption.18}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Sample geometric Brownian motions\relax }}{20}{figure.caption.19}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Sample geometric Brownian motions\relax }}{21}{figure.caption.20}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency\relax }}{23}{figure.caption.22}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.\relax }}{23}{figure.caption.23}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)\relax }}{24}{figure.caption.24}
-\contentsline {figure}{\numberline {A.4}{\ignorespaces Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the balancing frequency\relax }}{24}{figure.caption.25}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency\relax }}{21}{figure.caption.20}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.\relax }}{21}{figure.caption.21}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)\relax }}{22}{figure.caption.22}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the balancing frequency\relax }}{22}{figure.caption.23}
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the delta used.\relax }}{23}{figure.caption.24}
+\contentsline {figure}{\numberline {A.6}{\ignorespaces Samples of delta-neutral portfolios built with different functions of delta(BSM vs HSV)\relax }}{24}{figure.caption.25}
