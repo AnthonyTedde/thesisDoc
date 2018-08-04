@@ -628,16 +628,7 @@ The blue and red circles respectively stand for the MJD and BSM delta-hedging po
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
------------------------------SSSSSSS-----------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -696,8 +687,8 @@ In \cref{t:analysis:heston:pl}, the information are completely organized the sam
 
 \begin{figure}[ht]
   \centering
-  \input{figures/analysis.hsv.stocks.tex}
-  % \rule{40mm}{20mm}
+  % \input{figures/analysis.hsv.stocks.tex}
+  \rule{40mm}{20mm}
   \caption{A sample of one hundred Heston stochastic volatility processes.}
    %
   % BEGIN OF FLOATNOTE
@@ -716,16 +707,7 @@ In \cref{t:analysis:heston:pl}, the information are completely organized the sam
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
------------------------------SSSSSSS-----------------------------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
@@ -735,7 +717,7 @@ In \cref{t:analysis:heston:pl}, the information are completely organized the sam
 % Positiveness of the frequency
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As for the MJD model, with the increase of the balancing rhythm comes a rise in the value of the delta-neutral portfolio, on average, which even tends to systematically outperform the European call.
+As for the MJD model, with the increase of the balancing rhythm comes a rise in the values of the delta-neutral portfolios on average, which even tend to outperform the European calls systematically.
 
 
 
@@ -778,33 +760,23 @@ Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} &
 
 
 In order to get a deeper understanding of the results provided in \cref{t:analysis:heston:pl}, let us focus on the distributions of the P\&Ls. 
-Latter are depicted in \cref{p:analysis:hsv:pl:dist:big} where the green, blue and red-filled density curves respectively denote the P\&Ls' distributions when the delta-neutral portfolios are balanced twice a day, daily or weekly.
+Latter are pictured in \cref{p:analysis:hsv:pl:dist:big} (appendix \cref{cha:appendanalysis:plot}) where the green, blue and red-filled density curves respectively express the P\&Ls' distributions when the delta-neutral portfolios are balanced twice a day, daily or weekly.
 
 
 
 
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.merton.pl.dist.big.tex}
-  \rule{40mm}{20mm}
-  \caption{HSV delta-neutral hedging performance distribution}
-  \floatfoot{\textbf{Notes.}
-  }
-  \label{p:analysis:hsv:pl:dist:big}
-\end{figure}
          
 
-In the light of \cref{p:analysis:mjd:pl:dist:big}, one can observe that as the rhythm of balancing increases, the variance of the averaged relative profits and losses decreases, with the most of the distribution so concentrated around the mean.
+In the light of \cref{p:analysis:hsv:pl:dist:big}, one can observe that as the rhythm of balancing increases, the variance of the averaged relative profits and losses decreases, with the most of the distribution so concentrated around the mean.
 
 
 
-Furthermore, as it is the case with the hedge of MJD, the performances of poorly rebalanced portfolios are better for options the more in-the-money in the HSV model. 
+Furthermore, such as it is the case with the hedge of MJD, the performances of poorly rebalanced portfolios are better for options the more in-the-money in the HSV model. 
 A weaker gamma for the deep-in-the-money options explains such behavior.
-\Cref{p:analysis:hsv:gamma} represents the distribution of the computed 
 
-\Cref{p:analysis:hsv:gamma} represents the distribution of the computed values for the HSV gamma for options deep-in-the-money, in blue and deep-out-of-the-money, in red.
-The shape of the curve confirms that the value of gamma is bigger for the out-of-the-money such options and that consequently, the sensibility of the derivative to the underlying asset's price move is higher.
-Moreover, the density curves of \Cref{p:analysis:hsv:gamma} also illustrate that unlike the gamma computed through the BSM equation, those provided by HSV can be negatives.
+\Cref{p:analysis:hsv:gamma} represents the distribution of the computed values for the HSV gamma for options deep-in-the-money in blue and deep-out-of-the-money in red.
+The shape of the curve confirms that the value of gamma is bigger for out-of-the-money options, and by consequence, the sensibility of such derivatives to the underlying asset's prices move is higher.
+Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that unlike the gamma computed through the BSM equation, those provided by HSV can be negatives.
 
 
 
@@ -813,14 +785,38 @@ Moreover, the density curves of \Cref{p:analysis:hsv:gamma} also illustrate that
   \centering
   % \input{figures/p.analysis.hsv.hedge.gamma.tex}
   \rule{40mm}{20mm}
-  \caption{Sample geometric Brownian motions}
-  \floatfoot{\textbf{Notes.}
-  }
+  \caption{Distributions of gamma for in-the-money vs out-of-the-money options}
+    %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above densities have been constructed by means of the function \textit{hsv\_gamma}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. the blue density represents the distribution of a sample of gamma for in-the-money options with $K = 140$, while the red one gives the distibution of out-of-the-money options' gamma with $K = 230$.
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
   \label{p:analysis:hsv:gamma}
 \end{figure}
 
 
 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-----------------------------SSSSSSS-----------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -833,8 +829,8 @@ Moreover, the density curves of \Cref{p:analysis:hsv:gamma} also illustrate that
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.heston.pl.dist.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.heston.pl.dist.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Sample geometric Brownian motions}
   \floatfoot{\textbf{Notes.}
   }
@@ -850,8 +846,8 @@ The blue and red circles respectively stand for the MJD and BSM delta-hedging po
 % 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.heston.hedge.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.heston.hedge.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Sample geometric Brownian motions}
   \floatfoot{\textbf{Notes.}
   }
@@ -869,5 +865,14 @@ To conclude, to replicate a position in a European call, delta HSV would prefera
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-----------------------------SSSSSSS-----------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

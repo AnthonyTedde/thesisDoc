@@ -175,7 +175,7 @@ ppl3 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.heston.pl.dist.big.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.heston.pl.dist.big.tex", width = 6, height = 5)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -204,33 +204,7 @@ setwd("c:/Users/ATE/thesisDoc/data")
 
 
 
-#####################################
-# GAMMA DISTRIB
-#####################################
 
-
-ggplot(df) +
-  stat_density(aes(inthemoney) ,geom = "line",
-               colour = 'steelblue')+
-  stat_density(aes(outthemoney) ,geom = "line",
-               colour = 'darkred')+
-  xlim(-.005, 0.01)
-
-
-setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.hsv.hedge.gamma.tex", width = 4, height = 2)
-df <- data.frame(inthemoney = unlist(map(g[[1]], ~.x[1:20])),
-                 outthemoney = unlist(map(g[[13]], ~.x[1:20])))
-
-ggplot(df) +
-  stat_density(aes(inthemoney) ,geom = "line",
-               colour = 'steelblue')+
-  stat_density(aes(outthemoney) ,geom = "line",
-               colour = 'darkred')+
-  xlim(-.001, 0.007)
-
-dev.off()
-setwd("c:/Users/ATE/thesisDoc/data")
 
 
 
@@ -363,7 +337,7 @@ ppl2 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.heston.pl.dist.deltas.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.heston.pl.dist.deltas.tex", width = 6, height = 5)
 ggplot(ppl1) + 
   stat_bin(aes(ppl1),
                # geom =  'line',
@@ -482,7 +456,7 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.heston.hedge.deltas.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.heston.hedge.deltas.tex", width = 6, height = 5)
 gridExtra::grid.arrange(p1, p2, p3, p4, p5)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")

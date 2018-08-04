@@ -434,6 +434,131 @@ pi_bsm <- purrr::map(u, function(x){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################################
+# GAMMA
+#################################
+# LIBRARY
+#################################
+detach("package:StockPriceSimulator", unload = T)
+library(StockPriceSimulator)
+library(pracma)
+library(ggplot2)
+library(purrr)
+
+#################################
+# VARIABLE
+#################################
+setwd("c:/Users/ATE/thesisDoc/data")
+rm(list = ls())
+load(file = "optimalHestonCalibration.RData")
+load(file = "optimalHestonRiskaverse.RData")
+load(file = "DATA.RData")
+
+
+#################################
+# GENERALIZATION
+#################################
+# To change:
+n_delta_hedge <- 10
+# Frequency per day
+frequency <- 1
+
+
+  # To no change:
+  maturities <- c(91, 182, 399)#unique(DATA$maturity)
+  initial_stock_price <- dplyr::first(DATA$S0)
+  strikes <- c(140, 160, initial_stock_price , 200,  230) #unique(DATA$Strike)
+  
+  
+  domain <- expand.grid(maturities, strikes)
+  names(domain) <- c('maturity', 'strike')
+  
+  # To have reproducible and comparable experiments.
+  # DO NOT CHANGE VALUE OF max_frequency
+  max_frequency <- 2
+  scale = 365
+  step <- max_frequency / frequency
+  # Number of check per day
+  
+  
+  tmp <- dplyr::select(DATA, maturity, continuous)
+  tmp <- tmp[!duplicated(tmp), ]
+  domain <- plyr::join(domain, tmp)
+  # domain$continuous <- 0.02144491
+  
+  
+  #################################
+  # TIME SERIES
+  #################################
+  args_heston <- as.list(heston_riskaverse)
+  args_heston_riskneutral <- as.list(x)
+  
+  ts <- map(1:n_delta_hedge, ~ heston(
+    initial_stock_price = initial_stock_price,
+    initial_volatility = args_heston_riskneutral$v0,
+    time_to_maturity = max(domain$maturity) / 365,
+    seed = .x,
+    scale = scale * max_frequency,
+    alpha = args_heston$alpha,
+    rho = args_heston_riskneutral$rho,
+    kappa = args_heston$kappa,
+    theta = args_heston$theta,
+    sigma = args_heston_riskneutral$sigma
+  ))
+  # remove NA
+  CIR.last <- map_dbl(ts, ~ tail(.x$CIR, 1)) %>% unname
+  toremove <- which(is.na(CIR.last))
+  if(! is_empty(toremove))
+    ts <- ts[-toremove]
+  
+  #################################
+  # OPTION PRICE
+  #################################
+  # 
+  # Variable to change in order to change the rebalancing frequency.
+  # Daily frequency
+  heston_ts <- map(ts, function(x){
+    z <-  x[seq(1, (max(domain$maturity) * max_frequency + 1), by = step), ]
+    rownames(z) <- 1:nrow(z)
+    z
+  })
+
+
+
+
+
+
+g <- purrr::map(data.frame(t(domain)), .f = function(z){
+  # print(z)
+  purrr::map(heston_ts, .f = function(x){
+    gamma_heston(x$stock_price_path[1:(z[1] * frequency + 1)],
+                 V = x$CIR[1:(z[1] * frequency + 1)],
+                 time_to_maturity = z[1] / 365,
+                 K = z[2],
+                 alpha = z[3],
+                 theta = args_heston_riskneutral$theta,
+                 kappa = args_heston_riskneutral$kappa,
+                 sigma = args_heston_riskneutral$sigma,
+                 rho = args_heston_riskneutral$rho
+    )
+  })
+})
+
+
 ###############
 # gamma distrib
 #############################
@@ -464,6 +589,23 @@ ggplot(df) +
 gamma_hsv <- g
 save(gamma_hsv, file = 'GAMMA_HSV.R')
 
+
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.hsv.hedge.gamma.tex", width = 4, height = 2)
+df <- data.frame(inthemoney = unlist(map(g[[1]], ~.x[1:20])),
+                 outthemoney = unlist(map(g[[13]], ~.x[1:20])))
+
+ggplot(df) +
+  stat_density(aes(inthemoney) ,geom = "line",
+               colour = 'steelblue')+
+  stat_density(aes(outthemoney) ,geom = "line",
+               colour = 'darkred')+
+  xlim(-.001, 0.007)+
+  xlab("Gamma") + ylab("Density")
+
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 
