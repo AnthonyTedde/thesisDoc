@@ -222,7 +222,7 @@ ggplot(DATA_bsm, aes(Strike, imply.volatility)) +
   geom_point(data = DATA_bsm,
              aes(Strike, imply.volatility.bsm),
              color = "darkred")+
-  xlab("Strike") + ylab("Implied maturity")+
+  xlab("Strikes") + ylab("Implied volatilities")+
   facet_wrap( ~ maturity.verbose, ncol = 3)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")

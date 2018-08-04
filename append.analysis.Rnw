@@ -1,1 +1,78 @@
 \chapter{Analysis and results: Plots}
+\label{cha:appendanalysis:plot}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON density petL split by maturities and strikes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h]
+  \centering
+  % \input{figures/p.analysis.merton.pl.dist.big.tex}
+  \rule{40mm}{20mm}
+  \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency}
+    %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. 
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \label{p:analysis:mjd:pl:dist:big}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON density petL split by maturities and strikes IMPACT of delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h]
+  \centering
+  % \input{figures/p.analysis.merton.pl.dist.deltas.tex}
+  \rule{40mm}{20mm}
+  \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.}
+    %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red densities and MJD delta for those filled in green.
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \label{p:analysis:mjd:pl:dist:deltas}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MERTON density petL split by maturities and strikes IMPACT of delta SAMPLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}[h]
+  \centering
+  % \input{figures/p.analysis.merton.hedge.deltas.tex}
+  \rule{40mm}{20mm}
+  \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)}
+    %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$, while the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red circles and MJD delta for those in green.
+  \end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \label{p:analysis:mjd:hedge:deltas}
+\end{figure}
+
+

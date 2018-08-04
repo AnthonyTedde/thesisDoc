@@ -159,7 +159,7 @@ ppl3 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.big.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.big.tex", width = 6, height = 5)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -318,7 +318,7 @@ ppl2 <- map(1:nrow(domain), function(x){
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.deltas.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.merton.pl.dist.deltas.tex", width = 6, height = 5)
 ggplot(ppl1) + 
   stat_density(aes(ppl1),
                # geom =  'line',
@@ -439,7 +439,7 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
   
   
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 5)
 gridExtra::grid.arrange(p1, p2, p3, p4, p5)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")

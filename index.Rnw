@@ -12,11 +12,13 @@
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
-\tableofcontents{}
+
+{\setstretch{1.0}
+\tableofcontents
 
 \listoffigures
  
-\listoftables
+\listoftables}
 
 
 

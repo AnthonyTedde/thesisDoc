@@ -3,6 +3,7 @@
 % \usepgfplotslibrary{external} 
 % \tikzexternalize
 \usepackage{parskip}
+\usepackage{setspace}
 \usepackage[a4paper, margin=0.984252in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[breaklinks,hidelinks]{hyperref}
@@ -28,5 +29,8 @@
 \usepackage{adjustbox}
 \usepackage{multirow}
 \usepackage{arydshln}
+% \usepackage{scrextend} % add margin
 % \usepackage{hyperref}
 % \usepackage{physics}
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
