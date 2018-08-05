@@ -706,39 +706,30 @@ In that respect, the R functions \textit{mjd\_delta} and \textit{hsv\_delta}, re
 \subsection{Measuring the hedging performation}
 \label{sec:methodology:measuring}
 
-Finally, to analyze how much the hedging works, one method is to measure its overall cost.
-To do so, the really first thing is to value at maturity all the buying and selling operations carried out in order to keep delta-neutral the previously constructed portfolio and add them together.
+Finally, to assess the performance of the delta-hedging, one particular method, given by \citet{he2006calibration}, consists of computing the relative profit and loss (P\&L) of the hedging portfolio.
+The equation of the P\&L is provided by \ref{eq:below}
 
 \begin{align}
-  p_{tot} = \sum_{i = 0}^T p(t_i) e^{T-t_i} ,
-  \forall i \in \mathbb{Z} : i \in \left \{1, T \right \}
-  \label{methodology:porfolio:cost:tot}
+  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \label{eq:below}\\
+  \intertext{Where}
+  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)
+    - \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)
 \end{align}
 
-On the other hand, at maturity, the amount of money $X(0)$ received when entering into the contract at time zero will have continuously grown up at the constant riskless rate $r$, as described by \cref{eq:methodology:xt}.
 
-\begin{align}
-  X(T) = X(0) * e^{rT} \label{eq:methodology:xt}
-\end{align}
+The closer to zero is the P\&L, the better perform the hedge.
+A negative P\&L indicates that the action of hedging the call had cost money to the short position in the option while if P\&L is positive, it means that the same position made a profit.
 
-Incidentally, if the option is in-the-market at  maturity date, it first implies that it will be exercised, so increasing the wealth of the short position in the derivative by $K$, and then that $\Delta(T) = 1$, meaning that the writer of the option has exactly one share of stock in his / her portfolio to honour the transaction.
-Otherwise, the option is out-of-the-market, inducing that no transaction occurs and that $\Delta(T) = 0$.
-Consequently, at maturity, someone with a short position in the derivative, i.e., the one tempting to be replicated in the current analysis, will receive a positive cash inflow of $X(T) + \Delta(T) K$.
+The options that will be hedged have various maturities (${91\footnote{The maturity is expressed in days}, 182, 399}$) and for all of these, many strikes associated \$ (${140, 160, 186, 200, 230}$).
+In that way, a comparison between the performances of the delta-hedging could be made between those metrics.
 
-Hence, if the hedge works well, the relation exhibited by \ref{eq:methodology:hedge:neutral} should be respected.
+Moreover, the effect of the rebalancing frequency will be observed as well.
+Indeed, the measurement of the hedging will be done across three separate portfolios, i.e., one rebalanced twice a day, another once a day and the last will be weekly adjusted.
+Consequently, those effects will be compared.
 
-\begin{align}
- \sum_{i = 0}^{n = T} P(i) \cong X(T) + \Delta(T) * k \label{eq:methodology:hedge:neutral}
-\end{align}
+Ultimately, to get a sufficient amount of data that would permit to reveal trends, each hedging strategy that concerns each option will be performed on one hundred dummy time-series.
+Each of these will be either constructed by the function \textit{mjd\_ts} or \textit{hsv\_ts} depending on the model being assessed.
 
-Because the position could vary, we have to adapt the relation above (REF) in order to remove all unit from the comparison.
-According to hull, a measure of performance of the hedge could be to take the ratio of the standard deviation of the cost to hedge to the option price. In that case, the measure could be comparated among themselve even if the position taken into the underlying difer.
-
-\begin{align}
-  \frac{sd(hedge)}{C_0 e ^{r T}}
-  \label{bsm:delta:hedge:perf}
-\end{align}
-where hedge is a vector containing $n$ sample generated, and $C_0$ is the price of the call option at time zero value up to maturity.
 
 
 

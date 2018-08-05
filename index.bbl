@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -28,6 +28,14 @@ Adrian~A Dragulescu and Victor~M Yakovenko.
 \newblock Probability distribution of returns in the heston model with
   stochastic volatility.
 \newblock \emph{Quantitative Finance}, 2\penalty0 (6):\penalty0 443--453, 2002.
+
+\bibitem[He et~al.(2006)He, Kennedy, Coleman, Forsyth, Li, and
+  Vetzal]{he2006calibration}
+Changhong He, J~Shannon Kennedy, Thomas~F Coleman, Peter~A Forsyth, Yuying Li,
+  and Kenneth~R Vetzal.
+\newblock Calibration and hedging under jump diffusion.
+\newblock \emph{Review of Derivatives Research}, 9\penalty0 (1):\penalty0
+  1--35, 2006.
 
 \bibitem[Heston(1993)]{heston1993}
 Steven~L Heston.

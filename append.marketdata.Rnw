@@ -9,6 +9,9 @@
 \label{sec:appendix:option}
 
 \begin{longtable}{|lllll|lllll|}
+\caption[Market option data (AAPL)]{Call options quotes on the Apple stock got through function getOptionChain from the R package quantmod. Those prices were set from 18 May 2018 with timeframe ranging from 63 up to 399 days before maturity.} 
+\label{t:market:option}
+\endfirsthead
 % \centering
 % \begin{tabular}
   \hline 
@@ -26,11 +29,11 @@
   190.00 & 4.02 & 4.00 & 4.05 & 4.03 &  190.00 & 6.25 & 6.15 & 6.25 & 6.20 \\*
   200.00 & 1.18 & 1.15 & 1.18 & 1.16 &  200.00 & 2.75 & 2.70 & 2.73 & 2.71 \\*
   210.00 & 0.32 & 0.29 & 0.31 & 0.30 &  210.00 & 1.07 & 1.01 & 1.06 & 1.04 \\*
-  220.00 & 0.11 & 0.10 & 0.13 & 0.12 &  220.00 & 0.42 & 0.37 & 0.42 & 0.40 \\
-  \hline
-  \multicolumn{5}{|c|}{126 days to maturity} & \multicolumn{5}{c|}{154 days to maturity} \\*
+  220.00 & 0.11 & 0.10 & 0.13 & 0.12 &  220.00 & 0.42 & 0.37 & 0.42 & 0.40 \\*
+  \hline \pagebreak \hline
+  \multicolumn{5}{|c|}{126 days to maturity} & \multicolumn{5}{c|}{154 days to maturity} \\
     \hline
-  Strike & Last & Bid & Ask & Mid-Price & Strike & Last & Bid & Ask & Mid-Price \\*
+  Strike & Last & Bid & Ask & Mid-Price & Strike & Last & Bid & Ask & Mid-Price \\
   \hline
   130.00 & 56.00 & 56.80 & 57.60 & 57.20 &  130.00 & 57.50 & 57.00 & 57.75 & 57.38 \\*
   140.00 & 48.42 & 47.05 & 47.85 & 47.45 &  140.00 & 50.73 & 49.20 & 49.90 & 49.55 \\*
@@ -73,8 +76,6 @@
   210.00 & 9.77 & 8.85 & 9.40 & 9.12 \\*
   220.00 & 6.71 & 6.30 & 6.70 & 6.50 \\
   \cline{1-5}
-  \caption[Market option data (AAPL)]{Call options quotes on the Apple stock got through function getOptionChain from the R package quantmod. Those prices were set from 18 May 2018 with timeframe ranging from 63 up to 399 days before maturity.} 
-\label{t:market:option}
 % \end{tabular}
 \end{longtable}
 
