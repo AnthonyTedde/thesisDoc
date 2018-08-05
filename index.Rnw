@@ -39,27 +39,31 @@
 
 \listoffigures
  \clearpage
- 
- 
+
+
 \listoftables}
 \clearpage
 
 
 
 \pagenumbering{arabic}
-% \SweaveInput{introduction}
-% \SweaveInput{upstream}
-% \SweaveInput{BSM}
-% \SweaveInput{models}
-% \SweaveInput{methodology}
-% \SweaveInput{analysis.Rnw}
-% \SweaveInput{conclusion}
-% \SweaveInput{appendix}
+\SweaveInput{introduction}
+\SweaveInput{upstream}
+\SweaveInput{BSM}
+\SweaveInput{models}
+\SweaveInput{methodology}
+\SweaveInput{analysis.Rnw}
+\SweaveInput{conclusion}
+
+
+\bibliography{bibl}
+\bibliographystyle{plainnat}
+\addcontentsline{toc}{chapter}{Bibliography}
 
 \begin{appendices}
 \SweaveInput{append.function}
 \SweaveInput{append.marketdata}
-% \SweaveInput{append.analysis}
+\SweaveInput{append.analysis}
 \end{appendices}
 
 
@@ -71,6 +75,5 @@
 
 
 
-\bibliography{bibl}
-\bibliographystyle{plainnat}
+
 \end{document}

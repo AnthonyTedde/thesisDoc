@@ -6,7 +6,7 @@ library(gridExtra)
 # The following line set the variable @sampled with a list of 20
 # data.frame of Adapted random walk.
 # s <- sbmotionGenerator(time_to_maturity = 4, scale = 1, n = 2)
-Sampled_100 <- sbmotionGenerator(time_to_maturity = 5, scale = 100, n = 100)
+Sampled_100 <- sbmotionGenerator(time_to_maturity = 5, scale = 100, n = 20)
 class(Sampled_100) <- "list"
 
 Sampled <- sbmotionGenerator(time_to_maturity = 5, scale = 100, n = 100000)
@@ -46,7 +46,7 @@ p_density <- ggplot(last) +
         axis.text = element_text(size = rel(0.7)),
         plot.title = element_text(size = rel(0.8))) +
   labs(title = "(QB)",
-       x = 'Brownian Motion Distribution',
+       x = 'Brownian motion at T=5',
        y = 'Density')
 
 setwd("c:/Users/ATE/thesisDoc")

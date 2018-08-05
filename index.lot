@@ -1,5 +1,26 @@
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces R functions dealing with options and time series\relax }}{2}{table.caption.7}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Market option data (AAPL)}}{3}{table.1.B.1}
-\contentsline {table}{\numberline {B.2}{\ignorespaces Market stock data (AAPL)}}{12}{table.1.B.2}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Merton Mixed jump-diffusion time serie\relax }}{31}{table.caption.11}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Maturities took into account during the calibration stage\relax }}{44}{table.caption.19}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Strikes took into account during the calibration stage\relax }}{44}{table.caption.20}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Best estimates parameters for MJD call option model\relax }}{47}{table.caption.23}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Best estimates for HSV call option model\relax }}{51}{table.caption.29}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Treasury bill quotes on 18 May 2018\relax }}{54}{table.caption.34}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Treasury bill quotes on 18 May 2018\relax }}{55}{table.caption.35}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Maturities explored during the hedging performance measurement\relax }}{55}{table.caption.36}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Hedging with BSM: Relative P\&L\relax }}{63}{table.caption.41}
+\contentsline {table}{\numberline {6.2}{\ignorespaces Higher relative P\&Ls for BSM due to theta\relax }}{64}{table.caption.43}
+\contentsline {table}{\numberline {6.3}{\ignorespaces A sample of theta causing higher relative P\&Ls for BSM\relax }}{65}{table.caption.44}
+\contentsline {table}{\numberline {6.4}{\ignorespaces Hedging with MJD: Relative P\&L\relax }}{67}{table.caption.47}
+\contentsline {table}{\numberline {6.5}{\ignorespaces Hedging with HSV: Relative P\&L\relax }}{71}{table.caption.50}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces R functions dealing with options and time series\relax }}{78}{table.caption.54}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Market option data (AAPL)}}{79}{table.1.B.1}
+\contentsline {table}{\numberline {B.2}{\ignorespaces Market stock data (AAPL)}}{88}{table.1.B.2}
+\addvspace {10\p@ }

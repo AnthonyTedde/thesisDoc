@@ -8,8 +8,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.merton.pl.dist.big.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.merton.pl.dist.big.tex}
+  % \rule{40mm}{20mm}
   \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency}
     %
   % BEGIN OF FLOATNOTE
@@ -33,8 +33,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.merton.pl.dist.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.merton.pl.dist.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.}
     %
   % BEGIN OF FLOATNOTE
@@ -58,8 +58,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.merton.hedge.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.merton.hedge.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)}
     %
   % BEGIN OF FLOATNOTE
@@ -85,8 +85,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.heston.pl.dist.big.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.heston.pl.dist.big.tex}
+  % \rule{40mm}{20mm}
   \caption{Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the balancing frequency}
     %
   % BEGIN OF FLOATNOTE
@@ -116,8 +116,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.heston.pl.dist.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.heston.pl.dist.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the delta used.}
   %
   % BEGIN OF FLOATNOTE
@@ -147,8 +147,8 @@
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.heston.hedge.deltas.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.heston.hedge.deltas.tex}
+  % \rule{40mm}{20mm}
   \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs HSV)}
   %
   % BEGIN OF FLOATNOTE

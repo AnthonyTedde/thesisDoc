@@ -230,7 +230,7 @@ names(U_bsm[[1]][[3]][[1]])
 
 
 
-S <- map(U_bsm[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))
+S <- map(U_bsm[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))[1:50]
 
 setwd("c:/Users/ATE/thesisDoc")
 tikzDevice::tikz(file = "figures/analysis.bsm.stocks.tex", width = 4, height = 2)

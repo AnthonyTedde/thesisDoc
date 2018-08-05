@@ -129,7 +129,7 @@ ggplot() +
   stat_density(data = data.frame(u_heston),aes(u_heston),
                geom = "line",
                colour = 'darkred')+
-  xlab("log-returns")
+  xlab("log-return") + ylab("Density")
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
   ########################################################################

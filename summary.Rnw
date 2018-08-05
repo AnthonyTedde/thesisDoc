@@ -1,5 +1,5 @@
 \chapter*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
  
 The study developed in the current master thesis concerns the Black-Scholes-Merton (BSM) method initially intended to give a fair price to options for which a geometric Brownian motion (GBM) drives the underlying asset.
 Indeed this model works remarkably well provided that the underpinned assumptions are respected with the most restrictive one stating that the distribution of the log-returns of the underlying asset has to be normal.

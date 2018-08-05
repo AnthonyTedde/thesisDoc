@@ -14,7 +14,7 @@ While Fischer Black and Myron Scholes had used the capital asset pricing model (
 
 
 To price derivatives by using the model highlighted in this present chapter, Black and Scholes had set some constraints in \citet{bs}. 
-\Cref{sec:Assumptions} quotes that assumptions. 
+\Cref{sec:bsm:assumptions} quotes that assumptions. 
 
 
   
@@ -119,9 +119,18 @@ It is therefore key, during an analysis process to choose an appropriate time-st
 \centering
 \input{figures/ItoAccuracy.tex}
 \caption{Accuracy of Itô approximation}
-\floatfoot{\textbf{Notes.} The blue line curves are constructed using itô's approximation \ref{underlying:geometric:diff} while  \cref{eq:underlying:geometric:closed} is used to build the red ones. 
-The only parameters that change over the group are the couples $(dt, \sigma)$ which are set to $\left \{dt = 360, \sigma = 0.2 \right \}$ for (QA), $\left \{dt = 4, \sigma = 0.2\right \}$ for (QB), $\left \{dt = 360, \sigma = 1\right \}$ for (QC), and $\left \{dt = 4, \sigma = 1\right \}$ for (QD). 
-}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The blue line curves are constructed using itô's approximation \ref{eq:underlying:geometric:diff} while  \cref{eq:underlying:geometric:closed} is used to build the red ones. 
+The only parameters that change over the group are the couples $(dt, \sigma)$ which are set to $\left \{dt = 360, \sigma = 0.2 \right \}$ for (QA), $\left \{dt = 4, \sigma = 0.2\right \}$ for (QB), $\left \{dt = 360, \sigma = 1\right \}$ for (QC), and $\left \{dt = 4, \sigma = 1\right \}$ for (QD).  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{p:itoaccuracy}
 \end{figure}
 
@@ -134,7 +143,7 @@ The only parameters that change over the group are the couples $(dt, \sigma)$ wh
 \subsection{Distributions of geometric Brownian motion}
 \label{sub:Distribution of the stock price process}
 
-This section delves into the distributions of the process \ref{eq:underlying:geometric:closed,eq:underlying:geometric:diff,eq:underlying:log:return}. 
+This section delves into the distributions of the process described by \cref{eq:underlying:geometric:closed,eq:underlying:geometric:diff,eq:underlying:log:return}. 
 They are described by using the related underlying law together with the relevant moments.
 
 \Cref{eq:scontinuousdist}, provided in \citet{shreve},  shows that the process followed by \cref{eq:underlying:geometric:closed} has normally distributed returns with their expected value and variance proportional to the time period $dt$.
@@ -152,14 +161,23 @@ Indeed, the black bell curve is constructed using the theoretical normal law wit
 \begin{figure}[!h]
 \centering
 \input{figures/stock_return_density.tex}
-\caption{Daily Basis Stock Return Density}
+\caption{BSM: Stock returns density}
 \label{p:returndensity}
-\floatfoot{\textbf{Notes.} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.}   
+\end{changemargin} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
 The samples are built with \cref{eq:underlying:geometric:diff}. 
 The arguments are adjusted with the following values, $\alpha = 0$, $\sigma = 30\%$. 
 The black density belongs to the normal bell curve with mean $\alpha dt$ and standard deviation of $\sigma  \sqrt{dt}$. 
-The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$. 
-}
+The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.
+  %
+  % END OF FLOATNOTE
+  %
 \end{figure}
 
 
@@ -196,14 +214,23 @@ Indeed, the black bell curve is constructed using the theoretical normal law wit
 \begin{figure}[!h]
 \centering
 \input{figures/stock_logreturn_density.tex}
-\caption{Daily Basis Stock Return Density}
+\caption{BSM: Stock log-returns density}
 \label{p:logreturndensity}
-\floatfoot{\textbf{Notes.} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
 The samples are built with \cref{eq:underlying:log:return}. 
 The arguments are adjusted with the following values, $\alpha = 0$, $\sigma = 30\%$. 
 The black density belongs to the normal bell curve with mean $(\alpha - \frac{\sigma^2}{2}) \times t$ and standard deviation of $\sigma \times \sqrt{dt}$. 
-The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.  
-}
+The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.   
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \end{figure}
 
 
@@ -227,13 +254,23 @@ Indeed, the black bell curve is constructed using the theoretical log-normal law
 \begin{figure}[!h]
 \centering 
 \input{figures/stock_log_density.tex}
-\caption{Daily Basis Stock Return Density}
+\caption{BSM: Stock prices evolution density}
 \label{p:logdensity}
-\floatfoot{\textbf{Notes.} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
 The samples are built with \cref{eq:underlying:geometric:closed}. 
 The arguments are adjusted with the following values, $\alpha = 0$, $\sigma = 30\%$. 
 The black density belongs to the log-normal curve with mean $S(0) e^{\alpha t}$ and standard deviation of $S(0)^2 e^{2 \alpha t} (e^{\sigma^2 t} - 1)$. 
-The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.}
+The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \end{figure}
 
 

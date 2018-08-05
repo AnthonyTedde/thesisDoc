@@ -1,5 +1,5 @@
 \chapter*{Acknowledgements}
-\addcontentsline{toc}{section}{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
 
 First and foremost, I want to address all my gratitude to Anne, and our two wonderful children, Elsa and Valentin, for their patience and huge support. They gave me all the strength needed to go beyond my self-motivation.
 

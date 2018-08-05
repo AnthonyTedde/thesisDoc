@@ -49,15 +49,15 @@ Consequently, to capture both $\alpha$ and $\sigma$ at once, the method here fol
 To do so, similarly as done in \cref{sec:methodology:calibration}, the function \textit{fitdistr} is purposely used.
 As a reminder, that function needs (i) a probability density function (PDF) to fill, (ii) a sample of empirical data and (iii) a list of parameters to calibrate.
 As defined in \citet{bs}, the normal  PDF is the one to be fitted when one deals with log-returns of a GBM.
-Furthermore, The dataset representing the evolution of the Apple stock prices from 1st January 2017 to 31st December 2018, detailed in appendix \cref{} is employed as data template.
+Furthermore, The dataset representing the evolution of the Apple stock prices from 1st January 2017 to 31st December 2018, detailed in appendix \ref{cha:appendix:market} is employed as data template.
 The so found arguments by \textit{fitdistr} to use together with the normal PDF are $\left\{ \bar{x} = 0.0013, s = 0.0103 \right\}$, with $\bar{x}$ and $s$ respectively being the estimates of the mean and the standard deviation of the normal distribution.
 However, before using it inside the function \textit{bsm\_ts}, to simulate the time-series, they must be turned into drift and variance rates, as explained in \cref{sec:upstream:logreturn}.
 The so adjusted parameters to use within the BSM model are, $\left\{ \alpha = 0.4823, \sigma = 0.1959  \right\}$.
 
 \begin{figure}[h]
   \centering
-  % \input{figures/mjd.analysis.calibrated.tex}
-  \rule{40mm}{20mm}
+  \input{figures/mjd.analysis.calibrated.tex}
+  % \rule{40mm}{20mm}
   \caption{Distribution of the calibrated BSM time-series' log-returns with respect to the distribution of those provided by the market.}
   %
   % BEGIN OF FLOATNOTE
@@ -77,8 +77,8 @@ The so adjusted parameters to use within the BSM model are, $\left\{ \alpha = 0.
 
 \begin{figure}[h]
   \centering
-  % \input{figures/appl.impliedvol.bsm.tex}
-  \rule{40mm}{20mm}
+  \input{figures/appl.impliedvol.bsm.tex}
+  % \rule{40mm}{20mm}
   \caption{Black-Scholes-Merton's volatility smile with respect to the one provided by the market.}
   %
   % BEGIN OF FLOATNOTE
@@ -135,8 +135,8 @@ The total number of samples is one hundred, and consequently, \Cref{t:analysis:b
 
 \begin{figure}[ht]
   \centering
-  % \input{figures/analysis.bsm.stocks.tex}
-  \rule{40mm}{20mm}
+  \input{figures/analysis.bsm.stocks.tex}
+  %\rule{40mm}{20mm}
   \caption{A sample of one hundred geometric Brownian motions.}
     %
   % BEGIN OF FLOATNOTE
@@ -189,8 +189,8 @@ The continuous brown line represents the course of the option price and the gree
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.gbm.hedges.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.gbm.hedges.tex}
+  % \rule{40mm}{20mm}
   \caption{Delta-neutral portfolio with different frequencies of adjusting.}
    %
   % BEGIN OF FLOATNOTE
@@ -301,8 +301,8 @@ As expected, the more frequently rebalanced portfolios show less variance and th
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.gbm.pl.better.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.gbm.pl.better.tex}
+  % \rule{40mm}{20mm}
   \caption{Distributions of relative profits and losses according to the portfolios rebalancing frequencies.}
    %
   % BEGIN OF FLOATNOTE
@@ -399,8 +399,8 @@ The reason, as shown through \cref{p:analysis:gbm:pl:theta:high},  is due to the
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.gbm.theta.high.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.gbm.theta.high.tex}
+  % \rule{40mm}{20mm}
   \caption{European call option with higher theta as time goes to maturity}
    %
   % BEGIN OF FLOATNOTE
@@ -476,8 +476,8 @@ The total number of samples is one hundred, and consequently, \Cref{t:analysis:m
 
 \begin{figure}[h]
   \centering
-  % \input{figures/analysis.mjd.stocks.tex}
-  \rule{40mm}{20mm}
+  \input{figures/analysis.mjd.stocks.tex}
+  % \rule{40mm}{20mm}
   \caption{A sample of one hundred Merton jump-diffusion processes.}
     %
   % BEGIN OF FLOATNOTE
@@ -565,8 +565,8 @@ To observe how such specificities of the delta-neutral portfolio affect the dist
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.merton.pl.dist.in.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.merton.pl.dist.in.tex}
+  % \rule{40mm}{20mm}
   \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities (zoom-in on in-the-money options).}
     %
   % BEGIN OF FLOATNOTE
@@ -687,8 +687,8 @@ In \cref{t:analysis:heston:pl}, the information are completely organized the sam
 
 \begin{figure}[ht]
   \centering
-  % \input{figures/analysis.hsv.stocks.tex}
-  \rule{40mm}{20mm}
+  \input{figures/analysis.hsv.stocks.tex}
+  % \rule{40mm}{20mm}
   \caption{A sample of one hundred Heston stochastic volatility processes.}
    %
   % BEGIN OF FLOATNOTE
@@ -783,8 +783,8 @@ Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.hsv.hedge.gamma.tex}
-  \rule{40mm}{20mm}
+  \input{figures/p.analysis.hsv.hedge.gamma.tex}
+  % \rule{40mm}{20mm}
   \caption{Distributions of gamma for in-the-money vs out-of-the-money options}
     %
   % BEGIN OF FLOATNOTE

@@ -127,20 +127,20 @@ pl[[1]][[14]]
 # ################
 # UNCOMMENT IF NECESSARY
 ##########################
-# S <- map(U_heston[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))
-# 
-# setwd("c:/Users/ATE/thesisDoc")
-# tikzDevice::tikz(file = "figures/analysis.hsv.stocks.tex", width = 4, height = 2)
-# ggplot2::ggplot(dplyr::bind_rows(S, .id = "uniqueID"), 
-#                 ggplot2::aes(x= time, 
-#                              y = stock, 
-#                              group = uniqueID)) + 
-#   ggplot2::geom_line(ggplot2::aes(alpha = 0.5)) + 
-#   theme(legend.position = 'none') +
-#   ggplot2::labs( x = 'Time period',
-#                  y = 'Stock price')
-# dev.off()
-# setwd("c:/Users/ATE/thesisDoc/data")
+S <- map(U_heston[[2]][[3]], ~ data.frame(stock = .x$s, time = .x$time.period))[1:50]
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/analysis.hsv.stocks.tex", width = 4, height = 2)
+ggplot2::ggplot(dplyr::bind_rows(S, .id = "uniqueID"),
+                ggplot2::aes(x= time,
+                             y = stock,
+                             group = uniqueID)) +
+  ggplot2::geom_line(ggplot2::aes(alpha = 0.5)) +
+  theme(legend.position = 'none') +
+  ggplot2::labs( x = 'Time period',
+                 y = 'Stock price')
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 

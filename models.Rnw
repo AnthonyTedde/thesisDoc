@@ -33,7 +33,7 @@ In his paper, \citet{merton76} provides a model for stock price evolution involv
 \end{align}
   
 According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:other:merton:pde}). 
-The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:Scontinuous}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
+The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:underlying:geometric:closed}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
 Another type of changes, occuring during the stock lifecycle, are qualified as abnormal. Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effect on the stock price by giving rise to jumps in the course of stock path and therefore breaking its continuity (\citet{merton76}). The jump process is constructed on double basis. 
 
 Firstly, the occurence (i.e. the number of jumps arising throughout a given period of time) is computed thanks to a Poisson--driven process according to a parameter $\lambda$. 
@@ -116,8 +116,18 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 \begin{figure}[ht]
   \centering
   \input{figures/merton.path.tex} 
-  \floatfoot{Simulation of one Merton mixed jump-diffusion time serie. Data have been output by the R function \textit{sstoch\_jump()} which is an implementation of equation \cref{eq:other:merton:pde} (see appendix \ref{sub:r:time:merton}, for more information). The parameters passed to the function are:  $S(0) = 50$,   $T = 1$ (in year, along with a time step of 365 measures per year),  $\sigma = 0.2$, $\alpha = 0.5$,  $\lambda = 2$,  $\mu = 0.05$, and $\delta = 0.1$.}
-  \caption{Merton mixed jump-diffusion time serie}
+    %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} Simulation of one Merton jump-diffusion time-series. Data have been output by the R function \textit{mjd\_ts} which is an implementation of equation \cref{eq:other:merton:pde} (see appendix \ref{cha:append:function}, for more information). The parameters passed to the function are:  $S(0) = 50$,   $T = 1$ (in year, along with a time step of 365 measures per year),  $\sigma = 0.2$, $\alpha = 0.5$,  $\lambda = 2$,  $\mu = 0.05$, and $\delta = 0.1$.   
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+  \caption{Merton mixed jump-diffusion time-series}
   \label{p:other:merton:path}
 \end{figure}
 
@@ -130,16 +140,24 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 \subsection{Impact on the skewness log--return}
 \label{sub:MertonSkewness}
 
-The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. The figure [REF] shows how the density's shape of the log--return may vary along with this parameter.
+The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. \cref{plot:MertonReturnDensity} shows how the density's shape of the log-return may vary along with this parameter.
 
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \input{figures/MertonJumpReturn.tex}
-\caption{Merton: Daily Basis Stock Return Density}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
-}
+\caption{Merton returns density: Skewness}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\mu$ which is set to ($-0.5$, $0$, $0.5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$.  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{plot:MertonReturnDensity}
 \end{figure}
 
@@ -151,13 +169,21 @@ The above density function has been constructed over three distinctive groups of
 
 The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \input{figures/MertonJumpReturnTails.tex}
-\caption{Merton: Daily Basis Stock Return Density}
-\floatfoot{
-The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$. 
-}
+\caption{Merton returns density: Kurtosis}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above density function has been constructed over three distinctive groups of 5000 samples eachs. All samples have been constructed following \cref{eq:other:merton:pde}. The only parameter that changes over the group is $\lambda$ which is set to ($1$, $3$, $5$) respectively for the blue, green and red density function. The black density belongs to the normal curve with mean 0 and standard deviation of $\sqrt{dt} \times \sigma$.   
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{plot:MertonReturnDensityTails}
 \end{figure}
 
@@ -264,9 +290,18 @@ Likewise, \cref{p:other:correlatedheston} points out the fully positive correlat
 \begin{figure}[ht]
 \centering
 \input{figures/UncorrelatHeston.tex} 
-\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = -1$. 
-} 
-\caption{Heson Framework Using Negative Correllated Brownian Motions}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} Simulation of Heston time-series. Data have been output by the R function \textit{hsv\_ts} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{cha:append:function}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = -1$.  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
+\caption{Heson process with negatively correllated Brownian motions}
 \label{p:other:uncorrelatedheston}
 \end{figure}
 
@@ -274,9 +309,18 @@ Likewise, \cref{p:other:correlatedheston} points out the fully positive correlat
 \begin{figure}[ht]
 \centering
 \input{figures/correlatHeston.tex}
-\caption{Heson Framework Using Positive Correllated Brownian Motion}
-\floatfoot{Simulation of Heston time series. Data have been output by the R function \textit{heston()} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{sub:r:time:heston}, for more information). The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = 1$.
-}
+\caption{Heson process with positively correllated Brownian motions}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} Simulation of Heston time-series. Data have been output by the R function \textit{hsv\_ts} which is an implementation of equation \crefrange{eq:other:hsvvol}{eq:other:rho} (see appendix \ref{cha:append:function}, for more information).. The parameters passed to the function are:  $S(0) = 50$,  $V(0) = 0.2$,  $T = 5$ (years, along with a time step of 365 measures per year),  $\alpha = 0$,  $\kappa = 0.5$,  $\Theta = 0.2$,  $\sigma = 0.1$ and $\rho = 1$.  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{p:other:correlatedheston}
 \end{figure}
 
@@ -309,12 +353,21 @@ These statements are observed in \cref{p:other:heston:skewness}.
 \begin{figure}[ht]
 \centering
 \input{figures/skewnessHeston.tex}
-\caption{Merton: Log--return skewness on Heston}
-\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
-All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information).
+\caption{Log-returns skewness with Heston}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above density functions (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
+All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{hsv\_ts()} on appendix \ref{cha:append:function} for more information).
 The only parameter that changes over the groups is $\rho$ which is set to $-0.5$, $1$, $0.5$. The log-return densities of these groups are respectively represented by the red, green and blue outlined density functions. 
-The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
-}
+The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover one year with a time step of 500.  
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{p:other:heston:skewness}
 \end{figure}
 
@@ -332,11 +385,21 @@ Otherwise, \citet{heston1993} showed that by rising $\sigma$, the kurtosis of th
 \begin{figure}[ht]
 \centering
 \input{figures/density.heston.kurtosis.tex}
-\caption{Merton: Log--return skewness on Heston}
-\floatfoot{The above densities function (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
-All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{heston()} on appendix \ref{sub:r:time:heston} for more information). The only parameter that changes over the groups is $\sigma$ which is set to 0, 0.2, 0.4. The log-return densities of these groups are respectively represented by the green, blue and red outlined density curves. 
-The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover a period of one year with a time step of 500.
-}
+\caption{Log-returns kurtosis with Heston}
+  %
+  % BEGIN OF FLOATNOTE
+  %
+  \begin{changemargin}{0.5cm}{0.5cm}
+  \medskip
+\footnotesize
+\setstretch{1.0}\textbf{Notes.} The above density functions (red, blue and green) are constructed over three distinctive groups of 10000 samples each. The black curve density is theoretical.
+All samples are generated by an algorithm based on \cref{eq:other:hsvstock} for the stock data and on \cref{eq:other:hsvvol} for the related volatility (see function \textit{hsv\_ts()} on appendix \ref{cha:append:function} for more information). 
+The only parameter that changes over the groups is $\sigma$ which is set to 0, 0.2, 0.4. The log-return densities of these groups are respectively represented by the green, blue and red outlined density curves. 
+The black density represents to the normal bell curve with mean $- \frac{\theta}{2}$ and standard deviation of $\sqrt{\theta}$. The log-price return cover one year with a time step of 500.    
+\end{changemargin}
+  %
+  % END OF FLOATNOTE
+  %
 \label{p:other:heston:kurtosis}
 \end{figure}
 
@@ -374,7 +437,7 @@ Through this method, the european call price at time $t$, namely $C(t)$, is comp
   P_2(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi)}{i\phi} \right) d\phi \label{eq:other:call:heston:pi2}
 \end{align}
 
-Following the development in \citet{criso2015}, \Cref{eq:other:call:heston:pi} both are probability quantities that involve the underlying characteristic function, namely $\psi(x,V,t;\phi)$. Once these quantities are computed, they are substituted in \cref{eq:other:call:heston} in order to get the call price at time $t$.
+Following the development in \citet{criso2015}, both \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} are probability quantities that involve the underlying characteristic function, namely $\psi(x,V,t;\phi)$. Once these quantities are computed, they are substituted in \cref{eq:other:call:heston} in order to get the call price at time $t$.
 
 The characteristic functions for the Merton jump--diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
 
