@@ -139,138 +139,110 @@
 \begin{document}
 \input{index-concordance}
 
+\pagenumbering{roman}
+\chapter*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+ 
+The study developed in the current master thesis concerns the Black-Scholes-Merton (BSM) method initially intended to give a fair price to options for which a geometric Brownian motion (GBM) drives the underlying asset.
+Indeed this model works remarkably well provided that the underpinned assumptions are respected with the most restrictive one stating that the distribution of the log-returns of the underlying asset has to be normal.
+However, empirical results show that this constraint of log-normality does not hold for real-life trials and consequently break the more key hypothesis of the aforementioned model.
+
+The primary purpose of the analysis developed in that work is to assess how wrong goes the BSM equation while the underlying asset is not a GBM.
+To that end, others models will be investigated, namely, the Merton jump diffusion (MJD) and Heston stochastic volatility (HSV) models.
+Each of it bears a new characteristic. The MJD brings jumps to the paths of the underlying processes whilst HSV comes with a volatility parameter that evolves with times unlike the deterministic one inherent to BSM. These specificities affect the log-returns distributions that are no more normal.
+
+Accordingly, once calibrated, those models will be used to simulate a world where the assumption of log-normality of the BSM model does not hold anymore. The study case explored is to measure how the BSM equation will react when its central assumption is broken.
+To do this, the performance of the delta-neutral portfolios of BSM, MJD and HSV processes will be benchmarked.
+
+As a subanalysis, another goal of that master thesis is to examine if, with a unique set of parameters, the HSV and MJD models can reproduce the volatility smiles constructed from the options prices provided by the market.
+A conclusion would be that those models are versatile enough to cover a broader range of market prices than the BSM model itself.
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+First and foremost, I want to address all my gratitude to Anne, and our two wonderful children, Elsa and Valentin, for their patience and huge support. They gave me all the strength needed to go beyond my self-motivation.
+
+Many thanks to all of my family and precious friends that make the life more pleasant. I especially think of Nonna Emma, Mario, Josiane, Maud, Eddy, Christelle, Sébastien, and Pierre. 
+
+Thank you mum and dad.
+
+Last but not least, I want to sincerely thank Pr. Frédéric Vrins for trusting me. It was a real pleasure to meet you.
+
+
+
+
 {\setstretch{1.0}
 \tableofcontents
+\clearpage
 
 \listoffigures
+ \clearpage
+ 
  
 \listoftables}
+\clearpage
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  CHAPTER: Introduction
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Introduction}
-\label{cha:Introduction}
-
-The options market gained in importance in the latter decades, and the range of related products become more extensive with time.
-Although in some cases, those derivatives are used with speculative aims, primarily due to the leverage effect inherent to the long position taken in them, they however mainly serve to cover oneself against potential risks.
-Indeed, if someone plans to buy some share of stocks in a further date he/she can lock the price of that asset by going long in a European call, likewise, if another one wants to fix a selling price in a security for a future date, he could go long in a European put.
-
-Though, if everyone, as well the speculators as those wanting to lock a price are going long into those financial products, who are taking the opposite position by going short?
-Those profiles are called the hedgers and generally are employed by big financial institutions.
-Their goals are to sell derivative contracts without losing money by opting for an appropriate strategy that replicates the value of the long position in the option sold using other financial products bundle together into a portfolio. The so-called replicating or hedging portfolio.
-
-That wallet can be constructed by using the delta-hedging strategy consisting of the replication of the opposite position than that to hedge by taking advantage of the underlying asset as well as the money market account.
-Roughly speaking, that portfolio is built in a way that, at any time, each impact on the option value due to a move in the underlying price is offset by a position taken in that asset.
-Accordingly, the position in the underlying asset has to be continuously readjusted to remain such an effective buffer.
-This strategy will be explained more deeply in subsequent chapters.
-
-The strategy mentioned above needs money to be initially constructed, and that amount has to cover the fee of all the rebalancing operations whatever are the stock moves up to option's maturity.
-Consequently, that amount of money equals the option price at time zero.
-
-The Black-Scholes-Merton (BSM) equation developed in \citet{bs} and supplemented in \citet{merton73} helps to find such a price for a derivative by relying on some constraints that restrict what is observed in reality, but as with any model, the objective is to find a frame that matches with an abstract of fact, not to reproduce it fully.
-The most restrictive assumption is that the process driving the underlying asset's prices is a geometric Brownian motion (GBM), involving that the associated log-returns' distribution is normal and that the related volatility rate is deterministic.
-Hence, that master thesis will explore such claims and raises the following overall question concerning the approximations brought by the BSM model, how good are the BSM hedging performances within our not lognormal world?
-
-In the current document, the focus is set on measuring the performance of the particular  European vanilla calls options.
-
-% \section{Context}
-% \label{sec:introduction:context}
-
-\section{Raised questions}
-\label{sec:Introduction:raised}
-
-In order to go beyond the BSM constraints, other models are considered which allow time-series to take other distributions for their returns than the lognormal one.
-Those processes are the Merton jump-diffusion (MJD) and Heston stochastic volatility (HSV) whose first provide discrepancies in its path by adding a jump component, while the second lets volatility being no more immutable over time.
-
-Consequently, by considering to those models, the study breaks the assumptions of (i) normality for the log-returns and (ii) deterministic volatility.
-The objective will be to construct and quantify hedging strategies over such processes denoting underlying assets.
-Nevertheless, the prices of options on such dummy assets, driven by HSV or MJD, lack to be determined with the solution provided in \citet{bs}. 
-They need a particular methodology to be found out. Latter is given in \citet{heston1993} and relies on a probabilistic approach involving the characteristic functions of the stochastic processes $\ln S(t)$, where $S(t)$ expresses the random time-series generated by either MJD or HSV.
-
-First and foremost, the models used to generate time-series and those aimed to price European call options will be calibrated to provide credible outputs.
-Afterward, the geometric Brownian motion, Merton jump-diffusion, and Heston stochastic volatility processes will be applied to simulate artificial stock prices time-series while the BSM and Heston approaches will serve to price some related options.
-Ultimately, the so computed initial option prices will serve the analysis of the hedging performances.
-
-The hedges assessment will be split into two parts. 
-The first one regards the measure of the results reached when hedging a GBM with a BSM delta-neutral portfolio.  Needless to say that the score of such an approach should be almost perfect since all the assumptions underpinning the BSM framework are respected.
-The objective is to build a standard to be subsequently compared with the coverage of other processes.
-Thereafter, the assessment of options' coverages for which the underlying assets depend on MJD and HSV will take place.
-Those derivatives will be hedged through both the BSM delta and that appropriate to the underpinned model, computed from the first mathematical derivative of the related option price function with respect to the stock price.
-The goal is to compare their intrinsic performances and to evaluate how one goes wrong by applying the BSM delta in real life. 
-
-According to \citet{shreve}, the recurrence of rebalancing affects the quality of the hedge. 
-Those consequences can be significant to a certain extent.
-They depend on fundamental properties of the option to be hedged and notably rely on its gamma, that is, the acceleration at which the underlying asset affects the option price.
-Indeed, the hedge of an option with higher gamma can give poor results if not rebalanced regularly.
-That master thesis will evaluate the aforementioned gamma effect on the delta-neutral portfolio rebalancing frequency.
-
-Shreve also shows that the impact of gamma is always adverse for a delta-neutral portfolio that replicates a long position in the derivative. 
-Whilst the influence of theta, i.e., the rate at which an option decrease in value as time passes all other things being equal, is always positive for that securities.
-He especially exhibits that the weight of theta on a delta-neutral portfolio overwhelms that of gamma. 
-In that document, those effects will be analyzed for BSM, MJD and HSV related options, namely, up to what extent gamma and theta affect the options and consequently the delta-neutral portfolio, but also which types of options and what models are the more impacted.
-
-Ultimately, market data shows that to obtain the same prices for options with different strike prices but same maturity the BSM equation involves using different volatilities for the same underlying asset.
-Though, the risk of a share of stock does not depend on the strike prices of its related options, inducing that the BSM model lacks to reproduce such a behavior.
-That specificity is knowns as the volatility smile and represents the BSM implied volatility with respect to the strikes and grouped by maturity.
-When they are not clustered by maturity, one talk about volatility surface.
-Therefore, unlike the BSM approach, are the models MJD and HSV able to reproduce such volatility surface with one unique set of parameters provided that they happen to be well adjusted?
-
-The so raised questions are summarized in the list here below.
-
-\begin{itemize}
-\item What is the effect of the rebalancing rhythm on the hedging performances for the HSV and MJD models against the BSM approach? 
-\item How far can one go wrong by using the BSM delta-neutral strategy in the real world? Does it make sense to use it?
-\item What can be the effects of gamma and theta combined on the replicating portfolio?
-\item Are the MJD and HSV models able to reproduce the volatility smiles? 
-\end{itemize}
-
-\section{Limitation}
-\label{sec:timitation}
-
-
-\section{Organization of the document}
-\label{sec:introduction:organization}
+\pagenumbering{arabic}
+% \SweaveInput{introduction}
 % \SweaveInput{upstream}
 % \SweaveInput{BSM}
 % \SweaveInput{models}
-% \SweaveInput{methodology}
-\chapter{Analysis and results}
-\label{cha:analysis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  CHAPTER:Methodology
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Methodology}
+\label{cha:Methodology}
 
-The objective of the current chapter is to measure the hedging performance of the Black-Scholes model when the stock price evolves in a not log-normal world.
-The studied models in \cref{cha:OtherModel} allowing the course of a time-series to go out of the Black-Scholes frame are the Merton jump-diffusion (MJD) and Heston stochastic volatility(HSV).
-They have been implemented and adjusted for the purpose of that analysis. 
-For both models, two kinds of calibrated parameters have been found out, namely, the risk-neutral and risk-averse ones. 
-Therefore, the "no risk" parameters are used to price options, while those risky serve to generate time-series by using the aforementioned models.
+% 
+% \section{Overview}
+% \label{sec:methodology:overview}
 
-The chosen metric to compare the models' performances is the relative profit and loss (P\&L). Latter is explained in \cref{sec:methodology:measuring}.
+The objective of this master thesis is to measure the performances of the Black-Scholes-Merton (BSM) pricing method when the assumption of normality for the underlying asset's log-returns distribution is not met.
+The analysis will be focused on the Apple stock data and its related call options.
 
-The analysis is completed in two steps. The first one exclusively concerns the BSM model with all the so related constraints respected. Even though the results of the computations of the options' prices in such an environment do not respect those emerging from reality, the measures of the P\&L so computed serve as a benchmark for the other models to be assessed.
-In the next part of the analysis, the P\&Ls for both MJD and HSV will be quantified. Their computations are based on the delta-hedging strategy. On the one hand by using the delta of Black and Scholes and on the other, by using the appropriate delta belonging to the considered model.
-Although the Black and Scholes' delta is purposely computed to be applied when the underlying asset is driven by a geometric Brownian motion (GBM), using it together with other processes aims of estimate how one can go wrong within the real conditions.
-
-At last, some particular results will be commented.
-
-
-
-
+The methodology followed to measure such performances is based around three main parts. 
+First, The computation of the options price by using, in turn, the BSM, Merton mixed jump-diffusion (MJD) and Heston stochastic volatility (HSV) models. 
+After that, the volatility smiles of those computed prices, split by models and maturities, are going to be compared.
+Finally, delta-neutral portfolios will be constructed in order to measure the hedging performances of the models mentioned above.
 
 
-
-
-
-
-
-
+Instead of exclusively using market data, whether to collect the options prices or the stock time-series, some algorithms based on the models and theory explored in the literature review have been purposely created.
+Depending on the framework to explore, the options prices will be either computed by using the BSM equation (\cref{eq:bsm:bsm:sol}), if the underlying process relates to a geometric Brownian motion or by using the method developed by \citet{heston1993} (\cref{eq:other:call:heston}), if the underlying process relates to the model MJD or HSV.
+In order to assess the delta-neutral portfolios, 
+time-series will be required to measure its evolution across time.
+Those series will be simulated based on the theories developed by \citet{merton76} and \citet{heston1993} to respectively obtain paths with jumps and others with stochastic volatility as a correlated process.
+Consequently,  functions have been created in the R language to perform those tasks. \Cref{t:append:function:r} in appendix \cref{cha:append:function} regroups all those functions mentioned in that chapter and used for the study.
 
 
 
+Even though the hedging will not be directly constructed on market data, those data are needed to calibrate the parameters to pass into the functions listed in \cref{t:append:function:r}.
+The functions with the objective to calculate the prices of European calls will be calibrated with the Apple European calls market data and, to be consistent, those that simulate time-series will be adjusted using the Apple stock data available on the market.
+These processes of calibration are fully explained in \ref{sec:methodology:calibration}.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: calibration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calibration}
+\label{sec:methodology:calibration}
+
+
+
+
+
+Whenever one deals with functions aimed to reproduce some real-life experiments, the calibration process is crucial because it gives to the functions the capacity to act within appropriate boundaries.
+
+The process of calibration that will be applied in the current section concerns two distinctive groups of parameters. 
+Those dedicated to the functions that compute the European call price and those devoted to the functions that simulate the possible stock market movements.
+Consequently, the methods to adjust both kinds of arguments differ, mainly because the options prices calculation must be performed under risk-neutral environment and the delta hedging is measured on time-series evolving in a risk-averse world.
+
+Therefore, the market available options prices will be employed to calibrate the functions that compute options values, while those on the Apple stock's prices evolution will serve to estimate the right values to be passed as parameters for the time-series output-related functions.
+The option market prices and stock data were downloaded using the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo finance as a provider. The datasets so downloaded are available in appendix \ref{cha:appendix:market}.
+
+\Cref{sub:methodology:calibration:option} explains how to operate for the options' parameters, whereas \cref{sub:methodology:calibration:asset} shows the followed procedure to adjust the assets simulations' arguments.
 
 
 
@@ -278,462 +250,106 @@ At last, some particular results will be commented.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Log normal world BSM
+% SUBSECTION: Option prices' calibration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The delta-hedging in a log-normal world}
-\label{sec:analysis:delta}
-
-In order to use the BSM model for the assessment of the delta-hedging, some of its parameters have to be adjusted, such as it was done in \cref{cha:Methodology} for the processes HSV and MJD.
-
-According to \citet{bs}, only one immutable value for $\sigma$ is taken into account and the difference between the risk-neutral world where the options prices are determined, and the risk-averse one, is the replacement of the riskless rate $r$ by the drift rate $\alpha$.
-Consequently, to capture both $\alpha$ and $\sigma$ at once, the method here followed is to adjust them according to data provided from the risky world, i.e, the stock market.
-To do so, similarly as done in \cref{sec:methodology:calibration}, the function \textit{fitdistr} is purposely used.
-As a reminder, that function needs (i) a probability density function (PDF) to fill, (ii) a sample of empirical data and (iii) a list of parameters to calibrate.
-As defined in \citet{bs}, the normal  PDF is the one to be fitted when one deals with log-returns of a GBM.
-Furthermore, The dataset representing the evolution of the Apple stock prices from 1st January 2017 to 31st December 2018, detailed in appendix \cref{} is employed as data template.
-The so found arguments by \textit{fitdistr} to use together with the normal PDF are $\left\{ \bar{x} = 0.0013, s = 0.0103 \right\}$, with $\bar{x}$ and $s$ respectively being the estimates of the mean and the standard deviation of the normal distribution.
-However, before using it inside the function \textit{bsm\_ts}, to simulate the time-series, they must be turned into drift and variance rates, as explained in \cref{sec:upstream:logreturn}.
-The so adjusted parameters to use within the BSM model are, $\left\{ \alpha = 0.4823, \sigma = 0.1959  \right\}$.
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/mjd.analysis.calibrated.tex}
-  \rule{40mm}{20mm}
-  \caption{Distribution of the calibrated BSM time-series' log-returns with respect to the distribution of those provided by the market.}
-  %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 1st January 2017 to 31st December 2017. while the red curve is built from time-series generated by the function \textit{bsm\_ts} taking $\tau = 1.0931$, $\alpha = 0.48229$, $\sigma = 0.1958$ as parameters.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:adjusted}
-\end{figure}
-
-\Cref{p:analysis:gbm:adjusted} illustrates the theoretical density curve of the log-returns reproduced with the adjusted parameters, while \cref{p:analysis:gbm:option:adjusted} faces the blue colored volatility smiles determined from market data with those dotted in red, computed from data provided by the function \textit{bsm\_call} which takes the calibrated $\sigma$ and the riskless rate $r$ as parameters.
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/appl.impliedvol.bsm.tex}
-  \rule{40mm}{20mm}
-  \caption{Black-Scholes-Merton's volatility smile with respect to the one provided by the market.}
-  %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The parameters used to construct the red volatility smile is $\sigma =  0.1959$.
-The implied volatilities that represent the above blue volatility smiles have been computed by using an iterative method on the BSM equation to solve  $\sigma$ while the option prices were provided by the market.
-The method used was to find the root of $C(S(0), K, T, r; \sigma) - C_{K, T}$, where $C_{K, T}$ is the market price and $C(S(0), K, T, r; \sigma)$ is the function \textit{bsm\_call} with $\sigma$ as a cursor.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:option:adjusted}
-\end{figure}
-
-At a glance, one can see (i) that the GBM lacks to correctly replicate the behavior of the market time-series log-returns and (ii) that the BSM equation with only one possible value for the volatility is not versatile enough to adequately reflect the full range of options prices given by the market.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-% Result
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-The BSM model is nevertheless going to serve as a benchmark to compare the hedging performances of the other considered models, namely, MJD and HSV.
-\Cref{t:analysis:bsm:pl} presents the results of the relative P\&Ls got from the delta-hedging processes on European call options with maturities of 3, 6 and 13 months and strikes ranging from  \$ 140 to \$ 230.
-Those outputs are maturities column-wise and grouped by strikes in rows.
-Furthermore, each row is split into three parts, each of these subsections represents different rebalancing frequency.
-For instance, the result exhibited in column "91 dbm \footnote{days before maturity}" and row "140 > intraday" gives the mean of the relative P\&Ls computed on a series of delta-hedges of European call options with a maturity of 91 days (3 months), a strike of  \$ 140 and the rebalancing carried out twice a day.
-
-The dummy time-series of the underlying asset, which will serve the analysis, are depicted in \cref{p:analysis:gbm:100}. 
-According to the dimension of \cref{t:analysis:bsm:pl}, any paths of these series helped forty-five times the study since each of them have been involved in the hedge of options with five different strikes having three maturities each, along with three distinctive rebalancing frequencies.
-The total number of samples is one hundred, and consequently, \Cref{t:analysis:bsm:pl} summarizes four thousand and five hundred delta-hedging strategies.
-
-\begin{figure}[ht]
-  \centering
-  % \input{figures/analysis.bsm.stocks.tex}
-  \rule{40mm}{20mm}
-  \caption{A sample of one hundred geometric Brownian motions.}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The function used is \textit{bsm\_ts} of the R package \textit{randomwalk}, with the following arguments $\tau = 1.0931$, $\alpha = 0.48229$, $\sigma = 0.1958$.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:100}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-% Positiveness of the frequency
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-From \cref{t:analysis:bsm:pl} one can observe that the balancing frequency has a positive impact on the quality of the hedge.
-Indeed, the more frequent balancing, the better hedging.
-\Cref{p:analysis:gbm:hedges} shows an extract of the delta-hedging processes with different balancing frequencies.
-The continuous brown line represents the course of the option price and the green, blue and red dots respectively emphasize the associated delta-neutral portfolios' values with a rebalancing frequency of twice a day, once a day and once a week.
-
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.gbm.hedges.tex}
-  \rule{40mm}{20mm}
-  \caption{Delta-neutral portfolio with different frequencies of adjusting.}
-   %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The parameters given to the option function \textit{bsm\_call} are: $\tau = 0.2493$, $K = 186$, $\sigma = 0.1958$, $r = 0.01896$. While those used to construct the dummy underlying asset, by means of the GBM function \textit{bsm\_ts} , are: $\sigma = 0.1958$, $\alpha = 0.48229$.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:hedges}
-\end{figure}
-
-In the light of the above \cref{p:analysis:gbm:hedges}, and as confirmed by the \cref{t:analysis:bsm:pl}, within a log-normal world, a portfolio more regularly balanced will give better results for the BSM delta-hedging strategy.
-    
-\begin{table}[ht]
-\centering
-\begin{tabular}{lllll}
-  \hline
-  \hline
-   &  & 91 dbm\footnote{dbm: days before maturity} & 182 dbm & 399 dbm \\ 
-   \hdashline
-  \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
-  & daily & 0 & 0 & 0 \\ 
-  & weekly & 0 & 0 & 0 \\ 
-   \hdashline
-  \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
-  & daily & 0 & 0 & 0 \\ 
-  & weekly & -0.001 & -0.001 & -0.003 \\ 
-   \hdashline
-  \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
-  & daily & -0.005 & -0.002 & -0.004 \\ 
-  & weekly & -0.01 & -0.019 & -0.021 \\ 
-   \hdashline
-  \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
-  & daily & -0.002 & -0.005 & -0.006 \\ 
-  & weekly & -0.007 & -0.052 & -0.037 \\ 
-   \hdashline
-  \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
-  & daily & 0.022 & -0.063 & -0.022 \\ 
-  & weekly & 0.317 & -0.285 & -0.136 \\ 
-   \hline
-\end{tabular}
-\caption{Hedging with BSM: Relative P\&L} 
-\label{t:analysis:bsm:pl}
-\end{table}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% short gamma
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The vast majority of these results shows that with a less rebalancing frequency, the average value of P\&Ls is negative, meaning that the delta-neutral portfolios underperform in comparison with the options themselves. 
-The reason is due to the options' gamma. 
-As a reminder, gamma gives the acceleration of any changes in the call function with respect to the stock price.
-With a positive gamma, and it is always positive for a vanilla stock option within the BSM model, the function $c(S(t), t)$, with $t$  constant, is concave up. 
-As \citet{shreve} shows, the delta-neutral portfolio is tangent below the curve of that call function.
-Therefore, due to the convexity of the latter, an instantaneous change of the asset price, either by increasing or decreasing, always makes the related delta-neutral portfolio suffer and hence deflates. 
-That kind of portfolio is called short gamma.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% worst value
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-On other note, the average worst result comes from the coverage of deep-out-of-the-money options, weekly rebalanced.
-However, by opting for a more frequent rebalancing strategy, the mean of the relative P\&Ls reduces.  
-Indeed, it goes from 31.7\% to 2\% by choosing a rhythm of readjustment of twice a day instead of once a week.
-\Cref{p:analysis:gbm:pl:better} shows the distribution of the P\&Ls mentioned above with a portfolio balancing applied either daily (blue curve), twice a day (green curve) or once a week (red curve).
-As expected, the more frequently rebalanced portfolios show less variance and the more values near zero for the associated P\&Ls.
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.gbm.pl.better.tex}
-  \rule{40mm}{20mm}
-  \caption{Distributions of relative profits and losses according to the portfolios rebalancing frequencies.}
-   %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{bsm\_call}, with the following parameters: $\tau = 0.2493$, $K = 186$, $\sigma = 0.1958$, $r = 0.01896$. While the underlying asset followed differents dummy paths constructed through the function \textit{bsm\_ts} taking as arguments: $\sigma = 0.1958$, $\alpha = 0.48229$.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:pl:better}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Most disruptive
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The more disruptive observation is given by the averaging P\&Ls of the hedging of deep-out-of-the-money, weekly rebalanced options with 91 days before maturity, namely, 0.317.
-Unlike the other P\&Ls, this one is positive, meaning that the delta-neutral portfolios that replicate a position in the long European call won on average, which contradicts the previous statement stating the opposite.
-The underpinned reason is explained by a high value of options' theta, i.e., the first derivative of the call function with respect to time, all other things staying unchanged.
-Indeed, theta gives as information the effect of time on the derivative. As theta is always negative within the BSM model, then when time passes, all other things being equal, the derivative value decreases.
-Therefore, the more the value of theta is high in absolute value, the faster the option is going to lose value with respect to time.
-Consequently, the adverse effect of theta on the option's value has a positive impact on the hedging-portfolio which is able to overwhelm the negative effect that gamma has on it.
-\Cref{t:analysis:bsm:pl:worst} lists all the P\&Ls' results of that hedging scenario.
-
+\subsection{Option prices based calibration}
+\label{sub:methodology:calibration:option}
+
+In accordance with \citet{heston1993} and \citet{criso2015}, provided that the characteristic functions of the MJD and HSV models are known, the European calls prices of such underlying processes can be computed using \cref{eq:other:call:heston}.
+Although known, these characteristic functions (\cref{eq:other:merton:psi,eq:other:heston:psi}) need their parameters to be fed with appropriates values to best fit with what is observed in reality.
+That is why both functions will be adjusted with referential values before being used.
+
+To do so, the method followed by \citet{criso2015} will be applied.
+It consists of finding the arguments that minimize the square of the difference between the options prices provided by the market and those generated by a pricing function.
+Such a procedure can be resources consuming because it is iterative, 
+consequently to avoid endless computations and since the market comes with a large number of data, the maturities, and strikes listed in \cref{t:methodology:maturity,t:methodology:strike} will be those considered during the analysis.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{c|llllllllll}
-  \hline
-  \hline
-  & \multicolumn{1}{c}{[1]} & \multicolumn{1}{c}{[2]} & \multicolumn{1}{c}{[3]} & \multicolumn{1}{c}{[4]} & \multicolumn{1}{c}{[5]} & \multicolumn{1}{c}{[6]} & \multicolumn{1}{c}{[7]} & \multicolumn{1}{c}{[8]} & \multicolumn{1}{c}{[9]} & \multicolumn{1}{c}{[10]} \\
-  \hline
-  [0] & 1.01 & 8.52 & -0.52 & 0.67 & -15.42 & 0.55 & 3.62 & 0.35 & 2.45 & 2.15 \\ \relax
-  [10] & 2.55 & 0.85 & 1.61 & 0.06 & -1.68 & -4.93 & 3.16 & 0.61 & 0.27 & 0.97 \\ \relax
-  [20] & -9.32 & 0.38 & 3.34 & -0.43 & -9.27 & 0.60 & -0.37 & -0.27 & 0.27 & -0.57 \\ \relax
-  [30] & 1.54 & 0.83 & 17.43 & 1.04 & -37.44 & 1.09 & 1.48 & 1.73 & 0.92 & 0.77 \\ \relax
-  [40] & 1.17 & 0.29 & -2.33 & 0.45 & -0.51 & 8.98 & -3.76 & -0.55 & 0.83 & 0.69 \\ \relax
-  [50] & -8.85 & 0.18 & -0.96 & 0.92 & 4.38 & 0.29 & 2.95 & 4.55 & 5.29 & \hl{23.50} \\ \relax
-  [60] & -0.11 & 4.71 & 3.83 & -0.26 & 3.70 & -2.95 & 1.28 & 7.00 & 0.80 & 0.15 \\ \relax
-  [70] & -0.21 & 11.00 & 0.54 & 0.23 & 0.71 & -38.71 & 15.04 & 7.75 & -0.49 & 0.85 \\ \relax
-  [80] & -15.18 & 1.62 & 5.40 & -9.23 & -0.43 & 1.39 & 0.65 & 1.31 & -7.34 & 1.53 \\ \relax
-  [90] & -0.02 & 3.19 & -1.68 & 13.05 & -0.12 & -6.70 & -0.34 & 8.68 & 0.69 & 2.18 \\ 
-   \hline
+\begin{tabular}{lllllll}
+  63 & 91 & 126 & 154 & 182 & 245 & 399 \\
 \end{tabular}
-\caption{Higher relative P\&Ls for BSM due to theta} 
-\label{t:analysis:bsm:pl:worst}
+\caption{Maturities took into account during the calibration stage} 
+\label{t:methodology:maturity}
 \end{table}
 
-
-In order to understand what happens to those P\&Ls let us analyze the hedging process behind the one with the highest positive value. Latter is highlighted in \cref{t:analysis:bsm:pl:worst}.
-Henceforth, the computed values of theta for the options causing that P\&L result are listed in \cref{t:analysis:bsm:pl:worst:theta}.
-
- 
 \begin{table}[h]
 \centering
-\begin{tabular}{c|llllllll}
-  \hline
-  \hline
-  Time & 0.00 & 0.02 & 0.04 & 0.06 & 0.08 & 0.10 & 0.12 & \ldots\\ 
-Theta & -1.83 & -3.80 & -8.50 & -5.26 & -13.88 & -13.84 & -20.39 & \ldots \\ 
-   \hdashline
-  Time & \ldots & 0.13 & 0.15 & 0.17 & 0.19 & 0.21 & 0.23 & 0.25 \\ 
-  Theta & \ldots & -14.89 & -19.05 & -19.84 & -35.54 & -47.81 & -65.66 & Inf \\ 
-   \hline
+\begin{tabular}{llllllllll}
+  130 & 140 & 150 & 160 & 170 & 180 & 190 & 200 & 210 & 220 \\  
 \end{tabular}
-\caption{A sample of theta causing higher relative P\&Ls for BSM} 
-\label{t:analysis:bsm:pl:worst:theta}
+\caption{Strikes took into account during the calibration stage} 
+\label{t:methodology:strike}
 \end{table}
 
+As for \citet{criso2015}, the optimization method used is the least-square non-linear analysis. 
+To work, such a method needs (i) a function that returns dummy data -- i.e., the one to be adjusted --, (ii) a dataset that serves as a template, (iii) a cost function to minimize, and (iv) a set of parameters to optimize.
+To perform that analysis, an algorithm developed by \citet{pracma} is directly available in the R language through the function \textit{lsqnonlin} from the R package \textit{pracma}.
 
-
-The lowest values of theta appear at the end of the life of the derivative. 
-The reason, as shown through \cref{p:analysis:gbm:pl:theta:high},  is due to the fact that at the time near maturity, the values of the option's theta are computed when the option is just in-the-money, letting by consequence the time with a significant influence on its value.
-
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.gbm.theta.high.tex}
-  \rule{40mm}{20mm}
-  \caption{European call option with higher theta as time goes to maturity}
-   %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The parameters passed to the function \textit{bsm\_call}, to compute the different option values are: $\tau = 0.2493$, $K = 230$, $\sigma = 0.1958$, $r = 0.01896$. While the underlying asset followed differents dummy paths constructed through the function \textit{bsm\_ts} taking as arguments: $\sigma = 0.1958$, $\alpha = 0.48229$. The hedge is weekly balanced.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:gbm:pl:theta:high}
-\end{figure}
-
-
-
-By resuming the solution of theta given in \citet{shreve}, for the European call option, one gets the following equations.
+The functions that output the artificial data are those exhibited in \cref{t:append:function:r}, that is to say, and for what matters here, \textit{mjd\_call} and \textit{hsv\_call} for the computation of European calls prices using MJD and HSV, respectively.
+The template of  options data is available in \cref{t:market:option} (see appendix \ref{cha:appendix:market}).
+While the cost function is given by \cref{eq:methodology:cost}, the parameters to assess depend on the underlying model (either MJD or HSV).
 
 \begin{align}
-  \Theta = -r K e^{-r (T-t)} N\bigg(d_{-}(T-t, S(t))\bigg) -
-    \frac{\sigma S(t)}{2\sqrt{T-t}} N^{'}\bigg(d_{+}(T-t, S(t))\bigg) \label{eq:analysis:theta}\\
-  \intertext{with}
-  d_{\pm}(\tau, x) = \frac{1}{\sigma \sqrt{\tau}} \left [
-    \ln\frac{x}{K} + \left( r \pm \frac{\sigma^2}{2} \right) \tau
-  \right]\label{eq:analysis:d}
+ cst =& \sum_{k \in K} \sum_{t \in T} \left(C_{k,t}^{mkt} - C_{k,t}^{m \oplus h}(arguments)\right)^2
+ \label{eq:methodology:cost}, \\
+ with K &=  \{130, 140, 150, 160, 170, 180, 190, 200, 210, 220\}, \notag\\
+ T &= \left \{63, 91, 126, 154, 182, 245, 399\right \}\notag 
 \end{align}
-With $N$ and $N^{'}$ respectively standing for the normal cumulative distribution function (CDF) and for the normal probability density function (PDF). 
+On the one hand, The subscripts $K$ and $T$ respectively stand for the sets of strike prices and maturity dates, while on the other hand, the superscript $mkt$ denotes the "market price" whilst the one $m \oplus h$ refers to either MJD (m) xor (exclusive or) HSV (h) process based prices.
 
-Intuitively, according to \cref{eq:analysis:theta} As $\tau \downarrow \implies \sigma S(t) / (2\sqrt{T-t}) \uparrow$ and $N^{'}(d_{+}(T-t, S(t)))$ gets its higher value when $d_{+}(T-t, S(t)) \to 0$.
-Also, by \cref{eq:analysis:d}, for any given $\tau$ sufficiently small, the function $d_{+}$ is the nearest to zero as $x \to S(t)$.
-\Cref{p:analysis:gbm:pl:theta:high} shows that it is exactly what happens for the observed option.
+Consequently, \cref{eq:methodology:cost} is that to be minimized by the least-square non-linear analysis, for all strikes and maturities.
+The outputs of this process will eventually be the calibrated arguments that maximize the performance of the model with respect to what is observed in reality.
 
+One difficulty when dealing with such an algorithm is that the least-square non-linear analysis approach may return several best-fit sets of arguments due to the existence of multiple local minima in the cost function.
+Therefore, in order to select only one set among all the results provided by the optimization method, will be chosen that with which, at strikes and maturity dates equal, the pricing function gives the more of its outputs within the bid-ask spread of the corresponding options whose price is giving by the market, as shown by \cref{eq:methodology:bidask}.
 
+\begin{align}
+  max\bigg(C_{bid}^{mkt} \leq C_{K,T}^{m \oplus h}(arguments)  \leq C_{ask}^{mkt} \bigg)
+ \label{eq:methodology:bidask}
+\end{align}
 
-
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
+Even though the cost function to be optimized is the same for both HSV and MJD options pricing procedures, the parameters to adjust are different. \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston} respectively illustrate the  MJD and HSV related calibration processes along with the associated results.
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON
+% SUBSECTION: Asset prices based calibration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Merton jump-diffusion performance measuring}
-\label{sec:section name}
 
-\Cref{t:analysis:merton:pl} is arranged the same way than \cref{t:analysis:bsm:pl} but except that the columns are subdivided to give the information on the relative P\&Ls obtained by either replicating the long position in the European calls with the delta MJD or BSM.
-For instance, the result exhibited in the column "91 dbm > $delta_{bsm}$" and row "140 > intraday" gives the mean relative P\&L computed on a series of delta-hedging on European call options with a maturity of 91 days (3 months), a strike of  \$140, a rebalancing done twice a day and with $\Delta(t)$ computed using the BSM equation. 
-Whilst the output in the column "91 dbm > $delta_{mjd}$" and row "140 > intraday", gives the same information but with $\Delta(t)$ computed by using the Merton equation.
+\subsection{Asset prices based calibration}
+\label{sub:methodology:calibration:asset}
 
-The dummy time-series of the underlying asset, which will serve the analysis are all displayed in \cref{p:analysis:mjd:100}. 
-According to the dimension of \cref{t:analysis:merton:pl}, any of them is used ninety times in the study since each has been involved in the coverage of options with five different strikes, three maturities, three distinctive rebalancing frequencies and depending on two deltas as well.
-The total number of samples is one hundred, and consequently, \Cref{t:analysis:merton:pl} summarizes nine thousand delta-hedging strategies.
+To calibrate the parameters to pass to the MJD and HSV models aimed to generate all the dummy times-series that will serve for the analysis of the delta hedging, historical market data on the Apple stock will be used as a template.
+
+To perform such an upstream analysis, an approximation method to estimate the arguments with which the distribution of the log-returns generated by both MJD and HSV models better fit the density curve of the historical log-returns will be implemented.
+The list of arguments to adjust is smaller than the one needed to option calibration because the starting point is the set of the already calibrated parameters gotten from options data and will only be readjusted, those they are risk-neutralized.
+
+To get the historical data, the package \textit{quantmod}, developed by \citet{quantmod} which uses Yahoo finance as a provider,  will once more be used. The dataset so downloaded is available in appendix \ref{cha:appendix:apple} and concerns the daily stock price on Apple from 1st January 2017 to 31st December 2017.
+\Cref{p:methodology:density:aapl} shows the density curve generated by the log-returns of historical data.
 
 \begin{figure}[h]
   \centering
-  % \input{figures/analysis.mjd.stocks.tex}
-  \rule{40mm}{20mm}
-  \caption{A sample of one hundred Merton jump-diffusion processes.}
+  \input{figures/appl.logreturns.density.tex}
+  \caption{Historical Apple stock Log-returns distribution}
     %
   % BEGIN OF FLOATNOTE
   %
   \begin{changemargin}{0.5cm}{0.5cm}
   \medskip
 \footnotesize
-\setstretch{1.0}\textbf{Notes.} The function used is \textit{mjd\_ts} of the R package \textit{randomwalk}, with the following arguments $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$, and a time-step of $(365 * 2)^-1$.
+\setstretch{1.0}\textbf{Notes.} The above density function is constructed over the historical data of the Apple share of stock price evolution from 1st January 2017 to 31st December 2017. 
+It represents the empirical distribution of its daily log-returns observed during that period.
   \end{changemargin}
   %
   % END OF FLOATNOTE
   %
-  \label{p:analysis:mjd:100}
+  \label{p:methodology:density:aapl}
 \end{figure}
 
+The functions that output the dummy time-series are those exhibited in \cref{t:append:function:r}, namely, \textit{mjd\_ts} and \textit{hsv\_ts} for the generation of  MJD and HSV processes, respectively.
+The procedures to calibrate the arguments for those functions are explained in \cref{sub:methodology:calibration:merton,sub:methodology:calibration:heston}.
 
 
 
@@ -744,129 +360,165 @@ The total number of samples is one hundred, and consequently, \Cref{t:analysis:m
 
 
 
+% SUBSECTION: Merton's model calibration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Merton
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Merton's model calibration}
+\label{sub:methodology:calibration:merton}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-% Positiveness of the frequency
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Calibration of parameters for option pricing}
 
-From \cref{t:analysis:bsm:pl}, one can see that the effect of the rebalancing frequency is not as clear as it was within the hedging of the BSM model, in a lognormal world.
-At first sight, however, one can observe that with the increase of the balancing rhythm comes a rise in the value of the delta-neutral portfolios on average, which even tend to outperform the European calls systematically.
-Nonetheless, the only information provided by \cref{t:analysis:bsm:pl} is the mean of all the calculated P\&Ls, what therefore lacks in exhaustiveness.
+In order to use the function \textit{mjd\_call} based on \cref{eq:other:call:heston} to compute the price of European call options on an underlying with increments driven by the MJD model, the parameters $\left\{ \lambda, \mu, \delta ,\sigma \right\}$ must be calibrated with respect to the available market data.
 
+To do so, the aforementioned least-square non-linear analysis will be used together with data on Apple call option as a template.
+In that respect, the theoretical models to calibrate are given by \crefrange{eq:other:call:heston}{eq:other:call:heston:pi2} along with \cref{eq:other:merton:psi}, implemented by the R function \textit{mjd\_call}.
 
+Moreover, to stay in a range of acceptable values, the parameters of the MJD model should lie between some defined boundaries. 
 
+Indeed, $\sigma$ and $\delta$, as standard deviation parameters, must range between 0 and 1. 
+Otherwise, no limit is fixed for both $\mu$ and $\lambda$, letting the frequency of jumps and their average magnitudes entirely free.
+
+According to those constraints and due to the presence of multiple local minima, the \textit{lsqnonlin} function returns the \cref{t:methodology:call:merton:estimate1} as the whole sets of parameters that make the function \textit{mjd\_call} better fit with reality.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{llllllll}
+\begin{tabular}{llll}
   \hline
+lambda & mu & delta & sigma \\ 
   \hline
- Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
-   &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
-   \hdashline
-  \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
-  & daily & 0.002 & 0.006 & 0.008 & 0.012 & 0.016 & 0.021 \\ 
-  & weekly & 0.004 & 0.006 & 0.006 & 0.011 & 0.007 & 0.021 \\ 
-   \hdashline
-  \multirow{3}{*}{160} & intraday & 0.011 & 0.018 & 0.021 & 0.029 & 0.025 & 0.042 \\ 
-  & daily & 0.016 & 0.018 & 0.022 & 0.029 & 0.019 & 0.042 \\ 
-  & weekly & 0.013 & 0.016 & 0.018 & 0.026 & 0.018 & 0.04 \\ 
-   \hdashline
-  \multirow{3}{*}{186} & intraday & 0.036 & 0.021 & 0.078 & 0.055 & 0.079 & 0.074 \\ 
-  & daily & 0.039 & 0.022 & 0.072 & 0.055 & 0.068 & 0.074 \\ 
-  & weekly & 0.014 & -0.008 & 0.055 & 0.037 & 0.057 & 0.061 \\ 
-   \hdashline
-  \multirow{3}{*}{200} & intraday & 0.072 & -0.002 & 0.139 & 0.061 & 0.13 & 0.086 \\ 
-  & daily & 0.06 & -0.013 & 0.131 & 0.057 & 0.115 & 0.085 \\ 
-  & weekly & -0.02 & -0.1 & 0.083 & 0.005 & 0.085 & 0.053 \\ 
-   \hdashline
-  \multirow{3}{*}{230} & intraday & 0.955 & 0.331 & 0.444 & -0.061 & 0.301 & 0.063 \\ 
-  & daily & 1.098 & 0.466 & 0.409 & -0.091 & 0.261 & 0.054 \\ 
-  & weekly & -0.741 & -1.335 & 0.085 & -0.438 & 0.174 & -0.088 \\ 
+0.07915 & -0.37583 & 0.08771 & 0.18651 \\ 
+  0.11606 & -0.30724 & 0.09993 & 0.18445 \\ 
+  0.14411 & -0.24174 & 0.12023 & 0.18676 \\ 
+  0.06839 & -0.37680 & 0.18072 & 0.18870 \\ 
+  0.10312 & -0.29738 & 0.19545 & 0.18583 \\ 
+  0.05698 & -0.38007 & 0.28030 & 0.19043 \\ 
+  0.08216 & -0.28573 & 0.27560 & 0.18822 \\ 
    \hline
 \end{tabular}
-\caption{Hedging with MJD: Relative P\&L} 
-\label{t:analysis:merton:pl}
+\caption{Best estimates parameters for MJD call option model} 
 \end{table}
 
+However, the set of arguments \ref{eq:methodology:arg:merton:riskneutral} is the one making respond the model the best with what is observed in reality.
+Indeed, when passing that set to the R function \textit{mjdl\_call}, for all strikes and maturities from \cref{t:methodology:strike,t:methodology:maturity}, more than $68\%$ of the so generated prices are within the bid-ask spread of the Apple option historical data.
 
+\begin{align}
+  \left \{
+  \begin{array}{lcl}
+    \lambda &= &0.1031218, \\
+    \mu &= &-0.2973769, \\
+    \delta &= &0.1954519, \\
+    \sigma &= &0.1858289 
+  \end{array}
+  \right \}  
+  \label{eq:methodology:arg:merton:riskneutral}
+\end{align}
 
-In order to get a deeper understanding of the results provided in \cref{t:analysis:merton:pl}, let us focus on the distributions of the P\&Ls. 
-Latter are depicted in \cref{p:analysis:mjd:pl:dist:big} (appendix \ref{cha:appendanalysis:plot}) where the green, blue and red-filled density curves respectively denote the P\&Ls' distributions when the delta-neutral portfolios are balanced twice a day, daily or weekly.
-
-In the light of \cref{p:analysis:mjd:pl:dist:big}, one can observe that as the rhythm of balancing increases, the variance of the averaged relative profits and losses decreases, with the most of the distribution so concentrated around the mean.
-
-Likewise,  the time before maturity and the strike price of the options to be covered both affect the distributions of the portfolios' P\&Ls.
-%
-
-On the one hand, concerning the effect of the maturity on the shape of the distributions, the observations are split into two categories.
-The first concentrates the computed measures when $0 < K/S(t) < 1$ at time zero, that is, all the [deep]-in-the-money options, while the second gathers all the others, namely, [deep]-out-of|at-the-money. 
-To observe how such specificities of the delta-neutral portfolio affect the distribution, \cref{p:analysis:mjd:pl:dist:big} is zoomed-in for the interesting P\&Ls' density curves of the first aforementioned category, so giving \cref{p:analysis:mjd:pl:dist:in}.
-
+\Cref{p:methodology:impliedvol:aapl:merton} confronts the blue colored volatility smiles computed from market data, with those dotted in red, calculated from data provided by the function \textit{mjd\_call}, which takes the items of the set \ref{eq:methodology:arg:merton:riskneutral} as parameters.
 
 \begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.merton.pl.dist.in.tex}
-  \rule{40mm}{20mm}
-  \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities (zoom-in on in-the-money options).}
-    %
+  \centering 
+  \input{figures/appl.impliedvol.merton.tex}
+  \caption{Implied volatility of Apple option prices computed with MJD}
+      %
   % BEGIN OF FLOATNOTE
   %
   \begin{changemargin}{0.5cm}{0.5cm}
   \medskip
 \footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$ and $\delta = 0.01610$. 
+\setstretch{1.0}\textbf{Notes.} The implied volatilities that represent the above volatility smiles have been computed by using an iterative method on the BSM equation to solve  $\sigma$.
+  The parameters given to the function \textit{bsm\_call} were the stock price $S$, the strike price $K$, the riskless rate $r$ and the time to maturity $T$, letting $\sigma$ unknown.
+  The method used was to find the root of $C(S(0), K, T, r; \sigma) - C_{K, T}$, where $C_{K, T}$ is either the market price or the price giving by the function \textit{mjd\_call}, and $C(S(0), K, T, r; \sigma)$ is the function \textit{bsm\_call} with $\sigma$ as a cursor.
   \end{changemargin}
   %
   % END OF FLOATNOTE
   %
-  \label{p:analysis:mjd:pl:dist:in}
+  \label{p:methodology:impliedvol:aapl:merton}
 \end{figure}
 
-From \cref{p:analysis:mjd:pl:dist:in}, it can be observed that as the time to maturity increases for options with a strike below the underlying asset price at original date, the volatility of the hedging portfolios performance also increases.
-Whereas, according to \cref{p:analysis:mjd:pl:dist:big}, the inverse behavior is observed for the coverage performance's volatility of options with a higher strike price, meaning that the farther the derivative's maturity, the lower the uncertainty about the associated delta-neutral portfolios' performances.
 
+Consequently, for the purpose of that master thesis, the set \ref{eq:methodology:arg:merton:riskneutral} is the one that will be used together with the function \textit{mjd\_call} whenever performing the computation of option prices for the MJD model.
 
-On the other hand, as shown by \cref{p:analysis:mjd:pl:dist:in,p:analysis:mjd:pl:dist:big} and \cref{t:analysis:merton:pl}, the performances of poorly rebalanced portfolios are better for options the more in-the-money. 
-A weaker gamma for the deep-in-the-money options explains such behavior.
-Indeed, as time passes, the prices of the underlying assets tend to get more valuable in the vast majority, as illustrated by \cref{p:analysis:mjd:100}. 
-Therefore, the associated options with smaller strikes continue to gain value but at a lower rate because the incidences of the stock price changes become less impacting. 
-The inverse reasoning is applied to deep-out-of-the-money options. 
-Effectively, the initial price of such options is near zero, so are the associated deltas.
-However, with high growth time-series as described in \cref{p:analysis:mjd:100}, a collateral effect is that they rapidly affect such out-of-the-money options prices, just as a higher rate of change influences the values of the delta.
-Consequently, according to and for the measured options, gamma is lower for in-the-money and higher for out-of-the-money options, letting the performances of the low-frequency balancing delta-neutral portfolios more accurate for options which are originally the deeper in-the-money. 
 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Calibration of parameters for time series}
 
+The set \ref{eq:methodology:arg:merton:riskneutral} is calibrated under the risk-neutral world and cannot, therefore, be used as is to simulate the dummy time-series that will serve the analysis aimed to measure the delta hedging performance.
+Furthermore, in addition to those parameters, the drift rate $\alpha$ has to be estimated as well. It was not present in the set  \ref{eq:methodology:arg:merton:riskneutral} because it was not taken into account in the computation of the options prices.
 
+\Cref{p:methodology:density:aapl:merton:riskneutral} shows the empirical density curves illustrating the distributions of the log-returns computed either from historical Apple stock data for the blue curve or from dummy time series generated by the function \textit{mjd\_ts()} fed with the risk-neutral parameters\ref{eq:methodology:arg:merton:riskneutral}, for the red one.
 
 
+\begin{figure}[h]
+  \centering
+  \input{figures/appl.logreturns.density.merton.riskneutral.tex}
+  \caption{Historical and MJD related Apple stock Log-returns distribution}
+  \floatfoot{The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018. while the red curve is constructed from time-series genereated by the function \textit{hsv\_ts} taking the risk-neutral parameters \ref{eq:methodology:arg:merton:riskneutral} as arguments.
+  }
+  \label{p:methodology:density:aapl:merton:riskneutral}
+\end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-% delta vs delta merton
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\Cref{p:analysis:mjd:pl:dist:deltas} (appendix \ref{cha:appendanalysis:plot}) shows the distribution of the P\&Ls when the hedging is built either with BSM or MJD deltas. The red density curve concerns the data related to BSM deltas while the green represents the distributions of the performance's metrics for the MJD delta-hedging.
+The goal of that section is to find the risk-averse parameters that make both the distributions of the log-returns generated from market data or from \textit{mjd\_ts} fit together.
 
+Practically, to do so, an approximation algorithm developed by \citet{MASS} which is directly available in the R language through the function \textit{fitdistr} from the R package \textit{MASS} will be purposely used. 
+The goal of that algorithm is the find the parameters of a density function that make it reproduce the distribution of a sample of data.
+To do the job, that algorithm needs (i) a density function along with (ii) a sample of random data as a template.
+As defined in \citet{matsuda2004}, the density of the log-returns of time-series generated by the MJD model is given by \cref{eq:methodology:density:merton:log}.
 
+\begin{align}
+  P_t(x) &= \sum_{i=0}^{\infty} 
+    \frac{e^{-\lambda t} (\lambda t)^ i}{i!}
+    N\left[ 
+      x;
+      \left( \alpha - \frac{\sigma^2}{2} - \lambda \kappa \right) t + i \mu,
+      \sigma^2 t + i\delta^2
+    \right]\label{eq:methodology:density:merton:log} \\
+\intertext{where}
+  \kappa &= e^{\mu + \frac{1}{2} \delta^2} - 1 \notag 
+\end{align}
+The term $e^{-\lambda t} (\lambda t)^ i / i!$ gives the probability that $\lambda$ jumps occur during the time period $t$, while $N$ denotes the normal probability density function.
 
-Regarding the gotten measures of \cref{t:analysis:merton:pl} and according to \cref{p:analysis:mjd:pl:dist:deltas}, hedging in real life with the BSM-related delta seems not so wrong when the prices process of the underlying asset is driven by MJD.
-Let us dive more deeply into those delta-hedging strategies by observing what happens under the hood.
+The parameters to be assessed are the drift and variance rates of the stock prices process, namely, $\alpha$ and $\sigma$, the frequency of the jumps occurrence $\lambda$ and their intensity parameters, that is, $\mu$ and $\delta$.
+All of those parameters are fully described in \cref{sec:other:merton}.
 
-\Cref{p:analysis:mjd:hedge:deltas} (appendix \ref{cha:appendanalysis:plot}) illustrates how the delta-hedging works depending on the strike price and computed delta.
-The circles represent the replicated portfolios at each rebalancing time, whereas the underpinned black lines denote the courses of the options' values as time passes. 
-The blue and red circles respectively stand for the MJD and BSM delta-hedging portfolios' values.
+%%%% HERE %%%%%%
+By giving to the optimization function the \cref{eq:methodology:density:merton:log} as a density function, the Apple stock data \cref{appendix} as a template and the set of variables 
+$\left\{\alpha, \sigma, \lambda, \mu,  \delta  \right\}\lambda$ 
+as a cursor, that algorithm outputs the set \ref{eq:methodology:arg:merton:riskaverse} as the best fit arguments for the real world parameters.
 
+\begin{align}
+  \left \{
+  \begin{array}{lcl}
+    \alpha &= &0.4816753642, \\
+    \sigma &= &0.1020368856, \\
+    \lambda &= &99.5434345733, \\
+    \mu &= &-0.0006791266, \\
+    \delta &= &0.0161092106, 
+  \end{array}
+  \right \}  
+  \label{eq:methodology:arg:merton:riskaverse}
+\end{align}
 
 
-\Cref{p:analysis:mjd:hedge:deltas} definitely shows that for the particular case examined in that master thesis, applying either the BSM or MJD-related delta formula does not significantly impact the performance of the hedge when a Merton mixed jump-diffusion process drives the underlying asset.
+\Cref{p:methodology:density:aapl:merton:riskaverse} shows the empirical density curves illustrating the distributions of the log-returns computed either from historical Apple stock data for the blue curve or from dummy time series generated by the function \textit{mjd\_ts()} fed with the risk-averse parameters\ref{eq:methodology:arg:merton:riskaverse}, for the red one.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% STOP MERTON
+\begin{figure}[h]
+  \centering
+  \input{figures/appl.logreturns.density.merton.riskaverse.tex}
+  \caption{Historical and MJD related Apple stock Log-returns distribution in the risk-averse world}
+  \floatfoot{The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018. while the red curve is constructed from time-series genereated by the function \textit{mjd\_ts} taking the risk-averse parameters \ref{eq:methodology:arg:merton:riskaverse} as arguments.
+  }
+  \label{p:methodology:density:aapl:merton:riskaverse}
+\end{figure}
 
+Consequently, for the purpose of that master thesis, the set \ref{eq:methodology:arg:merton:riskaverse} is the one that will be used together with the function \textit{mjd\_ts()} whenever performing the computation of time series using the MJD model within the real world constraints.
 
 
 
@@ -878,170 +530,405 @@ The blue and red circles respectively stand for the MJD and BSM delta-hedging po
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%
+% HERE
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% SUBSECTION: Heston's model calibration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Heston
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Heston stochastic volatility performance measuring}
-\label{sec:section name}
+\subsection{Heston's model calibration}
+\label{sub:methodology:calibration:heston}
 
+\subsubsection*{Calibration of parameters for option pricing}
 
-In \cref{t:analysis:heston:pl}, the information are completely organized the same way that in \cref{t:analysis:merton:pl}. 
-\Cref{p:analysis:hsv:100} illustrates all the dummy time-series that will be considered for the analysis of delta-hedging using HSV as a stochastic process for the underlying asset.
+In order to use the function \textit{hsv\_call} based on \cref{eq:other:call:heston} to compute the price of European call options on an underlying with increments driven by the HSV model, the parameters $\left\{ V(0), \kappa, \theta, \sigma, \rho \right\}$ must be calibrated with respect to the available market data.
+Therefore, the so estimated parameters will be in line with the risk-neutral measure, or more specifically $\kappa$ and $\theta$, which are the only ones needed to be adapted to make \cref{eq:other:hsvvol:riskless} risk-neutral.
 
+To do so and similarly as it was done for the MJD option model, the least-square non-linear analysis will be used together with data on Apple call option as a template.
+In that respect, the theoretical models to calibrate are given by \crefrange{eq:other:call:heston}{eq:other:call:heston:pi2} along with \cref{eq:other:heston:psi}, implemented by the R function \textit{hsv\_call}.
 
-\begin{figure}[ht]
+Moreover, to stay in a range of acceptable values, the parameters of the HSV model should lie between some defined boundaries. 
+
+De facto, the mean-reversion speed ($\kappa$), the long-run variance ($\theta$) and the volatility of the volatility ($\sigma$) need to take values that together respect the Feller's condition (see \cref{sub:other:heston:feller}). 
+Additionally, $\sigma$ must range between 0 and 1 and, according to \citet{cristo2015} $\kappa$ should be positive to avoid mean aversion.
+Although the correlation coefficient $\rho$ may take any value from $[-1, 1]$, typically the correlation between the stock price increments and their intrinsic volatility is negative. Consequently, the boundaries of $\rho$ are set as $]0, -1[$.
+
+According to those constraints and due to the presence of multiple local minima, the \textit{lsqnonlin} function returns the \cref{t:methodology:call:heston:estimate1} as the whole sets of parameters that make the function \textit{hsv\_call} better fit with reality.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+v0 & theta & sigma & rho & kappa \\ 
+  \hline
+  0.03851 & 0.05142 & 0.29539 & -0.49338 & 1.99931 \\ 
+  0.03774 & 0.04832 & 0.30687 & -0.40213 & 3.00036 \\ 
+  0.03910 & 0.04948 & 0.40736 & -0.50193 & 3.00005 \\ 
+  0.03798 & 0.04872 & 0.50379 & -0.39878 & 4.00106 \\
+  0.03740 & 0.04754 & 0.30583 & -0.60126 & 4.00096 \\ 
+  0.03661 & 0.04604 & 0.30659 & -0.40295 & 5.00152 \\ 
+  0.03921 & 0.04709 & 0.50753 & -0.50170 & 5.00152 \\ 
+   \hline
+\end{tabular}
+\caption{Best estimates for HSV call option model} 
+\label{t:methodology:call:heston:estimate1}
+\end{table}
+
+However, the set of arguments \ref{eq:methodology:arg:heston:riskneutral} is the one making respond the model the best with what is observed in reality.
+Indeed when passing that set to the R function \textit{call\_heston}, for all strikes and maturities from \cref{t:methodology:strike,t:methodology:maturity}  more than $70\%$ of the so generated prices are within the bid-ask spread of the historical data.
+
+\begin{align}
+  \left \{
+  \begin{array}{lcl}
+    V(0) &= &0.03798218, \\
+    \theta &= &0.04871543, \\
+    \sigma &= &0.50378803, \\
+    \rho &= &-0.39877827, \\
+    \kappa &= &4.00105546 
+  \end{array}
+  \right \}  
+  \label{eq:methodology:arg:heston:riskneutral}
+\end{align}
+
+\Cref{p:methodology:impliedvol:aapl:heston} confronts the blue colored volatility smiles computed from market data, with those dotted in red, calculated from data provided by the function \textit{hsv\_call} which takes the items of the set \ref{eq:methodology:arg:heston:riskneutral} as parameters.
+
+\begin{figure}[h]
   \centering
-  % \input{figures/analysis.hsv.stocks.tex}
-  \rule{40mm}{20mm}
-  \caption{A sample of one hundred Heston stochastic volatility processes.}
-   %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The function used is \textit{hsv\_ts} of the R package \textit{StockPriceSimulation}, with the following arguments $S(0) = 186.31$,  $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$, $\alpha  = 0.4823$, and a time-step of $(365 * 2)^-1$.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:hsv:100}
+  \input{figures/appl.impliedvol.heston.tex}
+  \caption{Implied volatility of Apple option prices computed with HSV}
+  \floatfoot{The blue curves represent the implied volatility computed from the option market data on Apple while the ................
+  }
+  \label{p:methodology:impliedvol:aapl:heston}
 \end{figure}
 
 
+Consequently, for the purpose of that master thesis, the set \ref{eq:methodology:arg:heston:riskneutral} is the one that will be used together with the function \textit{hsv\_call} function whenever performing the computation of option prices for the HSV model.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Calibration of parameters for time series}
 
+The set \ref{eq:methodology:arg:heston:riskneutral} is calibrated under the risk-neutral world and cannot, therefore, be used as is to simulate the dummy time-series that will serve the analysis aimed to measure the delta hedging performance.
+Furthermore, in addition to those parameters, the drift rate $\alpha$ has to be estimated as well. It was not present in the set  \ref{eq:methodology:arg:heston:riskneutral} because it was not taken into account in the computation of the options prices.
 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-% Positiveness of the frequency
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-As for the MJD model, with the increase of the balancing rhythm comes a rise in the values of the delta-neutral portfolios on average, which even tend to outperform the European calls systematically.
-
-
-
-
-
-
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{llllllll}
-  \hline
-  \hline
-Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
-   &  & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ \\ 
-   \hdashline
-  \multirow{3}{*}{140} & intraday & 0 & 0.002 & 0.011 & 0.011 & 0.009 & 0.038 \\ 
-  & daily & -0.001 & 0.002 & 0.01 & 0.011 & 0.009 & 0.038 \\ 
-  & weekly & 0.001 & 0.002 & 0 & 0.011 & 0.008 & 0.038 \\ 
-  \hdashline
-  \multirow{3}{*}{160} & intraday & 0.009 & 0.028 & 0.023 & 0.073 & 0.042 & 0.143 \\ 
-  & daily & 0.008 & 0.028 & 0.025 & 0.072 & 0.036 & 0.143 \\ 
-  & weekly & 0.008 & 0.028 & 0.019 & 0.073 & 0.036 & 0.143 \\ 
-  \hdashline
-  \multirow{3}{*}{186} & intraday & 0.158 & 0.252 & 0.159 & 0.392 & 0.153 & 0.524 \\ 
-  & daily & 0.15 & 0.245 & 0.195 & 0.391 & 0.156 & 0.522 \\ 
-  & weekly & 0.117 & 0.241 & 0.158 & 0.378 & 0.139 & 0.519 \\ 
-  \hdashline 
-  \multirow{3}{*}{200} & intraday & 0.459 & -0.298 & 0.43 & 0.146 & 0.279 & 0.546 \\ 
-  & daily & 0.433 & -0.361 & 0.42 & 0.126 & 0.255 & 0.544 \\ 
-  & weekly & 0.268 & -0.659 & 0.369 & 0.005 & 0.246 & 0.498 \\ 
-  \hdashline 
-  \multirow{3}{*}{230} & intraday & 2.136 & -0.527 & 1.884 & -2.452 & 1.01 & -0.235 \\ 
-  & daily & 1.948 & -1.197 & 1.893 & -2.655 & 0.989 & -0.224 \\ 
-  & weekly & 1.407 & -2.152 & 1.547 & -2.402 & 0.917 & -0.353 \\ 
-   \hline
-\end{tabular}
-\caption{Hedging with HSV: Relative P\&L} 
-\label{t:analysis:heston:pl}
-\end{table}
-
-
-In order to get a deeper understanding of the results provided in \cref{t:analysis:heston:pl}, let us focus on the distributions of the P\&Ls. 
-Latter are pictured in \cref{p:analysis:hsv:pl:dist:big} (appendix \cref{cha:appendanalysis:plot}) where the green, blue and red-filled density curves respectively express the P\&Ls' distributions when the delta-neutral portfolios are balanced twice a day, daily or weekly.
-
-
-
-
-         
-
-In the light of \cref{p:analysis:hsv:pl:dist:big}, one can observe that as the rhythm of balancing increases, the variance of the averaged relative profits and losses decreases, with the most of the distribution so concentrated around the mean.
-
-
-
-Furthermore, such as it is the case with the hedge of MJD, the performances of poorly rebalanced portfolios are better for options the more in-the-money in the HSV model. 
-A weaker gamma for the deep-in-the-money options explains such behavior.
-
-\Cref{p:analysis:hsv:gamma} represents the distribution of the computed values for the HSV gamma for options deep-in-the-money in blue and deep-out-of-the-money in red.
-The shape of the curve confirms that the value of gamma is bigger for out-of-the-money options, and by consequence, the sensibility of such derivatives to the underlying asset's prices move is higher.
-Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that unlike the gamma computed through the BSM equation, those provided by HSV can be negatives.
-
-
+\Cref{p:methodology:density:aapl:heston:riskneutral} shows the empirical density curves illustrating the distributions of the log-returns computed either from historical Apple stock data for the blue curve or from dummy time-series generated by the function \textit{hsv\_ts()} fed with the risk-neutral parameters\ref{eq:methodology:arg:heston:riskneutral}, for the red one.
 
 
 \begin{figure}[h]
   \centering
-  % \input{figures/p.analysis.hsv.hedge.gamma.tex}
-  \rule{40mm}{20mm}
-  \caption{Distributions of gamma for in-the-money vs out-of-the-money options}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed by means of the function \textit{hsv\_gamma}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. the blue density represents the distribution of a sample of gamma for in-the-money options with $K = 140$, while the red one gives the distibution of out-of-the-money options' gamma with $K = 230$.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:hsv:gamma}
+  \input{figures/appl.logreturns.density.heston.riskneutral.tex}
+  \caption{Historical and HSV related Apple stock Log-returns distribution}
+  \floatfoot{The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018. while the red curve is constructed from time-series genereated by the function \textit{hsv\_ts} taking the risk-neutral parameters \ref{eq:methodology:arg:heston:riskneutral} as arguments.
+  }
+  \label{p:methodology:density:aapl:heston:riskneutral}
 \end{figure}
 
 
+The goal of that section is to find the risk-averse parameters that make both the distributions of the log-returns generated from market data or from \textit{hsv\_ts} fit together.
+To do so, and according to the differences between \cref{eq:other:hsvstock:riskless,eq:other:hsvvol:riskless} and \cref{eq:other:hsvstock,eq:other:hsvvol}, the parameters to modify are the drift rate $r \to \alpha$, the mean reversion speed $\kappa^{*} \to \kappa$ and the long-run volatility $\theta^* \to \theta$.
+Accordingly, the correlation parameter $\rho$ and the volatility of the volatility $\sigma$ stay unchanged from the risk-neutral to risk-averse world.
+
+The drift rate $\alpha$ has been estimated by following the method exhibited at \cref{sec:upstream:logreturn}. From the market empirical log-returns' first and second moments, the value $0.4822917$ has been found for $\alpha$.
+
+According to \cref{eq:other:kappa:riskless,eq:other:theta:riskless}, in order to  calculate $\kappa$ and $\theta$, the risk premium $\lambda$ has to be assessed.
+Practically, such as it was the case for the MJD model, the function \textit{fitdistr} from the R package \textit{MASS} will be purposely used. 
+As defined in \citet{Adrian}, the density of the log-returns generated by the HSV model is given by \cref{methodology:density:heston:log}.
+
+\begin{align}
+P_t(x) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{i \phi x + F_t(\phi)} d\phi \label{methodology:density:heston:log} \\
+\intertext{where}
+F_t(\phi) &= \frac{\kappa \theta}{\sigma^2} \gamma t -
+  \frac{2 \kappa \theta}{\sigma ^2} \ln\left(
+    \cosh \frac{\Omega t}{2} +
+    \frac{\Omega^2 - \gamma^2 +2 \kappa \gamma}{2 \kappa \Omega} \sinh \frac{\Omega t}{2}
+  \right) \notag \\
+\intertext{and}
+\Omega &= \sqrt{\gamma^2 + \sigma^2 (\phi^2 - i\phi)}, \notag
+\gamma = \kappa + i \rho \phi \sigma \notag
+\end{align}
+
+By giving to the optimization function the \cref{methodology:density:heston:log} as a density function, the Apple stock data \cref{appendix} as a template and the variable $\lambda$ as a cursor, that algorithm outputs $\lambda = 5.4883278229$, as the best fit argument, for the risk premium.
+The set of the risk-averse parameters is fully described here below in \ref{eq:methodology:arg:heston:riskaverse}.
+
+\begin{align}
+  \left \{
+  \begin{array}{lcl}
+    V(0) &= &0.03798218, \\
+    \theta &= &0.02054013, \\
+    \sigma &= &0.50378803, \\
+    \rho &= &-0.39877827, \\
+    \kappa &= &9.489383, \\
+    \alpha & = &0.4822917
+  \end{array}
+  \right \}  
+  \label{eq:methodology:arg:heston:riskaverse}
+\end{align}
+
+
+\Cref{p:methodology:density:aapl:heston:riskaverse} shows the empirical density curves illustrating the distributions of the log-returns computed either from historical data for the blue curve or from dummy time-series generated by the function \textit{hsv\_ts()} fed with the risk-averse parameters\ref{eq:methodology:arg:heston:riskaverse}, for the red one.
+
+
+\begin{figure}[h]
+  \centering
+  \input{figures/appl.logreturns.density.heston.riskaverse.tex}
+  \caption{Historical and HSV related Apple stock Log-returns distribution in the risk-averse world}
+  \floatfoot{The above blue density curve is constructed over the historical data of the Apple share of stock price evolution from 18th May 2017 to 18th May 2018. while the red curve is constructed from time-series genereated by the function \textit{hsv\_ts} taking the risk-averse parameters \ref{eq:methodology:arg:heston:riskaverse} as arguments.
+  }
+  \label{p:methodology:density:aapl:heston:riskaverse}
+\end{figure}
+
+Consequently, for the purpose of that master thesis, the set \ref{eq:methodology:arg:heston:riskaverse} is the one that will be used together with the function \textit{hsv\_ts()} whenever performing the computation of time series using the HSV model within the real world constraints.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SEC: DELTA HEDGING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Delta hedging}
+\label{sec:methodology:delta}
+
+In order to measure the hedging performance of the MJD and HSV models, I will (i) compute the prices of some options and then virtually sell them at that price, (ii)  construct the delta-neutral portfolio at time zero and thereafter continuously rebalance it, in accordance with the underlying asset price evolutions and (iii) measure the overall cost of the hedge as a performance indicator.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of the option price}
+\label{sec:methodology:determination}
+
+The computation of the option price at time zero will depend on the underlying model to be hedged.
+Indeed, the function \textit{mjd\_call} will be used to price options for which the underlying asset price evolution is driven by the MDJ model, whereas \textit{mjd\_call} will be used for HSV processes.
+
+As explain as an introduction, I will virtually sell the options I price.
+Therefore, as the writer of the options, I will raise \$ $X(0) = C_K^{m \oplus h} (0)$.
+That cash will directly be put into a money market account to make it grow at a constant riskless rate all along the duration of the hedging process, namely, during the whole life of the option.
+
+The T-bills will serve as riskless rate. According to the available data on \url{https://www.treasury.gov/}, quotes of these are given by \cref{tab:methodology:Tbill}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+  \hline
+  \multicolumn{4}{c}{T-bills} \\
+  \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.66\% & 1.90\% & 2.09\% & 2.30\% \\
+  \hline
+\end{tabular}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill}
+\end{table}
+
+The rates of \cref{tab:methodology:Tbill} are annual-base, consequently to get their countinuously compounded counterpart, EQUATION X can be used to give those given by \cref{tab:methodology:Tbill:compound}.
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+  \hline
+  \multicolumn{4}{c}{T-bills} \\
+  \hline
+  4 weeks & 13 weeks & 26 weeks & 52 weeks \\
+  1.659\% & 1.896\% & 2.068\% & 2.274\% \\
+  \hline
+\end{tabular}
+\caption{Treasury bill quotes on 18 May 2018} 
+\label{tab:methodology:Tbill:compound}
+\end{table}
+
+Thereafter by applying the bootstrap method along with linear interpolation, one can find the maturity-wise related riskless rates of the Apple call option used for the current analysis. Those rates are given by \cref{tab:methodology:tbill:maturity}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|ccccccc}
+
+  \hline
+Maturity(in days) & 63   & 91   & 126  & 154    & 182  & 245    & 399 \\ 
+Riskless rate     &  1.817\% & 1.896\% & 1.962\% & 2.015\%  & 2.068\%  & 2.139\%   & 2.311\% \\
+   \hline
+\end{tabular}
+\caption{Maturities explored during the hedging performance measurement} 
+\label{tab:methodology:tbill:maturity}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Determination of the option price
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Construction of the delta-neutral portfolio}
+\label{sec:methodology:construction}
+
+At time zero, the built of the delta-neutral portfolio is achieved by the purchase of $\Delta(0)$ share of stock multiplying by the number of assets involving in the derivative product.
+Simply put, if one wants to construct such a portfolio to cover against the possible losses incurred by the selling of a call option on one hundred shares, the number of underlying to buy at that time would be of $\Delta(t) \times 100$.
+For the sake of clarity, in the analysis I will perform, it is implicit that any European call option involves the purchase of only one underlying at maturity, though.
+Consequently, at time zero, the cost of such a portfolio is given by \cref{methodology:porfolio:cost:0}.
+
+\begin{align}
+p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \label{methodology:porfolio:cost:0}
+\end{align}
+Where the superscripts m (Merton) and h (Heston) respectively stand for the computation of MJD and HSV delta.
+
+The objective of that portfolio is to accurately replicate the reverse position taken in a derivative, i.e., to reproduce a position in a long European call in the case that matters for that analysis.
+To be efficient in that role, it must be frequently rebalanced.
+
+Accordingly, in order to do so, I will observe the underlying's time-series at every period of time $\delta t = 1 days$ and compute the updated value of $\Delta(t)$  at each of those observational timesteps.
+Therefore, the requisite expenses aimed to keep the portfolio delta-neutral will evolve over time, as shown here below by \cref{methodology:porfolio:cost:i}.
+
+\begin{align}
+p(t_i) & = \Delta^{m \oplus h}(t_i - t_{i - 1}) S(t_i) 
+,\forall i \in \mathbb{Z} : i \in \left \{1, T \right \}\label{methodology:porfolio:cost:i}
+\end{align}
+
+The aforementioned time-series that will be daily scrutinized are obviously hypothetical. They will be generated by the functions \textit{mjd\_ts} and \textit{hsv\_ts} for which the risk-averse parameters will be passed in.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Computation of the delta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Computation of the delta}
+\label{sec:methodology:computation:delta}
+
+By definition, the delta is the first derivative of the option's pricing function with respect to the stock price. It consequently, represents the instantaneous rate of change in the option value as the price of its underlying evolves, such so illustrated by \cref{eq:bsm:call}.
+
+Although \citet{bs} gives to delta the value $\N{\dsub{+}}$, with $d_{+}$ explained by \cref{eq:dpm}, latter can only be used within the framework developed by \citet{bs}, that is, if the underlying is driven by a geometric Brownian motion, the volatility is deterministic, or if no jump occurs.
+Accordingly, the solution to compute the delta provided by \citet{bs} cannot be used for such the MJD and HSV models.
+
+By following the definition of delta and because the pricing function of a European call option, for which the underlying asset price evolution is driven by either the MDJ or HSV models, is given by \cref{eq:other:call:heston}, then, the \cref{eq:methodology:delta:mh} gives the solution to compute the delta for such models.
+
+\begin{align}
+&\Delta^{m \oplus h}\left(t, S(t)\right)  =
+  P_1^{m \oplus h} + 
+  S(t) \frac{\partial P_1^{m \oplus h}}{\partial S(t)} - 
+  e^{-r(T-t)} K \frac{\partial P_2^{m \oplus h}}{\partial S(t)}
+\label{eq:methodology:delta:mh}
+\intertext{where}
+&\frac{\partial P_1^{m \oplus h}}{\partial S(t)} = 
+  \frac{1}{\pi}
+  \int_0^{\infty} Re \left[
+    \frac{i \phi \exp\left( -i\phi\ln K \right)} {- \phi^2 \psi^{m \oplus h}(-i)^2}  \right. \notag\\
+    &\left.
+    \mspace{150mu} \times \left(
+      \frac{\partial\psi^{m \oplus h}(\phi - i)}{\partial S(t)} \psi^{m \oplus h}(-i) -
+      \psi^{m \oplus h}(\phi-i) \frac{\partial\psi^{m \oplus h}(-i)}{\partial S(t)}
+    \right)
+  \right] d\phi \label{eq:methodology:delta:p1} \\
+\intertext{and}
+&\frac{\partial P_2^{m \oplus h}}{\partial S(t)} =
+\frac{1}{\pi}
+  \int_0^{\infty} Re \left(
+    \frac{\exp\left( -i \phi \ln K \right)}{i \phi}
+    \frac{\partial \psi^{m \oplus h}(\phi)}{\partial S(t)}
+  \right)d\phi \label{eq:methodology:delta:p2}
+\end{align}
+
+Hence, the \cref{eq:methodology:delta:mh} is the one to solve for both MJD and HSV models to find them the delta at time t.
+\Cref{eq:methodology:delta:p1,eq:methodology:delta:p2} can be solved by finding the first derivatives of the characteristic functions of MJD and HSV processes with respect to the stock price. 
+By the way, it turns out that both of these have the same form.
+\Cref{eq:methodology:psi:derivative:1} gives the solution of these derivatives, the term $\psi^{m \oplus h}(x)$ have to be replaced by the appropriate characteristic function.
+
+\begin{align}
+  \frac{\partial\psi^{m \oplus h}(x)}{\partial S(t)} =
+    \psi^{m \oplus h}{(x)} \frac{ix}{S(t)} 
+    \label{eq:methodology:psi:derivative:1}
+\end{align}
+
+By replacing all the derivative operations inside \cref{eq:methodology:delta:p1,eq:methodology:delta:p2} by \cref{eq:methodology:psi:derivative:1}, one finds the solved version given by \cref{eq:methodology:delta:p1:solved,eq:methodology:delta:p2:solved}. 
+
+\begin{align}
+&\frac{\partial P_1^{m \oplus h}}{\partial S(t)} = 
+  \frac{1}{\pi}
+  \int_0^{\infty} Re \left[
+    \frac{\exp\left( -i \phi \ln K \right) \psi^{m \oplus h}(\phi -i)}
+      {S(t)\psi^{m \oplus h}(-i)}
+  \right] d\phi \label{eq:methodology:delta:p1:solved} \\
+% \intertext{and}
+&\frac{\partial P_2^{m \oplus h}}{\partial S(t)} =
+\frac{1}{\pi}
+  \int_0^{\infty} Re \left[
+    \frac{\exp\left( -i \phi \ln K \right) \psi^{m \oplus h}(\phi)}
+      {S(t)}
+  \right]d\phi \label{eq:methodology:delta:p2:solved}
+\end{align}
+
+Consequently, in the extent that the term $\psi^{m \oplus h}(\phi)$ is replaced by the appropriate characteristic function, substituting \cref{eq:methodology:delta:p2:solved,eq:methodology:delta:p2:solved} into \ref{eq:methodology:delta:mh} gives \ref{eq:methodology:delta:full} that allows the computation of the delta of an option for which the underlying asset is driven by either a MJD or HSV process.
+
+
+\begin{align}
+  \Delta^{m \oplus h}\left(t, S(t)\right)  =
+  P_1^{m \oplus h} + 
+  \frac{S(t)}{\pi}
+    \int_0^{\infty} Re \left[
+    \frac{\exp\left( -i \phi \ln K \right) \psi^{m \oplus h}(\phi -i)}
+      {S(t)\psi^{m \oplus h}(-i)}
+  \right] \notag\\
+    \mspace{150mu}
+  - \frac{e^{-r(T-t)} K}{\pi}
+    \int_0^{\infty} Re \left[
+    \frac{\exp\left( -i \phi \ln K \right) \psi^{m \oplus h}(\phi)}
+      {S(t)}
+  \right]
+\label{eq:methodology:delta:full}
+\end{align}
+
+In that respect, the R functions \textit{mjd\_delta} and \textit{hsv\_delta}, respectively compute the MJD and HSV related deltas at time $t$ by taking the risk-neutral parameters.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUB: Measuring the hedging performation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Measuring the hedging performation}
+\label{sec:methodology:measuring}
+
+Finally, to analyze how much the hedging works, one method is to measure its overall cost.
+To do so, the really first thing is to value at maturity all the buying and selling operations carried out in order to keep delta-neutral the previously constructed portfolio and add them together.
+
+\begin{align}
+  p_{tot} = \sum_{i = 0}^T p(t_i) e^{T-t_i} ,
+  \forall i \in \mathbb{Z} : i \in \left \{1, T \right \}
+  \label{methodology:porfolio:cost:tot}
+\end{align}
+
+On the other hand, at maturity, the amount of money $X(0)$ received when entering into the contract at time zero will have continuously grown up at the constant riskless rate $r$, as described by \cref{eq:methodology:xt}.
+
+\begin{align}
+  X(T) = X(0) * e^{rT} \label{eq:methodology:xt}
+\end{align}
+
+Incidentally, if the option is in-the-market at  maturity date, it first implies that it will be exercised, so increasing the wealth of the short position in the derivative by $K$, and then that $\Delta(T) = 1$, meaning that the writer of the option has exactly one share of stock in his / her portfolio to honour the transaction.
+Otherwise, the option is out-of-the-market, inducing that no transaction occurs and that $\Delta(T) = 0$.
+Consequently, at maturity, someone with a short position in the derivative, i.e., the one tempting to be replicated in the current analysis, will receive a positive cash inflow of $X(T) + \Delta(T) K$.
+
+Hence, if the hedge works well, the relation exhibited by \ref{eq:methodology:hedge:neutral} should be respected.
+
+\begin{align}
+ \sum_{i = 0}^{n = T} P(i) \cong X(T) + \Delta(T) * k \label{eq:methodology:hedge:neutral}
+\end{align}
+
+Because the position could vary, we have to adapt the relation above (REF) in order to remove all unit from the comparison.
+According to hull, a measure of performance of the hedge could be to take the ratio of the standard deviation of the cost to hedge to the option price. In that case, the measure could be comparated among themselve even if the position taken into the underlying difer.
+
+\begin{align}
+  \frac{sd(hedge)}{C_0 e ^{r T}}
+  \label{bsm:delta:hedge:perf}
+\end{align}
+where hedge is a vector containing $n$ sample generated, and $C_0$ is the price of the call option at time zero value up to maturity.
 
 
 
@@ -1053,205 +940,54 @@ Moreover, the density curves of \cref{p:analysis:hsv:gamma} also illustrate that
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-% delta vs delta heston
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\Cref{p:analysis:hsv:pl:dist:deltas} (appendix \ref{cha:appendanalysis:plot}) shows the distribution of the P\&Ls when the hedging is built either with BSM or HSV deltas. The red density curve concerns the data related to BSM deltas while the green represents the distributions of the performance's metrics for the HSV delta-hedging.
-No real trend emerges on the hedging portfolio whether using the HSV or BSM-related delta, except for the hedge of the at-the-money options where the delta BSM implies higher values for the delta-neutral hedging portfolios.
-Nonetheless, let us dive more deeply into those delta-hedging strategies by observing what happens behind the scenes.
-
-\Cref{p:analysis:hsv:hedge:deltas} (appendix \ref{cha:appendanalysis:plot}) illustrates how the delta-hedging works depending on the strike price and computed delta.
-The circles represent the replicated portfolios at each rebalancing time, whereas the underpinned black lines are the courses of the options' values as time passes.
-The blue and red circles respectively stand for the HSV and BSM delta-hedging portfolios' values.
-
-% 
-
-
-
-Concerning options in-the-market, \cref{p:analysis:hsv:hedge:deltas} shows that the delta-neutral portfolios with delta BSM outperform those driven by a delta HSV, while the opposite claim is applicable for the hedging portfolios of out-of-the-market calls.
-The conclusion of the previous statement is not that delta BSM is "better"\footnote{the words "better" and "wore" are between quotes because those qualifiers would rather be applicable for a speculative analysis than a hedging one.} than delta HSV when hedging low strikes European calls or "wore" for high strikes ones, but it actually shows that delta BSM lacks sensitivity.
-Indeed, for options in-the-money, it tends to fastly achieve values near to one while it dramatically drops to zero for out-of-the-money calls.
-Therefore as the delta-hedging for the replication of long calls is a "buy high, sell low" strategy, it explains why the hedging of in-the-money options makes the BSM delta-neutral portfolios more valued than the HSV, at maturity. 
-Moreover, due to a slow to start delta with a value staying longer to zero, the hedging with BSM is delayed for out-of-the-money calls, letting the BSM delta-neutral portfolios taking advantage of the purchase of a low priced assets at a time near zero, for which the return exceeds that of the money market portfolios initially set up.
-To conclude, to replicate a position in a European call, delta HSV would preferably be used, concerning that case examined in this master thesis.
 
 
 
 
 
 
+
+
+
+% \SweaveInput{analysis.Rnw}
 % \SweaveInput{conclusion}
 % \SweaveInput{appendix}
 
 \begin{appendices}
+\chapter{Functions catalogue}
+\label{cha:append:function}
+
+
+\section{RandomWalk package}
+\label{sec:append:randomwalk}
+
+
+
+\section{StockPriceSimulator package}
+\label{sec:append:stock}
+
+
+\begin{table}[ht]
+  \begin{tabularx}{\textwidth}{llX}
+    \hline
+    Function name & Arguments & Purpose \\
+    \hline
+    bsm\_call & $\left \{ S(0), T, k, r, \sigma \right \}$ & Compute the BSM price of an option \\
+    mjd\_call & $\left \{ S(0), T, k, r, \lambda, \mu, \delta \sigma \right \}$ & Compute the Merton price of an option \\
+    hsv\_call & $\left \{ S(0), T, k, r, V(0), \theta, \kappa, \sigma, \rho \right \}$ & Compute the heston price of an option \\
+    bsm\_delta & $\left \{ S(0), T, k, r, \sigma \right \}$ & Compute the BSM delta of an option \\
+    mjd\_delta & $\left \{ S(0), T, k, r, \lambda, \mu, \delta \sigma \right \}$ & Compute the Merton delta of an option \\
+    hsv\_delta & $\left \{ S(0), T, k, r, V(0), \theta, \kappa, \sigma, \rho \right \}$ & Compute the heston delta of an option \\
+    bsm\_ts & $\left \{ S(0), T, \sigma, \alpha, dt \right \}$ & Simulate BSM time series \\
+    mjd\_ts & $\left \{ S(0), T, \sigma, \alpha, \lambda, \mu, \delta dt \right \}$ & Simulate MJD time series \\
+    hsv\_ts & $\left \{ S(0), T, V(0), \alpha, \rho, \kappa, \theta, \sigma, dt \right \}$ & Simulate HSV time series \\
+  \end{tabularx}
+  \caption{R functions dealing with options and time series}
+  \label{t:append:function:r}
+\end{table}
+
 % \SweaveInput{append.marketdata}
-\chapter{Analysis and results: Plots}
-\label{cha:appendanalysis:plot}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON density petL split by maturities and strikes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.merton.pl.dist.big.tex}
-  \rule{40mm}{20mm}
-  \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. 
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:mjd:pl:dist:big}
-\end{figure}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON density petL split by maturities and strikes IMPACT of delta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.merton.pl.dist.deltas.tex}
-  \rule{40mm}{20mm}
-  \caption{Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red densities and MJD delta for those filled in green.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:mjd:pl:dist:deltas}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON density petL split by maturities and strikes IMPACT of delta SAMPLE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.merton.hedge.deltas.tex}
-  \rule{40mm}{20mm}
-  \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{mjd\_call}, with the following parameters $\sigma = 0.1858$, $\lambda = 0.1031$, $\mu = -0.2974$, $\delta = 0.1955$. While the underlying asset followed differents dummy paths constructed through the function \textit{mjd\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $\sigma = 0.1021$, $\alpha = 0.4817$, $\lambda = 99.5434$, $\mu = -0.0007$, $\delta = 0.01610$. The associated delta function was the BSM delta for the red circles and MJD delta for those in blue.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:mjd:hedge:deltas}
-\end{figure}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HESTONdensity petL split by maturities and strikes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{figure}[h]
-  \centering
-  % \input{figures/p.analysis.heston.pl.dist.big.tex}
-  \rule{40mm}{20mm}
-  \caption{Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the balancing frequency}
-    %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{hsv\_call}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. While the underlying asset followed differents dummy paths constructed through the function \textit{hsv\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$ and $\alpha  = 0.4823$. 
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:hsv:pl:dist:big}
-\end{figure}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON density petL split by maturities and strikes IMPACT of delta
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-\begin{figure}[h]
-  \centering
-  \input{figures/p.analysis.heston.pl.dist.deltas.tex}
-  % \rule{40mm}{20mm}
-  \caption{Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the delta used.}
-  %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} The above densities have been constructed on the hedges of options, computed by means of the function \textit{hsv\_call}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. While the underlying asset followed differents dummy paths constructed through the function \textit{hsv\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$ and $\alpha  = 0.4823$. The associated delta function was the BSM delta for the red densities and HSV delta for those filled in green.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:hsv:pl:dist:deltas}
-\end{figure}
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% MERTON density petL split by maturities and strikes IMPACT of delta SAMPLE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[h]
-  \centering
-  \input{figures/p.analysis.heston.hedge.deltas.tex}
-  % \rule{40mm}{20mm}
-  \caption{Samples of delta-neutral portfolios built with different functions of delta(BSM vs HSV)}
-  %
-  % BEGIN OF FLOATNOTE
-  %
-  \begin{changemargin}{0.5cm}{0.5cm}
-  \medskip
-\footnotesize
-\setstretch{1.0}\textbf{Notes.} Hedging of options, computed by means of the function \textit{hsv\_call}, with the following parameters $V(0) = 0.03798218$, $\theta = 0.04871543$, $\sigma = 0.50378803$, $\rho = -0.39877827$, $\kappa = 4.00105546$. While the underlying asset followed differents dummy paths constructed through the function \textit{hsv\_ts} taking as arguments: $S(0) = 186.31$, $T = 1.0932$, $V(0) = 0.03798$, $\theta = 0.0205$, $\sigma = 0.50379$, $\rho = -0.3988$,  $\kappa = 9.4894$ and $\alpha  = 0.4823$. The associated delta function was the BSM delta for the red circles and HSV delta for those in blue.
-  \end{changemargin}
-  %
-  % END OF FLOATNOTE
-  %
-  \label{p:analysis:hsv:hedge:deltas}
-\end{figure}
-
+% \SweaveInput{append.analysis}
 \end{appendices}
 
 

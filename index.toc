@@ -1,10 +1,17 @@
-\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
-\contentsline {section}{\numberline {1.1}Raised questions}{5}{section.1.1}
-\contentsline {section}{\numberline {1.2}Limitation}{7}{section.1.2}
-\contentsline {section}{\numberline {1.3}Organization of the document}{7}{section.1.3}
-\contentsline {chapter}{\numberline {2}Analysis and results}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}The delta-hedging in a log-normal world}{9}{section.2.1}
-\contentsline {section}{\numberline {2.2}Merton jump-diffusion performance measuring}{14}{section.2.2}
-\contentsline {section}{\numberline {2.3}Heston stochastic volatility performance measuring}{17}{section.2.3}
-\contentsline {chapter}{Appendices}{20}{section*.19}
-\contentsline {chapter}{\numberline {A}Analysis and results: Plots}{21}{Appendix.1.A}
+\contentsline {section}{Abstract}{i}{chapter*.1}
+\contentsline {section}{Acknowledgements}{ii}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Methodology}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Calibration}{2}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Option prices based calibration}{2}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Asset prices based calibration}{4}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Merton's model calibration}{5}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}Heston's model calibration}{9}{subsection.1.1.4}
+\contentsline {section}{\numberline {1.2}Delta hedging}{12}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Determination of the option price}{13}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Construction of the delta-neutral portfolio}{14}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Computation of the delta}{15}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Measuring the hedging performation}{17}{subsection.1.2.4}
+\contentsline {chapter}{Appendices}{19}{section*.24}
+\contentsline {chapter}{\numberline {A}Functions catalogue}{20}{Appendix.1.A}
+\contentsline {section}{\numberline {A.1}RandomWalk package}{20}{section.1.A.1}
+\contentsline {section}{\numberline {A.2}StockPriceSimulator package}{20}{section.1.A.2}

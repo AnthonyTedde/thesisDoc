@@ -1,0 +1,16 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+ 
+The study developed in the current master thesis concerns the Black-Scholes-Merton (BSM) method initially intended to give a fair price to options for which a geometric Brownian motion (GBM) drives the underlying asset.
+Indeed this model works remarkably well provided that the underpinned assumptions are respected with the most restrictive one stating that the distribution of the log-returns of the underlying asset has to be normal.
+However, empirical results show that this constraint of log-normality does not hold for real-life trials and consequently break the more key hypothesis of the aforementioned model.
+
+The primary purpose of the analysis developed in that work is to assess how wrong goes the BSM equation while the underlying asset is not a GBM.
+To that end, others models will be investigated, namely, the Merton jump diffusion (MJD) and Heston stochastic volatility (HSV) models.
+Each of it bears a new characteristic. The MJD brings jumps to the paths of the underlying processes whilst HSV comes with a volatility parameter that evolves with times unlike the deterministic one inherent to BSM. These specificities affect the log-returns distributions that are no more normal.
+
+Accordingly, once calibrated, those models will be used to simulate a world where the assumption of log-normality of the BSM model does not hold anymore. The study case explored is to measure how the BSM equation will react when its central assumption is broken.
+To do this, the performance of the delta-neutral portfolios of BSM, MJD and HSV processes will be benchmarked.
+
+As a subanalysis, another goal of that master thesis is to examine if, with a unique set of parameters, the HSV and MJD models can reproduce the volatility smiles constructed from the options prices provided by the market.
+A conclusion would be that those models are versatile enough to cover a broader range of market prices than the BSM model itself.

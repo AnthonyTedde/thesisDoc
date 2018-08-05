@@ -79,9 +79,24 @@ The so raised questions are summarized in the list here below.
 \item Are the MJD and HSV models able to reproduce the volatility smiles? 
 \end{itemize}
 
-\section{Limitation}
-\label{sec:timitation}
+However, the answers that will be provided for the above questions are limited to the particular case studied in that master thesis and consequently cannot be generalized.
 
 
 \section{Organization of the document}
 \label{sec:introduction:organization}
+
+In this section are briefly introduced all the subsequent chapters.
+
+\cref{cha:upstream} introduces basics concepts that will be subsequently actively used in the others chapters. Among those, there are Brownian motions, introduction on the financial derivatives, Itô's approximation, Cox–Ingersoll–Ross process, log-return, continuously compounded rate of return and the computation of skewness and kurtosis.
+
+\cref{cha:bsm} presents the Black-Scholes-Merton model along with the geometric Brownian motion used to drive underlying assets prices processes. Furthermore, in that chapter dives also into the Greeks that will be used in the study part, namely, the delta, gamma, and theta. Each of it plays a specific role in the delta-hedging strategy or in the process of options pricing.
+
+\cref{cha:OtherModel} exhibits other models which will be used in the analysis in order to tackle with some of the flaws bring by the assumptions of the Black-Scholes-Merton pricing model. Those are the Merton jump-diffusion (MJD) and Heston stochastic volatility (HSV) models. Algorithms aimed either to compute time-series driven by those models or to price options on such series will be investigated.
+
+\cref{cha:Methodology} presents the methodology used to calibrate all the previously studied algorithm and it lists the followed procedure for assessing the performance of the models within a not log-normal world. 
+
+\cref{cha:analysis} points out and delves into the details of the results got from the delta-hedging performance study. These results will be split into three parts where in turn, the performances of the BSM, MJD and HSV models will be explored.
+
+\cref{cha:conclusion} concludes the work by highlighting some results, presenting their limits and suggest ways to reflect on them or ideas to go beyond the particular study case explored in that master thesis.
+
+

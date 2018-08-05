@@ -1,2 +1,24 @@
 \chapter{Conclusion}
-\label{cha:Conclusion}
+\label{cha:conclusion}
+
+
+The general approach pursued along the current master thesis was intended to measure the performance of the Black-Scholes-Merton (BSM) pricing method by exploring what could happen away of the assumptions of log-normality density for the underlying return and beyond the simple case of a deterministic volatility drift related to the model.
+Some other models had therefore been explored to overcome the issues mentioned above, namely,  Merton jump-diffusion (MJD) and Heston stochastic volatility (HSV) framework.
+
+In order to perform such an analysis, the work was split into two pieces. First was assessed the performances of BSM, MJD, and HSV by analyzing the provided options prices in comparison with what is observed from those available on market data. 
+In a second phase, the related performances were measured through replication portfolios by using, in turn, each model to create and rebalance them.
+
+With a unique value taken by its uncertainty parameter, the BSM model lacks in reproducing the volatility surfaces observed in the market and consequently the so associated prices.
+On the other hand, if the MJD and HSV models are appropriately calibrated, they can reproduce the whole diversity of market options prices and therefore match relatively well to the volatility surfaces. 
+Nevertheless, the options prices cannot be found from scratch by using MJD or HSV, because a few are required a priori to find the adjusted parameters when pricing derivatives from those models.
+
+In log-normal wold, when one uses the BSM model together with an underlying asset driven by a geometric Brownian motion, the hedging performance is almost perfect for a delta-neutral portfolio provided that the rebalancing is done frequently.
+
+In general, for both MJD and HSV the rebalancing frequency and a farther time to maturity have a positive effect on the performance of the delta-hedges. It should be noted that the effects of gamma and theta are not negligible for the hedges of deep-out-of-the-money options which are poorer performance than those of [deep]-in|at-the-money.
+
+Furthermore, the study shows that it exists a performance discrepancy between the replication MJD and HSV portfolios when using the BSM delta to balance them. While no significant differences have been found out when hedging using BSM of MJD delta for the Merton model, it turns out that the contrast is more explicit for the Heston model. Indeed, the latter is less performing when using BSM delta.
+
+Although the differences are not significative enough when comparing the delta-hedging performance for in-the-money options, the MJD model beats the HSV by providing lower relative profits and losses values for the coverage of options out-of-the-money.
+
+The results provided in that master thesis are restrictive because they are only based on the hedge of options of a unique underlying with high growth potential and cannot, therefore, be used to decipher larger trends.
+However, as the purposely developed algorithms are versatile enough to be adapted for the computation of delta-hedge of other options with different underlying, an interesting study case could be to analyze the performance of the delta-hedging across different options with different assets.

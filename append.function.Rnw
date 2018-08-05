@@ -1,0 +1,32 @@
+\chapter{Functions catalogue}
+\label{cha:append:function}
+
+
+\section{RandomWalk package}
+\label{sec:append:randomwalk}
+
+
+
+\section{StockPriceSimulator package}
+\label{sec:append:stock}
+
+
+\begin{table}[ht]
+  \begin{tabularx}{\textwidth}{llX}
+    \hline
+    Function name & Arguments & Purpose \\
+    \hline
+    bsm\_call & $\left \{ S(0), T, k, r, \sigma \right \}$ & Compute the BSM price of an option \\
+    mjd\_call & $\left \{ S(0), T, k, r, \lambda, \mu, \delta \sigma \right \}$ & Compute the Merton price of an option \\
+    hsv\_call & $\left \{ S(0), T, k, r, V(0), \theta, \kappa, \sigma, \rho \right \}$ & Compute the heston price of an option \\
+    bsm\_delta & $\left \{ S(0), T, k, r, \sigma \right \}$ & Compute the BSM delta of an option \\
+    mjd\_delta & $\left \{ S(0), T, k, r, \lambda, \mu, \delta \sigma \right \}$ & Compute the Merton delta of an option \\
+    hsv\_delta & $\left \{ S(0), T, k, r, V(0), \theta, \kappa, \sigma, \rho \right \}$ & Compute the heston delta of an option \\
+    bsm\_ts & $\left \{ S(0), T, \sigma, \alpha, dt \right \}$ & Simulate BSM time series \\
+    mjd\_ts & $\left \{ S(0), T, \sigma, \alpha, \lambda, \mu, \delta dt \right \}$ & Simulate MJD time series \\
+    hsv\_ts & $\left \{ S(0), T, V(0), \alpha, \rho, \kappa, \theta, \sigma, dt \right \}$ & Simulate HSV time series \\
+  \end{tabularx}
+  \caption{R functions dealing with options and time series}
+  \label{t:append:function:r}
+\end{table}
+

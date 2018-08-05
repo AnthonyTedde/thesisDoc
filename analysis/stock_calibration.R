@@ -80,7 +80,7 @@ ggplot() +
   stat_density(data = data.frame(u), aes(u),
                geom = "line",
                colour = 'steelblue') +
-  xlab("log-returns")
+  xlab("Log-returns") + ylab("Density")
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 

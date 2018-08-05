@@ -1,0 +1,10 @@
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+First and foremost, I want to address all my gratitude to Anne, and our two wonderful children, Elsa and Valentin, for their patience and huge support. They gave me all the strength needed to go beyond my self-motivation.
+
+Many thanks to all of my family and precious friends that make the life more pleasant. I especially think of Nonna Emma, Mario, Josiane, Maud, Eddy, Christelle, Sébastien, and Pierre. 
+
+Thank you mum and dad.
+
+Last but not least, I want to sincerely thank Pr. Frédéric Vrins for trusting me. It was a real pleasure to meet you.

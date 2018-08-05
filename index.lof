@@ -1,19 +1,8 @@
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Historical Apple stock Log-returns distribution\relax }}{5}{figure.caption.8}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Implied volatility of Apple option prices computed with MJD\relax }}{7}{figure.caption.11}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Historical and MJD related Apple stock Log-returns distribution\relax }}{8}{figure.caption.13}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Historical and MJD related Apple stock Log-returns distribution in the risk-averse world\relax }}{9}{figure.caption.14}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Implied volatility of Apple option prices computed with HSV\relax }}{11}{figure.caption.17}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Historical and HSV related Apple stock Log-returns distribution in the risk-averse world\relax }}{13}{figure.caption.20}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Distribution of the calibrated BSM time-series' log-returns with respect to the distribution of those provided by the market.\relax }}{9}{figure.caption.4}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Black-Scholes-Merton's volatility smile with respect to the one provided by the market.\relax }}{10}{figure.caption.5}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces A sample of one hundred geometric Brownian motions.\relax }}{10}{figure.caption.6}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Delta-neutral portfolio with different frequencies of adjusting.\relax }}{11}{figure.caption.7}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Distributions of relative profits and losses according to the portfolios rebalancing frequencies.\relax }}{12}{figure.caption.9}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces European call option with higher theta as time goes to maturity\relax }}{13}{figure.caption.12}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces A sample of one hundred Merton jump-diffusion processes.\relax }}{15}{figure.caption.13}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities (zoom-in on in-the-money options).\relax }}{16}{figure.caption.15}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces A sample of one hundred Heston stochastic volatility processes.\relax }}{17}{figure.caption.16}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Distributions of gamma for in-the-money vs out-of-the-money options\relax }}{19}{figure.caption.18}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the balancing frequency\relax }}{21}{figure.caption.20}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Relative profits and losses of delta-hedges concerning MJD processes split by prices and maturities: Impact of the delta used.\relax }}{21}{figure.caption.21}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Samples of delta-neutral portfolios built with different functions of delta(BSM vs MJD)\relax }}{22}{figure.caption.22}
-\contentsline {figure}{\numberline {A.4}{\ignorespaces Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the balancing frequency\relax }}{22}{figure.caption.23}
-\contentsline {figure}{\numberline {A.5}{\ignorespaces Relative profits and losses of delta-hedges concerning HSV processes split by prices and maturities: Impact of the delta used.\relax }}{23}{figure.caption.24}
-\contentsline {figure}{\numberline {A.6}{\ignorespaces Samples of delta-neutral portfolios built with different functions of delta(BSM vs HSV)\relax }}{24}{figure.caption.25}

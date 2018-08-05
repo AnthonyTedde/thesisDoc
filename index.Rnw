@@ -13,16 +13,28 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 
+\pagenumbering{roman}
+\SweaveInput{summary}
+\SweaveInput{acknowledgements}
+
+
+
+
 {\setstretch{1.0}
 \tableofcontents
+\clearpage
 
 \listoffigures
+ \clearpage
+ 
  
 \listoftables}
+\clearpage
 
 
 
-\SweaveInput{introduction}
+\pagenumbering{arabic}
+% \SweaveInput{introduction}
 % \SweaveInput{upstream}
 % \SweaveInput{BSM}
 % \SweaveInput{models}
@@ -32,8 +44,9 @@
 % \SweaveInput{appendix}
 
 \begin{appendices}
+\SweaveInput{append.function}
 % \SweaveInput{append.marketdata}
-\SweaveInput{append.analysis}
+% \SweaveInput{append.analysis}
 \end{appendices}
 
 
