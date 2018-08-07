@@ -18,7 +18,7 @@ To price derivatives by using the model highlighted in this present chapter, Bla
 
 
   
-One of the most important constraints of BSM is that the price evolution of the underlying asset is modeled by a geometric Brownian motion. Its time continuous form is given by  \cref{eq:underlying:geometric:closed}.
+One of the most important constraints of BSM is that a geometric Brownian motion models the price evolution of the underlying asset. Its time-continuous form is given by  \cref{eq:underlying:geometric:closed}.
 
 
 \begin{center}
@@ -28,13 +28,13 @@ One of the most important constraints of BSM is that the price evolution of the 
   \end{equation}
 \end{center}
 According to \citet{shreve}, The  GBM features a stochastic process where the only random component is the Brownian motion $\Bm$. 
-The others parameters, $\alpha$ and $\sigma$,  respectively stand for the drift and volatility rate of the process.
+The others parameters, $\alpha$ and $\sigma$,  respectively stand for the drift and volatility rates of the process.
 That model is fully explored in \cref{sec:underlying:derivation}.
 
 
  
 Furthermore, in order to match with the constraints underpinned by the model developed by Black and Scholes, the distribution of the underlying asset log-returns has to be normally distributed.
-Accordingly, the current chapter shows that this prerequisite is met when the price of a security is driven by a GBM.
+Accordingly, the current chapter shows that this prerequisite is met when a GBM drives the price of the security.
 
 
 
@@ -44,8 +44,8 @@ Accordingly, the current chapter shows that this prerequisite is met when the pr
 
 
 
-In that master thesis, the focus would be set to the computation of the pricing of vanilla Call options and the performance of the model when it evolves beyond the boundaries fixed by Black and Scholes. 
-Some discrepancies studied in later chapters will be for instance that the underlying model is not driven by a GBM, the volatility of the stock is not deterministic and varies across time or abrupt and non predictable movements occur during the life of the asset.
+In that master thesis, the focus will be set to the computation of the pricing of vanilla Call options and the performance of the model when it evolves beyond the boundaries fixed by Black and Scholes. 
+Some gaps from BSM studied in later chapters will be for instance that a GBM does not drive the underlying model, the volatility of the stock is not deterministic and varies across time or abrupt and unpredictable movements occur during the life of the asset.
 
 
 
@@ -62,16 +62,16 @@ Some discrepancies studied in later chapters will be for instance that the under
 \citet{bs} have provided a framework supported by a bunch of constraints qualified as ideal conditions under which the market would behave in order to make the BSM equation works with accuracy. All of these conditions are here below mentioned.
 
 \begin{enumerate}
-  \item The short-term risk free rate $r$ is known and constant
-  \item The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rate
-  \item No dividend are provided with the considered share of stock
-  \item The option considered within the computation is european
-  \item The price for bid and ask quote are identical. It means that there is no bid--ask spread to be considerered
-  \item Share of stock can be divided into any portions such as needed for the computation
-  \item Short selling is allowed with no penalties
+  \item The short-term risk free rate $r$ is known and constant.
+  \item The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rates.
+  \item No dividend are provided with the considered share of stock.
+  \item The option considered within the computation is European.
+  \item The prices for the bid and ask quotes are identical. It means that there is no bid-ask spread to be considered.
+  \item Share of stock can be divided into any portions such as needed for the computation.
+  \item Short selling is allowed with no penalties.
 \end{enumerate}
 
-In the study performed purposely for that master thesis, the condition (2), that is the stock return is driven by a GBM, won't be respected. 
+In the study performed purposely for that master thesis, the condition (2), that is a GBM drives the stock returns, won't be respected. 
 The goal is (i) to analyze how a derivative with another process as an underlying asset could be priced and how these prices reflect those in the market, and (ii) to measure the performance of the hedging if that constraint is not respected.
 Whilst incidentally, all other requisites will stay as is.
 
@@ -83,8 +83,8 @@ Whilst incidentally, all other requisites will stay as is.
 \label{sec:underlying:derivation}
 
 The differential form of \cref{eq:underlying:geometric:closed} is useful to find the properties of its distribution.
-As demonstrated by \citet{shreve}, in order to get it, the Itô's formula (\cref{sec:upstream:ito}) is used with $S(t)$ as a stochastic process to resolve. 
-By applying that tranformation, \cref{eq:underlying:geometric:diff,eq:underlying:geometric:rate} emerge:
+As demonstrated by \citet{shreve}, in order to get it, the Itô's formula (\cref{sec:upstream:ito}) is used with $S(t)$ as a stochastic process to be resolved. 
+By applying that transformation, \cref{eq:underlying:geometric:diff,eq:underlying:geometric:rate} emerge:
  
 \begin{center}
   \begin{subequations}
@@ -144,7 +144,7 @@ The only parameters that change over the group are the couples $(dt, \sigma)$ wh
 \label{sub:Distribution of the stock price process}
 
 This section delves into the distributions of the process described by \cref{eq:underlying:geometric:closed,eq:underlying:geometric:diff,eq:underlying:log:return}. 
-They are described by using the related underlying law together with the relevant moments.
+They are described by using the relevant underlying law together with the relevant moments.
 
 \Cref{eq:scontinuousdist}, provided in \citet{shreve},  shows that the process followed by \cref{eq:underlying:geometric:closed} has normally distributed returns with their expected value and variance proportional to the time period $dt$.
 
@@ -170,11 +170,12 @@ Indeed, the black bell curve is constructed using the theoretical normal law wit
   \medskip
 \footnotesize
 \setstretch{1.0}\textbf{Notes.}   
-\end{changemargin} The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
+The above blue distribution is constructed over $10e3$ paths of a unique stochastic process. 
 The samples are built with \cref{eq:underlying:geometric:diff}. 
 The arguments are adjusted with the following values, $\alpha = 0$, $\sigma = 30\%$. 
 The black density belongs to the normal bell curve with mean $\alpha dt$ and standard deviation of $\sigma  \sqrt{dt}$. 
 The distance period between each measure, namely $dt$ has been set to $10e3^{-1}$.
+\end{changemargin} 
   %
   % END OF FLOATNOTE
   %
@@ -236,14 +237,14 @@ The distance period between each measure, namely $dt$ has been set to $10e3^{-1}
 
 
 
-\citet{hull} shows that the theoretical density of the process $S(T)$ can be found from equation \cref{eq:logreturndist} and by applying the properties of the log-normal law.
+\citet{hull} shows that the theoretical density of the process $S(T)$ can be found from equation \cref{eq:logreturndist} by applying the properties of the log-normal law.
 Indeed, \cref{eq:logreturndist} can be transformed such as given by \cref{eq:underlyin:lgst}
 
 \begin{align}
 \ln{\St} \sim N\left(\ln{S(0)} + \left(\alpha - \frac{\sigma^2}{2}\right) t, \sigma^2 t\right) \label{eq:underlyin:lgst}
 \intertext{Any process inside the natural logarithm function characterized by the normal law is de facto determining by the log-normal law. 
 Ultimately by applying the transformation rules of the mean and variance from a normal probability density function to the log-normal parameters, one finds that the process $S(t)$ is described as follow.}
-\St \sim lognormal \left(S(0) e^{\alpha t}, S(0)^2 e^{2 \alpha t} \left(e^{\sigma^2 t} - 1 \right)\right)
+\St \sim lognormal \left(S(0) e^{\alpha t}, S(0)^2 e^{2 \alpha t} \left(e^{\sigma^2 t} - 1 \right)\right)\label{eq:underlyin:st:nnorm}
 \end{align}
 
 
@@ -357,13 +358,13 @@ The distance period between each measure, namely $dt$ has been set to $10e3^{-1}
 Concerning the framework developed in \citet{bs}, the pricing method of an option underpinned by the BSM model is closely related to an underlying for which its price $\St$ is a log-normally distributed stochastic process, such as the GBM be.
 
 As defined in \citet{shreve}, to provide a unique fair price to a stock option (e.g., for what matters here, to a vanilla European call) which depends on an underlying driven by a GBM, all the uncertainty associated to the stock price movements has to disappear. 
-To do so, one has first to construct such a portfolio $X(t)$ which encompasses the same source on uncertainty as for the option itself and then choosing the adequate position $\Delta(t)$ to take to the underlying asset at each time $t$, so that all randomness cancels out.
+To do so, one first constructs such a portfolio $X(t)$ which encompasses the same source of risk as the option itself and then choosing the adequate position $\Delta(t)$ to take into the underlying asset at each time $t$, so that all randomness cancels out.
  
 \begin{align}
   \dportfolio \label{eq:dportfolio} \\ 
-  \intertext{\Citet{shreve} shows that the goal is to dynamically hedge the position taken in the option. 
+  \intertext{\Citet{shreve} shows that the goal is to hedge the position taken in the option dynamically. 
 It means that the position has to be frequently rebalanced. 
-Consequently, at any times, the present value (PV) of the changes occurring in the portfolio, due to the underlying price evolution should be equal to the PV of those incurred by the financial derivative. 
+Consequently, at any time, the present value (PV) of the changes occurring in the portfolio, due to the underlying price evolution, should be equal to the PV of those incurred by the financial derivative. 
 The only way to achieve this equality is to adapt the delta for each period.}
    d\left(e^{-rt} X\left(t\right)\right) = d\left(e^{-rt} \ct \right)
 \intertext{That way, one can take a position in the derivative (short/long) and hedge it by taking $\pm \Delta(t)$ shares of stock. $X(0)$ being the price of the call at time zero}
@@ -390,7 +391,7 @@ By following and developing the method above, \citet{shreve} shows that the BSM 
 \end{center}
 
 Whilst the terminal condition focuses on the value at maturity, the boundary conditions fix some constraints on the extreme values likely to be taken by the shares of stock at any times during the option life. 
-In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that any options with a worthless underlying are themselves valueless, while whenever the option is deep-in-the-money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
+In that regard, the boundary condition (\ref{eq:BSMboundary0}) shows that any options with a worthless underlying are themselves valueless, while whenever the call option is deep-in-the-money, simulated with $x = \infty$ (\ref{eq:BSMboundaryinf}), the value of the derivative is equal to the value of a forward contract involving the same underlying and with the same maturity date.
 
 \begin{center}
   \begin{equation}
@@ -419,7 +420,7 @@ In addition to these arguments, two other parameters are required, namely, the s
     \label{eq:dpm}
 \end{align}
 
-Consequently, \cref{eq:bsm:bsm:sol} will be purposely used in this master thesis to compute the price of an option for which the underlying is exclusively driven by a geometric Brownian motion.
+Consequently, \cref{eq:bsm:bsm:sol} will be purposely used in this master thesis to compute the price of an option for which a geometric Brownian motion exclusively drives the underlying prices process.
 
 
 
@@ -464,7 +465,7 @@ Each one is identified through a Greek letter ($\Delta$, $\Theta$, $\Gamma$).
 The Greeks will afterward be used to show how the hedge of a call option behaves under the conditions defined in \citet{bs} and beyond. 
 Indeed, $\Delta$ has a key role in the hedging strategy because it can be used to capture the effect that an instantaneous change in the asset has to the derivative.
 $\Gamma$ can remove the error of approximation incurred by a hedge based on $\Delta$ due to the discretization of the timeframe.
-Whereas $\Theta$ is not taken into account for the hedging strategy because it relates to the passing of time and nobody can prevent it.
+While $\Theta$ is not taken into account for the hedging strategy because it relates to the passing of time and nobody can prevent it.
 
 These letters are described in this section as well as their implication in the present work.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -474,7 +475,7 @@ These letters are described in this section as well as their implication in the 
 \label{sub:Delta}
 
 As shown in \citet{shreve}, delta is the first derivative of the call function (\ref{eq:bsm:bsm:sol}) with respect to the stock price function, as shown by \cref{eq:bsm:call}.
-It, therefore, represents the instantaneous rate of change of a call's value as the price of its underlying evolves.
+It, therefore, represents the instantaneous rate of change of a call value as the price of its underlying evolves.
 
 \begin{align}
     \Delta \left(t, \St \right) &= \frac{\partial \call{t}{\St}}{\partial \St}
@@ -523,10 +524,10 @@ According to \citet{shreve}, Gamma ($\Gamma$) is the second derivative of the op
 It gives the acceleration at which the price of a call moves along with the underlying price, ceteris paribus. 
 Therefore, thanks to gamma,  the curvature of the function to be approximated using the differential form is known. 
 It can be crucial to at least assess how big is the value of gamma in order to adequately hedge a position in a call. 
-Indeed, if gamma is low, the rebalancing of the hedge does not have to occur as frequently as if it is high because any change in the underlying asset would bring a little move in the derivative price, letting delta be a good approximation of the option evolution with respect to the asset price.
+Indeed, if gamma is low, the rebalancing of the hedge does not have to occur as frequently as if it is high because any change in the underlying asset would bring a little move in the derivative price, letting delta be a reasonable approximation of the option evolution with respect to the asset price.
 
 
-As a portfolio can be delta-neutral, \citet{roman} showns that it can also be gamma-neutral. However, making a portfolio gamma-neutral forces to add another derivative on the same underlying inside it to vanish the gamma, with the consequence to modify the delta of the portfolio. It, therefore, implies to recompute the delta in order to restore the delta-neutrality of the portfolio
+As a portfolio can be delta-neutral, \citet{roman} shows that it can also be gamma-neutral. However, making a portfolio gamma-neutral forces to add another derivative on the same underlying inside it to vanish the gamma, with the consequence to modify the delta of the portfolio. It, therefore, implies to recompute the delta in order to restore the delta-neutrality of the portfolio
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Theta
@@ -544,7 +545,7 @@ Theta is the derivative of the price of an option with respect to the time, stoc
 \end{center}
 
 According to \citet{hull}, Theta can be used as a proxy for gamma in a delta-neutral portfolio.
-Indeed, because of its neutrality, delta so disappears of \cref{eq:BSMGreeks} letting the relation between gamma and theta become clearer, that is, according to the option price and the value of theta, gamma can be assessed.
+Indeed, because of its neutrality, delta so disappears of \cref{eq:BSMGreeks} letting the relation between gamma and theta become clearer, that is, according to the option price and the value of theta, gamma could be assessed.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -579,11 +580,15 @@ The quantity of the underlying asset to keep in that portfolio at any time is pr
 \Cref{eq:bsm:delta:reverse:portfolio} shows the relation between a European short call and the delta-neutral portfolio that replicates the reverse position in the derivative for any time $t \in [0, T]$, where $T$ denotes the time to maturity.
 
 \begin{align}
-  c(t, S(t)) = \Delta(t) S(t) + e^{r (t - t_0)} c(t_0, S(t_0)) -
-  \left(\sum_{t_i \in ]0, t]} \left( \Delta(t_{i} - t_{i-1}) S(t_i) \right) + \Delta(t_{0}) S(t_0) \right),
-  \forall i \in \mathbb{Z} : i \in \left \{1, T \right \} \label{eq:bsm:delta:reverse:portfolio}
+  c(t, S(t)) = \Delta(t) S(t) + 
+  e^{r (t - t_0)} \left( c(t_0, S(t_0))  - \Delta(t_{0}) S(t_0) \right)
+  \notag\\
+    \mspace{5mu}
+  - \sum_{\substack{t_i \\ \forall i \in \mathbb{Z} : i \in \left [1, n \right ]}}^{t_n = t} e^{r (t - t_i)} \left( \Delta(t_{i}) -  \Delta(t_{i-1}) \right) S(t_i)
+  \label{eq:bsm:delta:reverse:portfolio} 
+  % & \forall i \in \mathbb{Z} : i \in \left [1, t \right ] \notag
 \end{align}
-where the set $i$ is the time-step.
+where $i$ is the time-step.
 
 
 
@@ -615,22 +620,25 @@ where the set $i$ is the time-step.
 \label{sec:Flaws}
 
 
-* Other process than the geom
-* Volatility + volatility smiles (how option ar priced)
-* curvature of the distribution
-
-Even if the \cref{eq:underlying:geometric:closed} is used to model the stock price process, it exists some lacks with the observed real processes. The analysis ([CHA REF]) mainly covers the following discrepancy of the model against empirical results.
+Even if \cref{eq:underlying:geometric:closed} is used to model the stock price process, it exists some lacks with the processes observed in real condition. 
+\Cref{cha:Methodology,cha:analysis} mainly covers the following discrepancy of the model against empirical results.
   
-The volatility appearing in the aformentioned underlying model (\ref{eq:underlying:geometric:closed}) is constant as time passes. However, as stated by \citet{teneng2011limitations}, even if this consideration can be considered as true for short period of time, it is not the case over the long-run 
+The volatility arising in the aforementioned underlying asset process (\ref{eq:underlying:geometric:closed}) is constant as time passes. However, as stated by \citet{teneng2011limitations}, even if this consideration can be considered as true for a short period of time, it is not the case over the long-run 
 
-Other model substitutes the process defined throughout this chapter with other ones including stochastic volatility processes, making it changing over time.
-For this purpose, the Heston's model is developed in this current master thesis, which encompasses two stochastic processes, a geometric Brownian motion [???? + REF] for the stock price diffusion model [DIFUSION??] and a mean-reverting CIR model to compute the volatility as a stochastic process.
-This model is exposed in \cref{sec:Heston}.
+Other models substitute the process defined during this chapter by including a stochastic volatility process, making the risk parameter changing over time.
+For this purpose, the Heston's model (HSV) which is developed in this current master thesis involves two stochastic processes, a Brownian motion for the stock price diffusion equation and a mean-reverting CIR process in order to compute stochastic volatility.
+This model is exposed in \cref{sec:other:heston}.
 
-Following [REF and REF], the uderlying log--returns distribution is characterized by the normal law. Consequently, the random variable $\St$, at the fixed time $t$, is normal. 
-However, according to empirical results, the random variable $d\St$ do not fit with the normal bell curve (\citet{clark1973}).
-Therefore if the price changes are not normally distribution neither is the log--return and thus $\St$, at a fixed time $t$, is not log--normally distributed.
-Along with the Heston model, another one is considerd; the Merton's jump--diffusion model. Both are able to modify the skewness and kurtosis of the log--return distibution curve. The Merton framework is developed in \cref{sec:MixedJump}. 
+\Cref{eq:logreturndist} shows that the normal law characterizes the underlying log-returns distribution. Consequently, the random variable $\St$, at the fixed time $t$, is log-normal, such as stated by \cref{eq:underlyin:st:nnorm}. 
+However, according to \citet{clark1973}, empirical results illustrate that the random variable $d\St/\St$ do not fit with the normal bell curve.
+Therefore if that rate of change is not normally distributed neither are the log-returns and thus $\St$, for a fixed time $t$, is not log-normal.
+
+Along with the Heston model, another one is examined; the Merton's jump-diffusion (MJD) model. Both are able to modify the skewness and kurtosis of the log-returns distribution curve. The Merton equation is developed in \cref{cha:OtherModel}. 
+
+Others discrepancies directly observed from market data are the volatility smiles.
+Indeed, if someone tries to reverse compute the volatility parameter $\sigma$ from the available option prices, she/he will get different values for options on the same asset, covering the same period but with different strike prices. 
+Nevertheless, since that parameter is used to simulate the underlying stock prices motion, it means that the same asset, during the same period depends on different risk parameters following the point of view of a hedger. That makes no sense.
+As shown in \cref{cha:Methodology}, the models MJD and HSV are versatile enough to overcome this issue.
 
 
 

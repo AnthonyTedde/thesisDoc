@@ -6,17 +6,14 @@
 \chapter{Other Models to be considered}
 \label{cha:OtherModel}
 
+In this chapter are explored models that will substitute the geometric Brownian motion for the stock prices evolution along with the related option pricing method.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Overview
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview}
-\label{sub:OverviewJump}
-% Jump processes could be separated into two different category. 
-% In one hand there are jump-diffusion model, and in other hand it exists pure jump model.
-% Difference is related to the frequency of jump occurence. for the first, the occurence is defined by a parameter and could therefore occurs more of less frequently depending on the parameter set up.
-% In the contrary for the latter, jump arrive as frequenty as the stock price goes through time.
-% The purpose of this section is to describe these process and give a mathematecally model in order to practice it.
+The first considered model is the Merton jump-diffusion (MJD) that brings jump to the course of a stochastic process while the second is the Heston stochastic volatility model that allows the volatility parameter to evolve through time.
+
+At the end of that chapter, a method developed by \citet{heston1993} illustrates how to compute the prices of options based on such underlying by using their characteristic function.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Mixed jump-diffusionModel
@@ -33,11 +30,14 @@ In his paper, \citet{merton76} provides a model for stock price evolution involv
 \end{align}
   
 According to \citet{merton76}, there are two specific sources of uncertainty explained by the model (\cref{eq:other:merton:pde}). 
-The first one is qualified to be normal, arising repeatedly with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:underlying:geometric:closed}. The cause of these changes is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
-Another type of changes, occuring during the stock lifecycle, are qualified as abnormal. Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effect on the stock price by giving rise to jumps in the course of stock path and therefore breaking its continuity (\citet{merton76}). The jump process is constructed on double basis. 
 
-Firstly, the occurence (i.e. the number of jumps arising throughout a given period of time) is computed thanks to a Poisson--driven process according to a parameter $\lambda$. 
-$\lambda$ denotes the number of jumps per unit of time. Consequently, the probability that a jump occurs during a time range of $\Delta t$ is equal to $\lambda dt$ (event $A$, eq. \ref{eq:PA}), whereas the probability that there are no jump during the same range of time is $1 - \lambda dt$, (event $B$, eq. \ref{eq:PB}) (\citet{matsuda2004}). While C, eq. \ref{eq:PC}, refers to the event that more than one jump occur during the same small delta time.
+The first one is qualified as normal, repeatedly arising with low effects and keeping the stock price motion continuous from time to time. These small changes on the price are modeled by a Wiener process, such as it was the case in equation \ref{eq:underlying:geometric:closed}. The cause of these fluctuations is explained by a temporary unbalanced between the supply and demand \citet{merton76}.
+
+Another type of changes, occurring during the stock lifecycle, is qualified as abnormal by \citet{merton76}. 
+Such "abnormalities" happen less frequently, are unpredictable in their frequency and produce bigger effects on the stock price by giving rise to jumps during the course of the stock path, and therefore breaking its continuity. The jump process is constructed on a double basis. 
+
+Firstly, the occurrence (i.e. the number of jumps arising throughout a given period of time) is computed thanks to a Poisson-driven process according to a parameter $\lambda$. 
+$\lambda$ denotes the number of jumps per unit of time. Consequently, the probability that a jump occurs during a time range of $\Delta t$ is equal to $\lambda dt$ (event $A$, eq. \ref{eq:PA}), whereas the probability that there are no jump during the same range of time is $1 - \lambda dt$, (event $B$, eq. \ref{eq:PB}) (\citet{matsuda2004}). While event C, from \cref{eq:PC}, refers to the event that more than one jump occurs during the same small delta time.
 
 \begin{align}
   \mathop{\mathbb{P}} \{A\}&\cong \lambda dt  \label{eq:PA}\\
@@ -45,7 +45,7 @@ $\lambda$ denotes the number of jumps per unit of time. Consequently, the probab
   \mathop{\mathbb{P}} \{C\}&\cong   0 \label{eq:PC}
 \end{align}
 
-On the other hand, after the occurence comes the size of the jump. Such as the frequency, the importance of the jump can be characterized by a statistic law. Following \citet{heston}, the log--normal law is used. \citet{matsuda2004}, gives a summary in oder to grips with the concept of jump size  \crefrange{eq:yt}{eq:lny}.
+On the other hand, after the occurrence, the size of the jump matters. Such as the frequency, a statistic law characterizes the importance of the jump. Following \citet{merton76}, the log-normal law is used. \citet{matsuda2004} offers the \crefrange{eq:yt}{eq:lny} to summarize the law and the parameters that describe the jump intensity.
  
 \begin{align}
   y_t  &\sim lognormal( e^{\mu + \frac{1}{2} \delta^2}, 
@@ -60,7 +60,7 @@ On the other hand, after the occurence comes the size of the jump. Such as the f
 with $y_t$, $y_t - 1$ and $\ln{y_t} \equiv Y_t$ standing respectively for "absolute price jump size", "relative price jump size" and "log price jump size" (\citet{matsuda2004}).
 
  
-The Merton's jump-diffusion process is be able to capture positive / negative skewness (see \cref{sub:MertonSkewness}) and excess kurtosis (see \cref{sub:MertonKurtosis}) of the log--return density function \citet{merton76}. 
+The Merton's jump-diffusion process is be able to capture positive / negative skewness (see \cref{sub:MertonSkewness}) and excess kurtosis (see \cref{sub:MertonKurtosis}) of the log-return density function, in accordance with \citet{merton76}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,8 +88,8 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 \subsection{Graphical representation}
 \label{sub:other:merton:graphical}   
 
-\Cref{p:other:merton:path} shows a unique time serie generated using an implementation of \cref{eq:other:merton:pde}. A jump is clearly noticed at day 363. While
-\Cref{t:other:merton:path}, which is a subset of the time serie drawn in \cref{p:other:merton:path}, illustrates numerically when the jump occurs.
+\Cref{p:other:merton:path} shows a unique time-series generated using an implementation of \cref{eq:other:merton:pde}. A jump is clearly marked at day 363. While
+\cref{t:other:merton:path}, which is a subset of the time-series drawn in \cref{p:other:merton:path}, illustrates numerically when the jump occurs.
 
 \begin{table}[ht]
 \centering
@@ -109,7 +109,7 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
   365 &97.00 \\ 
    \hline
 \end{tabular}
-\caption{Merton Mixed jump-diffusion time serie}
+\caption{Merton Mixed jump-diffusion time-series}
 \label{t:other:merton:path}
 \end{table}
 
@@ -140,7 +140,7 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 \subsection{Impact on the skewness log--return}
 \label{sub:MertonSkewness}
 
-The way to influence the direction of the distibution's shape is achieved by moving the cursor of the expected value of jump impact, in other word, by changing the value of the parameter $\mu$. \cref{plot:MertonReturnDensity} shows how the density's shape of the log-return may vary along with this parameter.
+The way to influence the direction of the distribution's shape is achieved by moving the cursor of the expected value of jump impact, in other words, by changing the value of the parameter $\mu$. \cref{plot:MertonReturnDensity} shows how the density's shape of the log-return may vary together with this parameter.
 
 
 \begin{figure}[h]
@@ -167,7 +167,7 @@ The way to influence the direction of the distibution's shape is achieved by mov
 \subsection{Impact on kurtosis log--return}
 \label{sub:MertonKurtosis}
 
-The way to influence the aspect of the distibution's tails is achieved by moving the cursor of the expected value of jump occurence, in other word, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log--return may vary along with this parameter.
+The way to influence the aspect of the distribution's tails is achieved by moving the cursor of the expected value of jump occurrence, in other words, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log-return may vary together with this parameter.
 
 \begin{figure}[h]
 \centering
@@ -205,9 +205,9 @@ The way to influence the aspect of the distibution's tails is achieved by moving
 \section{Heston stochastic volatility model}
 \label{sec:other:heston}
 
-In his paper, \citet{heston1993} tackles with another discrepancy against the real world behaviour introduced by the geometric Brownian motion, namely, its deterministic and immutable volatility $\sigma$.
+In his paper, \citet{heston1993} tackles with another discrepancy against the real world behavior introduced by the geometric Brownian motion, namely, its deterministic and immutable volatility $\sigma$.
 
-In addition to provide a model where the volatility is stochastic (\cref{eq:other:hsvvol}), \citet{heston1993} gives the possibility to make that volatility in correlation with the stock price process (\cref{eq:other:hsvstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relates together.
+Besides, to provide a model where the volatility is stochastic (\cref{eq:other:hsvvol}), \citet{heston1993} gives the possibility to make that volatility in correlation with the stock price process (\cref{eq:other:hsvstock}), according to the parameter $\rho$ defining how the Brownian motions from both processes relate together.
 
 \begin{align}
     \HSVvol \label{eq:other:hsvvol} \\
@@ -218,9 +218,8 @@ In addition to provide a model where the volatility is stochastic (\cref{eq:othe
     d\Bmsub{v} d\Bmsub{s} &= \rho \label{eq:other:rho}
 \end{align}
 
-\Cref{eq:other:hsvstock} represents the evolution of an asset though time given, by its differential form. Such as \cref{eq:underlying:geometric:closed}, developed by \citet{bs}, the parameter $\alpha$ gives the drift rate of return. The difference between both models lies in the way the volatility is perceived. In \citet{heston1993}, the asset volatility is given by the stochastic \cref{eq:other:hsvvol}. More specifically, the volatility thus defined follows a Cox--Ingersoll--Ross process.
-
-\Crefrange{eq:other:hsvvol}{eq:other:hsvstock} will be used to build Monte Carlo simulations with the goal of getting samples of dummy stock price motions under real--world assumptions. The framework to use for option pricing purpose is given in \cref{sub:other:heston:risk}.
+\Cref{eq:other:hsvstock} represents the evolution of an asset though time, given by its differential form. 
+Such as \cref{eq:underlying:geometric:closed}, developed by \citet{bs}, the parameter $\alpha$ gives the drift rate. The difference between both models lies in the way the volatility is perceived. In \citet{heston1993}, the asset volatility is given by the stochastic \cref{eq:other:hsvvol}. More specifically, the volatility so defined follows a Cox-Ingersoll-Ross process.
 
 \subsection{Model parameters}
 \label{sub:other:heston:model}
@@ -228,20 +227,20 @@ In addition to provide a model where the volatility is stochastic (\cref{eq:othe
 Here are described all the parameters appearing in the Heston stochastic volatility model.
 
 \begin{tabular}{ll}
-  $S(t)$ & Price of the stock at time t \\
-  $\alpha$ &  Annualized -- and deterministic -- expected return \\
-  $V(t)$ & Observed volatility of the stock at time t \\
-  $\kappa$ & Mean-reversion speed \\
-  $\theta$ & Volatility's long-run mean \\
-  $\sigma$ & Volatility of the volatility 
+  $S(t)$ & Price of the stock at time t. \\
+  $\alpha$ &  Annualized -- and deterministic -- expected return. \\
+  $V(t)$ & Observed volatility of the stock at time t. \\
+  $\kappa$ & Mean-reversion speed. \\
+  $\theta$ & Volatility's long-run mean. \\
+  $\sigma$ & Volatility of the volatility. 
 \end{tabular}
 
 \subsection{Feller condition}
 \label{sub:other:heston:feller}
 
-Due to the time discretisation brung by The Monte Carlo simulation, the stochastic process \ref{eq:other:hsvvol} may turn out to be negative sometime. If such a negative value is appear at time $t$, the next value computed for $t+\epsilon$ will raise an error, due to the term $\sqrt{V(t)}$ that obviously does not exist for negative value.
+Due to the time discretization brought by a simulation, the stochastic process \ref{eq:other:hsvvol} may turn out to be sometimes negative. If such a value appears at time $t$, the next value computed for $t+\epsilon$ will raise an error, due to the term $\sqrt{V(t)}$ that does not exist for a negative value.
 
-In his paper, \citet{feller1951} demonstrates that a process such the one described by \cref{eq:other:hsvvol} does not reach negative value if the following relation \ref{eq:other:feller} is respected.
+In his paper, \citet{feller1951} demonstrates that a process such the one described by \cref{eq:other:hsvvol} does not reach negative values if the following relation \ref{eq:other:feller} is respected.
 
 \begin{align}
   &\lim_{V\to 0} \left( \kappa \theta - V - \frac{1}{2} \frac{\partial(\sigma \sqrt{V})^2}{\partial V} \right) \geq 0 \label{eq:other:feller} \\
@@ -250,7 +249,7 @@ In his paper, \citet{feller1951} demonstrates that a process such the one descri
   \iff & 2 \kappa \theta  - \sigma^2  \geq 0 \label{eq:other:feller:heston}
 \end{align}
 
-Consequently, if the condition related by \cref{eq:other:feller:heston} is respected, no negative values would occur by using a Monte Carlo simulation to compute the CIR stochastic volatility.
+Consequently, if the condition related by \cref{eq:other:feller:heston} is respected, no negative value would occur by using any time-discretized simulation to compute the CIR stochastic volatility.
 
 \subsection{Risk--neutralized processes}
 \label{sub:other:heston:risk}
@@ -258,13 +257,13 @@ Consequently, if the condition related by \cref{eq:other:feller:heston} is respe
 Likewise it has been done by \citet{bs}, \citet{heston1993} used a risk-neutral framework to price options.
 To do so, Heston modified the drift parameters of both price and volatility stochastic processes.
 
-The drift part of the price diffusion (\cref{eq:other:hsvstock}) is risk--neutralized by turning the rate $\alpha$ into its riskless counterpart $r$, as shown by \cref{eq:other:hsvstock:riskless}.
+The drift part of the price diffusion (\cref{eq:other:hsvstock}) is risk-neutralized by turning the rate $\alpha$ into its riskless counterpart $r$, as shown by \cref{eq:other:hsvstock:riskless}.
 
 \begin{align}
     \HSVstockriskless \label{eq:other:hsvstock:riskless}
 \end{align}
 
-In order to make the volatility process risk--neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. The risk--neutralized CIR process is given by cref{eq:other:hsvvol:riskless}.
+In order to make the volatility process risk-neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. Cref{eq:other:hsvvol:riskless} gives the so risk-neutralized CIR process.
 
 \begin{align}
     \HSVvolriskless \label{eq:other:hsvvol:riskless} \\
@@ -274,7 +273,7 @@ In order to make the volatility process risk--neutralized, Heston added the risk
     \theta^{*} & = \frac{\kappa \theta}{\kappa^{*}} \label{eq:other:theta:riskless}
 \end{align}
 
-Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively denote the long--run mean and mean--reversion speed, are the ones to estimate while dealing with pricing options purposes. 
+Consequently, the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively denote the long-run mean and mean-reversion speed, are the ones to estimate while dealing with HSV pricing options purposes. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Graphical representation
@@ -282,9 +281,9 @@ Consequently the parameters $\kappa^{*}$ and $\theta^{*}$, which respectively de
 \subsection{Graphical representation}
 \label{sub:other:heston:graphical}   
 
-Figures \ref{p:other:uncorrelatedheston} and \ref{p:other:correlatedheston}, get a hands-on insight into how the correlation between the underlying Brownian motions of the stock and volatility time series affect both processes.
+\Cref{p:other:uncorrelatedheston,p:other:correlatedheston}, give a hands-on insight in how the correlation between the underlying Brownian motions of the stock and volatility time series affect both processes.
 \cref{p:other:uncorrelatedheston} shows a correlation between the Wiener processes $B_1$ and $B_2$ sets to $\rho = -1$, making the two Markov motions perfectly negatively correlated. 
-It directly affects the course of the stocks serie, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
+It directly affects the course of the stocks series, which is altogether correlated in the same negative direction with respect to the CIR volatility process as well.
 Likewise, \cref{p:other:correlatedheston} points out the fully positive correlation occuring between the processes \ref{eq:other:hsvvol} and \ref{eq:other:hsvstock} whilst the Brownian motions correlation is set to one. 
 
 \begin{figure}[ht]
@@ -326,7 +325,7 @@ Likewise, \cref{p:other:correlatedheston} points out the fully positive correlat
 
 
 
-The usage of the aforementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the volatility stochastic process (\cref{eq:other:hsvvol}), (\citet{heston1993})
+As shown by \citet{heston1993}, the usage of the aforementioned Heston model lies in the fact that the correlation between the CIR and asset processes' Brownian motions would notably explain the spot return skewness whereas the kurtosis of the distribution may be affected by the volatility parameter $\sigma$ of the stochastic volatility process (\cref{eq:other:hsvvol}).
 It may consequently be consistent with what happens in the equity market, namely a sharp decrease in equity price implies an increase in stock volatility (\citet{criso2015}).
 % Nevertheless, even though Heston model gives a framework with stochastic volatility, over the long--run the spot return would be characterized by a normal distribution as limiting distribution, with $\theta$ as variance per unit of time. By consequence, Black--Scholes--Merton should work well for such long term option.
 
@@ -341,8 +340,8 @@ It may consequently be consistent with what happens in the equity market, namely
 
 Through the Heston stochastic volatility model, the skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$. 
 
-When a positive correlation exists between both Brownian motions, an increase in the volatility implies a rise in the asset price whereas a decrease in the volatility tend to lower the asset price.
-In other words, when the uncertainty is high and consequently the changes in the asset price are numerous, these latter tend to be positive. 
+When a positive correlation exists between both Brownian motions, an increase in the volatility implies a rise in the asset price whereas a decrease in the volatility tends to lower the asset price.
+In other words, when the uncertainty is high, and consequently the changes in the asset price are numerous, these latter tend to be positive. 
 That is why the distribution of the spot return is offset to the left with a right fat tail when $\rho$ is positive.
 
 The opposite relation is noticed with negative correlation, namely, lower prices relate to higher volatility generating a left fat tail in the log–return distribution (\citet{heston1993}).
@@ -379,8 +378,8 @@ The black density represents to the normal bell curve with mean $- \frac{\theta}
 
 Following \citet{heston1993}, the kurtosis of the distribution of the spot return may be affected by the parameter $\sigma$, which represent the volatility of the volatility.
 
-First and foremost, following \cref{eq:other:hsvvol} if $\sigma = 0$, the volatility V of the Heston model turns out to be deterministic and \cref{eq:other:hsvstock}  becomes a geometric Brownian motion with normal distribution for the time series' log-returns.
-Otherwise, \citet{heston1993} showed that by rising $\sigma$, the kurtosis of the spot returns increases. Consequently, within the Heston stochastic volatility model, the bigger $\sigma$, the fatter the tail, ceteris paribus. These statements are observed in \cref{p:other:heston:kurtosis}.
+First and foremost, following \cref{eq:other:hsvvol} if $\sigma = 0$, the volatility V of the Heston model turns out to be deterministic and \cref{eq:other:hsvstock}  becomes a geometric Brownian motion with normal distribution for the time-series' log-returns.
+Otherwise, \citet{heston1993} showed that by raising $\sigma$, the kurtosis of the spot returns increases. Consequently, within the Heston stochastic volatility model, the bigger $\sigma$, the fatter the tail, ceteris paribus. These statements are observed in \cref{p:other:heston:kurtosis}.
 
 \begin{figure}[ht]
 \centering
@@ -414,7 +413,7 @@ The black density represents to the normal bell curve with mean $- \frac{\theta}
 
 As shown by \cref{sec:other:merton} and \cref{sec:other:heston}, the frameworks developed by \citet{merton76} and \citet{heston1993} drastically change the distribution of any underlying assets following such processes. Therefore, the pricing method to be used must also be adapted in order to take that update into account.
 
-In his paper, \citet{heston1993} developed a techinque to price options using the characteristic function of the underlying asset. Furthermore, according to \citet{criso2015} that method could be used to price every options provided that the underlying's characteristic  is known.
+In his paper, \citet{heston1993} developed a technique to price options using the characteristic function of the underlying asset. Furthermore, according to \citet{criso2015} that method could be used to price any option provided that the underlying's characteristic function is known.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -426,10 +425,10 @@ In his paper, \citet{heston1993} developed a techinque to price options using th
 \citet{heston1993} proposed the solution given by \cref{eq:other:call:heston} to price a european call option.
 
 \begin{align}
-  C(t) = S(t) P_1 - e^{-r(T-t)} K P_2 \label{eq:other:call:heston}
+  c(t) = S(t) P_1 - e^{-r(T-t)} K P_2 \label{eq:other:call:heston}
 \end{align}
 
-Through this method, the european call price at time $t$, namely $C(t)$, is computed thanks to \cref{eq:other:call:heston}, where $S(t)$ and $e^{r(T - t)}$ respectively stand for the stock price and the present value of the strike at that time $t$.
+Through this method, the european call price at time $t$, namely $c(t)$, is computed thanks to \cref{eq:other:call:heston}, where $S(t)$ and $e^{r(T - t)}$ respectively stand for the stock price and the present value of the strike at that time $t$.
 
 \begin{align}
   P_1(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi - i)}{i\phi\psi(x,V,t;-i)} \right) d\phi \label{eq:other:call:heston:pi1} \\ 
@@ -439,7 +438,7 @@ Through this method, the european call price at time $t$, namely $C(t)$, is comp
 
 Following the development in \citet{criso2015}, both \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} are probability quantities that involve the underlying characteristic function, namely $\psi(x,V,t;\phi)$. Once these quantities are computed, they are substituted in \cref{eq:other:call:heston} in order to get the call price at time $t$.
 
-The characteristic functions for the Merton jump--diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
+The characteristic functions for the Merton jump-diffusion (\cref{sec:other:merton}) and Heston stochastic volatility (\cref{sec:other:heston}) models are developed \cref{sub:other:option:merton,sub:other:option:heston}
 
 
 
@@ -462,7 +461,7 @@ The characteristic functions for the Merton jump--diffusion (\cref{sec:other:mer
 \kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
 \end{align}
   
-According to the method given by \citet{heston1993}, the characteristic function \ref{eq:other:merton:psi} will be used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Merton mixed jump--diffusion model.
+According to the method given by \citet{heston1993}, the characteristic function \ref{eq:other:merton:psi} will be used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $c(t)$ corresponding to a stock price process $S(t)$ driven by the Merton mixed jump-diffusion model.
 
 
 
@@ -485,7 +484,7 @@ Following the development proposed by \citet{gatheral2006}, \citet{criso2015} pr
   &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
 \end{align}
 
-\Cref{eq:other:heston:psi} can be directly used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $C(t)$ corresponding to a stock price process $S(t)$ driven by the Heston stochastic volatility model.
+\Cref{eq:other:heston:psi} can be directly used inside \cref{eq:other:call:heston:pi1,eq:other:call:heston:pi2} in order to compute the quantities $P_1$ and $P_2$ that could be thereafter replaced inside \cref{eq:other:call:heston} to find the european call price  $c(t)$ corresponding to a stock price process $S(t)$ driven by the Heston stochastic volatility model.
 
 
 
