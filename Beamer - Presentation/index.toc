@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.12pt}
+\beamer@sectionintoc {2}{Methodology}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Calibration}{4}{0}{1}
+\beamer@subsectionintoc {2}{2}{Delta hedging}{5}{0}{1}
+\beamer@sectionintoc {3}{Analysis and results}{7}{0}{2}
+\beamer@subsectionintoc {3}{1}{Analysis and results: Merton}{8}{0}{2}
+\beamer@subsectionintoc {3}{2}{Analysis and results: Heston}{9}{0}{2}

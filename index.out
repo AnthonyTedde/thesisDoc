@@ -1,0 +1,56 @@
+\BOOKMARK [0][-]{chapter*.1}{Abstract}{}% 1
+\BOOKMARK [0][-]{chapter*.2}{Acknowledgements}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
+\BOOKMARK [1][-]{section.1.1}{Raised questions}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Organization of the document}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Upstream concepts}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Vanilla options}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Brownian Motion}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.1}{Correlated Brownian motions}{section.2.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Ito's lemma}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Cox-Ingersoll-Ross}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.5}{Skewness and Kurtosis}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.5.1}{Estimation}{section.2.5}% 13
+\BOOKMARK [1][-]{section.2.6}{Log-return and compounded interest rate}{chapter.2}% 14
+\BOOKMARK [0][-]{chapter.3}{The Black-Scholes-Merton option pricing model}{}% 15
+\BOOKMARK [1][-]{section.3.1}{Assumptions}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.2}{Geometric Brownian motion}{chapter.3}% 17
+\BOOKMARK [2][-]{subsection.3.2.1}{Distributions of geometric Brownian motion}{section.3.2}% 18
+\BOOKMARK [1][-]{section.3.3}{The Black-Scholes-Merton equation}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.4}{The greeks}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.4.1}{Delta}{section.3.4}% 21
+\BOOKMARK [2][-]{subsection.3.4.2}{Gamma}{section.3.4}% 22
+\BOOKMARK [2][-]{subsection.3.4.3}{Theta}{section.3.4}% 23
+\BOOKMARK [2][-]{subsection.3.4.4}{Relation between BSM and the Greeks}{section.3.4}% 24
+\BOOKMARK [1][-]{section.3.5}{The delta hedging strategy}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.6}{Flaws}{chapter.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Other Models to be considered}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Merton Mixed jump-diffusion Model}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.1.1}{Risk-neutralized process}{section.4.1}% 29
+\BOOKMARK [2][-]{subsection.4.1.2}{Graphical representation}{section.4.1}% 30
+\BOOKMARK [2][-]{subsection.4.1.3}{Impact on the skewness log-return}{section.4.1}% 31
+\BOOKMARK [2][-]{subsection.4.1.4}{Impact on kurtosis log-return}{section.4.1}% 32
+\BOOKMARK [1][-]{section.4.2}{Heston stochastic volatility model}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.2.1}{Model parameters}{section.4.2}% 34
+\BOOKMARK [2][-]{subsection.4.2.2}{Feller condition}{section.4.2}% 35
+\BOOKMARK [2][-]{subsection.4.2.3}{Risk-neutralized processes}{section.4.2}% 36
+\BOOKMARK [2][-]{subsection.4.2.4}{Graphical representation}{section.4.2}% 37
+\BOOKMARK [2][-]{subsection.4.2.5}{Impact on log-return density's skewness}{section.4.2}% 38
+\BOOKMARK [2][-]{subsection.4.2.6}{Impact on log-return density's kurtosis}{section.4.2}% 39
+\BOOKMARK [1][-]{section.4.3}{Option pricing method}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.3.1}{Probabilistic approach}{section.4.3}% 41
+\BOOKMARK [2][-]{subsection.4.3.2}{Characteristic function for Merton Mixed jump\205diffusion model}{section.4.3}% 42
+\BOOKMARK [2][-]{subsection.4.3.3}{Characteristic function for Heston stochastic volatility model}{section.4.3}% 43
+\BOOKMARK [0][-]{chapter.5}{Methodology}{}% 44
+\BOOKMARK [1][-]{section.5.1}{Calibration}{chapter.5}% 45
+\BOOKMARK [2][-]{subsection.5.1.1}{Option prices based calibration}{section.5.1}% 46
+\BOOKMARK [2][-]{subsection.5.1.2}{Asset prices based calibration}{section.5.1}% 47
+\BOOKMARK [2][-]{subsection.5.1.3}{Merton's model calibration}{section.5.1}% 48
+\BOOKMARK [2][-]{subsection.5.1.4}{Heston's model calibration}{section.5.1}% 49
+\BOOKMARK [1][-]{section.5.2}{Delta hedging}{chapter.5}% 50
+\BOOKMARK [2][-]{subsection.5.2.1}{Determination of the option price}{section.5.2}% 51
+\BOOKMARK [2][-]{subsection.5.2.2}{Construction of the delta-neutral portfolio}{section.5.2}% 52
+\BOOKMARK [2][-]{subsection.5.2.3}{Computation of the delta}{section.5.2}% 53
+\BOOKMARK [2][-]{subsection.5.2.4}{Measuring the hedging performation}{section.5.2}% 54
+\BOOKMARK [0][-]{chapter.6}{Analysis and results}{}% 55
+\BOOKMARK [1][-]{section.6.1}{The delta-hedging in a log-normal world}{ch

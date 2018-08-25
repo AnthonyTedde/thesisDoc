@@ -13,10 +13,10 @@ library(purrr)
 # Identical param
 alpha <-  0
 kappa <-  2
-theta <-  v <-  0.5
+theta <-  v <-  0.01
 Ti <- 1
-scale <- 10000
-rho <- 1
+scale <- 500
+rho <- 0
 
  # negative-correlation
 args<- list("NegCorrelation" = list(50, v, Ti, 1, scale, alpha, rho, kappa, theta, .4),
@@ -56,8 +56,16 @@ p <- ggplot(as.data.frame(return_list)) +
                 args = list(
                   mean = 0,
                   sd = sqrt(1 / scale) * sqrt(v)
-                ))
+                ))+
+  labs(x = "log-return",
+       y = "Density")
 
 tikzDevice::tikz(file = "figures/density.heston.kurtosis.tex", width = 6, height = 3) 
+print(p)
+dev.off()
+
+
+
+tikzDevice::tikz(file = "figures/density.heston.kurtosis2.tex", width = 4, height = 2) 
 print(p)
 dev.off()

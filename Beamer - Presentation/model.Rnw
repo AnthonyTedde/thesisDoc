@@ -1,0 +1,180 @@
+\section{Other models}
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Other models}
+
+\tableofcontents[currentsection]
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+\subsection{Merton's Jump-Diffusion Model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{The Merton's Jump-Diffusion Model (MJD)}
+
+\begin{block}{MJD stochastic process}
+  \begin{align}
+  \St &= S\left(0\right) e^{\left(\alpha - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
+  \notag
+\end{align}
+  
+\end{block}
+
+
+\begin{block}{Graphical representation}
+  \begin{figure}[ht]
+  \centering
+  \input{../figures/merton.path2.tex} 
+\end{figure}
+  
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}{MJD: log-return density}
+
+\begin{block}{Impact on the skewness}
+\begin{figure}[h]
+\centering
+\input{../figures/MertonJumpReturn2.tex}
+\end{figure}
+\end{block}
+\end{frame}
+
+\begin{frame}{MJD: log-return density}
+\begin{block}{Impact on the kurtosis}
+\begin{figure}[h]
+\centering
+\input{../figures/MertonJumpReturnTails2.tex}
+\end{figure}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Heston stochastic volatility model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{The Heston stochastic volatility model (HSV)}
+
+\begin{block}{HSV stochastic process}
+\begin{align}
+    \HSVvol \notag\\
+    \HSVstock \notag \\
+    \rho  &= d\Bmsub{v} d\Bmsub{s}  \notag
+\end{align}
+  
+\end{block}
+
+
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}{MJD: log-return density}
+
+\begin{block}{Impact on the skewness}
+\begin{figure}[ht]
+\centering
+\input{../figures/skewnessHeston2.tex}
+\end{figure}
+\end{block}
+\end{frame}
+
+\begin{frame}{MJD: log-return density}
+\begin{block}{Impact on the kurtosis}
+\begin{figure}[ht]
+\centering
+\input{../figures/density.heston.kurtosis2.tex}
+\end{figure}
+
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+\subsection{Options pricing method}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Heston probabilistic approach}
+
+
+\begin{align}
+  c(t) &= S(t) P_1 - e^{-r(T-t)} K P_2 \notag \\
+\intertext{With}
+  P_1(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi - i)}{i\phi\psi(x,V,t;-i)} \right) d\phi \notag \\ 
+  \intertext{}
+  P_2(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi)}{i\phi} \right) d\phi \notag
+\end{align}
+  
+
+
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{MJD Characteristic function}
+
+
+
+\begin{align}
+\psi^{merton}(\phi) &= e^{ 
+  \lambda \tau \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
+  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) \tau \right) -
+  \sigma^2 \frac{\phi^2}{2} \tau
+}
+\notag \\
+\intertext{where}
+\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
+\end{align}
+ 
+\end{frame}
+
+
+\begin{frame}{HSV Characteristic function}
+\begin{align}
+  &\psi^{heston}\left(\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \notag \\
+  \intertext{where}
+  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
+  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
+  \intertext{and}
+  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
+  &g = \frac{r_{-}}{r_{+}} \notag \\
+  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
+\end{align}
+
+ 
+\end{frame}
+% -----------------------------------------------------------------------------

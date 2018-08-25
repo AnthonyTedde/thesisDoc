@@ -137,7 +137,7 @@ However, likewise it was done by \citet{bs}, the drift part of \cref{eq:other:me
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Skewness
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on the skewness log--return}
+\subsection{Impact on the skewness log-return}
 \label{sub:MertonSkewness}
 
 The way to influence the direction of the distribution's shape is achieved by moving the cursor of the expected value of jump impact, in other words, by changing the value of the parameter $\mu$. \cref{plot:MertonReturnDensity} shows how the density's shape of the log-return may vary together with this parameter.
@@ -164,10 +164,10 @@ The way to influence the direction of the distribution's shape is achieved by mo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: kurtosis
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on kurtosis log--return}
+\subsection{Impact on kurtosis log-return}
 \label{sub:MertonKurtosis}
 
-The way to influence the aspect of the distribution's tails is achieved by moving the cursor of the expected value of jump occurrence, in other words, by changing the value of the parameter $\lambda$. The \cref{p:MertonReturnDensityTails} shows how the distribution's tails of the log-return may vary together with this parameter.
+The way to influence the aspect of the distribution's tails is achieved by moving the cursor of the expected value of jump occurrence, in other words, by changing the value of the parameter $\lambda$. \Cref{plot:MertonReturnDensityTails} shows how the distribution's tails of the log-return may vary together with this parameter.
 
 \begin{figure}[h]
 \centering
@@ -251,7 +251,7 @@ In his paper, \citet{feller1951} demonstrates that a process such the one descri
 
 Consequently, if the condition related by \cref{eq:other:feller:heston} is respected, no negative value would occur by using any time-discretized simulation to compute the CIR stochastic volatility.
 
-\subsection{Risk--neutralized processes}
+\subsection{Risk-neutralized processes}
 \label{sub:other:heston:risk}
 
 Likewise it has been done by \citet{bs}, \citet{heston1993} used a risk-neutral framework to price options.
@@ -263,7 +263,7 @@ The drift part of the price diffusion (\cref{eq:other:hsvstock}) is risk-neutral
     \HSVstockriskless \label{eq:other:hsvstock:riskless}
 \end{align}
 
-In order to make the volatility process risk-neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. Cref{eq:other:hsvvol:riskless} gives the so risk-neutralized CIR process.
+In order to make the volatility process risk-neutralized, Heston added the risk premium parameter, $\lambda$, to the drift part of \cref{eq:other:hsvvol}. \Cref{eq:other:hsvvol:riskless} gives the so risk-neutralized CIR process.
 
 \begin{align}
     \HSVvolriskless \label{eq:other:hsvvol:riskless} \\
@@ -335,7 +335,7 @@ It may consequently be consistent with what happens in the equity market, namely
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Impact on skewness density return
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on log--return density's skewness}
+\subsection{Impact on log-return density's skewness}
 \label{sub:hestonskewness}
 
 Through the Heston stochastic volatility model, the skewness of the distribution of continuously compounded spot return may be affected by the parameter $\rho$. 
@@ -373,7 +373,7 @@ The black density represents to the normal bell curve with mean $- \frac{\theta}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUBSECTION: Impact on kurtosis density return
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Impact on kurtosis density return}
+\subsection{Impact on log-return density's kurtosis}
 \label{sub:hestonkurtosis}
 
 Following \citet{heston1993}, the kurtosis of the distribution of the spot return may be affected by the parameter $\sigma$, which represent the volatility of the volatility.

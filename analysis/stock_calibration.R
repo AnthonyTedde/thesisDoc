@@ -88,15 +88,15 @@ setwd("c:/Users/ATE/thesisDoc/data")
 # Heston on the same period with risk neutral data
 ########################################################
 h <- heston(initial_stock_price = quote[1],
-       initial_volatility = x["v0"],
-       time_to_maturity = 1,
-       seed = 1,
-       scale = 365,
-       alpha = 0.02160,
-       rho = x["rho"],
-       kappa = x["kappa"],
-       theta = x["theta"],
-       sigma = x["sigma"])
+            initial_volatility = x["v0"],
+            time_to_maturity = 1,
+            seed = 1,
+            scale = 365,
+            alpha = 0.02160,
+            rho = x["rho"],
+            kappa = x["kappa"],
+            theta = x["theta"],
+            sigma = x["sigma"])
 
 quote <- h$stock_price_path
 

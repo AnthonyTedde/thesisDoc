@@ -47,13 +47,13 @@
 
 
 \pagenumbering{arabic}
-% \SweaveInput{introduction}
-% \SweaveInput{upstream}
-% \SweaveInput{BSM}
+\SweaveInput{introduction}
+\SweaveInput{upstream}
+\SweaveInput{BSM}
 \SweaveInput{models}
-% \SweaveInput{methodology}
-% \SweaveInput{analysis.Rnw}
-% \SweaveInput{conclusion}
+\SweaveInput{methodology}
+\SweaveInput{analysis.Rnw}
+\SweaveInput{conclusion}
 
 
 \bibliography{bibl}
@@ -61,9 +61,9 @@
 \addcontentsline{toc}{chapter}{Bibliography}
 
 \begin{appendices}
-% \SweaveInput{append.function}
-% \SweaveInput{append.marketdata}
-% \SweaveInput{append.analysis}
+\SweaveInput{append.function}
+\SweaveInput{append.marketdata}
+\SweaveInput{append.analysis}
 \end{appendices}
 
 

@@ -1,0 +1,251 @@
+\documentclass{beamer}
+ 
+\usetheme{default}
+\usepackage[latin1]{inputenc}
+\usefonttheme{professionalfonts}
+\usepackage{times}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usetikzlibrary{arrows,shapes}
+\usepackage{ulem}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{arydshln}
+
+
+%%% Color
+\definecolor{myred}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+
+ 
+% \usepackage[utf8]{inputenc}
+\SweaveInput{../preamble/formula.Rnw}
+\SweaveInput{../preamble/snippet.Rnw}
+ 
+% \usetheme{Boadilla}
+% \usecolortheme{default}
+
+
+
+
+%Information to be included in the title page:
+\title{Hedging performances of the Black-Scholes model in imperfect log-normal world}
+\author{Anthony Tedde}
+\institute{Louvain School of Management (LSM)}
+\date{2018}
+ 
+ 
+ 
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+ 
+%---Table of content---------------------------------------------------------
+\frame{\titlepage}
+\section[]{}
+\begin{frame}{Contents}
+  \tableofcontents
+\end{frame}
+%---Fim do Sumário------------------------------------------------------------
+
+
+
+
+
+% =============================================================================
+% CONTEXT
+% =============================================================================
+% \SweaveInput{context}
+
+% =============================================================================
+% Other Models
+% =============================================================================
+% \SweaveInput{model}
+
+
+% =============================================================================
+% Methodology
+% =============================================================================
+\section{Methodology}
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Methodology}
+
+\tableofcontents[currentsection]
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+\subsection{Calibration}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Calibration}
+
+\begin{block}{Calibration of the option valuation models}
+  \begin{itemize}
+    \item Concerns the models used to price the options
+    \item least-square non-linear analysis
+  \end{itemize}
+\end{block}
+
+\begin{block}{Calibration of the time-series generation models}
+  \begin{itemize}
+    \item Concerns the time-series used to simulate stock prices evolutions
+    \item Fit optimization based method
+  \end{itemize}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+\subsection{Delta hedging}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Delta hedging}
+
+\begin{block}{Construction of the delta-neutral portfolio at T=0}
+\begin{align}
+p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \notag
+\end{align}
+\end{block}
+
+\begin{block}{Portfolio balancing}
+\begin{align}
+p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right) S(t_i) 
+,\notag \\
+\forall i \in \mathbb{Z} : i \in \left [1, T \right ] \notag
+\end{align}
+\end{block}
+
+
+\end{frame}
+
+
+\begin{frame}{Delta hedging}
+
+\begin{block}{Measurement of the performances}
+\begin{align}
+  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \notag\\
+  \intertext{Where}
+  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)\notag\\
+    \mspace{150mu}
+    &- \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)\notag
+\end{align}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+% =============================================================================
+% Analysis and results
+% =============================================================================
+\section{Analysis and results}
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results}
+
+\tableofcontents[currentsection]
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+\subsection{Analysis and results: Merton}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: Merton}
+
+\begin{table}[h]
+\small
+\centering
+\begin{tabular}{llllllll}
+  \hline
+  \hline
+ Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+   &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
+   \hdashline
+  \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
+  & daily & 0.002 & 0.006 & 0.008 & 0.012 & 0.016 & 0.021 \\ 
+  & weekly & 0.004 & 0.006 & 0.006 & 0.011 & 0.007 & 0.021 \\ 
+   \hdashline
+  \multirow{3}{*}{160} & intraday & 0.011 & 0.018 & 0.021 & 0.029 & 0.025 & 0.042 \\ 
+  & daily & 0.016 & 0.018 & 0.022 & 0.029 & 0.019 & 0.042 \\ 
+  & weekly & 0.013 & 0.016 & 0.018 & 0.026 & 0.018 & 0.04 \\ 
+   \hdashline
+  \multirow{3}{*}{186} & intraday & 0.036 & 0.021 & 0.078 & 0.055 & 0.079 & 0.074 \\ 
+  & daily & 0.039 & 0.022 & 0.072 & 0.055 & 0.068 & 0.074 \\ 
+  & weekly & 0.014 & -0.008 & 0.055 & 0.037 & 0.057 & 0.061 \\ 
+   \hdashline
+  \multirow{3}{*}{200} & intraday & 0.072 & -0.002 & 0.139 & 0.061 & 0.13 & 0.086 \\ 
+  & daily & 0.06 & -0.013 & 0.131 & 0.057 & 0.115 & 0.085 \\ 
+  & weekly & -0.02 & -0.1 & 0.083 & 0.005 & 0.085 & 0.053 \\ 
+   \hdashline
+  \multirow{3}{*}{230} & intraday & 0.955 & 0.331 & 0.444 & -0.061 & 0.301 & 0.063 \\ 
+  & daily & 1.098 & 0.466 & 0.409 & -0.091 & 0.261 & 0.054 \\ 
+  & weekly & -0.741 & -1.335 & 0.085 & -0.438 & 0.174 & -0.088 \\ 
+   \hline
+\end{tabular}
+\caption{Hedging with MJD: Relative P\&L} 
+\label{t:analysis:merton:pl}
+\end{table}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+\subsection{Analysis and results: Heston}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: Heston}
+
+\begin{table}[ht]
+\small
+\centering
+\begin{tabular}{llllllll}
+  \hline
+  \hline
+Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+   &  & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ \\ 
+   \hdashline
+  \multirow{3}{*}{140} & intraday & 0 & 0.002 & 0.011 & 0.011 & 0.009 & 0.038 \\ 
+  & daily & -0.001 & 0.002 & 0.01 & 0.011 & 0.009 & 0.038 \\ 
+  & weekly & 0.001 & 0.002 & 0 & 0.011 & 0.008 & 0.038 \\ 
+  \hdashline
+  \multirow{3}{*}{160} & intraday & 0.009 & 0.028 & 0.023 & 0.073 & 0.042 & 0.143 \\ 
+  & daily & 0.008 & 0.028 & 0.025 & 0.072 & 0.036 & 0.143 \\ 
+  & weekly & 0.008 & 0.028 & 0.019 & 0.073 & 0.036 & 0.143 \\ 
+  \hdashline
+  \multirow{3}{*}{186} & intraday & 0.158 & 0.252 & 0.159 & 0.392 & 0.153 & 0.524 \\ 
+  & daily & 0.15 & 0.245 & 0.195 & 0.391 & 0.156 & 0.522 \\ 
+  & weekly & 0.117 & 0.241 & 0.158 & 0.378 & 0.139 & 0.519 \\ 
+  \hdashline 
+  \multirow{3}{*}{200} & intraday & 0.459 & -0.298 & 0.43 & 0.146 & 0.279 & 0.546 \\ 
+  & daily & 0.433 & -0.361 & 0.42 & 0.126 & 0.255 & 0.544 \\ 
+  & weekly & 0.268 & -0.659 & 0.369 & 0.005 & 0.246 & 0.498 \\ 
+  \hdashline 
+  \multirow{3}{*}{230} & intraday & 2.136 & -0.527 & 1.884 & -2.452 & 1.01 & -0.235 \\ 
+  & daily & 1.948 & -1.197 & 1.893 & -2.655 & 0.989 & -0.224 \\ 
+  & weekly & 1.407 & -2.152 & 1.547 & -2.402 & 0.917 & -0.353 \\ 
+   \hline
+\end{tabular}
+\caption{Hedging with HSV: Relative P\&L} 
+\label{t:analysis:heston:pl}
+\end{table}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+ 
+\end{document}

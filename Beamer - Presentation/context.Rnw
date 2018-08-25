@@ -1,0 +1,122 @@
+% =============================================================================
+% CONTEXT
+% =============================================================================
+\section{Context}
+
+% \subsection{\BSM model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM model}
+
+\begin{block}{\BSM solution}
+  \begin{align}
+      \BSMsol \notag
+  \intertext{with}
+      \dpm \notag
+  \end{align}
+\end{block}
+
+\begin{block}{Geometric Brownian Motion}
+  \begin{center}
+    \begin{equation}
+      \Scontinuous \notag
+    \end{equation}
+  \end{center}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}{Context: \BSM assumptions}
+  % \subsection{\BSM assumptions}
+  
+  \begin{enumerate}
+    \item The short-term risk free rate $r$ is known and constant.
+    \item The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rates.
+    \item No dividend are provided with the considered share of stock.
+    \item The option considered within the computation is European.
+    \item The prices for the bid and ask quotes are identical. It means that there is no bid-ask spread to be considered.
+    \item Share of stock can be divided into any portions such as needed for the computation.
+    \item Short selling is allowed with no penalties.
+  \end{enumerate} 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+\begin{frame}{Context: \BSM assumptions}
+  % \subsection{\BSM assumptions}
+  
+  \begin{enumerate}
+    \item The short-term risk free rate $r$ is known and constant.
+    \item \textcolor{myred}{The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rates.}
+    \item No dividend are provided with the considered share of stock.
+    \item The option considered within the computation is European.
+    \item The prices for the bid and ask quotes are identical. It means that there is no bid-ask spread to be considered.
+    \item Share of stock can be divided into any portions such as needed for the computation.
+    \item Short selling is allowed with no penalties.
+  \end{enumerate} 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM log-return density}
+
+\begin{center}
+\begin{equation}
+\ln{\frac{\St}{S\left(0\right)}} 
+  \sim N\left((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t \right)
+\notag
+\end{equation}
+\end{center}  
+
+
+\begin{figure}[!h]
+\centering
+\input{../figures/stock_logreturn_density2.tex}
+\end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM log-return density}
+\framesubtitle{The Apple case}
+
+\begin{figure}[!h]
+\centering
+\input{../figures/realvsempirical2.tex}
+\end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM volatility surface}
+  % \subsection{\BSM assumptions}
+  
+  \begin{figure}[h]
+  \centering
+  \input{../figures/appl.impliedvol.bsm2.tex}
+\end{figure}
+  
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: Summary}
+  % \subsection{\BSM assumptions}
+  
+  \begin{itemize}
+    \item \sout{Normality of log-returns}
+    \item Options' price implied volatility
+    \item Geometric Brownian Motion should be replaced
+  \end{itemize} 
+
+  
+\end{frame}
+% -----------------------------------------------------------------------------

@@ -43,6 +43,7 @@ library(StockPriceSimulator)
 library(ggplot2)
 library(grid)
 library(gridExtra)
+library(purrr)
 
 
 scale <- 500
@@ -71,11 +72,54 @@ p <-  ggplot(data.frame(return = log_return)) +
         axis.title = element_text(size = rel(0.8)),
         axis.text = element_text(size = rel(0.7)),
         plot.title = element_text(size = rel(0.8))) +
-   labs( x = 'Daily Stock Return',
+   labs( x = 'Log-return',
                      y = 'Density')
 p
 
 tikzDevice::tikz(file = "figures/stock_logreturn_density.tex", width = 6, height = 3)
+p
+dev.off()
+
+tikzDevice::tikz(file = "figures/stock_logreturn_density2.tex", width = 4, height = 2)
+p
+dev.off()
+
+
+
+
+
+
+scale <- 365
+n <- 1:5000
+t <- 1
+s0 <- 115.08
+
+a <- alpha
+stock <- unlist(map(n, ~sstock(initial_stock_price = s0, time_to_maturity = t,
+                               sigma = sigma,
+                               seed = .x, 
+                               scale = scale)$stock_price_path[scale * t + 1]))
+log_return <- log(stock / s0)
+
+
+
+p <-  ggplot(data.frame(return = log_return)) + 
+  stat_density(aes(x = return),
+               geom = "line",
+               alpha = 0.5,
+               colour = "darkred") + 
+  stat_density(data = data.frame(u), aes(u),
+               geom = "line",
+               colour = 'steelblue')+
+  theme(legend.position = 'none', 
+        axis.title = element_text(size = rel(0.8)),
+        axis.text = element_text(size = rel(0.7)),
+        plot.title = element_text(size = rel(0.8))) +
+  labs( x = 'Log-return',
+        y = 'Density')
+
+
+tikzDevice::tikz(file = "figures/realvsempirical2.tex", width = 4, height = 2)
 p
 dev.off()
 
