@@ -1,0 +1,70 @@
+\section{Methodology}
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Methodology}
+
+\tableofcontents[currentsection]
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+\subsection{Calibration}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Calibration}
+
+\begin{block}{Calibration of the option valuation models}
+  \begin{itemize}
+    \item Concerns the models used to price the options
+    \item least-square non-linear analysis
+  \end{itemize}
+\end{block}
+
+\begin{block}{Calibration of the time-series generation models}
+  \begin{itemize}
+    \item Concerns the time-series used to simulate stock prices evolutions
+    \item Fit optimization based method
+  \end{itemize}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+\subsection{Delta hedging}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Delta hedging}
+
+\begin{block}{Construction of the delta-neutral portfolio at T=0}
+\begin{align}
+p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \notag
+\end{align}
+\end{block}
+
+\begin{block}{Portfolio balancing}
+\begin{align}
+p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right) S(t_i) 
+,\notag \\
+\forall i \in \mathbb{Z} : i \in \left [1, T \right ] \notag
+\end{align}
+\end{block}
+
+
+\end{frame}
+
+
+\begin{frame}{Delta hedging}
+
+\begin{block}{Measurement of the performances}
+\begin{align}
+  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \notag\\
+  \intertext{Where}
+  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)\notag\\
+    \mspace{150mu}
+    &- \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)\notag
+\end{align}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------

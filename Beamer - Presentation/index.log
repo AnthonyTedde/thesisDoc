@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.8.5)  26 AUG 2018 00:33
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.8.5)  26 AUG 2018 20:00
 entering extended mode
 **index.tex
 ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.tex"
@@ -720,7 +720,6 @@ e)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\times.sty"
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty"
 Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
 
@@ -743,6 +742,7 @@ Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
 -1-18.sty"
 Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
 ))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
@@ -993,6 +993,10 @@ Package: arydshln 2004/08/31 v1.71
 \adl@everyvbox=\toks54
 \adl@LTpagetotal=\dimen223
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\jknappen\mathrsfs.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
 (C:/PROGRA~1/R/R-33~1.3/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
@@ -1115,29 +1119,29 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
 ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 121.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 124.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 124.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 124.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Try loading font information for T1+aess on input line 121.
+LaTeX Font Info:    ... okay on input line 124.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 124.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aess.fd"
@@ -1192,7 +1196,7 @@ File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 \everyMPtoPDFconversion=\toks56
 ) ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box90
-Package hyperref Info: Link coloring OFF on input line 121.
+Package hyperref Info: Link coloring OFF on input line 124.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -1202,9 +1206,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count191
 )
-LaTeX Info: Redefining \ref on input line 121.
-LaTeX Info: Redefining \pageref on input line 121.
-LaTeX Info: Redefining \nameref on input line 121.
+LaTeX Info: Redefining \ref on input line 124.
+LaTeX Info: Redefining \pageref on input line 124.
+LaTeX Info: Redefining \nameref on input line 124.
 
 ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.out")
 ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.out")
@@ -1244,83 +1248,127 @@ Dictionary: translator-theorem-dictionary, Language: English
 ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.toc") [3
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 179.
+LaTeX Font Info:    Try loading font information for U+msa on input line 189.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 179.
+LaTeX Font Info:    Try loading font information for U+msb on input line 189.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [4
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 189.
 
-] [5
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\jknappen\ursfs.fd"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+(C:\Users\ATE\thesisDoc\figures\merton.path2.tex)
+Overfull \vbox (1.7387pt too high) detected at line 189
+ []
+
+[4
+
+] (C:\Users\ATE\thesisDoc\figures\MertonJumpReturn2.tex) [5
 
 ]
-[6
+(C:\Users\ATE\thesisDoc\figures\MertonJumpReturnTails2.tex) [6
 
-] ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.toc") [7
+] [7
 
 ]
-Overfull \hbox (6.56573pt too wide) in paragraph at lines 281--281
+(C:\Users\ATE\thesisDoc\figures\skewnessHeston2.tex) [8
+
+]
+(C:\Users\ATE\thesisDoc\figures\density.heston.kurtosis2.tex) [9
+
+] [10
+
+] [11
+
+]
+[12
+
+] ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.toc") [13
+
+] [14
+
+]
+<../figures/test.png, id=446, 239.4546pt x 62.634pt>
+File: ../figures/test.png Graphic file (type png)
+ <use ../figures/test.png>
+Package pdftex.def Info: ../figures/test.png used on input line 426.
+(pdftex.def)             Requested size: 307.28987pt x 80.38243pt.
+
+[15
+
+ <C:/Users/ATE/thesisDoc/figures/test.png>] [16
+
+]
+(C:\Users\ATE\thesisDoc\figures\p.analysis.gbm.theta.high.tex) [17
+
+]
+Overfull \hbox (6.56573pt too wide) in paragraph at lines 537--537
  [] 
  []
 
 
-Overfull \vbox (11.72974pt too high) detected at line 281
+Overfull \vbox (11.72974pt too high) detected at line 537
  []
 
-[8
+[18
 
 ]
-Overfull \hbox (6.34839pt too wide) in paragraph at lines 323--323
+Overfull \hbox (6.34839pt too wide) in paragraph at lines 579--579
  [] 
  []
 
 
-Overfull \vbox (11.72974pt too high) detected at line 323
+Overfull \vbox (11.72974pt too high) detected at line 579
  []
 
-[9
+[19
 
 ]
 \tf@nav=\write7
 \tf@toc=\write8
 \tf@snm=\write9
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 330.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 330.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 586.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 586.
  ("C:\Users\ATE\thesisDoc\Beamer - Presentation\index.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 330.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 330.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 586.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 586.
 Package rerunfilecheck Info: File `index.out' has not changed.
-(rerunfilecheck)             Checksum: 67FAEFD14EE65C339667ADB5AEBF8D2A;383.
+(rerunfilecheck)             Checksum: 8826A04B32CA4EFFB8DA49C0ABC6FC22;574.
  ) 
 Here is how much of TeX's memory you used:
- 21898 strings out of 494045
- 426976 string characters out of 29895976
- 30520558 words of memory out of 60000000
- 24600 multiletter control sequences out of 15000+200000
- 26442 words of font info for 64 fonts, out of 3000000 for 9000
+ 27459 strings out of 494045
+ 535386 string characters out of 29895976
+ 30614514 words of memory out of 60000000
+ 30104 multiletter control sequences out of 15000+200000
+ 28701 words of font info for 74 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 49i,14n,56p,395b,545s stack positions out of 5000i,500n,10000p,30000000b,50000s
+ 49i,14n,56p,395b,882s stack positions out of 5000i,500n,10000p,30000000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C
-:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/P
-rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files 
-(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files (x86
-)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiK
-TeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on index.pdf (9 pages, 186520 bytes).
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on index.pdf (19 pages, 363580 bytes).
 PDF statistics:
- 352 PDF objects out of 1000 (max. 8388607)
- 28 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 641 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

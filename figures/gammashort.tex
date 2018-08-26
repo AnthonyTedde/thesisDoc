@@ -1,0 +1,27 @@
+\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1.}
+\definecolor{uuuuuu}{rgb}{0.26666666666666666,0.26666666666666666,0.26666666666666666}
+\definecolor{qqwuqq}{rgb}{0.,0.39215686274509803,0.}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.01cm,y=0.02cm]
+\draw[->,color=black] (0.,0.) -- (600.,0.);
+\foreach \x in {,50.,100.,150.,200.,250.,300.,350.,400.,450.,500.,550.}
+\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+\draw[color=black] (535.6601251235951,3.393840390581642) node [anchor=south west] { Stock price};
+\draw[->,color=black] (0.,0.) -- (0.,150.);
+\foreach \y in {,50.,100.}
+\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt);
+\draw[color=black] (4.242300488227133,131.5857510880588) node [anchor=west] { Option value};
+\clip(0.,0.) rectangle (600.,150.);
+\draw[line width=1.2pt,color=qqwuqq,smooth,samples=100,domain=0.0:600.0] plot(\x,{((\x)/50.0)^(2.0)});
+\draw [domain=0.:600.] plot(\x,{(-26026.356610115068--138.3899046468934*\x)/459.74963871662703});
+\begin{scriptsize}
+\draw[color=qqwuqq] (-413.76672414163716,63.70894327642596) node {$f$};
+\draw[color=black] (-413.76672414163716,-167.0722032831257) node {$a$};
+\draw [fill=uuuuuu] (369.1781007554098,54.5169880309486) circle (1.5pt);
+\draw [fill=xdxdff] (369.18,0.) circle (2.5pt);
+\draw[color=xdxdff] (379.5434671568367,17.8920980035738) node {$x1_1$};
+\draw [fill=xdxdff] (250.,0.) circle (2.5pt);
+\draw[color=xdxdff] (258.21367319354067,15.346717710637567) node {$x0$};
+\draw [fill=xdxdff] (500.,0.) circle (2.5pt);
+\draw[color=xdxdff] (508.5094019989415,15.346717710637567) node {$x3$};
+\end{scriptsize}
+\end{tikzpicture}

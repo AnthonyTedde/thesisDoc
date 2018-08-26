@@ -4,7 +4,7 @@
 \usepackage[latin1]{inputenc}
 \usefonttheme{professionalfonts}
 \usepackage{times}
-\usepackage{tikz}
+\usepackage{pgf,tikz}
 \usepackage{amsmath}
 \usepackage{verbatim}
 \usetikzlibrary{arrows,shapes}
@@ -15,6 +15,9 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{arydshln}
+\usepackage{mathrsfs}
+
+
 
 
 %%% Color
@@ -147,72 +150,63 @@
 % =============================================================================
 % Methodology
 % =============================================================================
-\section{Methodology}
+\section{Other models}
 
 
 % ----------------------------------------------------------------------------- 
-\begin{frame}{Methodology}
+\begin{frame}{Other models}
 
 \tableofcontents[currentsection]
  
 \end{frame}
 % -----------------------------------------------------------------------------
 
-\subsection{Calibration}
-% ----------------------------------------------------------------------------- 
-\begin{frame}{Calibration}
 
-\begin{block}{Calibration of the option valuation models}
-  \begin{itemize}
-    \item Concerns the models used to price the options
-    \item least-square non-linear analysis
-  \end{itemize}
+
+
+
+\subsection{Merton's Jump-Diffusion Model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{The Merton's Jump-Diffusion Model (MJD)}
+
+\begin{block}{MJD stochastic process}
+  \begin{align}
+  \St &= S\left(0\right) e^{\left(\alpha - \frac{\sigma^2}{2} - \lambda \kappa\right) t + \sigma \Bm + \sum_{i=1}^{N_t} Y_i}
+  \notag
+\end{align}
+  
 \end{block}
 
-\begin{block}{Calibration of the time-series generation models}
-  \begin{itemize}
-    \item Concerns the time-series used to simulate stock prices evolutions
-    \item Fit optimization based method
-  \end{itemize}
+
+\begin{block}{Graphical representation}
+  \begin{figure}[ht]
+  \centering
+  \input{../figures/merton.path2.tex} 
+\end{figure}
+  
 \end{block}
  
 \end{frame}
 % -----------------------------------------------------------------------------
 
 
+% -----------------------------------------------------------------------------
+\begin{frame}{MJD: log-return density}
 
-\subsection{Delta hedging}
-% ----------------------------------------------------------------------------- 
-\begin{frame}{Delta hedging}
-
-\begin{block}{Construction of the delta-neutral portfolio at T=0}
-\begin{align}
-p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \notag
-\end{align}
+\begin{block}{Impact on the skewness}
+\begin{figure}[h]
+\centering
+\input{../figures/MertonJumpReturn2.tex}
+\end{figure}
 \end{block}
-
-\begin{block}{Portfolio balancing}
-\begin{align}
-p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right) S(t_i) 
-,\notag \\
-\forall i \in \mathbb{Z} : i \in \left [1, T \right ] \notag
-\end{align}
-\end{block}
-
-
 \end{frame}
 
-
-\begin{frame}{Delta hedging}
-
-\begin{block}{Measurement of the performances}
-\begin{align}
-  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \notag\\
-  \intertext{Where}
-  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)\notag\\
-    \mspace{150mu}
-    &- \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)\notag
-\end{align}
+\begin{frame}{MJD: log-return density}
+\begin{block}{Impact on the kurtosis}
+\begin{figure}[h]
+\centering
+\input{../figures/MertonJumpReturnTails2.tex}
+\end{figure}
 \end{block}
  
 \end{frame}
@@ -225,6 +219,117 @@ p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Heston stochastic volatility model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{The Heston stochastic volatility model (HSV)}
+
+\begin{block}{HSV stochastic process}
+\begin{align}
+    \HSVvol \notag\\
+    \HSVstock \notag \\
+    \rho  &= d\Bmsub{v} d\Bmsub{s}  \notag
+\end{align}
+  
+\end{block}
+
+
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}{MJD: log-return density}
+
+\begin{block}{Impact on the skewness}
+\begin{figure}[ht]
+\centering
+\input{../figures/skewnessHeston2.tex}
+\end{figure}
+\end{block}
+\end{frame}
+
+\begin{frame}{MJD: log-return density}
+\begin{block}{Impact on the kurtosis}
+\begin{figure}[ht]
+\centering
+\input{../figures/density.heston.kurtosis2.tex}
+\end{figure}
+
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+\subsection{Options pricing method}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Heston probabilistic approach}
+
+
+\begin{align}
+  c(t) &= S(t) P_1 - e^{-r(T-t)} K P_2 \notag \\
+\intertext{With}
+  P_1(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi - i)}{i\phi\psi(x,V,t;-i)} \right) d\phi \notag \\ 
+  \intertext{}
+  P_2(x,V,t;\ln{K}) &= \frac{1}{2} + \frac{1}{\pi} \int_0^{\infty} Re \left( \frac{e^{-i\phi\ln{K}} \psi(x,V,t;\phi)}{i\phi} \right) d\phi \notag
+\end{align}
+  
+
+
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{MJD Characteristic function}
+
+
+
+\begin{align}
+\psi^{merton}(\phi) &= e^{ 
+  \lambda \tau \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
+  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) \tau \right) -
+  \sigma^2 \frac{\phi^2}{2} \tau
+}
+\notag \\
+\intertext{where}
+\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
+\end{align}
+ 
+\end{frame}
+
+
+\begin{frame}{HSV Characteristic function}
+\begin{align}
+  &\psi^{heston}\left(\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \notag \\
+  \intertext{where}
+  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
+  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
+  \intertext{and}
+  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
+  &g = \frac{r_{-}}{r_{+}} \notag \\
+  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
+\end{align}
+
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
 
 % =============================================================================
 % Analysis and results
@@ -239,6 +344,157 @@ p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right
  
 \end{frame}
 % -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Analysis and results: BSM}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative P\&L
+        \begin{itemize}
+          \item Gamma
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+
+    \begin{block}{}
+     \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\textwidth]{../figures/test.png}
+      \end{figure}
+    \end{block}%
+  
+    \begin{block}{}
+      \begin{itemize}
+        \item Short Gamma
+        \item Long Theta
+      \end{itemize}
+    \end{block}%
+  
+  
+
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative effect on P\&L
+        \begin{itemize}
+          \item Short Gamma
+        \end{itemize}
+        \item Positive effect on P\&L
+        \begin{itemize}
+          \item Long Theta
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+\begin{figure}[h]
+  \centering
+  \input{../figures/p.analysis.gbm.theta.high.tex}
+\end{figure}
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Analysis and results: Merton}
 % ----------------------------------------------------------------------------- 

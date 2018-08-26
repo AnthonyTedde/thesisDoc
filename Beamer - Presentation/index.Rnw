@@ -4,7 +4,7 @@
 \usepackage[latin1]{inputenc}
 \usefonttheme{professionalfonts}
 \usepackage{times}
-\usepackage{tikz}
+\usepackage{pgf,tikz}
 \usepackage{amsmath}
 \usepackage{verbatim}
 \usetikzlibrary{arrows,shapes}
@@ -15,6 +15,9 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{arydshln}
+\usepackage{mathrsfs}
+
+
 
 
 %%% Color
@@ -68,84 +71,7 @@
 % =============================================================================
 % Methodology
 % =============================================================================
-\section{Methodology}
-
-
-% ----------------------------------------------------------------------------- 
-\begin{frame}{Methodology}
-
-\tableofcontents[currentsection]
- 
-\end{frame}
-% -----------------------------------------------------------------------------
-
-\subsection{Calibration}
-% ----------------------------------------------------------------------------- 
-\begin{frame}{Calibration}
-
-\begin{block}{Calibration of the option valuation models}
-  \begin{itemize}
-    \item Concerns the models used to price the options
-    \item least-square non-linear analysis
-  \end{itemize}
-\end{block}
-
-\begin{block}{Calibration of the time-series generation models}
-  \begin{itemize}
-    \item Concerns the time-series used to simulate stock prices evolutions
-    \item Fit optimization based method
-  \end{itemize}
-\end{block}
- 
-\end{frame}
-% -----------------------------------------------------------------------------
-
-
-
-\subsection{Delta hedging}
-% ----------------------------------------------------------------------------- 
-\begin{frame}{Delta hedging}
-
-\begin{block}{Construction of the delta-neutral portfolio at T=0}
-\begin{align}
-p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \notag
-\end{align}
-\end{block}
-
-\begin{block}{Portfolio balancing}
-\begin{align}
-p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right) S(t_i) 
-,\notag \\
-\forall i \in \mathbb{Z} : i \in \left [1, T \right ] \notag
-\end{align}
-\end{block}
-
-
-\end{frame}
-
-
-\begin{frame}{Delta hedging}
-
-\begin{block}{Measurement of the performances}
-\begin{align}
-  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \notag\\
-  \intertext{Where}
-  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)\notag\\
-    \mspace{150mu}
-    &- \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)\notag
-\end{align}
-\end{block}
- 
-\end{frame}
-% -----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
+\SweaveInput{model}
 
 % =============================================================================
 % Analysis and results
@@ -160,6 +86,157 @@ p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right
  
 \end{frame}
 % -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Analysis and results: BSM}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative P\&L
+        \begin{itemize}
+          \item Gamma
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+
+    \begin{block}{}
+     \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\textwidth]{../figures/test.png}
+      \end{figure}
+    \end{block}%
+  
+    \begin{block}{}
+      \begin{itemize}
+        \item Short Gamma
+        \item Long Theta
+      \end{itemize}
+    \end{block}%
+  
+  
+
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative effect on P\&L
+        \begin{itemize}
+          \item Short Gamma
+        \end{itemize}
+        \item Positive effect on P\&L
+        \begin{itemize}
+          \item Long Theta
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+\begin{figure}[h]
+  \centering
+  \input{../figures/p.analysis.gbm.theta.high.tex}
+\end{figure}
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Analysis and results: Merton}
 % ----------------------------------------------------------------------------- 

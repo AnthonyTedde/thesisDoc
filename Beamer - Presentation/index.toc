@@ -1,7 +1,9 @@
 \beamer@endinputifotherversion {3.12pt}
-\beamer@sectionintoc {2}{Methodology}{3}{0}{1}
-\beamer@subsectionintoc {2}{1}{Calibration}{4}{0}{1}
-\beamer@subsectionintoc {2}{2}{Delta hedging}{5}{0}{1}
-\beamer@sectionintoc {3}{Analysis and results}{7}{0}{2}
-\beamer@subsectionintoc {3}{1}{Analysis and results: Merton}{8}{0}{2}
-\beamer@subsectionintoc {3}{2}{Analysis and results: Heston}{9}{0}{2}
+\beamer@sectionintoc {2}{Other models}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Merton's Jump-Diffusion Model}{4}{0}{1}
+\beamer@subsectionintoc {2}{2}{Heston stochastic volatility model}{7}{0}{1}
+\beamer@subsectionintoc {2}{3}{Options pricing method}{10}{0}{1}
+\beamer@sectionintoc {3}{Analysis and results}{13}{0}{2}
+\beamer@subsectionintoc {3}{1}{Analysis and results: BSM}{14}{0}{2}
+\beamer@subsectionintoc {3}{2}{Analysis and results: Merton}{18}{0}{2}
+\beamer@subsectionintoc {3}{3}{Analysis and results: Heston}{19}{0}{2}
