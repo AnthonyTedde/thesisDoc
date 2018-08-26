@@ -71,22 +71,22 @@ xt <- pmap(list(l, l_bsm), list) %>% as.data.frame
 colnames(xt) <- 1:6
 
 xt <- data.frame(strike = as.integer(domain$strike), 
-                frequency = rep(c('intraday', 'daily', 'weekly'), 
-                                length(unique(domain$strike))),
-                xt,
-                stringsAsFactors = F) 
+                 frequency = rep(c('intraday', 'daily', 'weekly'), 
+                                 length(unique(domain$strike))),
+                 xt,
+                 stringsAsFactors = F) 
 xt <- rbind(c(rep('', 2), map_chr(c(91, 91, 182, 182, 399, 399)
                                   , paste, 'days before maturity')),
-  c(rep('', 2),
-    rep(c('$\\Delta_{mrt}$', '$\\Delta_{bsm}$'), 3)),
-  xt)
+            c(rep('', 2),
+              rep(c('$\\Delta_{mrt}$', '$\\Delta_{bsm}$'), 3)),
+            xt)
 print(xtable::xtable(xt,
                      align = "lllllllll",  # align and put a vertical line (first "l" again represents column of row numbers)
                      caption = "Hedging with MJD: Relative P&L", 
                      label = "t:analysis:merton:pl"),
       include.rownames = FALSE,
       include.colnames = FALSE)
-      
+
 
 #####################################
 # TEST
@@ -284,9 +284,9 @@ ggplot(df) +
                # alpha = .7
   ) +
   xlab("asset price") + ylab("Density")
-  # xlim(-.025,  .05)+
-  # ylim(0, 5) + 
-  # facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
+# xlim(-.025,  .05)+
+# ylim(0, 5) + 
+# facet_wrap( ~ pivot, ncol = 3, scales = "free_y")
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
@@ -307,7 +307,7 @@ ppl1 <- map(1:nrow(domain), function(x){
   do.call(what = "rbind")  
 ppl2 <- map(1:nrow(domain), function(x){
   list(pl_bsm[[1]][[x]], rep(paste0("K = ",domain$strike[x]," - dbm = ", domain$maturity[x]),
-                         length(pl_bsm[[1]][[x]])))
+                             length(pl_bsm[[1]][[x]])))
 }) %>% map(function(x){
   data.frame(ppl2 = x[[1]], pivot = x[[2]])
 }) %>%
@@ -361,14 +361,14 @@ p1 <- ggplot(dplyr::bind_rows(ppl1[[1]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = .75) + 
+             colour = 'steelblue', size = .45) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 140, dbm = 182)",
-      x = 'Time period',
+       x = 'Time period',
        y = 'Option value')
 
 p2 <- ggplot(dplyr::bind_rows(ppl1[[2]], .id = "uniqueID")) +
@@ -377,10 +377,10 @@ p2 <- ggplot(dplyr::bind_rows(ppl1[[2]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = .75) + 
+             colour = 'steelblue', size = .45) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 160, dbm = 182)",
@@ -393,10 +393,10 @@ p3 <- ggplot(dplyr::bind_rows(ppl1[[3]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = .75) + 
+             colour = 'steelblue', size = .45) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 186, dbm = 182)",
@@ -409,10 +409,10 @@ p4 <- ggplot(dplyr::bind_rows(ppl1[[4]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = .75) + 
+             colour = 'steelblue', size = .45) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 200, dbm = 182)",
@@ -425,24 +425,122 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = .75) + 
+             colour = 'steelblue', size = .45) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 230, dbm = 182)",
        x = 'Time period',
        y = 'Option value')
-  
-  
+
+
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 6, height = 5)
-gridExtra::grid.arrange(p1, p2, p3, p4, p5)
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.deltas.tex", width = 4.5, height = 3.2)
+grid.arrange(p1, p2, p3, p4, p5)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 
 
+
+
+
+library(ggplot2)
+p1 <- ggplot(U_merton[[1]][[13]][[3]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(aes(x = time.period, y = delta* s +  p),
+             colour = ' red')
+# geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm),
+#            colour = 'black')
+
+
+
+
+
+k <- 7
+
+p1_i <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(aes(x = time.period, y = delta* s +  p),
+             colour = 'darkred',
+             size = .5)+
+  labs(x = 'Time period',
+       y = 'Option value')
+
+p2_i <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = s),
+            color = 'chocolate4') +
+  geom_line(aes(x = time.period, y = 230),
+            color = 'steelblue')+
+  geom_vline(xintercept = U_bsm[[3]][[13]][[k]]$time.period, alpha = 0.5,
+             linetype = "dotdash")+
+  labs(x = 'Time period',
+       y = 'Asset price')
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.gamma.intra.tex", width = 4, height = 3)
+gridExtra::grid.arrange(p1_i, p2_i)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+p1_d <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(data = U_merton[[2]][[13]][[k]],
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'darkred',
+             size = .5)+
+  labs(x = 'Time period',
+       y = 'Option value')
+
+p2_d <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = s),
+            color = 'chocolate4') +
+  geom_line(aes(x = time.period, y = 230),
+            color = 'steelblue')+
+  geom_vline(xintercept = U_bsm[[3]][[13]][[k]]$time.period, alpha = 0.5,
+             linetype = "dotdash")+
+  labs(x = 'Time period',
+       y = 'Asset price')
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.gamma.day.tex", width = 4, height = 3)
+gridExtra::grid.arrange(p1_d, p2_d)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+
+p1_w <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = option),
+            colour = 'chocolate4')+
+  geom_point(data = U_merton[[3]][[13]][[k]],
+             aes(x = time.period, y = delta* s +  p),
+             colour = 'darkred',
+             size = .5)+
+  labs(x = 'Time period',
+       y = 'Option value')
+
+p2_w <- ggplot(U_merton[[1]][[13]][[k]]) +
+  geom_line(aes(x = time.period, y = s),
+            color = 'chocolate4') +
+  geom_line(aes(x = time.period, y = 230),
+            color = 'steelblue')+
+  geom_vline(xintercept = U_bsm[[3]][[13]][[k]]$time.period, alpha = 0.5,
+             linetype = "dotdash")+
+  labs(x = 'Time period',
+       y = 'Asset price')
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/p.analysis.merton.hedge.gamma.week.tex", width = 4, height = 3)
+gridExtra::grid.arrange(p1_w, p2_w)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
 
 
 

@@ -41,7 +41,7 @@
 % -----------------------------------------------------------------------------
 \begin{frame}{MJD: log-return density}
 
-\begin{block}{Impact on the skewness}
+\begin{block}{Impact on the skewness ($\mu$)}
 \begin{figure}[h]
 \centering
 \input{../figures/MertonJumpReturn2.tex}
@@ -50,7 +50,7 @@
 \end{frame}
 
 \begin{frame}{MJD: log-return density}
-\begin{block}{Impact on the kurtosis}
+\begin{block}{Impact on the kurtosis ($\lambda$)}
 \begin{figure}[h]
 \centering
 \input{../figures/MertonJumpReturnTails2.tex}
@@ -100,7 +100,7 @@
 % -----------------------------------------------------------------------------
 \begin{frame}{MJD: log-return density}
 
-\begin{block}{Impact on the skewness}
+\begin{block}{Impact on the skewness ($\rho$)}
 \begin{figure}[ht]
 \centering
 \input{../figures/skewnessHeston2.tex}
@@ -109,7 +109,7 @@
 \end{frame}
 
 \begin{frame}{MJD: log-return density}
-\begin{block}{Impact on the kurtosis}
+\begin{block}{Impact on the kurtosis ($\sigma$)}
 \begin{figure}[ht]
 \centering
 \input{../figures/density.heston.kurtosis2.tex}
@@ -143,38 +143,4 @@
 \end{frame}
 % -----------------------------------------------------------------------------
 
-
-% ----------------------------------------------------------------------------- 
-\begin{frame}{MJD Characteristic function}
-
-
-
-\begin{align}
-\psi^{merton}(\phi) &= e^{ 
-  \lambda \tau \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
-  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) \tau \right) -
-  \sigma^2 \frac{\phi^2}{2} \tau
-}
-\notag \\
-\intertext{where}
-\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
-\end{align}
- 
-\end{frame}
-
-
-\begin{frame}{HSV Characteristic function}
-\begin{align}
-  &\psi^{heston}\left(\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \notag \\
-  \intertext{where}
-  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
-  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
-  \intertext{and}
-  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
-  &g = \frac{r_{-}}{r_{+}} \notag \\
-  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
-\end{align}
-
- 
-\end{frame}
 % -----------------------------------------------------------------------------

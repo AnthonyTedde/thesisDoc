@@ -3,54 +3,96 @@
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\sectionentry {2}{Other models}{3}{Other models}{0}}
+\headcommand {\sectionentry {2}{Context}{3}{Context}{0}}
 \headcommand {\beamer@sectionpages {2}{2}}
 \headcommand {\beamer@subsectionpages {2}{2}}
 \headcommand {\slideentry {2}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{4}{Merton's Jump-Diffusion Model}}\headcommand {\beamer@subsectionpages {3}{3}}
-\headcommand {\slideentry {2}{1}{1}{4/4}{Merton's Jump-Diffusion Model}{0}}
+\headcommand {\slideentry {2}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\slideentry {2}{1}{2}{5/5}{Merton's Jump-Diffusion Model}{0}}
+\headcommand {\slideentry {2}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\slideentry {2}{1}{3}{6/6}{Merton's Jump-Diffusion Model}{0}}
+\headcommand {\slideentry {2}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Heston stochastic volatility model}}\headcommand {\beamer@subsectionpages {4}{6}}
-\headcommand {\slideentry {2}{2}{1}{7/7}{Heston stochastic volatility model}{0}}
+\headcommand {\slideentry {2}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {2}{2}{2}{8/8}{Heston stochastic volatility model}{0}}
+\headcommand {\slideentry {2}{0}{8}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {2}{2}{3}{9/9}{Heston stochastic volatility model}{0}}
+\headcommand {\slideentry {2}{0}{9}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{10}{Options pricing method}}\headcommand {\beamer@subsectionpages {7}{9}}
-\headcommand {\slideentry {2}{3}{1}{10/10}{Options pricing method}{0}}
+\headcommand {\sectionentry {3}{Other models}{10}{Other models}{0}}
+\headcommand {\beamer@sectionpages {3}{9}}
+\headcommand {\beamer@subsectionpages {3}{9}}
+\headcommand {\slideentry {3}{0}{10}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {2}{3}{2}{11/11}{Options pricing method}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{11}{Merton's Jump-Diffusion Model}}\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {3}{1}{1}{11/11}{Merton's Jump-Diffusion Model}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\slideentry {2}{3}{3}{12/12}{Options pricing method}{0}}
+\headcommand {\slideentry {3}{1}{2}{12/12}{Merton's Jump-Diffusion Model}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {3}{Analysis and results}{13}{Analysis and results}{0}}
-\headcommand {\beamer@sectionpages {3}{12}}
-\headcommand {\beamer@subsectionpages {10}{12}}
-\headcommand {\slideentry {3}{0}{4}{13/13}{}{0}}
+\headcommand {\slideentry {3}{1}{3}{13/13}{Merton's Jump-Diffusion Model}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{14}{Analysis and results: BSM}}\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\slideentry {3}{1}{1}{14/14}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{14}{Heston stochastic volatility model}}\headcommand {\beamer@subsectionpages {11}{13}}
+\headcommand {\slideentry {3}{2}{1}{14/14}{Heston stochastic volatility model}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {3}{1}{2}{15/15}{Analysis and results: BSM}{0}}
+\headcommand {\slideentry {3}{2}{2}{15/15}{Heston stochastic volatility model}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {3}{1}{3}{16/16}{Analysis and results: BSM}{0}}
+\headcommand {\slideentry {3}{2}{3}{16/16}{Heston stochastic volatility model}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {3}{1}{4}{17/17}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{17}{Options pricing method}}\headcommand {\beamer@subsectionpages {14}{16}}
+\headcommand {\slideentry {3}{3}{1}{17/17}{Options pricing method}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{18}{Analysis and results: Merton}}\headcommand {\beamer@subsectionpages {14}{17}}
-\headcommand {\slideentry {3}{2}{1}{18/18}{Analysis and results: Merton}{0}}
+\headcommand {\sectionentry {4}{Methodology}{18}{Methodology}{0}}
+\headcommand {\beamer@sectionpages {10}{17}}
+\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\slideentry {4}{0}{2}{18/18}{}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{19}{Analysis and results: Heston}}\headcommand {\beamer@subsectionpages {18}{18}}
-\headcommand {\slideentry {3}{3}{1}{19/19}{Analysis and results: Heston}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{19}{Calibration}}\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\slideentry {4}{1}{1}{19/19}{Calibration}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\beamer@partpages {1}{19}}
-\headcommand {\beamer@subsectionpages {19}{19}}
-\headcommand {\beamer@sectionpages {13}{19}}
-\headcommand {\beamer@documentpages {19}}
-\headcommand {\def \inserttotalframenumber {19}}
+\headcommand {\slideentry {4}{1}{2}{20/20}{Calibration}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\slideentry {4}{1}{3}{21/21}{Calibration}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{22}{Delta hedging}}\headcommand {\beamer@subsectionpages {19}{21}}
+\headcommand {\slideentry {4}{2}{1}{22/22}{Delta hedging}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {4}{2}{2}{23/23}{Delta hedging}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\sectionentry {5}{Analysis and results}{24}{Analysis and results}{0}}
+\headcommand {\beamer@sectionpages {18}{23}}
+\headcommand {\beamer@subsectionpages {22}{23}}
+\headcommand {\slideentry {5}{0}{3}{24/24}{}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{25}{Analysis and results: BSM}}\headcommand {\beamer@subsectionpages {24}{24}}
+\headcommand {\slideentry {5}{1}{1}{25/25}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {5}{1}{2}{26/26}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {5}{1}{3}{27/27}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\slideentry {5}{1}{4}{28/28}{Analysis and results: BSM}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{29}{Analysis and results: Merton}}\headcommand {\beamer@subsectionpages {25}{28}}
+\headcommand {\slideentry {5}{2}{1}{29/29}{Analysis and results: Merton}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\slideentry {5}{2}{2}{30/30}{Analysis and results: Merton}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\slideentry {5}{2}{3}{31/31}{Analysis and results: Merton}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\slideentry {5}{2}{4}{32/32}{Analysis and results: Merton}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {5}{2}{5}{33/33}{Analysis and results: Merton}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{34}{Analysis and results: Heston}}\headcommand {\beamer@subsectionpages {29}{33}}
+\headcommand {\slideentry {5}{3}{1}{34/34}{Analysis and results: Heston}{0}}
+\headcommand {\beamer@framepages {34}{34}}
+\headcommand {\slideentry {5}{3}{2}{35/35}{Analysis and results: Heston}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\slideentry {5}{3}{3}{36/36}{Analysis and results: Heston}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\beamer@partpages {1}{36}}
+\headcommand {\beamer@subsectionpages {34}{36}}
+\headcommand {\beamer@sectionpages {24}{36}}
+\headcommand {\beamer@documentpages {36}}
+\headcommand {\def \inserttotalframenumber {36}}

@@ -1,0 +1,299 @@
+\section{Analysis and results}
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results}
+
+\tableofcontents[currentsection]
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Analysis and results: BSM}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative P\&L
+        \begin{itemize}
+          \item Gamma
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+
+    \begin{block}{}
+     \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\textwidth]{../figures/test.png}
+      \end{figure}
+    \end{block}%
+  
+    \begin{block}{}
+      \begin{itemize}
+        \item Short Gamma
+        \item Long Theta
+      \end{itemize}
+    \end{block}%
+  
+  
+
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+  \begin{columns}[T] % align columns
+  
+    \begin{column}{.4\textwidth}
+      \begin{itemize}
+        \item Balancing frequency
+        \item Negative effect on P\&L
+        \begin{itemize}
+          \item Short Gamma
+        \end{itemize}
+        \item Positive effect on P\&L
+        \begin{itemize}
+          \item Long Theta
+        \end{itemize}
+      \end{itemize}
+    \end{column}%
+  
+  
+  
+  \begin{column}{.55\textwidth}
+    \tiny
+    \begin{tabular}{lllll}
+      \hline
+      \hline
+       &  & 91 dbm & 182 dbm & 399 dbm \\ 
+       \hdashline
+      \multirow{3}{*}{140} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & 0 & 0 & 0 \\ 
+       \hdashline
+      \multirow{3}{*}{160} & intraday & 0 & 0 & 0 \\ 
+      & daily & 0 & 0 & 0 \\ 
+      & weekly & -0.001 & -0.001 & -0.003 \\ 
+       \hdashline
+      \multirow{3}{*}{186} & intraday & 0 & 0.001 & -0.001 \\ 
+      & daily & -0.005 & -0.002 & -0.004 \\ 
+      & weekly & -0.01 & -0.019 & -0.021 \\ 
+       \hdashline
+      \multirow{3}{*}{200} & intraday & 0.022 & 0.008 & -0.001 \\ 
+      & daily & -0.002 & -0.005 & -0.006 \\ 
+      & weekly & -0.007 & -0.052 & -0.037 \\ 
+       \hdashline
+      \multirow{3}{*}{230} & intraday & 0.02 & 0.042 & -0.007 \\ 
+      & daily & 0.022 & -0.063 & -0.022 \\ 
+      & weekly & 0.317 & -0.285 & -0.136 \\ 
+       \hline
+    \end{tabular}
+  \end{column}%
+  \end{columns}
+\end{frame}
+%++++++++++++++++++++
+\begin{frame}{Analysis and results: BSM}
+\begin{figure}[h]
+  \centering
+  \input{../figures/p.analysis.gbm.theta.high.tex}
+\end{figure}
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Analysis and results: Merton}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{table}[h]
+  \small
+  \centering
+  \begin{tabular}{llllllll}
+    \hline
+    \hline
+   Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+     &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
+     \hdashline
+    \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
+    & daily & 0.002 & 0.006 & 0.008 & 0.012 & 0.016 & 0.021 \\ 
+    & weekly & 0.004 & 0.006 & 0.006 & 0.011 & 0.007 & 0.021 \\ 
+     \hdashline
+    \multirow{3}{*}{160} & intraday & 0.011 & 0.018 & 0.021 & 0.029 & 0.025 & 0.042 \\ 
+    & daily & 0.016 & 0.018 & 0.022 & 0.029 & 0.019 & 0.042 \\ 
+    & weekly & 0.013 & 0.016 & 0.018 & 0.026 & 0.018 & 0.04 \\ 
+     \hdashline
+    \multirow{3}{*}{186} & intraday & 0.036 & 0.021 & 0.078 & 0.055 & 0.079 & 0.074 \\ 
+    & daily & 0.039 & 0.022 & 0.072 & 0.055 & 0.068 & 0.074 \\ 
+    & weekly & 0.014 & -0.008 & 0.055 & 0.037 & 0.057 & 0.061 \\ 
+     \hdashline
+    \multirow{3}{*}{200} & intraday & 0.072 & -0.002 & 0.139 & 0.061 & 0.13 & 0.086 \\ 
+    & daily & 0.06 & -0.013 & 0.131 & 0.057 & 0.115 & 0.085 \\ 
+    & weekly & -0.02 & -0.1 & 0.083 & 0.005 & 0.085 & 0.053 \\ 
+     \hdashline
+    \multirow{3}{*}{230} & intraday & 0.955 & 0.331 & 0.444 & -0.061 & 0.301 & 0.063 \\ 
+    & daily & 1.098 & 0.466 & 0.409 & -0.091 & 0.261 & 0.054 \\ 
+    & weekly & -0.741 & -1.335 & 0.085 & -0.438 & 0.174 & -0.088 \\ 
+     \hline
+  \end{tabular}
+  \caption{Hedging with MJD: Relative P\&L} 
+  \label{t:analysis:merton:pl}
+  \end{table}
+   
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Weekly rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.week.tex}
+    \end{figure}
+  \end{block}
+ 
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Daily rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.day.tex}
+    \end{figure}
+  \end{block}
+  
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Intradaily rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.intra.tex}
+    \end{figure}
+  \end{block}
+ 
+\end{frame}
+
+\begin{frame}{Analysis and results: Merton}
+
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.deltas.tex}
+    \end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+\subsection{Analysis and results: Heston}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Analysis and results: Heston}
+
+\begin{table}[ht]
+\small
+\centering
+\begin{tabular}{llllllll}
+  \hline
+  \hline
+Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+   &  & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ & $\Delta_{hsv}$ & $\Delta_{bsm}$ \\ 
+   \hdashline
+  \multirow{3}{*}{140} & intraday & 0 & 0.002 & 0.011 & 0.011 & 0.009 & 0.038 \\ 
+  & daily & -0.001 & 0.002 & 0.01 & 0.011 & 0.009 & 0.038 \\ 
+  & weekly & 0.001 & 0.002 & 0 & 0.011 & 0.008 & 0.038 \\ 
+  \hdashline
+  \multirow{3}{*}{160} & intraday & 0.009 & 0.028 & 0.023 & 0.073 & 0.042 & 0.143 \\ 
+  & daily & 0.008 & 0.028 & 0.025 & 0.072 & 0.036 & 0.143 \\ 
+  & weekly & 0.008 & 0.028 & 0.019 & 0.073 & 0.036 & 0.143 \\ 
+  \hdashline
+  \multirow{3}{*}{186} & intraday & 0.158 & 0.252 & 0.159 & 0.392 & 0.153 & 0.524 \\ 
+  & daily & 0.15 & 0.245 & 0.195 & 0.391 & 0.156 & 0.522 \\ 
+  & weekly & 0.117 & 0.241 & 0.158 & 0.378 & 0.139 & 0.519 \\ 
+  \hdashline 
+  \multirow{3}{*}{200} & intraday & 0.459 & -0.298 & 0.43 & 0.146 & 0.279 & 0.546 \\ 
+  & daily & 0.433 & -0.361 & 0.42 & 0.126 & 0.255 & 0.544 \\ 
+  & weekly & 0.268 & -0.659 & 0.369 & 0.005 & 0.246 & 0.498 \\ 
+  \hdashline 
+  \multirow{3}{*}{230} & intraday & 2.136 & -0.527 & 1.884 & -2.452 & 1.01 & -0.235 \\ 
+  & daily & 1.948 & -1.197 & 1.893 & -2.655 & 0.989 & -0.224 \\ 
+  & weekly & 1.407 & -2.152 & 1.547 & -2.402 & 0.917 & -0.353 \\ 
+   \hline
+\end{tabular}
+\caption{Hedging with HSV: Relative P\&L} 
+\label{t:analysis:heston:pl}
+\end{table}
+ 
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.heston.hedge.deltas.tex}
+    \end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------

@@ -139,16 +139,131 @@
 % =============================================================================
 % CONTEXT
 % =============================================================================
-% \SweaveInput{context}
+% =============================================================================
+% CONTEXT
+% =============================================================================
+\section{Context}
+
+% \subsection{\BSM model}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM model}
+
+\begin{block}{\BSM solution}
+  \begin{align}
+      \BSMsol \notag
+  \intertext{with}
+      \dpm \notag
+  \end{align}
+\end{block}
+
+\begin{block}{Geometric Brownian Motion}
+  \begin{center}
+    \begin{equation}
+      \Scontinuous \notag
+    \end{equation}
+  \end{center}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}{Context: \BSM assumptions}
+  % \subsection{\BSM assumptions}
+  
+  \begin{enumerate}
+    \item The short-term risk free rate $r$ is known and constant.
+    \item The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rates.
+    \item No dividend are provided with the considered share of stock.
+    \item The option considered within the computation is European.
+    \item The prices for the bid and ask quotes are identical. It means that there is no bid-ask spread to be considered.
+    \item Share of stock can be divided into any portions such as needed for the computation.
+    \item Short selling is allowed with no penalties.
+  \end{enumerate} 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+\begin{frame}{Context: \BSM assumptions}
+  % \subsection{\BSM assumptions}
+  
+  \begin{enumerate}
+    \item The short-term risk free rate $r$ is known and constant.
+    \item \textcolor{myred}{The stock return involving in the computation of BSM equation is log-normally distributed with constant mean and variance rates.}
+    \item No dividend are provided with the considered share of stock.
+    \item The option considered within the computation is European.
+    \item The prices for the bid and ask quotes are identical. It means that there is no bid-ask spread to be considered.
+    \item Share of stock can be divided into any portions such as needed for the computation.
+    \item Short selling is allowed with no penalties.
+  \end{enumerate} 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM log-return density}
+
+\begin{center}
+\begin{equation}
+\ln{\frac{\St}{S\left(0\right)}} 
+  \sim N\left((\alpha - \frac{\sigma^2}{2}) t, \sigma^2 t \right)
+\notag
+\end{equation}
+\end{center}  
+
+
+\begin{figure}[!h]
+\centering
+\input{../figures/stock_logreturn_density2.tex}
+\end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM log-return density}
+\framesubtitle{The Apple case}
+
+\begin{figure}[!h]
+\centering
+\input{../figures/realvsempirical2.tex}
+\end{figure}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: \BSM volatility surface}
+  % \subsection{\BSM assumptions}
+
+  \begin{figure}[h]
+  \centering
+  \input{../figures/appl.impliedvol.bsm2.tex}
+\end{figure}
+
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Context: Summary}
+  % \subsection{\BSM assumptions}
+  
+  \begin{itemize}
+    \item \sout{Normality of log-returns}
+    \item Options' price implied volatility
+    \item Geometric Brownian Motion should be replaced
+  \end{itemize} 
+
+  
+\end{frame}
+% -----------------------------------------------------------------------------
 
 % =============================================================================
 % Other Models
-% =============================================================================
-% \SweaveInput{model}
-
-
-% =============================================================================
-% Methodology
 % =============================================================================
 \section{Other models}
 
@@ -193,7 +308,7 @@
 % -----------------------------------------------------------------------------
 \begin{frame}{MJD: log-return density}
 
-\begin{block}{Impact on the skewness}
+\begin{block}{Impact on the skewness ($\mu$)}
 \begin{figure}[h]
 \centering
 \input{../figures/MertonJumpReturn2.tex}
@@ -202,7 +317,7 @@
 \end{frame}
 
 \begin{frame}{MJD: log-return density}
-\begin{block}{Impact on the kurtosis}
+\begin{block}{Impact on the kurtosis ($\lambda$)}
 \begin{figure}[h]
 \centering
 \input{../figures/MertonJumpReturnTails2.tex}
@@ -252,7 +367,7 @@
 % -----------------------------------------------------------------------------
 \begin{frame}{MJD: log-return density}
 
-\begin{block}{Impact on the skewness}
+\begin{block}{Impact on the skewness ($\rho$)}
 \begin{figure}[ht]
 \centering
 \input{../figures/skewnessHeston2.tex}
@@ -261,7 +376,7 @@
 \end{frame}
 
 \begin{frame}{MJD: log-return density}
-\begin{block}{Impact on the kurtosis}
+\begin{block}{Impact on the kurtosis ($\sigma$)}
 \begin{figure}[ht]
 \centering
 \input{../figures/density.heston.kurtosis2.tex}
@@ -295,38 +410,108 @@
 \end{frame}
 % -----------------------------------------------------------------------------
 
+% -----------------------------------------------------------------------------
+
+
+% =============================================================================
+% Methodology
+% =============================================================================
+\section{Methodology}
+
 
 % ----------------------------------------------------------------------------- 
-\begin{frame}{MJD Characteristic function}
+\begin{frame}{Methodology}
 
-
-
-\begin{align}
-\psi^{merton}(\phi) &= e^{ 
-  \lambda \tau \left( e^{i \mu \phi - \frac{\delta^2 \phi^2}{2}} - 1\right) +
-  i \phi \left( \ln S(t) + \left(  r - \frac{\sigma^2}{2} - \lambda \kappa \right) \tau \right) -
-  \sigma^2 \frac{\phi^2}{2} \tau
-}
-\notag \\
-\intertext{where}
-\kappa &= e^{\mu + \frac{\delta^2}{2}} - 1 \notag \\
-\end{align}
+\tableofcontents[currentsection]
  
+\end{frame}
+% -----------------------------------------------------------------------------
+
+\subsection{Calibration}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Calibration}
+
+\begin{block}{Template data}
+  \begin{itemize}
+    \item Apple stocks (01/01/2017 - 31/12/2017)
+    \item Apple stocks call options (18/05/2018)
+  \end{itemize}
+\end{block}
+
+\begin{block}{Calibration of the option valuation models}
+  \begin{itemize}
+    \item Concerns the models used to price the options
+    \item least-square non-linear analysis
+  \end{itemize}
+\end{block}
+
+\begin{block}{Calibration of the time-series generation models}
+  \begin{itemize}
+    \item Concerns the time-series used to simulate stock prices evolutions
+    \item Fit optimization based method
+  \end{itemize}
+\end{block}
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+\begin{frame}{MJD: Implied volatility}
+
+
+\begin{figure}[h]
+\centering
+\input{../figures/appl.impliedvol.merton2.tex}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{HSV: Implied volatility}
+
+\begin{figure}[h]
+\centering
+\input{../figures/appl.impliedvol.heston2.tex}
+\end{figure}
+
+ 
+\end{frame}
+% -----------------------------------------------------------------------------
+
+
+
+\subsection{Delta hedging}
+% ----------------------------------------------------------------------------- 
+\begin{frame}{Delta hedging}
+
+\begin{block}{Construction of the delta-neutral portfolio at T=0}
+\begin{align}
+p(t_0) = \Delta^{m \oplus h}(t_0) S(t_0) \notag
+\end{align}
+\end{block}
+
+\begin{block}{Portfolio balancing}
+\begin{align}
+p(t_i) & = \left(\Delta^{m \oplus h}(t_i) - \Delta^{m \oplus h}(t_{i - 1})\right) S(t_i) 
+,\notag \\
+\forall i \in \mathbb{Z} : i \in \left [1, T \right ] \notag
+\end{align}
+\end{block}
+
+
 \end{frame}
 
 
-\begin{frame}{HSV Characteristic function}
-\begin{align}
-  &\psi^{heston}\left(\phi\right) = e^{C(T-t, \phi)\theta + D(T-t, \phi)V(t) + i\phi\ln\left(S(t)e^{r(T-t)}\right)} \notag \\
-  \intertext{where}
-  &C(\tau, \phi) = \kappa \left(r_{-} \tau - \frac{2}{\sigma^2}\ln\left(\frac{1 - g e^{-h\tau}}{1 - g}\right)\right) \notag \\
-  &D(\tau, \phi) = r_{-}\frac{1 - e^{-h\tau}}{1 - ge^{-h\tau}} \notag \\ 
-  \intertext{and}
-  &r_{\pm} = \frac{\beta \pm h}{\sigma^2}; h = \sqrt{\beta^2 - 4\alpha\gamma} \notag \\
-  &g = \frac{r_{-}}{r_{+}} \notag \\
-  &\alpha = -\frac{\phi^2}{2} - \frac{i\phi}{2}; \beta = \kappa - \rho\sigma i\phi; \gamma = \frac{\sigma^2}{2} \notag
-\end{align}
+\begin{frame}{Delta hedging}
 
+\begin{block}{Measurement of the performances}
+\begin{align}
+  P\&L &= e^{-rT} \frac{\pi(S(T), T)}{c(S(0), 0)} \notag\\
+  \intertext{Where}
+  \pi(S(t), t) &= \Delta(t)S(t) + e^{rt} c(S(t_0), t_0)\notag\\
+    \mspace{150mu}
+    &- \sum_{i \in \mathbb{Z} : i \in \left [1, t \right ]} \left( e^{r(t-t_i)} p(t_i) \right) - c(S(t), t)\notag
+\end{align}
+\end{block}
  
 \end{frame}
 % -----------------------------------------------------------------------------
@@ -500,39 +685,84 @@
 % ----------------------------------------------------------------------------- 
 \begin{frame}{Analysis and results: Merton}
 
-\begin{table}[h]
-\small
-\centering
-\begin{tabular}{llllllll}
-  \hline
-  \hline
- Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
-   &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
-   \hdashline
-  \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
-  & daily & 0.002 & 0.006 & 0.008 & 0.012 & 0.016 & 0.021 \\ 
-  & weekly & 0.004 & 0.006 & 0.006 & 0.011 & 0.007 & 0.021 \\ 
-   \hdashline
-  \multirow{3}{*}{160} & intraday & 0.011 & 0.018 & 0.021 & 0.029 & 0.025 & 0.042 \\ 
-  & daily & 0.016 & 0.018 & 0.022 & 0.029 & 0.019 & 0.042 \\ 
-  & weekly & 0.013 & 0.016 & 0.018 & 0.026 & 0.018 & 0.04 \\ 
-   \hdashline
-  \multirow{3}{*}{186} & intraday & 0.036 & 0.021 & 0.078 & 0.055 & 0.079 & 0.074 \\ 
-  & daily & 0.039 & 0.022 & 0.072 & 0.055 & 0.068 & 0.074 \\ 
-  & weekly & 0.014 & -0.008 & 0.055 & 0.037 & 0.057 & 0.061 \\ 
-   \hdashline
-  \multirow{3}{*}{200} & intraday & 0.072 & -0.002 & 0.139 & 0.061 & 0.13 & 0.086 \\ 
-  & daily & 0.06 & -0.013 & 0.131 & 0.057 & 0.115 & 0.085 \\ 
-  & weekly & -0.02 & -0.1 & 0.083 & 0.005 & 0.085 & 0.053 \\ 
-   \hdashline
-  \multirow{3}{*}{230} & intraday & 0.955 & 0.331 & 0.444 & -0.061 & 0.301 & 0.063 \\ 
-  & daily & 1.098 & 0.466 & 0.409 & -0.091 & 0.261 & 0.054 \\ 
-  & weekly & -0.741 & -1.335 & 0.085 & -0.438 & 0.174 & -0.088 \\ 
-   \hline
-\end{tabular}
-\caption{Hedging with MJD: Relative P\&L} 
-\label{t:analysis:merton:pl}
-\end{table}
+  \begin{table}[h]
+  \small
+  \centering
+  \begin{tabular}{llllllll}
+    \hline
+    \hline
+   Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} & \multicolumn{2}{c}{399 dbm} \\ 
+     &  & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ & $\Delta_{mrt}$ & $\Delta_{bsm}$ \\ 
+     \hdashline
+    \multirow{3}{*}{140} & intraday & 0.004 & 0.006 & 0.011 & 0.012 & 0.01 & 0.021 \\ 
+    & daily & 0.002 & 0.006 & 0.008 & 0.012 & 0.016 & 0.021 \\ 
+    & weekly & 0.004 & 0.006 & 0.006 & 0.011 & 0.007 & 0.021 \\ 
+     \hdashline
+    \multirow{3}{*}{160} & intraday & 0.011 & 0.018 & 0.021 & 0.029 & 0.025 & 0.042 \\ 
+    & daily & 0.016 & 0.018 & 0.022 & 0.029 & 0.019 & 0.042 \\ 
+    & weekly & 0.013 & 0.016 & 0.018 & 0.026 & 0.018 & 0.04 \\ 
+     \hdashline
+    \multirow{3}{*}{186} & intraday & 0.036 & 0.021 & 0.078 & 0.055 & 0.079 & 0.074 \\ 
+    & daily & 0.039 & 0.022 & 0.072 & 0.055 & 0.068 & 0.074 \\ 
+    & weekly & 0.014 & -0.008 & 0.055 & 0.037 & 0.057 & 0.061 \\ 
+     \hdashline
+    \multirow{3}{*}{200} & intraday & 0.072 & -0.002 & 0.139 & 0.061 & 0.13 & 0.086 \\ 
+    & daily & 0.06 & -0.013 & 0.131 & 0.057 & 0.115 & 0.085 \\ 
+    & weekly & -0.02 & -0.1 & 0.083 & 0.005 & 0.085 & 0.053 \\ 
+     \hdashline
+    \multirow{3}{*}{230} & intraday & 0.955 & 0.331 & 0.444 & -0.061 & 0.301 & 0.063 \\ 
+    & daily & 1.098 & 0.466 & 0.409 & -0.091 & 0.261 & 0.054 \\ 
+    & weekly & -0.741 & -1.335 & 0.085 & -0.438 & 0.174 & -0.088 \\ 
+     \hline
+  \end{tabular}
+  \caption{Hedging with MJD: Relative P\&L} 
+  \label{t:analysis:merton:pl}
+  \end{table}
+   
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Weekly rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.week.tex}
+    \end{figure}
+  \end{block}
+ 
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Daily rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.day.tex}
+    \end{figure}
+  \end{block}
+  
+\end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+  \begin{block}{Intradaily rebalanced portfolio(K = 230, dbm = 91)}
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.gamma.intra.tex}
+    \end{figure}
+  \end{block}
+ 
+\end{frame}
+
+\begin{frame}{Analysis and results: Merton}
+
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.merton.hedge.deltas.tex}
+    \end{figure}
  
 \end{frame}
 % -----------------------------------------------------------------------------
@@ -577,8 +807,40 @@ Strikes & frequency  &\multicolumn{2}{c}{91 dbm} & \multicolumn{2}{c}{182 dbm} &
 \end{table}
  
 \end{frame}
+
+
+\begin{frame}{Analysis and results: Merton}
+
+    \begin{figure}[h]
+      \centering
+      \input{../figures/p.analysis.heston.hedge.deltas.tex}
+    \end{figure}
+ 
+\end{frame}
 % -----------------------------------------------------------------------------
 
+
+% =============================================================================
+% Conclusion
+% =============================================================================
+\begin{frame}{Conclusion}
+  % \subsection{\BSM assumptions}
+  
+  \begin{itemize}
+    \item Possibility to reproduce volatility smiles
+    \item Better performances for in/at-the-money
+    \item Effects of Gamma / Theta not negligible for out-of-the-money
+    \item Usage of deltas Heston / Merton if possible
+  \end{itemize} 
+
+  \begin{block}{How to go further}
+  \begin{itemize}
+    \item Consider a wider range of assets
+    \item Accurately measure the effect of Gamma / Theta
+  \end{itemize} 
+  \end{block}
+  
+\end{frame}
 
 
 

@@ -97,12 +97,12 @@
 % ----------------------------------------------------------------------------- 
 \begin{frame}{Context: \BSM volatility surface}
   % \subsection{\BSM assumptions}
-  
+
   \begin{figure}[h]
   \centering
   \input{../figures/appl.impliedvol.bsm2.tex}
 \end{figure}
-  
+
 \end{frame}
 % -----------------------------------------------------------------------------
 

@@ -380,10 +380,10 @@ p1 <- ggplot(dplyr::bind_rows(ppl1[[1]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = 1) + 
+             colour = 'steelblue', size = .5) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 140, dbm = 182)",
@@ -396,10 +396,10 @@ p2 <- ggplot(dplyr::bind_rows(ppl1[[2]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = 1) + 
+             colour = 'steelblue', size = .5) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 160, dbm = 182)",
@@ -412,10 +412,10 @@ p3 <- ggplot(dplyr::bind_rows(ppl1[[3]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = 1) + 
+             colour = 'steelblue', size = .5) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 186, dbm = 182)",
@@ -428,10 +428,10 @@ p4 <- ggplot(dplyr::bind_rows(ppl1[[4]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = 1) + 
+             colour = 'steelblue', size = .5) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 200, dbm = 182)",
@@ -444,10 +444,10 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
             colour = 'black')+ 
   geom_point(aes(x = time.period, y = delta.bsm* s +  p.bsm, 
                  group = uniqueID),
-             color = 'darkred', size = 1.5) +
+             color = 'darkred', size = .75) +
   geom_point(aes(x = time.period, y = delta* s +  p, 
                  group = uniqueID),
-             colour = 'steelblue', size = 1) + 
+             colour = 'steelblue', size = .5) + 
   theme(legend.position = 'none', 
         title = element_text(size = rel(0.8))) +
   labs(title = "(K = 230, dbm = 182)",
@@ -456,7 +456,7 @@ p5 <- ggplot(dplyr::bind_rows(ppl1[[5]], .id = "uniqueID")) +
 
 
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.heston.hedge.deltas.tex", width = 6, height = 5)
+tikzDevice::tikz(file = "figures/p.analysis.heston.hedge.deltas.tex", width = 4.5, height = 3.2)
 gridExtra::grid.arrange(p1, p2, p3, p4, p5)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")

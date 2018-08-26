@@ -8,6 +8,7 @@ library(tidyverse)
 library(pracma)
 library(FME)
 
+setwd("c:/Users/ATE/thesisDoc/data")
 load(file = 'DATA.RData')
 ggplot(DATA, aes(Strike, price)) + 
   geom_line() +
@@ -224,6 +225,20 @@ ggplot(DATA_bsm, aes(Strike, imply.volatility)) +
              color = "darkred")+
   xlab("Strikes") + ylab("Implied volatilities")+
   facet_wrap( ~ maturity.verbose, ncol = 3)
+dev.off()
+setwd("c:/Users/ATE/thesisDoc/data")
+
+
+
+setwd("c:/Users/ATE/thesisDoc")
+tikzDevice::tikz(file = "figures/appl.impliedvol.bsm2.tex", width = 4, height = 3)
+ggplot(DATA_bsm, aes(Strike, imply.volatility)) + 
+  geom_line(color = "steelblue") +
+  geom_point(data = DATA_bsm,
+             aes(Strike, imply.volatility.bsm),
+             color = "darkred")+
+  xlab("Strikes") + ylab("Implied volatilities")+
+  facet_wrap( ~ maturity, ncol = 3)
 dev.off()
 setwd("c:/Users/ATE/thesisDoc/data")
 

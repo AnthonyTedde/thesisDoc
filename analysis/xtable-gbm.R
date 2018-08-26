@@ -144,12 +144,12 @@ ggplot(df) +
                # geom =  'line',
                fill = 'steelblue',
                alpha = .7
-               ) +
+  ) +
   stat_density(aes(gamma_140_91_w),
                # geom =  'line',
                fill = 'darkred',
                alpha = .5
-               ) +
+  ) +
   xlim(0, 0.04) + ylim(0, 300)
 
 > U_bsm[[3]][[13]][[3]]$theta
@@ -170,7 +170,7 @@ theta_230_91_w <- map(U_bsm[[3]][[13]], ~.x$theta[-length(.x$theta)]) %>%
 theta_140_91_w <- map(U_bsm[[3]][[14]], ~.x$theta[-length(.x$theta)]) %>% 
   unlist
 df1 <- data.frame(theta_230_91_w)
-                 # theta_230_91_d,
+# theta_230_91_d,
 df2 <- data.frame(theta_140_91_w)
 
 ggplot(df1) +
@@ -342,7 +342,7 @@ round(U_bsm[[3]][[13]][[60]]$time.remaining, 2)
 # Its course
 ###
 setwd("c:/Users/ATE/thesisDoc")
-tikzDevice::tikz(file = "figures/p.analysis.gbm.theta.high.tex", width = 4, height = 4)
+tikzDevice::tikz(file = "figures/p.analysis.gbm.theta.high.tex", width = 4, height = 3)
 
 strouk <- 13
 samp <- 60
@@ -365,7 +365,7 @@ p2 <- ggplot(U_bsm[[1]][[strouk]][[samp]]) +
              linetype = "dotdash")+
   labs(x = 'Time period',
        y = 'Asset price')
-  
+
 gridExtra::grid.arrange(p1, p2)
 
 dev.off()

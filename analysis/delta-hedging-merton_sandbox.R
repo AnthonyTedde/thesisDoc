@@ -188,7 +188,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
          diff_delta_bsm[[x]],
          d_bsm[[x]])
   })
-
+  
   
   # names(l) <- paste(domain$maturity, domain$strike, sep='/')
   
@@ -253,7 +253,7 @@ delta_hedging_analysis <- function(n_delta_hedge, frequency){
     })
   })
   print(paste('for frequency' , frequency, 'and n hedge of', n_delta_hedge))
-return(u)
+  return(u)
 }
 
 
